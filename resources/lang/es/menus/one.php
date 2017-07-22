@@ -1,17 +1,59 @@
 <?php
 
 return [
-    'home' => [
-        'title' => 'Menu',
-        'icon' => 'fa fa-truck',
+
+    'service' => [
+        'title' => 'Servicios',
+        'icon' => 'fa fa-ambulance',
         'submenu' => [
-            'subhome1' => [
-                'title' => 'Submenu 1',
-                'route' => 'home'
+            'create' => [
+                'title' => 'Nuevo',
+                'route' => 'service.create'
             ],
-            'subhome2' => [
-                'title' => 'Submenu 2',
-                'route' => 'home'
+        ]
+    ],
+
+    'clients' => [
+        'title' => 'Clientes',
+        'icon' => 'fa fa-users',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'client.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'client.show'
+            ],
+        ]
+    ],
+
+    'providers' => [
+        'title' => 'Proveedores',
+        'icon' => 'fa fa-handshake-o',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'provider.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'provider.show'
+            ],
+        ]
+    ],
+
+    'users' => [
+        'title' => 'Usuarios',
+        'icon' => 'fa fa-key',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'user.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'user.show'
             ],
         ]
     ],
