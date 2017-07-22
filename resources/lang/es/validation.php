@@ -173,7 +173,11 @@ return [
         'family'                => 'familia',
         'contact'               => 'contacto',
         'advance'               => 'anticipo',
-        'retainer'               => 'anticipo'
+        'retainer'              => 'anticipo',
+        'brand'                 => 'marca',
+        'service'               => 'servicio',
+        'model'                 => 'model',
+        'plate'                 => 'placas',
     ],
 
 ];
