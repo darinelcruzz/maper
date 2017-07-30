@@ -5,7 +5,7 @@ Route::get('salir', function (){
     return redirect('/');
 })->name('getout');
 
-// Clientes
+// Servicios
 Route::group(['prefix' => 'servicios', 'as' => 'service.'], function () {
     Route::get('crear', [
         'uses' => 'ServiceController@create',
@@ -35,6 +35,11 @@ Route::group(['prefix' => 'servicios', 'as' => 'service.'], function () {
     Route::post('cambiar', [
         'uses' => 'ServiceController@change',
         'as' => 'change'
+    ]);
+
+    Route::get('detalles/{service}', [
+        'uses' => 'ServiceController@details',
+        'as' => 'details'
     ]);
 });
 
@@ -123,6 +128,34 @@ Route::group(['prefix' => 'productos', 'as' => 'product.'], function () {
 
     Route::post('cambiar', [
         'uses' => 'ProductController@change',
+        'as' => 'change'
+    ]);
+});
+
+// Unidades
+Route::group(['prefix' => 'unidades', 'as' => 'unit.'], function () {
+    Route::get('crear', [
+        'uses' => 'UnitController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'UnitController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'UnitController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'UnitController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'UnitController@change',
         'as' => 'change'
     ]);
 });

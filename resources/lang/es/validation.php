@@ -178,6 +178,14 @@ return [
         'service'               => 'servicio',
         'model'                 => 'model',
         'plate'                 => 'placas',
+        'model'                 => 'modelo',
+        'load'                  => 'carga',
+        'inventory'             => 'inventario',
+        'key'                   => 'llave',
+        'origin'                => 'origen',
+        'destination'           => 'destino',
+        'driver'                => 'operador',
+        'unit'                  => 'unidad',
     ],
 
 ];

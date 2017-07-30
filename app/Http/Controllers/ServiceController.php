@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 use App\Service;
+use App\Unit;
 
 class ServiceController extends Controller
 {
     public function create()
     {
-        return view('services.create');
+        $date = Date::now()->format('Y-m-d');
+        $units = Unit::pluck('description', 'id')->toArray();
+        return view('services.create', compact('units', 'date'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:services',
-            'city' => 'required',
-            'phone' => 'required',
+
         ]);
 
         $service = Service::create($request->all());
@@ -39,14 +41,17 @@ class ServiceController extends Controller
     public function change(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'city' => 'required',
-            'phone' => 'required',
+
         ]);
 
         Service::find($request->id)->update($request->all());
 
         return $this->show();
+    }
+
+    function details(Service $service)
+    {
+        return view('services.details', compact('service'));
     }
 
     function deleteService($id)

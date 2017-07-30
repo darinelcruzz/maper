@@ -13,47 +13,98 @@
 
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 {!! Field::select('service',
-                                    ['1' => 'Fiscalia', '2' => 'Vialidad', '3' => 'Transito', '4' => 'Aseguradoras', '5' => 'Publico en general'], null,
-                                    ['tpl' => 'templates/withicon'], ['icon' => 'list'])
+                                    ['Publico en general' => 'Publico en general'], null)
                                 !!}
                             </div>
-                            <div class="col-md-6">
-                                {!! Field::select('description',
-                                    ['1' => 'Arrastre', '2' => 'Colisión'], null,
-                                    ['tpl' => 'templates/withicon'], ['icon' => 'pencil-square-o'])
-                                !!}
+                            <div class="col-md-4">
+                                {!! Field::text('description')!!}
                             </div>
+                            <div class="col-md-4">
+								{!! Field::date('date', $date) !!}
+							</div>
                         </div>
-                        <hr>
 
                         <div class="box-header with-border">
-                            <h3 class="box-title">Vehículo</h3>
+                            <h3 class="box-title">Vehículo
+                                <i class="fa fa-car" aria-hidden="true"></i>
+                            </h3>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4">
-                                {!! Field::text('brand', ['tpl' => 'templates/withicon'], ['icon' => 'car'])!!}
+                                {!! Field::text('brand')!!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('model', ['tpl' => 'templates/withicon'], ['icon' => 'car'])!!}
+                                {!! Field::text('model')!!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('type', ['tpl' => 'templates/withicon'], ['icon' => 'car'])!!}
+                                {!! Field::select('type',
+                                    ['moto' => 'Moto', 'coche' => 'Coche', '3' => '3.5 a 4.5 Ton', '4' => '5 a 9 Ton', '5' => 'Mas de 10 Ton'], null)
+                                !!}
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-4">
-                                {!! Field::text('plate', ['tpl' => 'templates/withicon'], ['icon' => 'cc-stripe'])!!}
+                                {!! Field::number('load', ['min' => '0'])!!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('color', ['tpl' => 'templates/withicon'], ['icon' => 'paint-brush'])!!}
+                                {!! Field::text('plate')!!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::number('inventory', ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'list-ol'])!!}
+                                {!! Field::text('color')!!}
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                {!! Field::number('inventory', ['min' => '0'])!!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::select('key',
+                                    ['si' => 'Si', 'no' => 'No'], null)
+                                !!}
+                            </div>
+                        </div>
+
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Ubicación
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                {!! Field::text('username')!!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::text('origin')!!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::text('destination')!!}
+                            </div>
+                        </div>
+
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Unidad
+                                <i class="fa fa-truck" aria-hidden="true"></i>
+                            </h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                {!! Field::select('driver',
+                                    ['Juan Clemente' => 'Juan Clemente', 'Juan Manuel' => 'Juan Manuel', 'Francisco' => 'Francisco',
+                                    'Rafael' => 'Rafael', 'Deberín' => 'Deberín'], null)
+                                !!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::select('unit', $units, null, ['empty' => 'Seleccione una unidad']) !!}
+                            </div>
+                        </div>
+
                     </div>
                   <!-- /.box-body -->
                   <div class="box-footer">

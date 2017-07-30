@@ -10,6 +10,10 @@ return [
                 'title' => 'Nuevo',
                 'route' => 'service.create'
             ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'service.show'
+            ],
         ]
     ],
 
@@ -39,6 +43,21 @@ return [
             'list' => [
                 'title' => 'Listado',
                 'route' => 'provider.show'
+            ],
+        ]
+    ],
+
+    'units' => [
+        'title' => 'Unidades',
+        'icon' => 'fa fa-truck',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'unit.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'unit.show'
             ],
         ]
     ],
