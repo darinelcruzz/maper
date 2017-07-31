@@ -31,7 +31,7 @@ class CreateServicesTable extends Migration
             $table->string('destination')->nullable();
             $table->string('driver')->nullable();
             $table->string('unit')->nullable();
-            $table->string('date')->nullable();
+            $table->timestamp('date')->nullable();
 
             $table->timestamps();
         });

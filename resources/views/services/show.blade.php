@@ -17,7 +17,7 @@
         </template>
 
         <template slot="body">
-            @foreach($services as $row)
+            @foreach($public as $row)
               <tr>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>

@@ -11,7 +11,7 @@ class ServiceController extends Controller
 {
     public function create()
     {
-        $date = Date::now()->format('Y-m-d');
+        $date = Date::now();
         $units = Unit::pluck('description', 'id')->toArray();
         return view('services.create', compact('units', 'date'));
     }
@@ -28,8 +28,8 @@ class ServiceController extends Controller
 
     public function show()
     {
-        $services = service::all();
-        return view('services.show', compact('services'));
+        $public = Service::service('Publico en general');
+        return view('services.show', compact('public'));
     }
 
     public function edit($id)

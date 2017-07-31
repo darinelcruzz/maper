@@ -24,8 +24,8 @@
                                 <dd>{{ $service->description }}</dd>
                             </td>
                             <td>
-                                <B>Fecha:</B>
-                                <dd>{{ $service->date }}</dd>
+                                <B>Fecha y hora:</B>
+                                <dd>{{ $service->formatted_date }} {{ $service->hour }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -135,7 +135,7 @@
                             </td>
                             <td>
                                 <B>Unidad:</B>
-                                <dd>{{ $service->unitr->description }}</dd>
+                                <dd>{{ $service->unitr->description or '' }}</dd>
                             </td>
                             <td>
                             </td>

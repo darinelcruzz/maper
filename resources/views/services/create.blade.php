@@ -21,9 +21,17 @@
                             <div class="col-md-4">
                                 {!! Field::text('description')!!}
                             </div>
-                            <div class="col-md-4">
-								{!! Field::date('date', $date) !!}
-							</div>
+                            <div class="col-md-3">
+                                <div id="field_date" class="form-group">
+                                    <label for="date" class="control-label">
+                                        Fecha
+                                    </label>
+                                    <div class="controls">
+                                        <input class="form-control" id="date" name="date" type="datetime-local" value="2017-07-31">
+                                    </div>
+                                </div>
+                           </div>
+
                         </div>
 
                         <div class="box-header with-border">
