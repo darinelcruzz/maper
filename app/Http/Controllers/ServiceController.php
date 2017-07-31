@@ -11,9 +11,8 @@ class ServiceController extends Controller
 {
     public function create()
     {
-        $date = Date::now();
         $units = Unit::pluck('description', 'id')->toArray();
-        return view('services.create', compact('units', 'date'));
+        return view('services.create', compact('units'));
     }
 
     public function store(Request $request)

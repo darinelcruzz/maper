@@ -24,10 +24,10 @@
                             <div class="col-md-3">
                                 <div id="field_date" class="form-group">
                                     <label for="date" class="control-label">
-                                        Fecha
+                                        Fecha y hora:
                                     </label>
                                     <div class="controls">
-                                        <input class="form-control" id="date" name="date" type="datetime-local" value="2017-07-31">
+                                        <input class="form-control" id="date" name="date" type="datetime-local" value="{{ date('Y-m-d\TH:i') }}">
                                     </div>
                                 </div>
                            </div>
