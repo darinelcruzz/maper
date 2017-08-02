@@ -28,13 +28,15 @@ class ServiceController extends Controller
     public function show()
     {
         $public = Service::service('Publico en general');
-        return view('services.show', compact('public'));
+        $corps = Service::service('cola');
+        return view('services.show', compact('public', 'corps'));
     }
 
     public function edit($id)
     {
         $service = Service::find($id);
-        return view('services.edit', compact('service'));
+        $units = Unit::pluck('description', 'id')->toArray();
+        return view('services.edit', compact('service', 'units'));
     }
 
     public function change(Request $request)

@@ -21,8 +21,14 @@ class Service extends Model
 
     public function getFormattedDateAttribute()
     {
-        $date = new Date(strtotime($this->date));
+        $date = new Date(strtotime($this->date_service));
 
-        return $date->format('l j F Y h:i a');
+        return $date->format('l, j F Y h:i a');
+    }
+    public function getShortDateAttribute()
+    {
+        $date = new Date(strtotime($this->date_service));
+
+        return $date->format('j F y h:i a');
     }
 }
