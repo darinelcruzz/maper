@@ -17,12 +17,11 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-
-        ]);
+        $this->validate($request, []);
 
         $service = Service::create($request->all());
         return redirect(route('service.show'));
+
     }
 
     public function show()

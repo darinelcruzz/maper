@@ -5,6 +5,7 @@
     <data-table col="col-md-12" title="Público en General" example="example1" color="box-danger">
         <template slot="header">
             <tr>
+                <th>ID</th>
                 <th>Fecha</th>
                 <th>Inventario</th>
                 <th>Tipo</th>
@@ -19,6 +20,7 @@
         <template slot="body">
             @foreach($public as $row)
               <tr>
+                  <td>{{ $row->id }}</td>
                   <td>{{ $row->short_date }}</td>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>

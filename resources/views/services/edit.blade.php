@@ -53,7 +53,7 @@
                             <div class="col-md-4">
                                 {!! Field::select('type',
                                     ['moto' => 'Moto', 'coche' => 'Coche', '3.5 a 4.5 Ton' => '3.5 a 4.5 Ton', '5 a 9 Ton' => '5 a 9 Ton', 'Mas de 10 Ton' => 'Mas de 10 Ton'], $service->type,
-                                    ['empty' => false])
+                                    ['empty' => 'Seleccione el tipo'])
                                 !!}
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                                 {!! Field::number('inventory', $service->inventory, ['min' => '0'])!!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::select('key', ['si' => 'Si', 'no' => 'No'], $service->key,['empty' => false]) !!}
+                                {!! Field::select('key', ['si' => 'Si', 'no' => 'No'], $service->key,['empty' => '¿Tenía llave?']) !!}
                             </div>
                         </div>
 
@@ -107,11 +107,11 @@
                             <div class="col-md-4">
                                 {!! Field::select('driver',
                                     ['Juan Clemente' => 'Juan Clemente', 'Juan Manuel' => 'Juan Manuel', 'Francisco' => 'Francisco',
-                                    'Rafael' => 'Rafael', 'Deberín' => 'Deberín'], $service->driver,['empty' => false])
+                                    'Rafael' => 'Rafael', 'Deberín' => 'Deberín'], $service->driver,['empty' => 'Seleccione al operador'])
                                 !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::select('unit', $units, $service->unit, ['empty' => false]) !!}
+                                {!! Field::select('unit', $units, $service->unit, ['empty' => 'Seleccione la unidad']) !!}
                             </div>
                         </div>
 
