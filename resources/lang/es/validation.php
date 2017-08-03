@@ -186,6 +186,7 @@ return [
         'destination'           => 'destino',
         'driver'                => 'operador',
         'unit'                  => 'unidad',
+        'lot'                   => 'corralón',
     ],
 
 ];

@@ -14,9 +14,9 @@ class Service extends Model
     	return $this->belongsTo(Unit::class, 'unit');
     }
 
-    public function scopeService($query, $service)
+    public function scopeService($query, $comparation, $service)
     {
-        return $query->where('service', $service)->get();
+        return $query->where('service', $comparation, $service)->get();
     }
 
     public function getFormattedDateAttribute()

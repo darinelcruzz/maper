@@ -6,42 +6,78 @@ Route::get('salir', function (){
 })->name('getout');
 
 // Servicios
-Route::group(['prefix' => 'servicios', 'as' => 'service.'], function () {
-    Route::get('crear', [
-        'uses' => 'ServiceController@create',
-        'as' => 'create'
-    ]);
 
-    Route::post('crear', [
-        'uses' => 'ServiceController@store',
-        'as' => 'store'
-    ]);
+Route::get('servicios', [
+    'uses' => 'ServiceController@show',
+    'as' => 'service.show'
+]);
+    // Publico General
+    Route::group(['prefix' => 'servicios/publico', 'as' => 'service.public.'], function () {
+        Route::get('crear', [
+            'uses' => 'PublicServiceController@create',
+            'as' => 'create'
+        ]);
 
-    Route::get('/', [
-        'uses' => 'ServiceController@show',
-        'as' => 'show'
-    ]);
+        Route::post('crear', [
+            'uses' => 'PublicServiceController@store',
+            'as' => 'store'
+        ]);
 
-    Route::get('editar/{id}', [
-        'uses' => 'ServiceController@edit',
-        'as' => 'edit'
-    ]);
 
-    Route::get('eliminar/{id}', [
-        'uses' => 'ServiceController@deleteClient',
-        'as' => 'delete'
-    ]);
+        Route::get('editar/{id}', [
+            'uses' => 'PublicServiceController@edit',
+            'as' => 'edit'
+        ]);
 
-    Route::post('cambiar', [
-        'uses' => 'ServiceController@change',
-        'as' => 'change'
-    ]);
+        Route::get('eliminar/{id}', [
+            'uses' => 'PublicServiceController@deleteClient',
+            'as' => 'delete'
+        ]);
 
-    Route::get('detalles/{service}', [
-        'uses' => 'ServiceController@details',
-        'as' => 'details'
-    ]);
-});
+        Route::post('cambiar', [
+            'uses' => 'PublicServiceController@change',
+            'as' => 'change'
+        ]);
+
+        Route::get('detalles/{service}', [
+            'uses' => 'PublicServiceController@details',
+            'as' => 'details'
+        ]);
+    });
+
+    // Corporaciones
+    Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporation.'], function () {
+        Route::get('crear', [
+            'uses' => 'CorporationServiceController@create',
+            'as' => 'create'
+        ]);
+
+        Route::post('crear', [
+            'uses' => 'CorporationServiceController@store',
+            'as' => 'store'
+        ]);
+
+
+        Route::get('editar/{id}', [
+            'uses' => 'CorporationServiceController@edit',
+            'as' => 'edit'
+        ]);
+
+        Route::get('eliminar/{id}', [
+            'uses' => 'CorporationServiceController@deleteClient',
+            'as' => 'delete'
+        ]);
+
+        Route::post('cambiar', [
+            'uses' => 'CorporationServiceController@change',
+            'as' => 'change'
+        ]);
+
+        Route::get('detalles/{service}', [
+            'uses' => 'CorporationServiceController@details',
+            'as' => 'details'
+        ]);
+    });
 
 // Clientes
 Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {

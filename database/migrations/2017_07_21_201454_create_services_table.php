@@ -35,6 +35,7 @@ class CreateServicesTable extends Migration
             $table->timestamp('date_out')->nullable();
             $table->float('amount')->nullable();
             $table->string('status')->nullable();
+            $table->string('lot')->nullable();
 
             $table->timestamps();
         });

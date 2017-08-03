@@ -6,9 +6,13 @@ return [
         'title' => 'Servicios',
         'icon' => 'fa fa-ambulance',
         'submenu' => [
-            'create' => [
-                'title' => 'Nuevo',
-                'route' => 'service.create'
+            'public' => [
+                'title' => 'Publico General',
+                'route' => 'service.public.create'
+            ],
+            'corporation' => [
+                'title' => 'Coorporaciones',
+                'route' => 'service.corporation.create'
             ],
             'list' => [
                 'title' => 'Listado',

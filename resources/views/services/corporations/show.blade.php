@@ -8,11 +8,12 @@
                 <th>ID</th>
                 <th>Fecha</th>
                 <th>Inventario</th>
+                <th>Tipo</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Llave</th>
                 <th>Monto</th>
-                <th></th>
+                <th>Opciones</th>
             </tr>
         </template>
 
@@ -22,6 +23,7 @@
                   <td>{{ $row->id }}</td>
                   <td>{{ $row->short_date }}</td>
                   <td>{{ $row->inventory }}</td>
+                  <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }}</td>
                   <td>{{ $row->model }}</td>
                   <td>{{ $row->key }}</td>
@@ -30,7 +32,7 @@
                       <a href="{{ route('service.public.details', ['id' => $row->id]) }}">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                       </a>
-                      &nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp; &nbsp;&nbsp;
                       <a href="{{ route('service.public.edit', ['id' => $row->id]) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
@@ -40,41 +42,32 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Corporaciones" example="example2" color="box-danger">
+    <data-table col="col-md-12" title="Corporaciones" example="example2" color="box-danger" collapsed="collapsed-box">
         <template slot="header">
             <tr>
-                <th>ID</th>
                 <th>Fecha S.</th>
                 <th>Inventario</th>
                 <th>Tipo</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Llave</th>
-                <th>Liberar </th>
-                <th></th>
+                <th>Opciones</th>
             </tr>
         </template>
 
         <template slot="body">
             @foreach($corps as $row)
               <tr>
-                  <td>{{ $row->id }}</td>
-                  <td>{{ $row->short_date }}</td>
+                  <td>{{ $row->date_service }}</td>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }}</td>
                   <td>{{ $row->model }}</td>
                   <td>{{ $row->key }}</td>
                   <td>
-                      <a href="#" class="btn btn-success">
-                          <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
-                      </a>
-                  </td>
-                  <td>
                       <a href="{{ route('service.corporation.details', ['id' => $row->id]) }}">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                       </a>
-                      &nbsp;&nbsp;&nbsp;
                       <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
