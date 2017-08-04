@@ -35,3 +35,30 @@ $factory->define(App\Unit::class, function (Faker\Generator $faker) {
         'description' => '01 Plataforma',
     ];
 });
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+
+    return [
+        'service' => 'Público general',
+        'description' => 'Servicio',
+        'brand' => 'Audi',
+        'type' => 'A4',
+        'category' => 'coche',
+        'load' => '0',
+        'plate' => 'CV-56-56',
+        'color' => 'Gris',
+        'inventory' => '001',
+        'key' => 'si',
+        'username' => 'Victor',
+        'origin' => 'Margaritas',
+        'destination' => 'Comitán',
+        'driver' => 'Deberín',
+        'unit' => '1',
+        'date_service' => '2017-08-04 14:05:00',
+        'date_out' => null,
+        'date_return' => '2017-08-04 23:10:00',
+        'amount' => '600',
+        'status' => 'pagado',
+        'lot'   => null,
+    ];
+});

@@ -39,7 +39,7 @@ class CorporationServiceController extends Controller
 
         Service::find($request->id)->update($request->all());
 
-        return $this->show();
+        return redirect(route('service.show'));
     }
 
     function details(Service $service)

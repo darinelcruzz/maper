@@ -25,6 +25,12 @@ class Service extends Model
 
         return $date->format('l, j F Y h:i a');
     }
+    public function getFormattedDateReturnAttribute()
+    {
+        $date = new Date(strtotime($this->date_return));
+
+        return $date->format('l, j F Y h:i a');
+    }
     public function getShortDateAttribute()
     {
         $date = new Date(strtotime($this->date_service));

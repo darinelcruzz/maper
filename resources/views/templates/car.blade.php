@@ -9,11 +9,11 @@
         {!! Field::text('brand', isset($service) ? $service->brand: null)!!}
     </div>
     <div class="col-md-4">
-        {!! Field::text('model', isset($service) ? $service->model: null)!!}
+        {!! Field::text('type', isset($service) ? $service->type: null)!!}
     </div>
     <div class="col-md-4">
-        {!! Field::select('type',
-            ['Moto' => 'Moto', 'Coche' => 'Coche', '3.5 a 4.5 Ton' => '3.5 a 4.5 Ton', '5 a 9 Ton' => '5 a 9 Ton', 'Mas de 10 Ton' => 'Mas de 10 Ton'], isset($service) ? $service->type: null, ['empty' => 'Seleccione el tipo'])
+        {!! Field::select('category',
+            ['Moto' => 'Moto', 'Coche' => 'Coche', '3.5 a 4.5 Ton' => '3.5 a 4.5 Ton', '5 a 9 Ton' => '5 a 9 Ton', 'Mas de 10 Ton' => 'Mas de 10 Ton'], isset($service) ? $service->category: null, ['empty' => 'Seleccione el tipo'])
         !!}
     </div>
 </div>
