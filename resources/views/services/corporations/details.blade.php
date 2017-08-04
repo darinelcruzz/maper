@@ -138,6 +138,8 @@
                                 <dd>{{ $service->unitr->description or '' }}</dd>
                             </td>
                             <td>
+                                <B>Corralón:</B>
+                                <dd>{{ $service->lot }}</dd>
                             </td>
                         </tr>
                     </tbody>

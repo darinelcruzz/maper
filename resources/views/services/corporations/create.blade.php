@@ -14,8 +14,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             {!! Field::select('service',
-                                ['transito' => 'Tránsito del Estado', 'vialidad' => 'Vialidad Municipal', 'policia municipal' => 'Policia Municipal',
-                                'fiscalia' => 'Fiscalía', 'federal' => 'Federal'], null, ['empty' => '¿A que corresponde?'])
+                                ['Tránsito del Estado' => 'Tránsito del Estado', 'Vialidad Municipal' => 'Vialidad Municipal', 'Policia Municipal' => 'Policia Municipal',
+                                'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal'], null, ['empty' => '¿A que corresponde?'])
                             !!}
                        </div>
                         <div class="col-md-4">

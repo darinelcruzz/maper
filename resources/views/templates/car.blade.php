@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-4">
         {!! Field::select('type',
-            ['moto' => 'Moto', 'coche' => 'Coche', '3' => '3.5 a 4.5 Ton', '4' => '5 a 9 Ton', '5' => 'Mas de 10 Ton'], isset($service) ? $service->type: null, ['empty' => 'Seleccione el tipo'])
+            ['Moto' => 'Moto', 'Coche' => 'Coche', '3.5 a 4.5 Ton' => '3.5 a 4.5 Ton', '5 a 9 Ton' => '5 a 9 Ton', 'Mas de 10 Ton' => 'Mas de 10 Ton'], isset($service) ? $service->type: null, ['empty' => 'Seleccione el tipo'])
         !!}
     </div>
 </div>

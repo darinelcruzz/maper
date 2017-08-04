@@ -30,7 +30,7 @@ class CorporationServiceController extends Controller
     {
         $service = Service::find($id);
         $units = Unit::pluck('description', 'id')->toArray();
-        return view('services.corporation.edit', compact('service', 'units'));
+        return view('services.corporations.edit', compact('service', 'units'));
     }
 
     public function change(Request $request)
@@ -44,7 +44,7 @@ class CorporationServiceController extends Controller
 
     function details(Service $service)
     {
-        return view('services.corporation.details', compact('service'));
+        return view('services.corporations.details', compact('service'));
     }
 
     function deleteService($id)

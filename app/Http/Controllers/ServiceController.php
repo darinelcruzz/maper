@@ -12,8 +12,8 @@ class ServiceController extends Controller
 
     public function show()
     {
-        $public = Service::service('=','Publico general');
-        $corps = Service::service('!=', 'publico general');
+        $public = Service::service('=','Público general');
+        $corps = Service::service('!=', 'Público general');
         return view('services.show', compact('public', 'corps'));
     }
 
