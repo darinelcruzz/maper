@@ -25,7 +25,7 @@
                             </td>
                             <td>
                                 <B>Fecha y hora:</B>
-                                <dd>{{ $service->formatted_date }} {{ $service->hour }}</dd>
+                                <dd>{{ $service->formatted_date }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -49,12 +49,12 @@
                                 <dd>{{ $service->brand }}</dd>
                             </td>
                             <td>
-                                <B>Modelo:</B>
-                                <dd>{{ $service->model }}</dd>
-                            </td>
-                            <td>
                                 <B>Tipo:</B>
                                 <dd>{{ $service->type }}</dd>
+                            </td>
+                            <td>
+                                <B>Categoría:</B>
+                                <dd>{{ $service->category }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -137,6 +137,12 @@
                                 <B>Unidad:</B>
                                 <dd>{{ $service->unitr->description or '' }}</dd>
                             </td>
+                            <td>
+                                <B>Regreso:</B>
+                                <dd>{{ $service->formatted_date_return }}</dd>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <B>Corralón:</B>
                                 <dd>{{ $service->lot }}</dd>

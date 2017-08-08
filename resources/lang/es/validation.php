@@ -176,7 +176,7 @@ return [
         'retainer'              => 'anticipo',
         'brand'                 => 'marca',
         'service'               => 'servicio',
-        'model'                 => 'model',
+        'category'              => 'categoría',
         'plate'                 => 'placas',
         'model'                 => 'modelo',
         'load'                  => 'carga',

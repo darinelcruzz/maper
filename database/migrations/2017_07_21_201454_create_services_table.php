@@ -19,8 +19,8 @@ class CreateServicesTable extends Migration
             $table->string('service')->nullable();
             $table->string('description')->nullable();
             $table->string('brand')->nullable();
-            $table->string('model')->nullable();
             $table->string('type')->nullable();
+            $table->string('category')->nullable();
             $table->string('load')->nullable();
             $table->string('plate')->nullable();
             $table->string('color')->nullable();
@@ -33,6 +33,7 @@ class CreateServicesTable extends Migration
             $table->string('unit')->nullable();
             $table->timestamp('date_service')->nullable();
             $table->timestamp('date_out')->nullable();
+            $table->timestamp('date_return')->nullable();
             $table->float('amount')->nullable();
             $table->string('status')->nullable();
             $table->string('lot')->nullable();

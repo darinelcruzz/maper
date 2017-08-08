@@ -9,7 +9,7 @@
                 <th>Fecha</th>
                 <th>Inventario</th>
                 <th>Marca</th>
-                <th>Modelo</th>
+                <th>Operador</th>
                 <th>Llave</th>
                 <th>Monto</th>
                 <th></th>
@@ -23,7 +23,7 @@
                   <td>{{ $row->short_date }}</td>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->brand }}</td>
-                  <td>{{ $row->model }}</td>
+                  <td>{{ $row->driver }}</td>
                   <td>{{ $row->key }}</td>
                   <td>${{ $row->amount }}</td>
                   <td>
@@ -48,7 +48,7 @@
                 <th>Inventario</th>
                 <th>Tipo</th>
                 <th>Marca</th>
-                <th>Modelo</th>
+                <th>Operador</th>
                 <th>Llave</th>
                 <th>Liberar </th>
                 <th></th>
@@ -63,7 +63,7 @@
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }}</td>
-                  <td>{{ $row->model }}</td>
+                  <td>{{ $row->driver }}</td>
                   <td>{{ $row->key }}</td>
                   <td>
                       <a href="#" class="btn btn-success">
