@@ -84,6 +84,6 @@ return [
     'logout' => [
         'title' => 'Cerrar Sesión',
         'icon' => 'fa fa-sign-out',
-        'route' => 'home',
+        'route' => 'getout',
     ],
 ];
