@@ -43,6 +43,11 @@ Route::get('servicios', [
             'uses' => 'PublicServiceController@details',
             'as' => 'details'
         ]);
+
+        Route::get('pay/{service}', [
+            'uses' => 'PublicServiceController@pay',
+            'as' => 'pay'
+        ]);
     });
 
     // Corporaciones

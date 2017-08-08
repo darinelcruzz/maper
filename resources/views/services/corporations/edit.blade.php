@@ -25,9 +25,6 @@
                                     </div>
                                 </div>
                            </div>
-                           <div class="col-md-4">
-                               {!! Field::number('amount', $service->amount,['min' => '0', 'step' => '.01'])!!}
-                          </div>
                         </div>
 
                       @include('templates.car')

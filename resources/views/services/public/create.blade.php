@@ -37,7 +37,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <input type="hidden" name="status" value="pagado">
+                    <input type="hidden" name="status" value="pendiente">
                     <input type="hidden" name="service" value="Público general">
                     {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 </div>

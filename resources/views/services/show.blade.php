@@ -12,6 +12,7 @@
                 <th>Operador</th>
                 <th>Llave</th>
                 <th>Monto</th>
+                <th>Opciones</th>
                 <th></th>
             </tr>
         </template>
@@ -26,12 +27,19 @@
                   <td>{{ $row->driver }}</td>
                   <td>{{ $row->key }}</td>
                   <td>${{ $row->amount }}</td>
+                  <td align="right">
+                      <a href="{{ route('service.public.pay', ['id' => $row->id]) }}" class="btn btn-success">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                      </a>
+                      <a href="#" class="btn btn-danger">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                      </a>
+                  </td>
                   <td>
-                      <a href="{{ route('service.public.details', ['id' => $row->id]) }}">
+                      <a href="{{ route('service.public.details', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                       </a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="{{ route('service.public.edit', ['id' => $row->id]) }}">
+                      <a href="{{ route('service.public.edit', ['id' => $row->id]) }}"  class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
                   </td>
@@ -44,7 +52,7 @@
         <template slot="header">
             <tr>
                 <th>ID</th>
-                <th>Fecha S.</th>
+                <th>Fecha</th>
                 <th>Inventario</th>
                 <th>Tipo</th>
                 <th>Marca</th>
@@ -65,17 +73,16 @@
                   <td>{{ $row->brand }}</td>
                   <td>{{ $row->driver }}</td>
                   <td>{{ $row->key }}</td>
-                  <td>
+                  <td align="right">
                       <a href="#" class="btn btn-success">
                           <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
                       </a>
                   </td>
                   <td>
-                      <a href="{{ route('service.corporation.details', ['id' => $row->id]) }}">
+                      <a href="{{ route('service.corporation.details', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                       </a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}">
+                      <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
                   </td>

@@ -35,6 +35,6 @@ class Service extends Model
     {
         $date = new Date(strtotime($this->date_service));
 
-        return $date->format('j F y, h:i a');
+        return $date->format('j/M/y, G:i');
     }
 }

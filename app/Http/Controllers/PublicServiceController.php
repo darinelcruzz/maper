@@ -45,6 +45,11 @@ class PublicServiceController extends Controller
         return view('services.public.details', compact('service'));
     }
 
+    function pay(Service $service)
+    {
+        return view('services.public.pay', compact('service'));
+    }
+
     function deleteService($id)
     {
         Service::destroy($id);
