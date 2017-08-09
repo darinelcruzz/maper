@@ -46,7 +46,7 @@ Route::get('servicios', [
             'as' => 'details'
         ]);
 
-        Route::get('pay/{service}', [
+        Route::get('pago/{service}', [
             'uses' => 'PublicServiceController@pay',
             'as' => 'pay'
         ]);
@@ -199,6 +199,34 @@ Route::group(['prefix' => 'unidades', 'as' => 'unit.'], function () {
 
     Route::post('cambiar', [
         'uses' => 'UnitController@change',
+        'as' => 'change'
+    ]);
+});
+
+// Operadores
+Route::group(['prefix' => 'operadores', 'as' => 'driver.'], function () {
+    Route::get('crear', [
+        'uses' => 'DriverController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'DriverController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'DriverController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'DriverController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'DriverController@change',
         'as' => 'change'
     ]);
 });

@@ -36,6 +36,13 @@ $factory->define(App\Unit::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Driver::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Deberlín',
+    ];
+});
+
 $factory->define(App\Service::class, function (Faker\Generator $faker) {
 
     return [
@@ -52,7 +59,7 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'username' => 'Victor',
         'origin' => 'Margaritas',
         'destination' => 'Comitán',
-        'driver' => 'Deberín',
+        'driver' => '1',
         'unit' => '1',
         'date_service' => '2017-08-04 14:05:00',
         'date_out' => null,

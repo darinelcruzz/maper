@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
 use App\Service;
 use App\Unit;
+use App\Driver;
 
 class PublicServiceController extends Controller
 {
     public function create()
     {
         $units = Unit::pluck('description', 'id')->toArray();
-        return view('services.public.create', compact('units'));
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        return view('services.public.create', compact('units', 'drivers'));
     }
 
     public function store(Request $request)
@@ -28,7 +30,8 @@ class PublicServiceController extends Controller
     {
         $service = Service::find($id);
         $units = Unit::pluck('description', 'id')->toArray();
-        return view('services.public.edit', compact('service', 'units'));
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        return view('services.public.edit', compact('service', 'units', 'drivers'));
     }
 
     public function change(Request $request)

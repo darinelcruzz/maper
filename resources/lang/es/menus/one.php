@@ -66,6 +66,21 @@ return [
         ]
     ],
 
+    'drivers' => [
+        'title' => 'Operadores',
+        'icon' => 'fa fa-id-card-o',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'driver.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'driver.show'
+            ],
+        ]
+    ],
+
     'users' => [
         'title' => 'Usuarios',
         'icon' => 'fa fa-key',

@@ -18,7 +18,7 @@
                         <div class="col-md-4">
                             <div id="field_date" class="form-group">
                                 <label for="date_service" class="control-label">
-                                    Fecha y hora:
+                                    Fecha y hora
                                 </label>
                                 <div class="controls">
                                     <input class="form-control" id="date_service" name="date_service" type="datetime-local" value="{{ date('Y-m-d\TH:i') }}">
@@ -26,14 +26,14 @@
                             </div>
                        </div>
                        <div class="col-md-4">
-                           {!! Field::number('amount', ['min' => '0', 'step' => '.01'])!!}
+                           {!! Field::number('amount', ['label' => 'Importe estimado', 'min' => '0', 'step' => '.01'])!!}
                       </div>
                     </div>
 
                     @include('templates.car')
                     @include('templates.ubication')
                     @include('templates.unit')
-
+                    </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

@@ -14,6 +14,11 @@ class Service extends Model
     	return $this->belongsTo(Unit::class, 'unit');
     }
 
+    public function driverr()
+    {
+        return $this->belongsTo(Driver::class, 'driver');
+    }
+
     public function scopeService($query, $comparation, $service)
     {
         return $query->where('service', $comparation, $service)->get();

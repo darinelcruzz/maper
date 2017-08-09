@@ -20,8 +20,15 @@
                                 <dd>{{ $service->destination }}</dd>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <B>Importe estimado:</B>
+                                <dd>${{ $service->amount }}</dd>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+                <br>
                 <div class="box-header with-border">
                     <h3 class="box-title">Pago
                         <i class="fa fa-dollar" aria-hidden="true"></i>
@@ -29,13 +36,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        {!! Field::number('amount',$service->amount,['label' => 'Arrastre', 'min' => '0', 'step' => '.01'])!!}
+                        {!! Field::number('amount' ,['label' => 'Arrastre', 'min' => '0', 'step' => '.01'])!!}
                     </div>
                     <div class="col-md-4">
                         {!! Field::number('amount',['label' => 'Maniobra','min' => '0', 'step' => '.01'])!!}
-                   </div>
-                   <div class="col-md-4">
-
                    </div>
                 </div>
                 <!-- /.box-body -->

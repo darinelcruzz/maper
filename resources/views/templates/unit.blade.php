@@ -6,9 +6,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        {!! Field::select('driver',
-            ['Juan Clemente' => 'Juan Clemente', 'Juan Manuel' => 'Juan Manuel', 'Francisco' => 'Francisco',
-            'Rafael' => 'Rafael', 'Deberín' => 'Deberín'], isset($service) ? $service->driver: null, ['empty' => 'Seleccione al operador'])
+        {!! Field::select('driver', $drivers, isset($service) ? $service->driver: null, ['empty' => 'Seleccione al operador'])
         !!}
     </div>
     <div class="col-md-4">
@@ -24,4 +22,3 @@
             </div>
         </div>
    </div>
-</div>
