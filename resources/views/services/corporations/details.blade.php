@@ -31,7 +31,7 @@
                                 <B>Tipo:</B><dd>{{ $service->type }}</dd>
                             </td>
                             <td>
-                                <B>Categoría:</B><dd>{{ $service->category }}</dd>
+                                <B>Categoría:</B><dd>{{ $service->pricer->name }}</dd>
                             </td>
                         </tr>
                         <tr>

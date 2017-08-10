@@ -84,6 +84,11 @@ Route::get('servicios', [
             'uses' => 'CorporationServiceController@details',
             'as' => 'details'
         ]);
+
+        Route::get('pago/{service}', [
+            'uses' => 'CorporationServiceController@pay',
+            'as' => 'pay'
+        ]);
     });
 
 // Clientes
@@ -199,6 +204,34 @@ Route::group(['prefix' => 'unidades', 'as' => 'unit.'], function () {
 
     Route::post('cambiar', [
         'uses' => 'UnitController@change',
+        'as' => 'change'
+    ]);
+});
+
+// Precios
+Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
+    Route::get('crear', [
+        'uses' => 'PriceController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'PriceController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'PriceController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'PriceController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'PriceController@change',
         'as' => 'change'
     ]);
 });

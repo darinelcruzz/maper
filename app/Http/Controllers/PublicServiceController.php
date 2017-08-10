@@ -7,6 +7,7 @@ use Jenssegers\Date\Date;
 use App\Service;
 use App\Unit;
 use App\Driver;
+use App\Price;
 
 class PublicServiceController extends Controller
 {
@@ -14,7 +15,8 @@ class PublicServiceController extends Controller
     {
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
-        return view('services.public.create', compact('units', 'drivers'));
+        $prices = Price::pluck('name', 'id')->toArray();
+        return view('services.public.create', compact('units', 'drivers', 'prices'));
     }
 
     public function store(Request $request)
@@ -31,7 +33,8 @@ class PublicServiceController extends Controller
         $service = Service::find($id);
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
-        return view('services.public.edit', compact('service', 'units', 'drivers'));
+        $prices = Price::pluck('name', 'id')->toArray();
+        return view('services.public.edit', compact('service', 'units', 'drivers', 'prices'));
     }
 
     public function change(Request $request)

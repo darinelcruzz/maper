@@ -12,9 +12,7 @@
         {!! Field::text('type', isset($service) ? $service->type: null)!!}
     </div>
     <div class="col-md-4">
-        {!! Field::select('category',
-            ['Moto' => 'Moto', 'Coche' => 'Coche', '3.5 a 4.5 Ton' => '3.5 a 4.5 Ton', '5 a 9 Ton' => '5 a 9 Ton', 'Mas de 10 Ton' => 'Mas de 10 Ton'], isset($service) ? $service->category: null, ['empty' => 'Seleccione el tipo'])
-        !!}
+        {!! Field::select('category', $prices, isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría']) !!}
     </div>
 </div>
 

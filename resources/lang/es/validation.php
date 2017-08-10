@@ -187,6 +187,8 @@ return [
         'driver'                => 'operador',
         'unit'                  => 'unidad',
         'lot'                   => 'corralón',
+        'pension'               => 'pensión',
+        'maneuver'              => 'maniobra',
     ],
 
 ];

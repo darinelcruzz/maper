@@ -51,6 +51,21 @@ return [
         ]
     ],
 
+    'prices' => [
+        'title' => 'Precios',
+        'icon' => 'fa fa-dollar',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'price.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'price.show'
+            ],
+        ]
+    ],
+
     'units' => [
         'title' => 'Unidades',
         'icon' => 'fa fa-truck',

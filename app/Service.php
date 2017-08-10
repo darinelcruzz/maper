@@ -9,19 +9,24 @@ class Service extends Model
 {
     protected $guarded = [];
 
-    public function unitr()
-    {
-    	return $this->belongsTo(Unit::class, 'unit');
-    }
-
-    public function driverr()
+    function driverr()
     {
         return $this->belongsTo(Driver::class, 'driver');
     }
 
-    public function scopeService($query, $comparation, $service)
+    function unitr()
     {
-        return $query->where('service', $comparation, $service)->get();
+        return $this->belongsTo(Unit::class, 'unit');
+    }
+
+    function pricer()
+    {
+        return $this->belongsTo(Price::class, 'category');
+    }
+
+    public function scopeService($query, $comparation, $service, $col)
+    {
+        return $query->where($col, $comparation, $service)->get();
     }
 
     public function getFormattedDateAttribute()

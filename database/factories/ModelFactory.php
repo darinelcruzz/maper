@@ -43,14 +43,23 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Service::class, function (Faker\Generator $faker) {
+$factory->define(App\Price::class, function (Faker\Generator $faker) {
 
     return [
-        'service' => 'Público general',
+        'name' => 'Automovil',
+        'amount' => '60',
+    ];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+    $service = array('Público general', 'Tránsito del Estado');
+
+    return [
+        'service' => $service[array_rand($service)],
         'description' => 'Servicio',
         'brand' => 'Audi',
         'type' => 'A4',
-        'category' => 'coche',
+        'category' => '1',
         'load' => '0',
         'plate' => 'CV-56-56',
         'color' => 'Gris',

@@ -12,9 +12,13 @@ class ServiceController extends Controller
 
     public function show()
     {
-        $public = Service::service('=','Público general');
-        $corps = Service::service('!=', 'Público general');
-        return view('services.show', compact('public', 'corps'));
+        $public = Service::where('service', 'Público general')->get();
+        $corps = Service::where('service', '!=', 'Público general')
+                        ->where('status', 'corralon')->get();
+        $release = Service::where('service', '!=', 'Público general')
+                        ->where('status', 'liberado')->get();
+
+        return view('services.show', compact('public', 'corps', 'release'));
     }
 
 }

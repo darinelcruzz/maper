@@ -5,10 +5,11 @@
     <div class="row">
         <div class="col-md-8">
             <solid-box title="Inventario {{ $service->service }}" color="box-default" collapsed=''>
+                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Fecha y hora:</B>
+                                <B>Fecha y hora entrada:</B>
                                 <dd>{{ $service->formatted_date }}</dd>
                             </td>
                             <td>
@@ -18,12 +19,6 @@
                             <td>
                                 <B>Destino:</B>
                                 <dd>{{ $service->destination }}</dd>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <B>Importe estimado:</B>
-                                <dd>${{ $service->amount }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -41,12 +36,17 @@
                     <div class="col-md-4">
                         {!! Field::number('maneuver',['min' => '0', 'step' => '.01'])!!}
                    </div>
+                   <div class="col-md-4">
+                       {!! Field::number('pension', $cost,['disabled'=> 'true', 'min' => '0', 'step' => '.01'])!!}
+                  </div>
                 </div>
-
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <input type="hidden" name="status" value="pagado">
-                    {!! Form::submit('Pagar', ['class' => 'btn btn-black btn-block']) !!}
+                    <input type="hidden" name="id" value="{{ $service->id }}">
+                    <input type="hidden" name="pension" value="{{ $cost }}">
+                    <input type="hidden" name="status" value="liberado">
+                    <input type="hidden" name="date_out" value="{{ date('Y-m-d\TH:i') }}">
+                    {!! Form::submit('Liberar', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
             </solid-box>
         </div>
