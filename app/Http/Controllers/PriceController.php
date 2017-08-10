@@ -28,8 +28,8 @@ class PriceController extends Controller
 
     public function edit($id)
     {
-        $unit = Price::find($id);
-        return view('prices.edit', compact('unit'));
+        $price = Price::find($id);
+        return view('prices.edit', compact('price'));
     }
 
     public function change(Request $request)

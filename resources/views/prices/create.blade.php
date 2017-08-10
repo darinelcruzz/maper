@@ -11,7 +11,7 @@
                 {!! Form::open(['method' => 'POST', 'route' => 'price.store', 'class' => 'form-horizontal']) !!}
                   <div class="box-body">
                     {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('amount', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
+                    {!! Field::number('pension', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer">

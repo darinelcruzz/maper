@@ -17,7 +17,7 @@ class CreatePricesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            $table->float('amount');
+            $table->float('pension');
 
             $table->timestamps();
         });

@@ -47,7 +47,7 @@ $factory->define(App\Price::class, function (Faker\Generator $faker) {
 
     return [
         'name' => 'Automovil',
-        'amount' => '60',
+        'pension' => '60',
     ];
 });
 

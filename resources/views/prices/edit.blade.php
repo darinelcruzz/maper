@@ -9,16 +9,15 @@
                 </div>
 
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'unit.change', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'price.change', 'class' => 'form-horizontal']) !!}
 
                     <div class="box-body">
-                        {!! Field::text('name', $unit->name, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('number', $unit->number, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('description', $unit->description, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('name', $price->name, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('amount', $price->pension, ['tpl' => 'templates/oneline']) !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <input type="hidden" name="id" value="{{ $unit->id }}">
+                        <input type="hidden" name="id" value="{{ $price->id }}">
                         {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
                     </div>
                     <!-- /.box-footer -->

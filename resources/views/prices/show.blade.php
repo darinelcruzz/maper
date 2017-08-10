@@ -14,7 +14,7 @@
             @foreach($prices as $row)
               <tr>
                   <td>{{ $row->name }}</td>
-                  <td>{{ $row->amount }}</td>
+                  <td>{{ $row->pension }}</td>
                   <td>
                       <a href="{{ route('price.edit', ['id' => $row->id]) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
