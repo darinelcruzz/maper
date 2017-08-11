@@ -13,7 +13,7 @@
 
                     <div class="box-body">
                         {!! Field::text('name', $price->name, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('amount', $price->pension, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('pension', $price->pension, ['tpl' => 'templates/oneline']) !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

@@ -58,13 +58,15 @@ class CorporationServiceController extends Controller
     function pay(Service $service)
     {
         $entry = new Date(strtotime($service->date_service));
-        $entry2 = $entry->format('His');
+        $entryHour = $entry->format('His');
+        //$entryDate = $entry->format('Ymd');
         $today = Date::now();
-        $today2 = $today->format('His');
+        $todayHour = $today->format('His');
+        //$todayDate = $today->format('Ymd');
         $interval = $entry->diff($today);
         $interval = $interval->format('%a');
 
-        if($today2 < $entry2)
+        if($todayHour < $entryHour)
         {
             $mul= $interval + 2;
         }
@@ -72,7 +74,7 @@ class CorporationServiceController extends Controller
             $mul = $interval + 1;
         }
 
-        $cost = Price::find($service->category)->amount * $mul;
+        $cost = Price::find($service->category)->pension * $mul;
 
 
         return view('services.corporations.pay', compact('service', 'cost'));

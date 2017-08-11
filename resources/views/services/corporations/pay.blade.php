@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="Inventario {{ $service->service }}" color="box-default" collapsed=''>
+            <solid-box title="Inventario {{ $service->inventrory }}" color="box-default" collapsed=''>
                 {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}
                 @include('templates.headTable')
                         <tr>
@@ -24,6 +24,13 @@
                     </tbody>
                 </table>
                 <br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! Field::text('releaser')!!}
+                    </div>
+                </div>
+
                 <div class="box-header with-border">
                     <h3 class="box-title">Pago
                         <i class="fa fa-dollar" aria-hidden="true"></i>

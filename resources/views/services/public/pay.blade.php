@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="Inventario {{ $service->service }}" color="box-default" collapsed=''>
+            <solid-box title="Inventario {{ $service->inventory }}" color="box-default" collapsed=''>
                 @include('templates.headTable')
                         <tr>
                             <td>

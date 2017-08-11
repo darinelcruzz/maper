@@ -39,6 +39,7 @@ class CreateServicesTable extends Migration
             $table->string('lot')->nullable();
             $table->float('maneuver')->nullable();
             $table->float('pension')->nullable();
+            $table->string('releaser')->nullable();
 
             $table->timestamps();
         });

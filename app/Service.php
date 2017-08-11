@@ -29,6 +29,7 @@ class Service extends Model
         return $query->where($col, $comparation, $service)->get();
     }
 
+
     public function getFormattedDateAttribute()
     {
         $date = new Date(strtotime($this->date_service));
@@ -41,9 +42,23 @@ class Service extends Model
 
         return $date->format('l, j F Y h:i a');
     }
+    public function getFormattedDateOutAttribute()
+    {
+        $date = new Date(strtotime($this->date_out));
+
+        return $date->format('l, j F Y h:i a');
+    }
+
+
     public function getShortDateAttribute()
     {
         $date = new Date(strtotime($this->date_service));
+
+        return $date->format('j/M/y, G:i');
+    }
+    public function getShortDateOutAttribute()
+    {
+        $date = new Date(strtotime($this->date_out));
 
         return $date->format('j/M/y, G:i');
     }

@@ -55,7 +55,7 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
     $service = array('Público general', 'Tránsito del Estado');
 
     return [
-        'service' => $service[array_rand($service)],
+        'service' => 'Tránsito del Estado',
         'description' => 'Servicio',
         'brand' => 'Audi',
         'type' => 'A4',
@@ -74,7 +74,7 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'date_out' => null,
         'date_return' => '2017-08-04 23:10:00',
         'amount' => '600',
-        'status' => 'pagado',
+        'status' => 'corralon',
         'lot'   => null,
     ];
 });

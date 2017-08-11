@@ -82,12 +82,12 @@
         <template slot="header">
             <tr>
                 <th>ID</th>
-                <th>Fecha</th>
+                <th>Fecha Liberación</th>
                 <th>Inventario</th>
                 <th>Tipo</th>
                 <th>Marca</th>
-                <th>Operador</th>
-                <th>Llave</th>
+                <th>Liberador</th>
+                <th>Importe</th>
                 <th>Opciones</th>
             </tr>
         </template>
@@ -96,16 +96,13 @@
             @foreach($release as $row)
               <tr>
                   <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->short_date }}</td>
+                  <td>{{ $row->short_date_out }}</td>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }}</td>
-                  <td>{{ $row->driverr->name }}</td>
-                  <td>{{ $row->key }}</td>
+                  <td>{{ $row->releaser }}</td>
+                  <td>${{ $row->amount + $row->maneuver + $row->pension }}</td>
                   <td>
-                      <a href="{{ route('service.corporation.pay', ['id' => $row->id]) }}" class="btn btn-success">
-                          <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
-                      </a>
                       <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>

@@ -19,6 +19,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <br>
                 <h3 class="box-title">Vehículo
                     <i class="fa fa-car" aria-hidden="true"></i>
                 </h3>
@@ -53,7 +54,7 @@
                         </tr>
                     </tbody>
                 </table>
-
+                <br>
                 <div class="box-header with-border">
                     <h3 class="box-title">Ubicación
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -73,7 +74,7 @@
                         </tr>
                     </tbody>
                 </table>
-
+                <br>
                 <div class="box-header with-border">
                     <h3 class="box-title">Unidad
                         <i class="fa fa-truck" aria-hidden="true"></i>
@@ -98,6 +99,30 @@
                         </tr>
                     </tbody>
                 </table>
+                <br>
+                @if ($service->status == 'liberado')
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liberación
+                        <i class="fa fa-unlock" aria-hidden="true"></i>
+                    </h3>
+                </div>
+                @include('templates.headTable')
+                        <tr>
+                            <td>
+                                <B>Liberador:</B><dd>{{ $service->releaser }}</dd>
+                            </td>
+                            <td>
+                                <B>Fecha:</B><dd>{{ $service->formatted_date_out }}</dd>
+                            </td>
+                            <td>
+                                <B>Importe:</B><dd>${{ $service->amount + $service->maneuver + $service->pension }}</dd>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                @endif
 
             </solid-box>
         </div>
