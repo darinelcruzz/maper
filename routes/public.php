@@ -7,8 +7,13 @@ Route::get('salir', function (){
     return redirect('/');
 })->name('getout');
 
-// Servicios
+//Admin
+Route::get('caja', [
+    'uses' => 'AdministrationController@show',
+    'as' => 'cash'
+]);
 
+// Servicios
 Route::get('servicios', [
     'uses' => 'ServiceController@show',
     'as' => 'service.show'

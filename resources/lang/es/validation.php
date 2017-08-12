@@ -189,6 +189,7 @@ return [
         'lot'                   => 'corralón',
         'pension'               => 'pensión',
         'maneuver'              => 'maniobra',
+        'releaser'              => 'liberador',
     ],
 
 ];
