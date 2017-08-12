@@ -26,3 +26,55 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Unit::class, function (Faker\Generator $faker) {
+
+    return [
+        'number' => '1',
+        'name' => 'Plataforma',
+        'description' => '01 Plataforma',
+    ];
+});
+
+$factory->define(App\Driver::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Deberlín',
+    ];
+});
+
+$factory->define(App\Price::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Automovil',
+        'pension' => '60',
+    ];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+    $service = array('Público general', 'Tránsito del Estado');
+
+    return [
+        'service' => 'Tránsito del Estado',
+        'description' => 'Servicio',
+        'brand' => 'Audi',
+        'type' => 'A4',
+        'category' => '1',
+        'load' => '0',
+        'plate' => 'CV-56-56',
+        'color' => 'Gris',
+        'inventory' => '001',
+        'key' => 'si',
+        'username' => 'Victor',
+        'origin' => 'Margaritas',
+        'destination' => 'Comitán',
+        'driver' => '1',
+        'unit' => '1',
+        'date_service' => '2017-08-04 14:05:00',
+        'date_out' => null,
+        'date_return' => '2017-08-04 23:10:00',
+        'amount' => '600',
+        'status' => 'corralon',
+        'lot'   => null,
+    ];
+});

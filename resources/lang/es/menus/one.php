@@ -6,9 +6,17 @@ return [
         'title' => 'Servicios',
         'icon' => 'fa fa-ambulance',
         'submenu' => [
-            'create' => [
-                'title' => 'Nuevo',
-                'route' => 'service.create'
+            'public' => [
+                'title' => 'Publico General',
+                'route' => 'service.public.create'
+            ],
+            'corporation' => [
+                'title' => 'Coorporaciones',
+                'route' => 'service.corporation.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'service.show'
             ],
         ]
     ],
@@ -43,6 +51,51 @@ return [
         ]
     ],
 
+    'prices' => [
+        'title' => 'Precios',
+        'icon' => 'fa fa-dollar',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'price.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'price.show'
+            ],
+        ]
+    ],
+
+    'units' => [
+        'title' => 'Unidades',
+        'icon' => 'fa fa-truck',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'unit.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'unit.show'
+            ],
+        ]
+    ],
+
+    'drivers' => [
+        'title' => 'Operadores',
+        'icon' => 'fa fa-id-card-o',
+        'submenu' => [
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'driver.create'
+            ],
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'driver.show'
+            ],
+        ]
+    ],
+
     'users' => [
         'title' => 'Usuarios',
         'icon' => 'fa fa-key',
@@ -61,6 +114,6 @@ return [
     'logout' => [
         'title' => 'Cerrar Sesión',
         'icon' => 'fa fa-sign-out',
-        'route' => 'home',
+        'route' => 'getout',
     ],
 ];

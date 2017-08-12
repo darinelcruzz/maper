@@ -3,56 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 use App\Service;
+use App\Unit;
 
 class ServiceController extends Controller
 {
-    public function create()
-    {
-        return view('services.create');
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|unique:services',
-            'city' => 'required',
-            'phone' => 'required',
-        ]);
-
-        $service = Service::create($request->all());
-        return redirect(route('service.show'));
-    }
 
     public function show()
     {
-        $services = service::all();
-        return view('services.show', compact('services'));
+        $public = Service::where('service', 'Público general')->get();
+        $corps = Service::where('service', '!=', 'Público general')
+                        ->where('status', 'corralon')->get();
+        $release = Service::where('service', '!=', 'Público general')
+                        ->where('status', 'liberado')->get();
+
+        return view('services.show', compact('public', 'corps', 'release'));
     }
 
-    public function edit($id)
-    {
-        $service = Service::find($id);
-        return view('services.edit', compact('service'));
-    }
-
-    public function change(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'city' => 'required',
-            'phone' => 'required',
-        ]);
-
-        Service::find($request->id)->update($request->all());
-
-        return $this->show();
-    }
-
-    function deleteService($id)
-    {
-        Service::destroy($id);
-
-        return back();
-    }
 }

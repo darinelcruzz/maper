@@ -1,42 +1,100 @@
 <?php
 
+Auth::routes();
+
 Route::get('salir', function (){
     Auth::logout();
     return redirect('/');
 })->name('getout');
 
-// Clientes
-Route::group(['prefix' => 'servicios', 'as' => 'service.'], function () {
-    Route::get('crear', [
-        'uses' => 'ServiceController@create',
-        'as' => 'create'
-    ]);
+//Admin
+Route::get('caja', [
+    'uses' => 'AdministrationController@show',
+    'as' => 'cash'
+]);
 
-    Route::post('crear', [
-        'uses' => 'ServiceController@store',
-        'as' => 'store'
-    ]);
+// Servicios
+Route::get('servicios', [
+    'uses' => 'ServiceController@show',
+    'as' => 'service.show'
+]);
+    // Publico General
+    Route::group(['prefix' => 'servicios/publico', 'as' => 'service.public.'], function () {
+        Route::get('crear', [
+            'uses' => 'PublicServiceController@create',
+            'as' => 'create'
+        ]);
 
-    Route::get('/', [
-        'uses' => 'ServiceController@show',
-        'as' => 'show'
-    ]);
+        Route::post('crear', [
+            'uses' => 'PublicServiceController@store',
+            'as' => 'store'
+        ]);
 
-    Route::get('editar/{id}', [
-        'uses' => 'ServiceController@edit',
-        'as' => 'edit'
-    ]);
 
-    Route::get('eliminar/{id}', [
-        'uses' => 'ServiceController@deleteClient',
-        'as' => 'delete'
-    ]);
+        Route::get('editar/{id}', [
+            'uses' => 'PublicServiceController@edit',
+            'as' => 'edit'
+        ]);
 
-    Route::post('cambiar', [
-        'uses' => 'ServiceController@change',
-        'as' => 'change'
-    ]);
-});
+        Route::get('eliminar/{id}', [
+            'uses' => 'PublicServiceController@deleteClient',
+            'as' => 'delete'
+        ]);
+
+        Route::post('cambiar', [
+            'uses' => 'PublicServiceController@change',
+            'as' => 'change'
+        ]);
+
+        Route::get('detalles/{service}', [
+            'uses' => 'PublicServiceController@details',
+            'as' => 'details'
+        ]);
+
+        Route::get('pago/{service}', [
+            'uses' => 'PublicServiceController@pay',
+            'as' => 'pay'
+        ]);
+    });
+
+    // Corporaciones
+    Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporation.'], function () {
+        Route::get('crear', [
+            'uses' => 'CorporationServiceController@create',
+            'as' => 'create'
+        ]);
+
+        Route::post('crear', [
+            'uses' => 'CorporationServiceController@store',
+            'as' => 'store'
+        ]);
+
+
+        Route::get('editar/{id}', [
+            'uses' => 'CorporationServiceController@edit',
+            'as' => 'edit'
+        ]);
+
+        Route::get('eliminar/{id}', [
+            'uses' => 'CorporationServiceController@deleteClient',
+            'as' => 'delete'
+        ]);
+
+        Route::post('cambiar', [
+            'uses' => 'CorporationServiceController@change',
+            'as' => 'change'
+        ]);
+
+        Route::get('detalles/{service}', [
+            'uses' => 'CorporationServiceController@details',
+            'as' => 'details'
+        ]);
+
+        Route::get('pago/{service}', [
+            'uses' => 'CorporationServiceController@pay',
+            'as' => 'pay'
+        ]);
+    });
 
 // Clientes
 Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {
@@ -123,6 +181,90 @@ Route::group(['prefix' => 'productos', 'as' => 'product.'], function () {
 
     Route::post('cambiar', [
         'uses' => 'ProductController@change',
+        'as' => 'change'
+    ]);
+});
+
+// Unidades
+Route::group(['prefix' => 'unidades', 'as' => 'unit.'], function () {
+    Route::get('crear', [
+        'uses' => 'UnitController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'UnitController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'UnitController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'UnitController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'UnitController@change',
+        'as' => 'change'
+    ]);
+});
+
+// Precios
+Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
+    Route::get('crear', [
+        'uses' => 'PriceController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'PriceController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'PriceController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'PriceController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'PriceController@change',
+        'as' => 'change'
+    ]);
+});
+
+// Operadores
+Route::group(['prefix' => 'operadores', 'as' => 'driver.'], function () {
+    Route::get('crear', [
+        'uses' => 'DriverController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'DriverController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'DriverController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'DriverController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'DriverController@change',
         'as' => 'change'
     ]);
 });
