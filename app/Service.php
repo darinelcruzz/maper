@@ -24,6 +24,11 @@ class Service extends Model
         return $this->belongsTo(Price::class, 'category');
     }
 
+    function clientr()
+    {
+        return $this->belongsTo(Client::class, 'client');
+    }
+
     public function scopeService($query, $comparation, $service, $col)
     {
         return $query->where($col, $comparation, $service)->get();

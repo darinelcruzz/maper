@@ -26,7 +26,7 @@ class CreateServicesTable extends Migration
             $table->string('color')->nullable();
             $table->integer('inventory')->nullable();
             $table->string('key')->nullable();
-            $table->string('username')->nullable();
+            $table->string('client')->nullable();
             $table->string('origin')->nullable();
             $table->string('destination')->nullable();
             $table->string('driver')->nullable();
@@ -40,6 +40,7 @@ class CreateServicesTable extends Migration
             $table->float('maneuver')->nullable();
             $table->float('pension')->nullable();
             $table->string('releaser')->nullable();
+            $table->integer('bill')->nullable();
 
             $table->timestamps();
         });

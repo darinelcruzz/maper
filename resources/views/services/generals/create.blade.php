@@ -5,10 +5,10 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Nuevo servicio Corporaciones</h3>
+                    <h3 class="box-title">Nuevo servicio General</h3>
                 </div>
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.store']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'service.general.store']) !!}
 
                 <div class="box-body">
 
@@ -20,7 +20,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <input type="hidden" name="status" value="corralon">
+                    <input type="hidden" name="status" value="pendiente">
+                    <input type="hidden" name="service" value="General">
                     {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->

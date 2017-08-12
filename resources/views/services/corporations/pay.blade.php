@@ -42,10 +42,18 @@
                     </div>
                     <div class="col-md-4">
                         {!! Field::number('maneuver',['min' => '0', 'step' => '.01'])!!}
-                   </div>
-                   <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
                        {!! Field::number('pension', $cost,['disabled'=> 'true', 'min' => '0', 'step' => '.01'])!!}
-                  </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! Field::number('descount', ['min' => '0', 'step' => '.01'])!!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Field::text('reason')!!}
+                    </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

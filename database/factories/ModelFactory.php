@@ -36,6 +36,15 @@ $factory->define(App\Unit::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Client::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Publico en General',
+        'city' => 'n/a',
+        'phone' => '0',
+    ];
+});
+
 $factory->define(App\Driver::class, function (Faker\Generator $faker) {
 
     return [
@@ -65,7 +74,7 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'color' => 'Gris',
         'inventory' => '001',
         'key' => 'si',
-        'username' => 'Victor',
+        'client' => '1',
         'origin' => 'Margaritas',
         'destination' => 'Comitán',
         'driver' => '1',

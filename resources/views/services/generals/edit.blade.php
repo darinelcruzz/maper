@@ -8,7 +8,7 @@
                     <h3 class="box-title">Editar servicio Público General</h3>
                 </div>
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'service.public.change']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
 
                     <div class="box-body">
                         <div class="row">

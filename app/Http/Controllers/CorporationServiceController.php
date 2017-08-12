@@ -8,6 +8,7 @@ use App\Service;
 use App\Unit;
 use App\Driver;
 use App\Price;
+use App\Client;
 
 class CorporationServiceController extends Controller
 {
@@ -16,7 +17,9 @@ class CorporationServiceController extends Controller
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
         $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.corporations.create', compact('units', 'drivers', 'prices'));
+        $clients = Client::pluck('name', 'id')->toArray();
+        $ser = 'corp';
+        return view('services.corporations.create', compact('units', 'drivers', 'prices', 'clients', 'ser'));
     }
 
     public function store(Request $request)

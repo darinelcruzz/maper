@@ -18,41 +18,41 @@ Route::get('servicios', [
     'uses' => 'ServiceController@show',
     'as' => 'service.show'
 ]);
-    // Publico General
-    Route::group(['prefix' => 'servicios/publico', 'as' => 'service.public.'], function () {
+    // General
+    Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], function () {
         Route::get('crear', [
-            'uses' => 'PublicServiceController@create',
+            'uses' => 'GeneralServiceController@create',
             'as' => 'create'
         ]);
 
         Route::post('crear', [
-            'uses' => 'PublicServiceController@store',
+            'uses' => 'GeneralServiceController@store',
             'as' => 'store'
         ]);
 
 
         Route::get('editar/{id}', [
-            'uses' => 'PublicServiceController@edit',
+            'uses' => 'GeneralServiceController@edit',
             'as' => 'edit'
         ]);
 
         Route::get('eliminar/{id}', [
-            'uses' => 'PublicServiceController@deleteClient',
+            'uses' => 'GeneralServiceController@deleteClient',
             'as' => 'delete'
         ]);
 
         Route::post('cambiar', [
-            'uses' => 'PublicServiceController@change',
+            'uses' => 'GeneralServiceController@change',
             'as' => 'change'
         ]);
 
         Route::get('detalles/{service}', [
-            'uses' => 'PublicServiceController@details',
+            'uses' => 'GeneralServiceController@details',
             'as' => 'details'
         ]);
 
         Route::get('pago/{service}', [
-            'uses' => 'PublicServiceController@pay',
+            'uses' => 'GeneralServiceController@pay',
             'as' => 'pay'
         ]);
     });

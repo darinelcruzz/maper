@@ -8,15 +8,18 @@ use App\Service;
 use App\Unit;
 use App\Driver;
 use App\Price;
+use App\Client;
 
-class PublicServiceController extends Controller
+class GeneralServiceController extends Controller
 {
     public function create()
     {
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
         $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.public.create', compact('units', 'drivers', 'prices'));
+        $clients = Client::pluck('name', 'id')->toArray();
+        $ser = 'gen';
+        return view('services.generals.create', compact('units', 'drivers', 'prices', 'clients', 'ser'));
     }
 
     public function store(Request $request)
@@ -34,7 +37,7 @@ class PublicServiceController extends Controller
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
         $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.public.edit', compact('service', 'units', 'drivers', 'prices'));
+        return view('services.generals.edit', compact('service', 'units', 'drivers', 'prices'));
     }
 
     public function change(Request $request)
@@ -48,12 +51,12 @@ class PublicServiceController extends Controller
 
     function details(Service $service)
     {
-        return view('services.public.details', compact('service'));
+        return view('services.generals.details', compact('service'));
     }
 
     function pay(Service $service)
     {
-        return view('services.public.pay', compact('service'));
+        return view('services.generals.pay', compact('service'));
     }
 
     function deleteService($id)
