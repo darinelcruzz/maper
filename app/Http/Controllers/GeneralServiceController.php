@@ -37,7 +37,9 @@ class GeneralServiceController extends Controller
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
         $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.generals.edit', compact('service', 'units', 'drivers', 'prices'));
+        $clients = Client::pluck('name', 'id')->toArray();
+        $ser = 'gen';
+        return view('services.generals.edit', compact('service', 'units', 'drivers', 'prices', 'clients', 'ser'));
     }
 
     public function change(Request $request)

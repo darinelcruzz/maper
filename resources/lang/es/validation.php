@@ -190,6 +190,10 @@ return [
         'pension'               => 'pensión',
         'maneuver'              => 'maniobra',
         'releaser'              => 'liberador',
+        'others'                => 'otros',
+        'bill'                  => 'factura',
+        'discount'              => 'descuento',
+        'reason'                => 'razón',
     ],
 
 ];

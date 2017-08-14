@@ -116,7 +116,7 @@
                                 <B>Fecha:</B><dd>{{ $service->formatted_date_out }}</dd>
                             </td>
                             <td>
-                                <B>Importe:</B><dd>${{ $service->amount + $service->maneuver + $service->pension }}</dd>
+                                <B>Importe:</B><dd>${{ $service->amount + $service->maneuver + $service->pension - $service->discount }}</dd>
                             </td>
                         </tr>
                     </tbody>

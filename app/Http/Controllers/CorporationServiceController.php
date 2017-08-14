@@ -41,7 +41,9 @@ class CorporationServiceController extends Controller
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
         $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.corporations.edit', compact('service', 'units', 'drivers', 'prices'));
+        $clients = Client::pluck('name', 'id')->toArray();
+        $ser = 'corp';
+        return view('services.corporations.edit', compact('service', 'units', 'drivers', 'prices', 'clients', 'ser'));
     }
 
     public function change(Request $request)

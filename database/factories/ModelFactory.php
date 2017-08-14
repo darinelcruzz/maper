@@ -61,7 +61,7 @@ $factory->define(App\Price::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Service::class, function (Faker\Generator $faker) {
-    $service = array('Público general', 'Tránsito del Estado');
+    $service = array('General', 'Tránsito del Estado');
 
     return [
         'service' => 'Tránsito del Estado',

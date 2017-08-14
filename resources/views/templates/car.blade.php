@@ -32,9 +32,11 @@
     <div class="col-md-4">
         {!! Field::number('inventory', isset($service) ? $service->inventory: null, ['min' => '0'])!!}
     </div>
-    <div class="col-md-4">
-        {!! Field::select('key',
-            ['si' => 'Si', 'no' => 'No'], isset($service) ? $service->key: null, ['empty' => '¿Tenía llave?'])
-        !!}
-    </div>
+    @if($ser == 'corp')
+        <div class="col-md-4">
+            {!! Field::select('key',
+                ['si' => 'Si', 'no' => 'No'], isset($service) ? $service->key: null, ['empty' => '¿Tenía llave?'])
+            !!}
+        </div>
+    @endif
 </div>
