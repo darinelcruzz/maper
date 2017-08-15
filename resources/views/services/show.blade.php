@@ -2,7 +2,44 @@
 
 @section('main-content')
 
-    
+
+
+    <data-table col="col-md-12" title="Corporaciones" example="example2" color="box-primary" collapsed="collapsed-box">
+        <template slot="header">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Inventario</th>
+                <th>Tipo</th>
+                <th>Vehículo</th>
+                <th>Operador</th>
+                <th>Llave</th>
+                <th>Opciones</th>
+            </tr>
+        </template>
+
+        <template slot="body">
+            @foreach($corps as $row)
+              <tr>
+                  <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                  <td>{{ $row->short_date }}</td>
+                  <td>{{ $row->inventory }}</td>
+                  <td>{{ $row->service }}</td>
+                  <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                  <td>{{ $row->driverr->name }}</td>
+                  <td>{{ $row->key }}</td>
+                  <td>
+                      <a href="{{ route('service.corporation.pay', ['id' => $row->id]) }}" class="btn btn-success">
+                          <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
+                      </a>
+                      <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      </a>
+                  </td>
+              </tr>
+            @endforeach
+        </template>
+    </data-table>
     <data-table col="col-md-12" title="Pagados" example="example3" color="box-warning" collapsed="collapsed-box">
         <template slot="header">
             <tr>
