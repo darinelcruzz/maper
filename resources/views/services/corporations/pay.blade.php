@@ -21,6 +21,16 @@
                                 <dd>{{ $service->destination }}</dd>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <B>Arrastre estimado:</B>
+                                <dd>$ {{ $service->amount }}</dd>
+                            </td>
+                            <td>
+                                <B>Maniobra estimado:</B>
+                                <dd>$ {{ $service->maneuver }}</dd>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <br>

@@ -60,14 +60,19 @@ class CorporationServiceController extends Controller
         return view('services.corporations.details', compact('service'));
     }
 
+    function printLetter(Service $service)
+    {
+        $today = Date::now();
+        $date = $today->format('d \d\e F \d\e\l Y');
+        return view('services.corporations.letter', compact('service', 'date'));
+    }
+
     function pay(Service $service)
     {
         $entry = new Date(strtotime($service->date_service));
         $entryHour = $entry->format('His');
-        //$entryDate = $entry->format('Ymd');
         $today = Date::now();
         $todayHour = $today->format('His');
-        //$todayDate = $today->format('Ymd');
         $interval = $entry->diff($today);
         $interval = $interval->format('%a');
 

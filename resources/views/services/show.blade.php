@@ -81,7 +81,6 @@
             <tr>
                 <th>ID</th>
                 <th>Fecha Pago</th>
-                <th>Inventario</th>
                 <th>Cliente</th>
                 <th>Marca</th>
                 <th>Importe</th>
@@ -94,7 +93,6 @@
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                   <td>{{ $row->short_date_out }}</td>
-                  <td>{{ $row->inventory }}</td>
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }}</td>
@@ -132,6 +130,9 @@
                   <td>{{ $row->releaser }}</td>
                   <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }}</td>
                   <td>
+                      <a href="{{ route('service.corporation.print', ['id' => $row->id]) }}" class="btn btn-default">
+                          <i class="fa fa-print" aria-hidden="true"></i>
+                      </a>
                       <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>

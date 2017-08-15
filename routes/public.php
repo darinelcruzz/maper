@@ -94,6 +94,11 @@ Route::get('servicios', [
             'uses' => 'CorporationServiceController@pay',
             'as' => 'pay'
         ]);
+
+        Route::get('formato/{service}', [
+            'uses' => 'CorporationServiceController@printLetter',
+            'as' => 'print'
+        ]);
     });
 
 // Clientes
