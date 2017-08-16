@@ -121,7 +121,7 @@ return [
         'first_name'            => 'nombre',
         'last_name'             => 'apellido',
         'password'              => 'contraseña',
-        'password2'              => 'contraseña',
+        'password2'             => 'contraseña',
         'password_confirmation' => 'confirmación de la contraseña',
         'city'                  => 'ciudad',
         'country'               => 'país',
@@ -194,6 +194,11 @@ return [
         'bill'                  => 'factura',
         'discount'              => 'descuento',
         'reason'                => 'razón',
+        'motocycle'             => 'moto',
+        'car'                   => 'coche',
+        'ton3'                  => '3 Ton',
+        'ton5'                  => '5 Ton',
+        'ton10'                 => '10 Ton',
     ],
 
 ];

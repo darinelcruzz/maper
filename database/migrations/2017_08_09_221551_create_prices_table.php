@@ -16,8 +16,15 @@ class CreatePricesTable extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name');
-            $table->float('pension');
+            $table->string('name')->nullable();
+            $table->string('type')->nullable();
+            $table->float('km')->nullable();
+            $table->float('moto')->nullable();
+            $table->float('car')->nullable();
+            $table->float('ton3')->nullable();
+            $table->float('ton5')->nullable();
+            $table->float('ton10')->nullable();
+            $table->string('observation')->nullable();
 
             $table->timestamps();
         });

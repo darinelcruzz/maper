@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="Inventario {{ $service->inventory }}" color="box-default" collapsed=''>
+            <solid-box title="{{ $service->clientr->name }}" color="box-default" collapsed=''>
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
                 @include('templates.headTable')
                         <tr>
@@ -23,6 +23,10 @@
                         </tr>
                         <tr>
                             <td>
+                                <B>Inventario:</B>
+                                <dd>{{ $service->inventory }}</dd>
+                            </td>
+                            <td>
                                 <B>Descripción:</B>
                                 <dd>{{ $service->description }}</dd>
                             </td>
@@ -31,6 +35,7 @@
                                 <dd>${{ $service->amount }}</dd>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
                 <br>

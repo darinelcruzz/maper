@@ -82,7 +82,7 @@
         <table align="center" border="1">
             <tr>
                 <th width="80px">MARCA:</th>
-                <td width="230px">{{ $service->brand }}</td>
+                <td width="250px">{{ $service->brand }}</td>
             </tr>
             <tr>
                 <th>MODELO:</th>
@@ -90,7 +90,7 @@
             </tr>
             <tr>
                 <th>TIPO:</th>
-                <td>{{ $service->pricer->name }}</td>
+                <td>{{ $service->category }}</td>
             </tr>
             <tr>
                 <th>COLOR:</th>

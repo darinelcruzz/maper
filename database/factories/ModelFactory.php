@@ -52,14 +52,6 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Price::class, function (Faker\Generator $faker) {
-
-    return [
-        'name' => 'Automovil',
-        'pension' => '60',
-    ];
-});
-
 $factory->define(App\Service::class, function (Faker\Generator $faker) {
     $service = array('General', 'Tránsito del Estado');
 

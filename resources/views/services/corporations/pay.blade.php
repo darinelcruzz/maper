@@ -23,6 +23,10 @@
                         </tr>
                         <tr>
                             <td>
+                                <B>Inventario:</B>
+                                <dd>{{ $service->inventory }}</dd>
+                            </td>
+                            <td>
                                 <B>Arrastre estimado:</B>
                                 <dd>$ {{ $service->amount }}</dd>
                             </td>

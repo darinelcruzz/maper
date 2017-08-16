@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="Inventario {{ $service->inventory }}" color="box-default" collapsed=''>
+            <solid-box title="{{ $service->service }}" color="box-default" collapsed=''>
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -17,9 +17,14 @@
                                 <B>Fecha y hora:</B><dd>{{ $service->formatted_date }}</dd>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <B>Inventario:</B>
+                                <dd>{{ $service->inventory }}</dd>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <br>
                 <h3 class="box-title">Vehículo
                     <i class="fa fa-car" aria-hidden="true"></i>
                 </h3>
@@ -32,7 +37,7 @@
                                 <B>Tipo:</B><dd>{{ $service->type }}</dd>
                             </td>
                             <td>
-                                <B>Categoría:</B><dd>{{ $service->pricer->name }}</dd>
+                                <B>Categoría:</B><dd>{{ $service->category }}</dd>
                             </td>
                         </tr>
                         <tr>

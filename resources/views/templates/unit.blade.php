@@ -9,8 +9,10 @@
         {!! Field::select('driver', $drivers, isset($service) ? $service->driver: null, ['empty' => 'Seleccione al operador'])
         !!}
     </div>
-    <div class="col-md-4">
-        {!! Field::select('unit', $units, isset($service) ? $service->unit: null, ['empty' => 'Seleccione la unidad']) !!}
+    <div class="form group">
+        <div class="col-md-4">
+            {!! Field::select('unit', $units, isset($service) ? $service->unit: null, ['empty' => 'Seleccione la unidad']) !!}
+        </div>
     </div>
     <div class="col-md-4">
         <div id="field_date" class="form-group">

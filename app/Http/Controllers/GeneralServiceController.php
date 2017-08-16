@@ -16,10 +16,9 @@ class GeneralServiceController extends Controller
     {
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
-        $prices = Price::pluck('name', 'id')->toArray();
         $clients = Client::pluck('name', 'id')->toArray();
         $ser = 'gen';
-        return view('services.generals.create', compact('units', 'drivers', 'prices', 'clients', 'ser'));
+        return view('services.generals.create', compact('units', 'drivers', 'clients', 'ser'));
     }
 
     public function store(Request $request)
@@ -36,10 +35,9 @@ class GeneralServiceController extends Controller
         $service = Service::find($id);
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
-        $prices = Price::pluck('name', 'id')->toArray();
         $clients = Client::pluck('name', 'id')->toArray();
         $ser = 'gen';
-        return view('services.generals.edit', compact('service', 'units', 'drivers', 'prices', 'clients', 'ser'));
+        return view('services.generals.edit', compact('service', 'units', 'drivers', 'clients', 'ser'));
     }
 
     public function change(Request $request)

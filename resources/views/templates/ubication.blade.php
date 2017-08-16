@@ -18,3 +18,10 @@
         {!! Field::text('destination', isset($service) ? $service->destination: null)!!}
     </div>
 </div>
+<div class="row">
+    <div class="col-md-4">
+        <a href="https://google.com.mx/maps" target="_blank" class="btn btn-success">Google Maps
+            <i class="fa fa-map-pin" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>

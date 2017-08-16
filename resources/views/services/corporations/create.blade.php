@@ -2,7 +2,7 @@
 
 @section('main-content')
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10">
             <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">Nuevo servicio Corporaciones</h3>

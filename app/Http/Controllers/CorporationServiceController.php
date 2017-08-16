@@ -16,10 +16,9 @@ class CorporationServiceController extends Controller
     {
         $units = Unit::pluck('description', 'id')->toArray();
         $drivers = Driver::pluck('name', 'id')->toArray();
-        $prices = Price::pluck('name', 'id')->toArray();
         $clients = Client::pluck('name', 'id')->toArray();
         $ser = 'corp';
-        return view('services.corporations.create', compact('units', 'drivers', 'prices', 'clients', 'ser'));
+        return view('services.corporations.create', compact('units', 'drivers', 'clients', 'ser'));
     }
 
     public function store(Request $request)
@@ -84,8 +83,15 @@ class CorporationServiceController extends Controller
             $mul = $interval + 1;
         }
 
-        $cost = Price::find($service->category)->pension * $mul;
-
+        if($service->category == 'Moto'){
+            $cost = Price::find(1)->moto * $mul;
+        }
+        elseif ($service->category == 'Coche') {
+            $cost = Price::find(1)->car * $mul;
+        }
+        else{
+            $cost = Price::find(1)->ton3 * $mul;
+        }
 
         return view('services.corporations.pay', compact('service', 'cost'));
     }
