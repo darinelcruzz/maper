@@ -20,10 +20,10 @@
               <tr>
                   <td>{{ $row->id }}</td>
                   <td>{{ $row->name }}</td>
-                  <td>{{ $row->motocycle }}</td>
-                  <td>{{ $row->car }}</td>
-                  <td>{{ $row->ton3 }}</td>
-                  <td>{{ $row->ton5 }}</td>
+                  <td>${{ $row->moto }}</td>
+                  <td>${{ $row->car }}</td>
+                  <td>${{ $row->ton3 }}</td>
+                  <td>${{ $row->ton5 }}</td>
                   <td>${{ $row->ton10 }}</td>
                   <td>
                       <a href="{{ route('price.edit', ['id' => $row->id]) }}"  class="btn btn-info">
@@ -49,14 +49,14 @@
         </template>
 
         <template slot="body">
-            @foreach($others as $row)
+            @foreach($route1 as $row)
               <tr>
                   <td>{{ $row->km }}</td>
                   <td>{{ $row->name }}</td>
-                  <td>{{ $row->motocycle }}</td>
-                  <td>{{ $row->car }}</td>
-                  <td>{{ $row->ton3 }}</td>
-                  <td>{{ $row->ton5 }}</td>
+                  <td>${{ $row->moto }}</td>
+                  <td>${{ $row->car }}</td>
+                  <td>${{ $row->ton3 }}</td>
+                  <td>${{ $row->ton5 }}</td>
                   <td>${{ $row->ton10 }}</td>
                   <td>
                       <a href="{{ route('price.edit', ['id' => $row->id]) }}"  class="btn btn-info">
@@ -67,10 +67,10 @@
             @endforeach
         </template>
     </data-table>
-    <data-table col="col-md-12" title="Otros" example="example1" color="box-primary" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Ruta 2" example="example3" color="box-primary" collapsed="collapsed-box">
         <template slot="header">
             <tr>
-                <th>ID</th>
+                <th>Km</th>
                 <th>Nombre</th>
                 <th>Moto</th>
                 <th>Coche</th>
@@ -81,11 +81,11 @@
         </template>
 
         <template slot="body">
-            @foreach($others as $row)
+            @foreach($route2 as $row)
               <tr>
-                  <td>{{ $row->id }}</td>
+                  <td>{{ $row->km }}</td>
                   <td>{{ $row->name }}</td>
-                  <td>{{ $row->motocycle }}</td>
+                  <td>{{ $row->moto }}</td>
                   <td>{{ $row->car }}</td>
                   <td>{{ $row->ton3 }}</td>
                   <td>{{ $row->ton5 }}</td>

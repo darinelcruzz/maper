@@ -23,11 +23,11 @@ class PriceController extends Controller
     public function show()
     {
         $others = Price::where('type', 'otros')->get();
-        $route1 = Price::where('type', 'ruta 1')->get();
-        $route2 = Price::where('type', 'ruta 2')->get();
-        $route3 = Price::where('type', 'ruta 3')->get();
-        $route4 = Price::where('type', 'ruta 4')->get();
-        $route5 = Price::where('type', 'ruta 5')->get();
+        $route1 = Price::where('type', 'Ruta 1')->get();
+        $route2 = Price::where('type', 'Ruta 2')->get();
+        $route3 = Price::where('type', 'Ruta 3')->get();
+        $route4 = Price::where('type', 'Ruta 4')->get();
+        $route5 = Price::where('type', 'Ruta 5')->get();
 
         return view('prices.show', compact('others', 'route1', 'route2', 'route3', 'route4', 'route5'));
     }

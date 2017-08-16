@@ -15,7 +15,7 @@
                         ['otros' => 'Otros', 'Ruta 1' => 'Ruta 1', 'Ruta 2' => 'Ruta 2', 'Ruta 3' => 'Ruta 3', 'Ruta 4' => 'Ruta 4',
                         'Ruta 5' => 'Ruta 5'], null, ['empty' => '¿A que corresponde?', 'tpl' => 'templates/oneline'])!!}
                     {!! Field::number('km', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('motocycle', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
+                    {!! Field::number('moto', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
                     {!! Field::number('car', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
                     {!! Field::number('ton3', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
                     {!! Field::number('ton5', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
