@@ -50,17 +50,17 @@
                     </div>
                     <div class="col-md-4">
                         {!! Field::number('maneuver', 0, ['min' => '0', 'step' => '.01'])!!}
-                   </div>
-                   <div class="col-md-4">
-                       {!! Field::number('others', 0, ['min' => '0', 'step' => '.01'])!!}
-                  </div>
+                    </div>
+                    <div class="col-md-4">
+                        {!! Field::number('others', 0, ['min' => '0', 'step' => '.01'])!!}
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-4">
-                       <h3><B>Total $</B></h3>
-                   </div>
+                        <h3><B>Total $</B></h3>
+                    </div>
                 </div>
 
                 <!-- /.box-body -->

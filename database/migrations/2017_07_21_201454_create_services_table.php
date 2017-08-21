@@ -44,6 +44,7 @@ class CreateServicesTable extends Migration
             $table->float('others')->nullable();
             $table->float('discount')->nullable();
             $table->string('reason')->nullable();
+            $table->string('pay')->nullable();
 
             $table->timestamps();
         });

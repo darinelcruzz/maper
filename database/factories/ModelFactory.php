@@ -45,6 +45,20 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Price::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Pensión',
+        'type' => 'otros',
+        'km' => null,
+        'moto' => '25',
+        'car' => '60',
+        'ton3' => '150',
+        'ton5' => '150',
+        'ton10' => '150',
+    ];
+});
+
 $factory->define(App\Driver::class, function (Faker\Generator $faker) {
 
     return [
