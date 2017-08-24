@@ -39,29 +39,8 @@
                     </tbody>
                 </table>
                 <br>
-                <div class="box-header with-border">
-                    <h3 class="box-title">Pago
-                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                    </h3>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        {!! Field::number('amount', 0, ['label' => 'Arrastre', 'min' => '0', 'step' => '.01'])!!}
-                    </div>
-                    <div class="col-md-4">
-                        {!! Field::number('maneuver', 0, ['min' => '0', 'step' => '.01'])!!}
-                    </div>
-                    <div class="col-md-4">
-                        {!! Field::number('others', 0, ['min' => '0', 'step' => '.01'])!!}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                        <h3><B>Total $</B></h3>
-                    </div>
-                </div>
+
+                @include('templates.pay')
 
                 <!-- /.box-body -->
                 <div class="box-footer">

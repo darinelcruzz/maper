@@ -68,10 +68,12 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Service::class, function (Faker\Generator $faker) {
     $service = array('General', 'Tránsito del Estado');
-
+    $status = array('pendiente', 'corralon');
+    $description = array('Servicio', 'Arrastre', 'Cola');
+    $index = $faker->numberBetween(0, 1);
     return [
-        'service' => 'Tránsito del Estado',
-        'description' => 'Servicio',
+        'service' => $service[$index],
+        'description' => $description[array_rand($description)],
         'brand' => 'Audi',
         'type' => 'A4',
         'category' => '1',
@@ -88,8 +90,8 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'date_service' => '2017-08-04 14:05:00',
         'date_out' => null,
         'date_return' => '2017-08-04 23:10:00',
-        'amount' => '600',
-        'status' => 'corralon',
+        'amount' => $faker->numberBetween(100, 600),
+        'status' => $status[$index],
         'lot'   => null,
     ];
 });

@@ -55,7 +55,9 @@
                             <td>
                                 <B>Llave:</B><dd>{{ $service->key }}</dd>
                             </td>
-
+                            <td>
+                                <B>Modelo:</B><dd>{{ $service->model }}</dd>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

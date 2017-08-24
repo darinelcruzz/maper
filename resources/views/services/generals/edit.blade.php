@@ -33,6 +33,9 @@
                       @include('templates.car')
                       @include('templates.ubication')
                       @include('templates.unit')
+                      @if($service->status != 'pendiente')
+                          @include('templates.pay')
+                      @endif
 
                     </div>
                   <!-- /.box-body -->

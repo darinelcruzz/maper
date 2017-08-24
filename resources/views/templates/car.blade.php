@@ -39,5 +39,8 @@
                 ['si' => 'Si', 'no' => 'No'], isset($service) ? $service->key: null, ['empty' => '¿Tenía llave?'])
             !!}
         </div>
+        <div class="col-md-4">
+            {!! Field::number('model', isset($service) ? $service->model: null, ['min' => '0'])!!}
+        </div>
     @endif
 </div>

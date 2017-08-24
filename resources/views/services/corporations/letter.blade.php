@@ -85,16 +85,16 @@
                 <td width="250px">{{ $service->brand }}</td>
             </tr>
             <tr>
-                <th>MODELO:</th>
-                <td>{{ $service->type }}</td>
-            </tr>
-            <tr>
                 <th>TIPO:</th>
-                <td>{{ $service->category }}</td>
+                <td>{{ $service->type }}</td>
             </tr>
             <tr>
                 <th>COLOR:</th>
                 <td>{{ $service->color }}</td>
+            </tr>
+            <tr>
+                <th>MODELO:</th>
+                <td>{{ $service->model }}</td>
             </tr>
             <tr>
                 <th>PLACAS:</th>

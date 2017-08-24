@@ -30,6 +30,9 @@
                       @include('templates.car')
                       @include('templates.ubication')
                       @include('templates.unit')
+                      @if($service->status != 'corralon')
+                          @include('templates.pay')
+                      @endif
 
                     </div>
                   <!-- /.box-body -->

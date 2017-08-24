@@ -45,6 +45,9 @@ class GeneralServiceController extends Controller
         $this->validate($request, []);
 
         Service::find($request->id)->update($request->all());
+        Service::find($request->id)->update([
+            'status' => $request->credit == 'on' ? 'credito' : $request->status
+        ]);
 
         return redirect(route('service.show'));
     }
@@ -56,7 +59,9 @@ class GeneralServiceController extends Controller
 
     function pay(Service $service)
     {
-        return view('services.generals.pay', compact('service'));
+        $cost = 0;
+        $ser = 'gen';
+        return view('services.generals.pay', compact('service', 'ser', 'cost'));
     }
 
     function deleteService($id)

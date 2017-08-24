@@ -68,6 +68,7 @@ class CorporationServiceController extends Controller
 
     function pay(Service $service)
     {
+        $ser = 'corp';
         $entry = new Date(strtotime($service->date_service));
         $entryHour = $entry->format('His');
         $today = Date::now();
@@ -93,7 +94,7 @@ class CorporationServiceController extends Controller
             $cost = Price::find(1)->ton3 * $mul;
         }
 
-        return view('services.corporations.pay', compact('service', 'cost'));
+        return view('services.corporations.pay', compact('service', 'ser', 'cost'));
     }
 
     function deleteService($id)

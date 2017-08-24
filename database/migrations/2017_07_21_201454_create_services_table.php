@@ -20,6 +20,7 @@ class CreateServicesTable extends Migration
             $table->string('description')->nullable();
             $table->string('brand')->nullable();
             $table->string('type')->nullable();
+            $table->integer('model')->nullable();
             $table->string('category')->nullable();
             $table->string('load')->nullable();
             $table->string('plate')->nullable();
@@ -45,6 +46,7 @@ class CreateServicesTable extends Migration
             $table->float('discount')->nullable();
             $table->string('reason')->nullable();
             $table->string('pay')->nullable();
+            $table->string('credit')->nullable();
 
             $table->timestamps();
         });
