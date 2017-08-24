@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Unit;
+use App\Driver;
 
 class UnitController extends Controller
 {
@@ -25,8 +26,9 @@ class UnitController extends Controller
 
     public function show()
     {
+        $drivers = Driver::all();
         $units = Unit::all();
-        return view('units.show', compact('units'));
+        return view('units.show', compact('units', 'drivers'));
     }
 
     public function edit($id)

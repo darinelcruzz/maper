@@ -8,10 +8,16 @@ Route::get('salir', function (){
 })->name('getout');
 
 //Admin
-Route::get('caja', [
-    'uses' => 'AdministrationController@show',
-    'as' => 'cash'
-]);
+Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
+    Route::get('caja', [
+        'uses' => 'AdministrationController@cash',
+        'as' => 'cash'
+    ]);
+    Route::post('caja', [
+        'uses' => 'AdministrationController@cash',
+        'as' => 'cash'
+    ]);
+});
 
 // Servicios
 Route::get('servicios', [

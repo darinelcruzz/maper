@@ -34,6 +34,13 @@ class Service extends Model
         return $query->where($col, $comparation, $service)->get();
     }
 
+    public function scopePayType($query, $date, $type)
+    {
+        return $query->whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
+                            ->where('status', '!=', 'credito')
+                            ->where('pay', $type)->get();
+    }
+
 
     public function getFormattedDateAttribute()
     {
@@ -66,5 +73,10 @@ class Service extends Model
         $date = new Date(strtotime($this->date_out));
 
         return $date->format('j/M/y, G:i');
+    }
+
+    public function getTotalAttribute()
+    {
+        return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 }

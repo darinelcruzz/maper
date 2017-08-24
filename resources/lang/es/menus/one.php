@@ -21,6 +21,17 @@ return [
         ]
     ],
 
+    'admin' => [
+        'title' => 'Administración',
+        'icon' => 'fa fa-line-chart',
+        'submenu' => [
+            'create' => [
+                'title' => 'Caja',
+                'route' => 'admin.cash'
+            ],
+        ]
+    ],
+
     'clients' => [
         'title' => 'Clientes',
         'icon' => 'fa fa-users',
@@ -66,32 +77,17 @@ return [
         ]
     ],
 
-    'units' => [
-        'title' => 'Unidades',
+    'resources' => [
+        'title' => 'Recursos',
         'icon' => 'fa fa-truck',
         'submenu' => [
-            'create' => [
-                'title' => 'Agregar',
+            'createu' => [
+                'title' => 'Agregar unidad',
                 'route' => 'unit.create'
             ],
-            'list' => [
-                'title' => 'Listado',
-                'route' => 'unit.show'
-            ],
-        ]
-    ],
-
-    'drivers' => [
-        'title' => 'Operadores',
-        'icon' => 'fa fa-id-card-o',
-        'submenu' => [
-            'create' => [
-                'title' => 'Agregar',
+            'created' => [
+                'title' => 'Agregar operador',
                 'route' => 'driver.create'
-            ],
-            'list' => [
-                'title' => 'Listado',
-                'route' => 'driver.show'
             ],
         ]
     ],
