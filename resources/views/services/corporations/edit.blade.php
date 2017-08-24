@@ -32,6 +32,7 @@
                       @include('templates.unit')
                       @if($service->status != 'corralon')
                           @include('templates.pay')
+                          <input type="hidden" name="status" value="{{ $service->status }}">
                       @endif
 
                     </div>
