@@ -19,7 +19,7 @@
             @foreach($general as $row)
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->short_date }}</td>
+                  <td>{{ $row->getShortDate('date_service') }}</td>
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>{{ $row->driverr->name }}</td>
@@ -58,7 +58,7 @@
             @foreach($corps as $row)
               <tr>
                   <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->short_date }}</td>
+                  <td>{{ $row->getShortDate('date_service') }}</td>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -93,7 +93,7 @@
             @foreach($paid as $row)
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->short_date_out }}</td>
+                  <td>{{ $row->getShortDate('date_out') }}</td>
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }} - {{ $row->pay }}</td>
@@ -125,7 +125,7 @@
             @foreach($release as $row)
               <tr>
                   <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->short_date_out }}</td>
+                  <td>{{ $row->getShortDate('date_out') }}</td>
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -160,7 +160,7 @@
             @foreach($credit as $row)
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->short_date_out }}</td>
+                  <td>{{ $row->getShortDate('date_out') }}</td>
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }}</td>

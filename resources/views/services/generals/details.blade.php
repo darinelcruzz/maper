@@ -17,7 +17,7 @@
                             </td>
                             <td>
                                 <B>Fecha y hora:</B>
-                                <dd>{{ $service->formatted_date }}</dd>
+                                <dd>{{ $service->getDate('date_service') }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -71,7 +71,7 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Usuario:</B><dd>{{ $service->username }}</dd>
+                                <B>Cliente:</B><dd>{{ $service->clientr->name }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B><dd>{{ $service->origin }}</dd>
@@ -97,7 +97,7 @@
                                 <B>Unidad:</B><dd>{{ $service->unitr->description or '' }}</dd>
                             </td>
                             <td>
-                                <B>Regreso:</B><dd>{{ $service->formatted_date_return }}</dd>
+                                <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
                             </td>
                         </tr>
                     </tbody>

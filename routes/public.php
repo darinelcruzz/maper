@@ -138,6 +138,11 @@ Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {
         'uses' => 'ClientController@change',
         'as' => 'change'
     ]);
+
+    Route::get('detalles/{client}', [
+        'uses' => 'ClientController@details',
+        'as' => 'details'
+    ]);
 });
 
 // Proveedores

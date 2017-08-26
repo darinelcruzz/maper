@@ -11,34 +11,21 @@
                 {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}
 
                     <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {!! Field::text('description', $service->description)!!}
-                            </div>
-                            <div class="col-md-4">
-                                <div id="field_date" class="form-group">
-                                    <label for="date" class="control-label">
-                                        Fecha y hora:
-                                    </label>
-                                    <div class="controls">
-                                        <input class="form-control" id="date_service" name="date_service" type="datetime-local" value="{{ date('Y-m-d\TH:i', strtotime($service->date_service)) }}">
-                                    </div>
-                                </div>
-                           </div>
-                        </div>
 
-                      @include('templates.car')
-                      @include('templates.ubication')
-                      @include('templates.unit')
-                      @if($service->status != 'corralon')
-                          @include('templates.pay')
-                          <input type="hidden" name="status" value="{{ $service->status }}">
-                      @endif
+                        @include('templates.principal')
+                        @include('templates.car')
+                        @include('templates.ubication')
+                        @include('templates.unit')
+                        @if($service->status != 'corralon')
+                            @include('templates.pay')
+                            <input type="hidden" name="status" value="{{ $service->status }}">
+                        @endif
 
                     </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
                       <input type="hidden" name="id" value="{{ $service->id }}">
+                      <input type="hidden" name="status" value="{{ $service->status }}">
                     {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                   </div>
                   <!-- /.box-footer -->

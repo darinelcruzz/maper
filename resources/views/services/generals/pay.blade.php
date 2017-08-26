@@ -1,4 +1,4 @@
-@extends('admin')
+getShortDate(@extends('admin')
 
 @section('main-content')
 
@@ -10,7 +10,7 @@
                         <tr>
                             <td>
                                 <B>Fecha y hora:</B>
-                                <dd>{{ $service->formatted_date }}</dd>
+                                <dd>{{ $service->getDate('date_service') }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B>

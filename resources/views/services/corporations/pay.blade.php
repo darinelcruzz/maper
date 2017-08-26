@@ -10,7 +10,7 @@
                         <tr>
                             <td>
                                 <B>Fecha y hora entrada:</B>
-                                <dd>{{ $service->formatted_date }}</dd>
+                                <dd>{{ $service->getDate('date_service') }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B>

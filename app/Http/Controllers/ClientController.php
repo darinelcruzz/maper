@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use App\Service;
 
 class ClientController extends Controller
 {
@@ -47,6 +48,12 @@ class ClientController extends Controller
         Client::find($request->id)->update($request->all());
 
         return $this->show();
+    }
+
+    public function details(Client $client)
+    {
+        $services = Service::servicesByClient($client->id);
+        return view('clients.details', compact('client', 'services'));
     }
 
     function deleteClient($id)

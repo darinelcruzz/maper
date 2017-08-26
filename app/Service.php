@@ -41,38 +41,21 @@ class Service extends Model
                             ->where('pay', $type)->get();
     }
 
-
-    public function getFormattedDateAttribute()
+    public function scopeServicesByClient($query, $client)
     {
-        $date = new Date(strtotime($this->date_service));
-
-        return $date->format('l, j F Y h:i a');
-    }
-    public function getFormattedDateReturnAttribute()
-    {
-        $date = new Date(strtotime($this->date_return));
-
-        return $date->format('l, j F Y h:i a');
-    }
-    public function getFormattedDateOutAttribute()
-    {
-        $date = new Date(strtotime($this->date_out));
-
-        return $date->format('l, j F Y h:i a');
+        return $query->where('client', $client)->get();
     }
 
-
-    public function getShortDateAttribute()
+    public function getDate($date)
     {
-        $date = new Date(strtotime($this->date_service));
-
-        return $date->format('j/M/y, G:i');
+        $fdate = new Date(strtotime($this->$date));
+        return $fdate->format('l, j F Y h:i a');
     }
-    public function getShortDateOutAttribute()
-    {
-        $date = new Date(strtotime($this->date_out));
 
-        return $date->format('j/M/y, G:i');
+    public function getShortDate($date)
+    {
+        $fdate = new Date(strtotime($this->$date));
+        return $fdate->format('j/M/y, G:i');
     }
 
     public function getTotalAttribute()

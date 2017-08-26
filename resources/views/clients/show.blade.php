@@ -21,7 +21,7 @@
             @foreach($clients as $client)
               <tr>
                   <td>{{ $client->id }}</td>
-                  <td>{{ $client->name }}</td>
+                  <td><a href="{{ route('client.details', ['id' => $client->id]) }}"> {{ $client->name }} </a></td>
                   <td>{{ $client->rfc }}</td>
                   <td>{{ $client->address }}</td>
                   <td>{{ $client->phone }}</td>
