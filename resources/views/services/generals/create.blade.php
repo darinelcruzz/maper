@@ -22,6 +22,7 @@
                 <div class="box-footer">
                     <input type="hidden" name="status" value="pendiente">
                     <input type="hidden" name="service" value="General">
+                    <input type="hidden" name="view" value="create">
                     {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->

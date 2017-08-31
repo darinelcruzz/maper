@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
+use App\Http\Requests\ServiceRequest;
 use App\Service;
 use App\Unit;
 use App\Driver;
@@ -23,8 +24,7 @@ class GeneralServiceController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, []);
-
+        $this->required($request);
         $service = Service::create($request->all());
         return redirect(route('service.show'));
 
@@ -42,11 +42,11 @@ class GeneralServiceController extends Controller
 
     public function change(Request $request)
     {
-        $this->validate($request, []);
+        $this->required($request);
 
         Service::find($request->id)->update($request->all());
         Service::find($request->id)->update([
-            'status' => $request->credit == 'on' ? 'credito' : $request->status
+            'status' => $request->pay == 'Credito' ? 'credito' : $request->status
         ]);
 
         return redirect(route('service.show'));
@@ -69,5 +69,57 @@ class GeneralServiceController extends Controller
         Service::destroy($id);
 
         return back();
+    }
+
+    function required($request)
+    {
+        if($request->view == 'edit' || $request->view == 'create'){
+            return $this->validate($request, [
+                'description' => 'required',
+                'amount' => 'required',
+                'brand' => 'required',
+                'type' => 'required',
+                'category' => 'required',
+                'load' => 'required',
+                'plate' => 'required',
+                'color' => 'required',
+                'client' => 'required',
+                'origin' => 'required',
+                'destination' => 'required',
+                'driver' => 'required',
+                'unit' => 'required',
+                'date_return' => 'required',
+            ]);
+        }
+        elseif ($request->view == 'pay') {
+            $this->validate($request, [
+                'amount' => 'required',
+                'maneuver' => 'required',
+                'others' => 'required',
+                'pay' => 'required',
+            ]);
+        }
+        elseif($request->view == 'editPayed'){
+            return $this->validate($request, [
+                'description' => 'required',
+                'amount' => 'required',
+                'brand' => 'required',
+                'type' => 'required',
+                'category' => 'required',
+                'load' => 'required',
+                'plate' => 'required',
+                'color' => 'required',
+                'client' => 'required',
+                'origin' => 'required',
+                'destination' => 'required',
+                'driver' => 'required',
+                'unit' => 'required',
+                'date_return' => 'required',
+                'amount' => 'required',
+                'maneuver' => 'required',
+                'others' => 'required',
+                'pay' => 'required',
+            ]);
+        }
     }
 }

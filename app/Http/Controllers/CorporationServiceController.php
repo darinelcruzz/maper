@@ -23,12 +23,7 @@ class CorporationServiceController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'service' => 'required',
-            'lot' => 'required',
-            'key' => 'required',
-        ]);
-
+        $this->required($request);
         $service = Service::create($request->all());
         return redirect(route('service.show'));
 
@@ -46,7 +41,7 @@ class CorporationServiceController extends Controller
 
     public function change(Request $request)
     {
-        $this->validate($request, []);
+        $this->required($request);
 
         Service::find($request->id)->update($request->all());
 
@@ -101,5 +96,65 @@ class CorporationServiceController extends Controller
         Service::destroy($id);
 
         return back();
+    }
+
+    function required($request)
+    {
+        if($request->view == 'edit' || $request->view == 'create'){
+            return $this->validate($request, [
+                'description' => 'required',
+                'amount' => 'required',
+                'maneuver' => 'required',
+                'service' => 'required',
+                'brand' => 'required',
+                'type' => 'required',
+                'category' => 'required',
+                'load' => 'required',
+                'plate' => 'required',
+                'color' => 'required',
+                'inventory' => 'required',
+                'key' => 'required',
+                'model' => 'required',
+                'origin' => 'required',
+                'destination' => 'required',
+                'driver' => 'required',
+                'unit' => 'required',
+                'date_return' => 'required',
+                'lot' => 'required',
+            ]);
+        }
+        elseif ($request->view == 'pay') {
+            $this->validate($request, [
+                'releaser' => 'required',
+                'amount' => 'required',
+                'discount' => 'required',
+                'pay' => 'required',
+            ]);
+        }
+        elseif($request->view == 'editPayed'){
+            return $this->validate($request, [
+                'description' => 'required',
+                'amount' => 'required',
+                'maneuver' => 'required',
+                'brand' => 'required',
+                'type' => 'required',
+                'category' => 'required',
+                'load' => 'required',
+                'plate' => 'required',
+                'color' => 'required',
+                'key' => 'required',
+                'model' => 'required',
+                'origin' => 'required',
+                'destination' => 'required',
+                'driver' => 'required',
+                'unit' => 'required',
+                'date_return' => 'required',
+                'lot' => 'required',
+                'releaser' => 'required',
+                'amount' => 'required',
+                'discount' => 'required',
+                'pay' => 'required',
+            ]);
+        }
     }
 }

@@ -21,6 +21,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="status" value="corralon">
+                    <input type="hidden" name="view" value="create">
                     {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->

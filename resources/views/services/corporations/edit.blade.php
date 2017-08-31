@@ -18,7 +18,9 @@
                         @include('templates.unit')
                         @if($service->status != 'corralon')
                             @include('templates.pay')
-                            <input type="hidden" name="status" value="{{ $service->status }}">
+                            <input type="hidden" name="view" value="editPayed">
+                        @else
+                            <input type="hidden" name="view" value="edit">
                         @endif
 
                     </div>

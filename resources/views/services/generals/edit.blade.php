@@ -18,9 +18,9 @@
                         @include('templates.unit')
                         @if($service->status != 'pendiente')
                             @include('templates.pay')
-                            <input type="hidden" name="status" value="{{ $service->status }}">
+                            <input type="hidden" name="view" value="editPayed">
                         @else
-
+                            <input type="hidden" name="view" value="edit">
                         @endif
 
                     </div>
@@ -28,7 +28,7 @@
                   <div class="box-footer">
                       <input type="hidden" name="id" value="{{ $service->id }}">
                       <input type="hidden" name="status" value="{{ $service->status }}">
-                    {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
+                      {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                   </div>
                   <!-- /.box-footer -->
                 {!! Form::close() !!}

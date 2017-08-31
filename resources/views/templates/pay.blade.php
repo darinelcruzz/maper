@@ -1,3 +1,11 @@
+@if($ser == 'corp')
+    <div class="row">
+        <div class="col-md-4">
+            {!! Field::text('releaser', isset($service) ? $service->releaser: null)!!}
+        </div>
+    </div>
+@endif
+
 <div class="box-header with-border">
     <h3 class="box-title">Pago
         <i class="fa fa-dollar" aria-hidden="true"></i>
@@ -22,15 +30,13 @@
 
 @if($ser == 'corp')
     <div class="row">
-        <div class="col-md-8">
-        </div>
+        <div class="col-md-8"></div>
         <div class="col-md-4">
            <h4><B>Subtotal $</B></h4>
        </div>
     </div>
     <div class="row">
-        <div  class="col-md-4">
-        </div>
+        <div  class="col-md-4"></div>
         <div class="col-md-4">
             {!! Field::text('reason', isset($service) ? $service->reason: null)!!}
         </div>
@@ -43,21 +49,10 @@
     <div class="col-md-4">
         {!! Field::select('pay',
             ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
-            'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?'])
+            'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque', 'Credito' => 'Credito'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?'])
         !!}
     </div>
-    @if($ser == 'gen')
-        <div class="col-md-4">
-            <div class="form-group">
-                <br>
-                ¿Es a crédito?
-                <input type="checkbox" class="flat-red" name="credit">
-            </div>
-        </div>
-    @else
-        <div class="col-md-4">
-        </div>
-    @endif
+    <div class="col-md-4"></div>
     <div class="col-md-4">
        <h3><B>Total $</B></h3>
    </div>

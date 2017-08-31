@@ -23,7 +23,7 @@
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>{{ $row->driverr->name }}</td>
-                  <td>${{ $row->amount }}</td>
+                  <td>${{ $row->total }}</td>
                   <td>
                       <a href="{{ route('service.general.pay', ['id' => $row->id]) }}" class="btn btn-success">
                           <i class="fa fa-check" aria-hidden="true"></i>
@@ -96,7 +96,7 @@
                   <td>{{ $row->getShortDate('date_out') }}</td>
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }} - {{ $row->pay }}</td>
+                  <td>${{ $row->total }} - {{ $row->pay }}</td>
                   <td>
                       <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -130,7 +130,7 @@
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>{{ $row->releaser }}</td>
-                  <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }} - {{ $row->pay }}</td>
+                  <td>${{ $row->total }} - {{ $row->pay }}</td>
                   <td>
                       <a href="{{ route('service.corporation.print', ['id' => $row->id]) }}" class="btn btn-default">
                           <i class="fa fa-print" aria-hidden="true"></i>
@@ -163,7 +163,7 @@
                   <td>{{ $row->getShortDate('date_out') }}</td>
                   <td>{{ $row->clientr->name }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>${{ $row->amount + $row->maneuver + $row->pension - $row->discount }}</td>
+                  <td>${{ $row->total }}</td>
                   <td>
                       <a href="#" class="btn btn-success">
                           <i class="fa fa-money" aria-hidden="true"></i>
