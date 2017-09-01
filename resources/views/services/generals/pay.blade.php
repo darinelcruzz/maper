@@ -1,4 +1,4 @@
-getShortDate(@extends('admin')
+@extends('admin')
 
 @section('main-content')
 

@@ -262,6 +262,34 @@ Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
     ]);
 });
 
+// Abonos
+Route::group(['prefix' => 'abonos', 'as' => 'payment.'], function () {
+    Route::get('crear', [
+        'uses' => 'PaymentController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'PaymentController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'PaymentController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{id?}', [
+        'uses' => 'PaymentController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'PaymentController@change',
+        'as' => 'change'
+    ]);
+});
+
 // Operadores
 Route::group(['prefix' => 'operadores', 'as' => 'driver.'], function () {
     Route::get('crear', [

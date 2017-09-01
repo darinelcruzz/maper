@@ -4,31 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Payment;
+use App\Service;
 
 class PaymentController extends Controller
 {
     public function create()
     {
-        return view('clients.create');
+        //$payments = Payment::find($id);
+
+        return view('payments.create');
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:clients',
-            'city' => 'required',
-            'phone' => 'required',
-        ]);
-
-        $client = Client::create($request->all());
-        return redirect(route('client.show'));
+        $this->validate($request, []);
+        $payment = Payment::create($request->all());
+        return redirect(route('payments.show'));
     }
 
     public function show()
     {
-        $clients = Client::all();
-        return view('clients.show', compact('clients'));
+        $payments = Payment::all();
+        return view('payments.show', compact('payments'));
     }
+
+
+
+
+
+
 
     public function edit($id)
     {
@@ -38,11 +42,7 @@ class PaymentController extends Controller
 
     public function change(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'city' => 'required',
-            'phone' => 'required',
-        ]);
+        $this->validate($request, []);
 
         Client::find($request->id)->update($request->all());
 

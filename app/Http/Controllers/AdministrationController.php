@@ -12,8 +12,8 @@ class AdministrationController extends Controller
     {
         $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
 
-        $all = Service::whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
-
+        $all = Service::whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
+                            ->where('status', '!=', 'cancelado')->get();
         $tCash = $this->getTotal(Service::payType($date, 'Efectivo'));
         $tDebit = $this->getTotal(Service::payType($date, 'T. Debito'));
         $tCredit = $this->getTotal(Service::payType($date, 'T. Credito'));
