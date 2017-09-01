@@ -21,8 +21,10 @@ class ServiceController extends Controller
                         ->where('status', 'pagado')->get();
         $credit = Service::where('service', 'General')
                         ->where('status', 'credito')->get();
+        $cancel = Service::where('service', 'General')
+                        ->where('status', 'cancelado')->get();
 
-        return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit'));
+        return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit', 'cancel'));
     }
 
 }

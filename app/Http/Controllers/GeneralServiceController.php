@@ -64,6 +64,11 @@ class GeneralServiceController extends Controller
         return view('services.generals.pay', compact('service', 'ser', 'cost'));
     }
 
+    function cancel(Service $service)
+    {
+        return view('services.generals.cancel', compact('service'));
+    }
+
     function deleteService($id)
     {
         Service::destroy($id);
@@ -119,6 +124,12 @@ class GeneralServiceController extends Controller
                 'maneuver' => 'required',
                 'others' => 'required',
                 'pay' => 'required',
+            ]);
+        }
+        elseif($request->view == 'cancel'){
+            return $this->validate($request, [
+                'reason' => 'required',
+
             ]);
         }
     }

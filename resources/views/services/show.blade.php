@@ -28,7 +28,7 @@
                       <a href="{{ route('service.general.pay', ['id' => $row->id]) }}" class="btn btn-success">
                           <i class="fa fa-check" aria-hidden="true"></i>
                       </a>
-                      <a href="#" class="btn btn-danger">
+                      <a href="{{ route('service.general.cancel', ['id' => $row->id]) }}" class="btn btn-danger">
                           <i class="fa fa-times" aria-hidden="true"></i>
                       </a>
                       <a href="{{ route('service.general.edit', ['id' => $row->id]) }}"  class="btn btn-info">
@@ -172,6 +172,32 @@
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
                   </td>
+              </tr>
+            @endforeach
+        </template>
+    </data-table>
+
+    <data-table col="col-md-12" title="Cancelados" example="example6" color="box-danger" collapsed="collapsed-box">
+        <template slot="header">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Marca</th>
+                <th>Importe</th>
+                <th>Razón</th>
+            </tr>
+        </template>
+
+        <template slot="body">
+            @foreach($cancel as $row)
+              <tr>
+                  <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                  <td>{{ $row->getShortDate('date_out') }}</td>
+                  <td>{{ $row->clientr->name }}</td>
+                  <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                  <td>${{ $row->total }}</td>
+                  <td>{{ $row->reason }}</td>
               </tr>
             @endforeach
         </template>

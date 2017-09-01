@@ -61,6 +61,11 @@ Route::get('servicios', [
             'uses' => 'GeneralServiceController@pay',
             'as' => 'pay'
         ]);
+
+        Route::get('cancelar/{service}', [
+            'uses' => 'GeneralServiceController@cancel',
+            'as' => 'cancel'
+        ]);
     });
 
     // Corporaciones

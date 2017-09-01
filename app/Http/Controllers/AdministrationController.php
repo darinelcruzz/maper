@@ -12,17 +12,17 @@ class AdministrationController extends Controller
     {
         $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
 
-        $all = Service::whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
-                            ->where('status', '!=', 'credito')->get();
+        $all = Service::whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
 
         $tCash = $this->getTotal(Service::payType($date, 'Efectivo'));
         $tDebit = $this->getTotal(Service::payType($date, 'T. Debito'));
         $tCredit = $this->getTotal(Service::payType($date, 'T. Credito'));
         $tCheck = $this->getTotal(Service::payType($date, 'Cheque'));
         $tTransfer = $this->getTotal(Service::payType($date, 'Transferencia'));
+        $credit = $this->getTotal(Service::payType($date, 'Credito'));
         $total = $this->getTotal($all);
 
-        return view('cash.balance', compact('date', 'all', 'tCash', 'tDebit', 'tCredit', 'tCheck', 'tTransfer','total'));
+        return view('cash.balance', compact('date', 'all', 'tCash', 'tDebit', 'tCredit', 'tCheck', 'tTransfer', 'credit', 'total'));
     }
 
     public function getTotal($services)

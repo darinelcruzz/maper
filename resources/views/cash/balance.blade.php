@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-lg-8 col-md-12">
 			<data-table-com title="Ingresos" example="example1" color="box-success">
 		        <template slot="header">
 		            <tr>
@@ -53,9 +53,8 @@
 		    </data-table-com>
 		</div>
 
-		<div class="col-md-4">
-
-			<div class="col-md-10 col-md-offset-2">
+		<div class="col-lg-4 col-md-12">
+			<div class="col-lg-6 col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Efectivo</p>
@@ -67,7 +66,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-md-10 col-md-offset-2">
+			<div class="col-lg-6 col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Tarjeta débito</p>
@@ -79,7 +78,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-md-10 col-md-offset-2">
+			<div class="col-lg-6 col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Tarjeta crédito</p>
@@ -91,7 +90,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-md-10 col-md-offset-2">
+			<div class="col-lg-6 col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Cheques</p>
@@ -103,7 +102,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-md-10 col-md-offset-2">
+			<div class="col-lg-6 col-md-4">
 				<div class="small-box bg-info">
 					<div class="inner">
 						<p>Transferencias</p>
@@ -111,6 +110,18 @@
 					</div>
 					<div class="icon">
 						<i class="fa fa-exchange"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-4">
+				<div class="small-box bg-primary">
+					<div class="inner">
+						<p>Crédito</p>
+						<h3>$ {{ $credit }}</h3>
+					</div>
+					<div class="icon">
+						<i class="fa fa-calendar"></i>
 					</div>
 				</div>
 			</div>

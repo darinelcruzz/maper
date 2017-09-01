@@ -37,7 +37,6 @@ class Service extends Model
     public function scopePayType($query, $date, $type)
     {
         return $query->whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
-                            ->where('status', '!=', 'credito')
                             ->where('pay', $type)->get();
     }
 
