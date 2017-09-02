@@ -144,7 +144,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito" example="example5" color="box-default" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Crédito" example="example5" color="box-teal" collapsed="collapsed-box">
         <template slot="header">
             <tr>
                 <th>ID</th>
