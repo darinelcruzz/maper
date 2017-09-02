@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
+use JavaScript;
 use App\Http\Requests\ServiceRequest;
 use App\Service;
 use App\Unit;
@@ -61,6 +62,14 @@ class GeneralServiceController extends Controller
     {
         $cost = 0;
         $ser = 'gen';
+
+        JavaScript::put([
+            'pension' => $cost,
+            'amount' => $service->amount,
+            'maneuver' => $service->maneuver,
+            'others' => $service->others,
+        ]);
+
         return view('services.generals.pay', compact('service', 'ser', 'cost'));
     }
 

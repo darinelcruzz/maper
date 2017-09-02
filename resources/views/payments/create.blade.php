@@ -2,47 +2,60 @@
 
 @section('main-content')
 
-    <data-table col="col-md-8" title="Abonos anterioes" example="example1" color="box-primary">
-        <template slot="header">
-            <tr>
-                <th>Fecha</th>
-                <th>Monto</th>
-                <th>Restante</th>
-            </tr>
-        </template>
-
-        <template slot="body">
-        </template>
-    </data-table>
-
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Nuevo precio</h3>
+                    <h3 class="box-title">Nuevo abono</h3>
                 </div>
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'price.store', 'class' => 'form-horizontal']) !!}
-                  <div class="box-body">
-                    {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
-                    {!! Field::select('type',
-                        ['otros' => 'Otros', 'Ruta 1' => 'Ruta 1', 'Ruta 2' => 'Ruta 2', 'Ruta 3' => 'Ruta 3', 'Ruta 4' => 'Ruta 4',
-                        'Ruta 5' => 'Ruta 5'], null, ['empty' => '¿A que corresponde?', 'tpl' => 'templates/oneline'])!!}
-                    {!! Field::number('km', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('moto', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('car', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('ton3', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('ton5', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('ton10', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::text('observation', ['tpl' => 'templates/oneline']) !!}
-                  </div>
+                {!! Form::open(['method' => 'POST', 'route' => 'payment.store']) !!}
+                <div class="box-body">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            {!! Field::number('amount')!!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Field::select('pay',
+                                ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
+                                'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque', 'Credito' => 'Credito'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?'])
+                            !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
+                        </div>
+                    </div>
+                </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
-                    {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
+
                   </div>
                   <!-- /.box-footer -->
                 {!! Form::close() !!}
             </div>
         </div>
     </div>
+
+    <data-table col="col-md-8" title="General" example="example1" color="box-primary">
+        <template slot="header">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+                <th>Método</th>
+            </tr>
+        </template>
+
+        <template slot="body">
+            @foreach($payment as $row)
+              <tr>
+                  <td>{{ $row->id }}</td>
+                  <td>{{ $row->date_payment }}</td>
+                  <td>{{ $row->amount }}</td>
+                  <td>{{ $row->pay }}</td>
+              </tr>
+            @endforeach
+        </template>
+    </data-table>
 @endsection

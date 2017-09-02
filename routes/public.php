@@ -264,7 +264,7 @@ Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
 
 // Abonos
 Route::group(['prefix' => 'abonos', 'as' => 'payment.'], function () {
-    Route::get('crear', [
+    Route::get('crear/{id?}', [
         'uses' => 'PaymentController@create',
         'as' => 'create'
     ]);

@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-    <div class="row">
+    <div id="payment" class="row">
         <div class="col-md-8">
             <solid-box title="{{ $service->service }}" color="box-default" collapsed=''>
                 {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}

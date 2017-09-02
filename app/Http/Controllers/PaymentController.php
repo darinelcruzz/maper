@@ -8,11 +8,11 @@ use App\Service;
 
 class PaymentController extends Controller
 {
-    public function create()
+    public function create($id)
     {
-        //$payments = Payment::find($id);
-
-        return view('payments.create');
+        $service = Service::find($id);
+        $payment = Payment::where('service', $id)->get();
+        return view('payments.create', compact('service', 'payment'));
     }
 
     public function store(Request $request)

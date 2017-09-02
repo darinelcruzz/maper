@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
+use JavaScript;
 use App\Service;
 use App\Unit;
 use App\Driver;
@@ -87,6 +88,13 @@ class CorporationServiceController extends Controller
         else{
             $cost = Price::find(1)->ton3 * $mul;
         }
+
+        JavaScript::put([
+            'pension' => $cost,
+            'amount' => $service->amount,
+            'maneuver' => $service->maneuver,
+            'others' => $service->others,
+        ]);
 
         return view('services.corporations.pay', compact('service', 'ser', 'cost'));
     }

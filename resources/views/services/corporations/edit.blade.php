@@ -17,7 +17,7 @@
                         @include('templates.ubication')
                         @include('templates.unit')
                         @if($service->status != 'corralon')
-                            @include('templates.pay')
+                            @include('templates.pay', ['cost' => $service->pension])
                             <input type="hidden" name="view" value="editPayed">
                         @else
                             <input type="hidden" name="view" value="edit">
