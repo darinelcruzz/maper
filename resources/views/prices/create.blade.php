@@ -12,7 +12,7 @@
                   <div class="box-body">
                     {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
                     {!! Field::select('type',
-                        ['otros' => 'Otros', 'Ruta 1' => 'Ruta 1', 'Ruta 2' => 'Ruta 2', 'Ruta 3' => 'Ruta 3', 'Ruta 4' => 'Ruta 4',
+                        ['otros' => 'Otros', 'local' => 'Local', 'Ruta 1' => 'Ruta 1', 'Ruta 2' => 'Ruta 2', 'Ruta 3' => 'Ruta 3', 'Ruta 4' => 'Ruta 4',
                         'Ruta 5' => 'Ruta 5'], null, ['empty' => '¿A que corresponde?', 'tpl' => 'templates/oneline'])!!}
                     {!! Field::number('km', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
                     {!! Field::number('moto', ['step' => '0.01', 'tpl' => 'templates/oneline']) !!}
