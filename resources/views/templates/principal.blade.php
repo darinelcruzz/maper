@@ -18,13 +18,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        {!! Field::number('amount', isset($service) ? $service->amount: null, ['label' => 'Arrastre estimado', 'min' => '0', 'step' => '.01'])!!}
-   </div>
     @if($ser == 'corp')
-        <div class="col-md-4">
-            {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'step' => '.01'])!!}
-       </div>
         <div class="col-md-4">
             {!! Field::select('service',
                 ['Tránsito del Estado' => 'Tránsito del Estado', 'Vialidad Municipal' => 'Vialidad Municipal', 'Policia Municipal' => 'Policia Municipal',

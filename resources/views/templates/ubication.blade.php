@@ -18,6 +18,18 @@
         {!! Field::text('destination', isset($service) ? $service->destination: null)!!}
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-4">
+        {!! Field::number('amount', isset($service) ? $service->amount: null, ['label' => 'Arrastre estimado', 'min' => '0', 'step' => '.01'])!!}
+   </div>
+    @if($ser == 'corp')
+        <div class="col-md-4">
+            {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'step' => '.01'])!!}
+       </div>
+    @endif
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <a href="https://google.com.mx/maps" target="_blank" class="btn btn-success">Google Maps
