@@ -114,7 +114,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Pagados" example="example3" color="box-warning" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Pagados" example="example3" color="box-success" collapsed="collapsed-box">
         <template slot="header">
             <tr>
                 <th>ID</th>
