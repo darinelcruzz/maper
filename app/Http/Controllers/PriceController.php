@@ -23,7 +23,7 @@ class PriceController extends Controller
     public function show()
     {
         $others = Price::where('type', 'otros')->get();
-        $localG = Price::where('type', 'localS')->get();
+        $localG = Price::where('type', 'localG')->get();
         $localC = Price::where('type', 'localC')->get();
         $route1 = Price::where('type', 'Ruta 1')->get();
         $route2 = Price::where('type', 'Ruta 2')->get();
