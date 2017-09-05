@@ -25,17 +25,13 @@
     <link rel="stylesheet" href="{{ asset('/plugins/dataTables.bootstrap.css') }}">
 
     <style>
-        p {
-            text-align:justify;
-            text-indent:50px;
+        th, td {
+            font-size: 11px;
         },
-        th {
-            font-weight: 10;
-        }
     </style>
 </head>
 
-<body>
+<body onload="window.print();">
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
@@ -44,13 +40,13 @@
                         <img width="100px" src="{{ asset('/img/MAPER.png') }}">
                     </center>
                 </div>
-                <div class="col-xs-9">
-                    <h3 align="center">
-                        <b>Gastos</b><br>
-                    </h3>
+                <div class="col-xs-6">
                     <h4 align="center">
+                        <b>Gastos</b><br>
+                    </h4>
+                    <h5 align="center">
                         <b>{{ $range }}</b>
-                    </h4><br><br>
+                    </h5><br><br>
                 </div>
             </div>
 
@@ -70,12 +66,18 @@
                             @foreach($all as $row)
                                 <tr>
                                     <td>{{ $row->id }}</td>
-                                    <td>{{ $row->date }}</td>
+                                    <td>{{ $row->getDate('date') }}</td>
                                     <td>{{ $row->description }} {{ $row->bill == 'si' ? '- Facturado' : '' }}</td>
                                     <td>${{ $row->amount }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <td></td>
+                            <td></td>
+                            <td><b>Total</b></td>
+                            <td>${{ $total }}</td>
+                        </tfoot>
                     </table>
                 </div>
             <!-- /.col -->

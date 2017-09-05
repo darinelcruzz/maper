@@ -46,7 +46,20 @@ class ExpenseController extends Controller
         $start = new Date(strtotime($request->date_start));
         $end = new Date(strtotime($request->date_end));
         $range = $start->format('D, d/M/Y') . ' - ' . $end->format('D, d/M/Y');
-        return view('expenses.format', compact('all', 'range'));
+
+        $total = $this->getTotal($all);
+        return view('expenses.format', compact('all', 'range', 'total'));
+    }
+
+    public function getTotal($expenses)
+    {
+        $total = 0;
+
+        foreach ($expenses as $expense) {
+            $total += $expense->amount;
+        }
+
+        return $total;
     }
 
 }

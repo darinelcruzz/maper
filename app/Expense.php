@@ -14,4 +14,9 @@ class Expense extends Model
         $fdate = new Date(strtotime($this->$date));
         return $fdate->format('j/M/y, G:i');
     }
+    public function getDate($date)
+    {
+        $fdate = new Date(strtotime($this->$date));
+        return $fdate->format('D, j M Y');
+    }
 }
