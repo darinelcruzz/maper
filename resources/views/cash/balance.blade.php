@@ -33,9 +33,19 @@
 					@foreach ($all as $row)
 						<tr>
 	                        <td>{{ $row->id }}</td>
-	                        <td>{{ $row->service }}</td>
+	                        <td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 	                        <td>{{ $row->pay }}</td>
+	                        <td>${{ $row->total }}</td>
+	                    </tr>
+					@endforeach
+
+					@foreach ($creditAll as $row)
+						<tr>
+	                        <td>{{ $row->id }}</td>
+	                        <td>{{ $row->clientr->name }}</td>
+	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+	                        <td>{{ $row->pay }} - {{ $row->pay_credit }}</td>
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
 					@endforeach
@@ -58,7 +68,7 @@
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Efectivo</p>
-	      				<h3>$ {{ $tCash }}</h3>
+	      				<h3>$ {{ $methodsA['Efectivo'] + $methodsB['Efectivo'] }}</h3>
 	    			</div>
 	    			<div class="icon">
 	      				<i class="fa fa-money"></i>
@@ -70,7 +80,7 @@
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Tarjeta débito</p>
-	      				<h3>$ {{ $tDebit }}</h3>
+	      				<h3>$ {{ $methodsA['T. Debito'] + $methodsB['T. Debito'] }}</h3>
 	    			</div>
 	    			<div class="icon">
 	      				<i class="fa fa-credit-card"></i>
@@ -82,7 +92,7 @@
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Tarjeta crédito</p>
-	      				<h3>$ {{ $tCredit }}</h3>
+	      				<h3>$ {{ $methodsA['T. Credito'] + $methodsB['T. Credito'] }}</h3>
 	    			</div>
 	    			<div class="icon">
 	      				<i class="fa fa-credit-card-alt"></i>
@@ -94,7 +104,7 @@
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Cheques</p>
-	      				<h3>$ {{ $tCheck }}</h3>
+	      				<h3>$ {{ $methodsA['Cheque'] + $methodsB['Cheque'] }}</h3>
 	    			</div>
 	    			<div class="icon">
 	      				<i class="fa fa-pencil"></i>
@@ -106,7 +116,7 @@
 				<div class="small-box bg-info">
 					<div class="inner">
 						<p>Transferencias</p>
-						<h3>$ {{ $tTransfer }}</h3>
+						<h3>$ {{ $methodsA['Transferencia'] + $methodsB['Transferencia'] }}</h3>
 					</div>
 					<div class="icon">
 						<i class="fa fa-exchange"></i>
@@ -118,7 +128,7 @@
 				<div class="small-box bg-primary">
 					<div class="inner">
 						<p>Crédito</p>
-						<h3>$ {{ $credit }}</h3>
+						<h3>$ {{ $methodsA['Credito'] + $methodsB['Credito'] }}</h3>
 					</div>
 					<div class="icon">
 						<i class="fa fa-calendar"></i>

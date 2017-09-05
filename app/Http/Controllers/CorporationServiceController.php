@@ -89,13 +89,6 @@ class CorporationServiceController extends Controller
             $cost = Price::find(1)->ton3 * $mul;
         }
 
-        JavaScript::put([
-            'pension' => $cost,
-            'amount' => $service->amount,
-            'maneuver' => $service->maneuver,
-            'others' => $service->others,
-        ]);
-
         return view('services.corporations.pay', compact('service', 'ser', 'cost'));
     }
 

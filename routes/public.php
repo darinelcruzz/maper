@@ -24,6 +24,7 @@ Route::get('servicios', [
     'uses' => 'ServiceController@show',
     'as' => 'service.show'
 ]);
+
     // General
     Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], function () {
         Route::get('crear', [
@@ -32,7 +33,7 @@ Route::get('servicios', [
         ]);
 
         Route::post('crear', [
-            'uses' => 'GeneralServiceController@store',
+            'uses' => 'ServiceController@store',
             'as' => 'store'
         ]);
 
@@ -62,6 +63,11 @@ Route::get('servicios', [
             'as' => 'pay'
         ]);
 
+        Route::post('pago', [
+            'uses' => 'GeneralServiceController@change',
+            'as' => 'setPayMethod'
+        ]);
+
         Route::get('cancelar/{service}', [
             'uses' => 'GeneralServiceController@cancel',
             'as' => 'cancel'
@@ -76,7 +82,7 @@ Route::get('servicios', [
         ]);
 
         Route::post('crear', [
-            'uses' => 'CorporationServiceController@store',
+            'uses' => 'ServiceController@store',
             'as' => 'store'
         ]);
 
@@ -262,31 +268,36 @@ Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
     ]);
 });
 
-// Abonos
-Route::group(['prefix' => 'abonos', 'as' => 'payment.'], function () {
-    Route::get('crear/{id?}', [
-        'uses' => 'PaymentController@create',
+// Gastos
+Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
+    Route::get('crear', [
+        'uses' => 'ExpenseController@create',
         'as' => 'create'
     ]);
 
     Route::post('crear', [
-        'uses' => 'PaymentController@store',
+        'uses' => 'ExpenseController@store',
         'as' => 'store'
     ]);
 
     Route::get('/lista', [
-        'uses' => 'PaymentController@show',
+        'uses' => 'ExpenseController@show',
         'as' => 'show'
     ]);
 
     Route::get('editar/{id?}', [
-        'uses' => 'PaymentController@edit',
+        'uses' => 'ExpenseController@edit',
         'as' => 'edit'
     ]);
 
     Route::post('cambiar', [
-        'uses' => 'PaymentController@change',
+        'uses' => 'ExpenseController@change',
         'as' => 'change'
+    ]);
+
+    Route::post('formato', [
+        'uses' => 'ExpenseController@format',
+        'as' => 'format'
     ]);
 });
 

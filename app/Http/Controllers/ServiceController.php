@@ -18,7 +18,8 @@ class ServiceController extends Controller
         $release = Service::where('service', '!=', 'General')
                         ->where('status', 'liberado')->get();
         $paid = Service::where('service', 'General')
-                        ->where('status', 'pagado')->get();
+                        ->where('status', 'pagado')
+                        ->orWhere('status', 'liquidado')->get();
         $credit = Service::where('service', 'General')
                         ->where('status', 'credito')->get();
         $cancel = Service::where('service', 'General')
@@ -27,4 +28,11 @@ class ServiceController extends Controller
         return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit', 'cancel'));
     }
 
+    public function store(Request $request)
+    {
+        //$this->required($request);
+        $service = Service::create($request->all());
+        return redirect(route('service.show'));
+
+    }
 }

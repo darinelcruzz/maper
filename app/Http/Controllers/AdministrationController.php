@@ -14,15 +14,20 @@ class AdministrationController extends Controller
 
         $all = Service::whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
                             ->where('status', '!=', 'cancelado')->get();
-        $tCash = $this->getTotal(Service::payType($date, 'Efectivo'));
-        $tDebit = $this->getTotal(Service::payType($date, 'T. Debito'));
-        $tCredit = $this->getTotal(Service::payType($date, 'T. Credito'));
-        $tCheck = $this->getTotal(Service::payType($date, 'Cheque'));
-        $tTransfer = $this->getTotal(Service::payType($date, 'Transferencia'));
-        $credit = $this->getTotal(Service::payType($date, 'Credito'));
-        $total = $this->getTotal($all);
+        $creditAll = Service::whereBetween('date_credit', [$date . ' 00:00:00', $date . ' 23:59:59'])
+                            ->where('status', '!=', 'cancelado')->get();
 
-        return view('cash.balance', compact('date', 'all', 'tCash', 'tDebit', 'tCredit', 'tCheck', 'tTransfer', 'credit', 'total'));
+        $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
+        $methodsA = [];
+        $methodsB = [];
+
+        foreach ($methods as $method) {
+            $methodsA[$method] = $this->getTotal(Service::payType($date, $method,'date_out', 'pay'));
+            $methodsB[$method] = $this->getTotal(Service::payType($date, $method, 'date_credit', 'pay_credit'));
+        }
+        $total = $this->getTotal($all) + $this->getTotal($creditAll);
+
+        return view('cash.balance', compact('date', 'all', 'creditAll', 'methodsA', 'methodsB', 'total'));
     }
 
     public function getTotal($services)

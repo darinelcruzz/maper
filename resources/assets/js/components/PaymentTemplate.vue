@@ -17,7 +17,7 @@
                 <div id="field_amount" class="form-group">
                     <label for="amount" class="control-label">Arrastre</label>
                     <div class="controls">
-                        <input min="0" step=".01" class="form-control" v-model="vamount" id="amount" name="amount" type="number">
+                        <input min="0" class="form-control" v-model="vamount" id="amount" name="amount" type="number">
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div id="field_maneuver" class="form-group">
                     <label for="maneuver" class="control-label">Maniobra</label>
                     <div class="controls">
-                        <input min="0" step=".01" class="form-control" id="maneuver" name="maneuver" type="number" v-model="vmaneuver">
+                        <input min="0" class="form-control" id="maneuver" name="maneuver" type="number" v-model="vmaneuver">
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <div id="field_others" class="form-group">
                     <label for="others" class="control-label">Otros</label>
                     <div class="controls">
-                        <input min="0" step=".01" class="form-control" id="others" name="others" type="number" v-model="vothers">
+                        <input min="0" class="form-control" id="others" name="others" type="number" v-model="vothers">
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 <div id="field_pension" class="form-group">
                     <label for="pension" class="control-label">Pension</label>
                     <div class="controls">
-                        <input min="0" step=".01" class="form-control" id="pension" disabled name="pension" type="number" v-model="vpension">
+                        <input min="0" class="form-control" id="pension" disabled name="pension" type="number" v-model="vpension">
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <div id="field_discount" class="form-group">
                         <label for="discount" class="control-label">Descuento</label>
                         <div class="controls">
-                            <input min="0" step=".01" class="form-control" id="discount" name="discount" type="number" v-model="vdiscount">
+                            <input min="0" class="form-control" id="discount" name="discount" type="number" v-model="vdiscount">
                         </div>
                     </div>
                 </div>

@@ -34,10 +34,10 @@ class Service extends Model
         return $query->where($col, $comparation, $service)->get();
     }
 
-    public function scopePayType($query, $date, $type)
+    public function scopePayType($query, $date, $type, $dateCol, $payCol)
     {
-        return $query->whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
-                    ->where('pay', $type)->get();
+        return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
+                    ->where($payCol, $type)->get();
     }
 
     public function scopeServicesByClient($query, $client)

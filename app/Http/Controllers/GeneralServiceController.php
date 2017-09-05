@@ -63,13 +63,6 @@ class GeneralServiceController extends Controller
         $cost = 0;
         $ser = 'gen';
 
-        JavaScript::put([
-            'pension' => $cost,
-            'amount' => $service->amount,
-            'maneuver' => $service->maneuver,
-            'others' => $service->others,
-        ]);
-
         return view('services.generals.pay', compact('service', 'ser', 'cost'));
     }
 
