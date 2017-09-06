@@ -40,9 +40,9 @@ class Service extends Model
                     ->where($payCol, $type)->get();
     }
 
-    public function scopeServicesByClient($query, $client)
+    public function scopeServicesByClient($query, $client, $status, $optional='')
     {
-        return $query->where('client', $client)->get();
+        return $query->where('client', $client)->where('status', $status)->orWhere('status', $optional)->get();
     }
 
     public function getDate($date)

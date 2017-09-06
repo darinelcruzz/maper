@@ -52,8 +52,27 @@ class ClientController extends Controller
 
     public function details(Client $client)
     {
-        $services = Service::servicesByClient($client->id);
-        return view('clients.details', compact('client', 'services'));
+        $payed = Service::servicesByClient($client->id, 'liquidado', 'pagado');
+        $pending = Service::servicesByClient($client->id, 'credito');
+        $expired = Service::servicesByClient($client->id, 'vencida');
+
+        $totalPay = $this->getTotal($payed);
+        $totalPen = $this->getTotal($pending);
+
+        $pendings = count($pending) + count($expired);
+
+        return view('clients.details', compact('client', 'payed', 'pending', 'expired', 'pendings','totalPay', 'totalPen'));
+    }
+
+    public function getTotal($services)
+    {
+        $total = 0;
+
+        foreach ($services as $service) {
+            $total += $service->total;
+        }
+
+        return $total;
     }
 
     function deleteClient($id)

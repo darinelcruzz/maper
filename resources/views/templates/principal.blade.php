@@ -12,12 +12,6 @@
             </div>
         </div>
    </div>
-   <div class="col-md-4">
-       {!! Field::number('bill', isset($service) ? $service->bill: null, ['min' => '0'])!!}
-  </div>
-</div>
-
-<div class="row">
     @if($ser == 'corp')
         <div class="col-md-4">
             {!! Field::select('service',
@@ -25,5 +19,9 @@
                 'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal'], isset($service) ? $service->service: null, ['empty' => '¿A que corresponde?'])
             !!}
         </div>
+    @elseif($ser == 'gen')
+            <div class="col-md-4">
+                {!! Field::select('client', $clients, isset($service) ? $service->client: null, ['empty' => 'Seleccione al cliente'])!!}
+            </div>
     @endif
 </div>

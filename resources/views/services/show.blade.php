@@ -20,7 +20,7 @@
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                   <td>{{ $row->getShortDate('date_service') }}</td>
-                  <td>{{ $row->clientr->name }}</td>
+                  <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }}</a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>{{ $row->driverr->name }}</td>
                   <td>${{ $row->total }}</td>
@@ -131,7 +131,7 @@
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                   <td>{{  $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out')}}</td>
-                  <td>{{ $row->clientr->name }}</td>
+                  <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }} </a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>${{ $row->total }} - {{ $row->pay }}  {{  $row->pay_credit ? "- ".$row->pay_credit : ""}}</td>
                   <td>
@@ -162,7 +162,7 @@
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                   <td>{{ $row->getShortDate('date_out') }}</td>
-                  <td>{{ $row->clientr->name }}</td>
+                  <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }}</a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>${{ $row->total }}</td>
                   <td>

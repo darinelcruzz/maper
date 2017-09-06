@@ -37,34 +37,35 @@
             </div>
         </div>
 
-        <data-table col="col-md-7" title="Gastos"
-            example="example1" color="box-default">
-            <template slot="header">
-                <tr>
-                    <th>#</th>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
-                    <th>Monto</th>
-                    <th></th>
-                </tr>
-            </template>
+        <div class="col-md-8">
+            <data-table-com title="Gastos" example="example1" color="box-default">
+                <template slot="header">
+                    <tr>
+                        <th>#</th>
+                        <th>Descripción</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th></th>
+                    </tr>
+                </template>
 
-            <template slot="body">
-                @foreach($expenses as $expense)
-                  <tr>
-                      <td>{{ $expense->id }}</td>
-                      <td>{{ $expense->description }} {{ $expense->bill == 'si' ? '- Facturado' : '' }}</td>
-                      <td>{{ $expense->getShortDate('date') }}</td>
-                      <td>{{ $expense->amount }}</td>
-                      <td>
-                          <a href="{{ route('expense.edit', ['id' => $expense->id]) }}">
-                              <i class="fa fa-edit"></i>
-                          </a>
-                      </td>
-                  </tr>
-                @endforeach
-            </template>
-        </data-table>
+                <template slot="body">
+                    @foreach($expenses as $expense)
+                      <tr>
+                          <td>{{ $expense->id }}</td>
+                          <td>{{ $expense->description }} {{ $expense->bill == 'si' ? '- Facturado' : '' }}</td>
+                          <td>{{ $expense->getShortDate('date') }}</td>
+                          <td>{{ $expense->amount }}</td>
+                          <td>
+                              <a href="{{ route('expense.edit', ['id' => $expense->id]) }}">
+                                  <i class="fa fa-edit"></i>
+                              </a>
+                          </td>
+                      </tr>
+                    @endforeach
+                </template>
+            </data-table-com>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-4">

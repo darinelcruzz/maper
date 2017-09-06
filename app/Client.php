@@ -11,4 +11,13 @@ class Client extends Model
     	'email', 'contact', 'rfc', 'city'
     ];
 
+    function getShortNameAttribute()
+    {
+        if (strlen($this->name) > 30) {
+            return substr($this->name, 0, 30) . "...";
+        }
+
+        return $this->name;
+    }
+
 }
