@@ -13,7 +13,7 @@
                             <thead>
                                 <tr>
                                     <th width="50%"><h4>Saldo</h4></th>
-                                    <th width="50%"><h4>Pendientes</h4></th>
+                                    <th width="50%"><h4>Sin pagar</h4></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +39,7 @@
                             <th>ID</th>
                             <th>Fecha</th>
                             <th>Vehículo</th>
-                            <th>Operador</th>
+                            <th>Dias</th>
                             <th>Monto</th>
                         </tr>
                     </template>
@@ -48,9 +48,9 @@
                         @foreach($expired as $row)
                           <tr>
                               <td>{{ $row->id }}</td>
-                              <td>{{ $row->getShortDate('date_service') }}</td>
+                              <td>{{ $row->getShortDate('date_out') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{ $row->driverr->name }}</td>
+                              <td>{{ $row->getDays('date_out') }}</td>
                               <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
                           </tr>
                         @endforeach
@@ -78,7 +78,7 @@
                             <th>ID</th>
                             <th>Fecha</th>
                             <th>Vehículo</th>
-                            <th>Operador</th>
+                            <th>Dias</th>
                             <th>Monto</th>
                         </tr>
                     </template>
@@ -87,9 +87,9 @@
                         @foreach($pending as $row)
                           <tr>
                               <td>{{ $row->id }}</td>
-                              <td>{{ $row->getShortDate('date_service') }}</td>
+                              <td>{{ $row->getShortDate('date_out') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{ $row->driverr->name }}</td>
+                              <td>{{ $row->getDays('date_out') }}</td>
                               <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
                           </tr>
                         @endforeach
@@ -112,9 +112,9 @@
                     <template slot="header">
                         <tr>
                             <th>ID</th>
-                            <th>Fecha</th>
+                            <th>Fecha Pago</th>
                             <th>Vehículo</th>
-                            <th>Operador</th>
+                            <th>Método</th>
                             <th>Monto</th>
                         </tr>
                     </template>
@@ -123,9 +123,9 @@
                         @foreach($payed as $row)
                           <tr>
                               <td>{{ $row->id }}</td>
-                              <td>{{ $row->getShortDate('date_service') }}</td>
+                              <td>{{ $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{ $row->driverr->name }}</td>
+                              <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                               <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
                           </tr>
                         @endforeach

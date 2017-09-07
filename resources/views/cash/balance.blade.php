@@ -45,7 +45,7 @@
 	                        <td>{{ $row->id }}</td>
 	                        <td>{{ $row->clientr->name }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-	                        <td>{{ $row->pay }} - {{ $row->pay_credit }}</td>
+	                        <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
 					@endforeach

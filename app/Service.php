@@ -57,8 +57,18 @@ class Service extends Model
         return $fdate->format('j/M/y, G:i');
     }
 
+    function getDays($date)
+    {
+        $today = Date::now();
+        $entry = new Date(strtotime($this->$date));
+        $interval = $entry->diff($today);
+        $interval = $interval->format('%a');
+        return $interval;
+    }
+
     public function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
+
 }

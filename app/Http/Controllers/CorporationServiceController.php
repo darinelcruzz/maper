@@ -64,6 +64,7 @@ class CorporationServiceController extends Controller
     function pay(Service $service)
     {
         $ser = 'corp';
+
         $entry = new Date(strtotime($service->date_service));
         $entryHour = $entry->format('His');
         $today = Date::now();

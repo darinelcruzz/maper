@@ -133,7 +133,7 @@
                   <td>{{  $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out')}}</td>
                   <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }} </a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>${{ $row->total }} - {{ $row->pay }}  {{  $row->pay_credit ? "- ".$row->pay_credit : ""}}</td>
+                  <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                   <td>
                       <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

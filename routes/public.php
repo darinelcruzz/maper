@@ -33,7 +33,7 @@ Route::get('servicios', [
         ]);
 
         Route::post('crear', [
-            'uses' => 'ServiceController@store',
+            'uses' => 'GeneralServiceController@store',
             'as' => 'store'
         ]);
 
@@ -82,7 +82,7 @@ Route::get('servicios', [
         ]);
 
         Route::post('crear', [
-            'uses' => 'ServiceController@store',
+            'uses' => 'CorporationServiceController@store',
             'as' => 'store'
         ]);
 

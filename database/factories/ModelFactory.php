@@ -71,8 +71,9 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
     $status = array('pendiente', 'corralon');
     $description = array('Servicio', 'Arrastre', 'Cola');
     $index = $faker->numberBetween(0, 1);
+    //$service[$index],
     return [
-        'service' => $service[$index],
+        'service' => 'General',
         'description' => $description[array_rand($description)],
         'brand' => 'Audi',
         'type' => 'A4',
@@ -91,7 +92,7 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'date_out' => null,
         'date_return' => '2017-08-04 23:10:00',
         'amount' => $faker->numberBetween(100, 600),
-        'status' => $status[$index],
+        'status' => 'pendiente',
         'lot'   => null,
     ];
 });
