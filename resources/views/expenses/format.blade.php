@@ -58,26 +58,34 @@
                                 <th>Id</th>
                                 <th>Fecha</th>
                                 <th>Descripción</th>
-                                <th>Monto</th>
+                                <th>Cargo</th>
+                                <th>Abono</th>
+                                <th>Saldo</th>
                             </tr>
                         </thead>
 
                         <tbody>
+                            @php
+                                $temp = 0;
+                            @endphp
                             @foreach($all as $row)
+                                @php
+                                    if ($row->type != 'cargo') {
+                                        $temp += $row->amount;
+                                    } else {
+                                        $temp -= $row->amount;
+                                    }
+                                @endphp
                                 <tr>
                                     <td>{{ $row->id }}</td>
                                     <td>{{ $row->getDate('date') }}</td>
                                     <td>{{ $row->description }} {{ $row->bill == 'si' ? '- Facturado' : '' }}</td>
-                                    <td>${{ $row->amount }}</td>
+                                    <td>{{ $row->type == 'cargo' ? '$' . $row->amount : '' }}</td>
+                                    <td>{{ $row->type == 'cargo' ? '' : '$' . $row->amount }}</td>
+                                    <td>{{ '$ ' . $temp }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <td></td>
-                            <td></td>
-                            <td><b>Total</b></td>
-                            <td>${{ $total }}</td>
-                        </tfoot>
                     </table>
                 </div>
             <!-- /.col -->

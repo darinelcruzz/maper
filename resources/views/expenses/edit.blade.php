@@ -46,7 +46,8 @@
                     <th>#</th>
                     <th>Descripción</th>
                     <th>Fecha</th>
-                    <th>Monto</th>
+                    <th>Cargo</th>
+                    <th>Abono</th>
                     <th></th>
                 </tr>
             </template>
@@ -57,7 +58,8 @@
                       <td>{{ $expense->id }}</td>
                       <td>{{ $expense->description }} {{ $expense->bill == 'si' ? '- Facturado' : '' }}</td>
                       <td>{{ $expense->getShortDate('date') }}</td>
-                      <td>{{ $expense->amount }}</td>
+                      <td>{{ $expense->type == 'cargo' ? '$' . $expense->amount : '' }}</td>
+                      <td>{{ $expense->type == 'cargo' ? '' : '$' . $expense->amount }}</td>
                       <td>
                           <a href="{{ route('expense.edit', ['id' => $expense->id]) }}">
                               <i class="fa fa-edit"></i>
