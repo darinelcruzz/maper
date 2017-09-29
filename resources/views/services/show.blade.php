@@ -22,7 +22,7 @@
                   <td>{{ $row->getShortDate('date_service') }}</td>
                   <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }}</a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>{{ $row->driverr->name }}</td>
+                  <td>{{ $row->driverr->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
                   <td>${{ $row->total }}</td>
                   <td>
                       <a href="{{ route('service.general.pay', ['id' => $row->id]) }}" class="btn btn-success">

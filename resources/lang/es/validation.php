@@ -200,6 +200,7 @@ return [
         'ton5'                  => '5 Ton',
         'ton10'                 => '10 Ton',
         'pay'                   => 'método de pago',
+        'helper'                => 'apoyo',
     ],
 
 ];

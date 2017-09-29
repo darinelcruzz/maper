@@ -14,6 +14,16 @@ class Service extends Model
         return $this->belongsTo(Driver::class, 'driver');
     }
 
+    function helperr()
+    {
+        return $this->belongsTo(Driver::class, 'helper');
+    }
+
+    /*function drivers()
+    {
+        return $this->hasMany(Driver::class, 'driver');
+    }*/
+
     function unitr()
     {
         return $this->belongsTo(Unit::class, 'unit');
