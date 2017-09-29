@@ -18,8 +18,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><h3>${{ $totalPen }}</h3></td>
-                                    <td><h3>{{ $pendings }}</h3></td>
+                                    <td><h3>${{ $client->serviceTotal('pending') + $client->serviceTotal('expired') }}</h3></td>
+                                    <td><h3>{{ $client->pending }}</h3></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -45,7 +45,7 @@
                     </template>
 
                     <template slot="body">
-                        @foreach($expired as $row)
+                        @foreach($client->expired_services as $row)
                           <tr>
                               <td>{{ $row->id }}</td>
                               <td>{{ $row->getShortDate('date_out') }}</td>
@@ -62,7 +62,7 @@
                             <th></th>
                             <th></th>
                             <th>Total</th>
-                            <th></th>
+                            <th>${{ $client->serviceTotal('expired')}}</th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -84,7 +84,7 @@
                     </template>
 
                     <template slot="body">
-                        @foreach($pending as $row)
+                        @foreach($client->pending_services as $row)
                           <tr>
                               <td>{{ $row->id }}</td>
                               <td>{{ $row->getShortDate('date_out') }}</td>
@@ -100,7 +100,7 @@
                             <th></th>
                             <th></th>
                             <th>Total</th>
-                            <th>${{ $totalPen}}</th>
+                            <th>${{ $client->serviceTotal('pending') }}</th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -120,7 +120,7 @@
                     </template>
 
                     <template slot="body">
-                        @foreach($payed as $row)
+                        @foreach($client->paid_services as $row)
                           <tr>
                               <td>{{ $row->id }}</td>
                               <td>{{ $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out') }}</td>
@@ -136,7 +136,7 @@
                             <th></th>
                             <th></th>
                             <th>Total</th>
-                            <th>${{ $totalPay}}</th>
+                            <th>{{ $client->serviceTotal('paid', true)}}</th>
                         </tr>
                     </template>
                 </data-table-com>

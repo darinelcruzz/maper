@@ -21,13 +21,44 @@ class Client extends Model
         return $this->name;
     }
 
-    /*function getDaysAttribute()
+    function services()
     {
-        $today = Date::now();
-        $entry = new Date(strtotime($this->date_out));
-        $interval = $entry->diff($today);
-        $interval = $interval->format('%a');
-        return $this->date_out;
-    }*/
+        return $this->hasMany(Service::class, 'client');
+    }
+
+    function getPaidServicesAttribute()
+    {
+        return $this->services->where('status', 'pagado');
+    }
+
+    function getExpiredServicesAttribute()
+    {
+        return $this->services->where('status', 'vencida');
+    }
+
+    function getPendingServicesAttribute()
+    {
+        return $this->services->where('status', 'credito');
+    }
+
+    function getPendingAttribute()
+    {
+        return count($this->pending_services) + count($this->expired_services);
+    }
+
+    function serviceTotal($status, $formatted = false) {
+        $sattribute = $status . "_services";
+        $total = 0;
+
+        foreach ($this->$sattribute as $service) {
+            $total += $service->total;
+        }
+
+        if ($formatted) {
+            return '$ ' . number_format($total, 2, '.', ',');
+        }
+
+        return $total;
+    }
 
 }

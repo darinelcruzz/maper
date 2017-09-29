@@ -19,11 +19,6 @@ class Service extends Model
         return $this->belongsTo(Driver::class, 'helper');
     }
 
-    /*function drivers()
-    {
-        return $this->hasMany(Driver::class, 'driver');
-    }*/
-
     function unitr()
     {
         return $this->belongsTo(Unit::class, 'unit');
@@ -48,11 +43,6 @@ class Service extends Model
     {
         return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
                     ->where($payCol, $type)->get();
-    }
-
-    public function scopeServicesByClient($query, $client, $status, $optional='')
-    {
-        return $query->where('client', $client)->where('status', $status)->orWhere('status', $optional)->get();
     }
 
     public function getDate($date)

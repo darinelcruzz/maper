@@ -53,44 +53,22 @@ class ClientController extends Controller
 
     public function details(Client $client)
     {
-        $days = $this->expire();
-
-        $payed = Service::servicesByClient($client->id, 'liquidado', 'pagado');
-        $pending = Service::servicesByClient($client->id, 'credito');
-        $expired = Service::servicesByClient($client->id, 'vencida');
-
-        $totalPay = $this->getTotal($payed);
-        $totalPen = $this->getTotal($pending);
-
-        $pendings = count($pending) + count($expired);
-
-        return view('clients.details', compact('client', 'payed', 'pending', 'expired', 'pendings','totalPay', 'totalPen', 'days'));
-    }
-
-    public function getTotal($services)
-    {
-        $total = 0;
-
-        foreach ($services as $service) {
-            $total += $service->total;
-        }
-
-        return $total;
+        $this->expire();
+        return view('clients.details', compact('client'));
     }
 
     function expire()
     {
         $services = Service::where('status', 'credito')->get();
-
         foreach ($services as $service) {
             $interval = $service->getDays('date_out');
-            if ($interval > 40 ) {
+            if ($interval > 40) {
                 Service::find($service->id)->update(['status' => 'vencida']);
             }
         }
     }
 
-    function deleteClient($id)
+    function destroy($id)
     {
         Client::destroy($id);
 
