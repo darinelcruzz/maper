@@ -5,7 +5,7 @@
     <div id="payment" class="row">
         <div class="col-md-8">
             <solid-box title="{{ $service->service }}" color="box-default" collapsed=''>
-                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.update']) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>

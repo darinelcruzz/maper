@@ -12,10 +12,8 @@ class AdministrationController extends Controller
     {
         $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
 
-        $all = Service::whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
-                            ->where('status', '!=', 'cancelado')->get();
-        $creditAll = Service::whereBetween('date_credit', [$date . ' 00:00:00', $date . ' 23:59:59'])
-                            ->where('status', '!=', 'cancelado')->get();
+        $all = Service::untilDate($date);
+        $creditAll = Service::untilDate($date, 'date_credit');
 
         $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
         $methodsA = [];
@@ -25,6 +23,7 @@ class AdministrationController extends Controller
             $methodsA[$method] = $this->getTotal(Service::payType($date, $method,'date_out', 'pay'));
             $methodsB[$method] = $this->getTotal(Service::payType($date, $method, 'date_credit', 'pay_credit'));
         }
+
         $total = $this->getTotal($all) + $this->getTotal($creditAll);
 
         return view('cash.balance', compact('date', 'all', 'creditAll', 'methodsA', 'methodsB', 'total'));

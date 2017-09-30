@@ -8,7 +8,8 @@
                     <h3 class="box-title">Editar servicio Público General</h3>
                 </div>
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}
+                {!! Form::open(['method' => 'POST',
+                    'route' => 'service.corporation.update']) !!}
 
                     <div class="box-body">
 
@@ -18,9 +19,6 @@
                         @include('templates.unit')
                         @if($service->status != 'corralon')
                             @include('templates.pay', ['cost' => $service->pension])
-                            <input type="hidden" name="view" value="editPayed">
-                        @else
-                            <input type="hidden" name="view" value="edit">
                         @endif
 
                     </div>

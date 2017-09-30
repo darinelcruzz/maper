@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Dusk\DuskServiceProvider;
 use App\Http\Composers\SidebarComposer;
+use App\Http\Composers\CorporationsComposer;
+use App\Http\Composers\GeneralComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,5 +38,7 @@ class AppServiceProvider extends ServiceProvider
     protected function registerViewComposers()
    {
        View::composer('menus.sidebar', SidebarComposer::class);
+       View::composer('services.corporations.*', CorporationsComposer::class);
+       View::composer('services.generals.*', GeneralComposer::class);
    }
 }

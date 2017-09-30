@@ -71,4 +71,10 @@ class Service extends Model
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 
+    function scopeUntilDate($query, $date, $column = 'date_out', $status = 'cancelado')
+    {
+        return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])
+                    ->where('status', '!=', $status)->get();
+    }
+
 }

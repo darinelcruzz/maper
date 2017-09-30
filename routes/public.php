@@ -38,7 +38,7 @@ Route::get('servicios', [
         ]);
 
 
-        Route::get('editar/{id}', [
+        Route::get('editar/{service}', [
             'uses' => 'GeneralServiceController@edit',
             'as' => 'edit'
         ]);
@@ -87,7 +87,7 @@ Route::get('servicios', [
         ]);
 
 
-        Route::get('editar/{id}', [
+        Route::get('editar/{service}', [
             'uses' => 'CorporationServiceController@edit',
             'as' => 'edit'
         ]);
@@ -98,8 +98,8 @@ Route::get('servicios', [
         ]);
 
         Route::post('cambiar', [
-            'uses' => 'CorporationServiceController@change',
-            'as' => 'change'
+            'uses' => 'CorporationServiceController@update',
+            'as' => 'update'
         ]);
 
         Route::get('detalles/{service}', [
