@@ -96,3 +96,19 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'lot'   => null,
     ];
 });
+
+$factory->define(App\Price::class, function (Faker\Generator $faker) {
+    $types = ['otros', 'local', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
+
+    return [
+        'name' => $faker->word,
+        'type' => $types[array_rand($types)],
+        'km' => $faker->numberBetween(10, 50),
+        'moto' => $faker->numberBetween(50, 100),
+        'car' => $faker->numberBetween(100, 250),
+        'ton3' => $faker->numberBetween(150, 300),
+        'ton5' => $faker->numberBetween(280, 450),
+        'ton10' => $faker->numberBetween(500, 800),
+        'observation' => $faker->sentence,
+    ];
+});

@@ -14,9 +14,25 @@ class Expense extends Model
         $fdate = new Date(strtotime($this->$date));
         return $fdate->format('j/M/y, G:i');
     }
+
     public function getDate($date)
     {
         $fdate = new Date(strtotime($this->$date));
         return $fdate->format('D, j M Y');
+    }
+
+    public function getIsChargeAttribute()
+    {
+        return $this->type == 'cargo';
+    }
+
+    public function getIsBilledAttribute()
+    {
+        return $this->bill == 'si';
+    }
+
+    public function getFamountAttribute()
+    {
+        return '$ ' . number_format($this->amount, 2);
     }
 }

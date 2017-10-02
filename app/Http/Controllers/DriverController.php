@@ -19,6 +19,7 @@ class DriverController extends Controller
         ]);
 
         $driver = Driver::create($request->all());
+
         return redirect(route('driver.show'));
     }
 
@@ -28,9 +29,8 @@ class DriverController extends Controller
         return view('drivers.show', compact('drivers'));
     }
 
-    public function edit($id)
+    public function edit(Driver $driver)
     {
-        $driver = Driver::find($id);
         return view('drivers.edit', compact('driver'));
     }
 
@@ -45,7 +45,7 @@ class DriverController extends Controller
         return $this->show();
     }
 
-    function deleteSnit($id)
+    function destroy($id)
     {
         Driver::destroy($id);
 

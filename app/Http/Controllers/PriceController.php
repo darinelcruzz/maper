@@ -22,21 +22,16 @@ class PriceController extends Controller
 
     public function show()
     {
-        $others = Price::where('type', 'otros')->get();
-        $localG = Price::where('type', 'localG')->get();
-        $localC = Price::where('type', 'localC')->get();
-        $route1 = Price::where('type', 'Ruta 1')->get();
-        $route2 = Price::where('type', 'Ruta 2')->get();
-        $route3 = Price::where('type', 'Ruta 3')->get();
-        $route4 = Price::where('type', 'Ruta 4')->get();
-        $route5 = Price::where('type', 'Ruta 5')->get();
+        $prices = Price::all();
+        $types = ['otros', 'local', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
+        $header = ['Km', 'Nombre', 'Moto', 'Coche', '3 Ton', '5 Ton', '10 Ton'];
+        $body = ['km', 'name', 'moto', 'car', 'ton3', 'ton5', 'ton10'];
 
-        return view('prices.show', compact('others', 'localG', 'localC', 'route1', 'route2', 'route3', 'route4', 'route5'));
+        return view('prices.show', compact('prices', 'types', 'body', 'header'));
     }
 
-    public function edit($id)
+    public function edit(Price $price)
     {
-        $price = Price::find($id);
         return view('prices.edit', compact('price'));
     }
 
@@ -54,7 +49,7 @@ class PriceController extends Controller
         return view('prices.details', compact('unit'));
     }
 
-    function deleteSnit($id)
+    function destroy($id)
     {
         Price::destroy($id);
 

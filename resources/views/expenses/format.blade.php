@@ -31,7 +31,7 @@
     </style>
 </head>
 
-<body onload="window.print();">
+<body onload="window.print()">
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
@@ -68,9 +68,9 @@
                             @php
                                 $temp = 0;
                             @endphp
-                            @foreach($all as $row)
+                            @foreach($expenses as $row)
                                 @php
-                                    if ($row->type != 'cargo') {
+                                    if (!$row->isCharge) {
                                         $temp += $row->amount;
                                     } else {
                                         $temp -= $row->amount;
@@ -79,10 +79,10 @@
                                 <tr>
                                     <td>{{ $row->id }}</td>
                                     <td>{{ $row->getDate('date') }}</td>
-                                    <td>{{ $row->description }} {{ $row->bill == 'si' ? '- Facturado' : '' }}</td>
-                                    <td>{{ $row->type == 'cargo' ? '$' . $row->amount : '' }}</td>
-                                    <td>{{ $row->type == 'cargo' ? '' : '$' . $row->amount }}</td>
-                                    <td>{{ '$ ' . $temp }}</td>
+                                    <td>{{ $row->isBilled ? "$row->description - Facturado" : $row->description }}</td>
+                                    <td>{{ $row->isCharge ? $row->famount : '' }}</td>
+                                    <td>{{ $row->isCharge ? '' : $row->famount }}</td>
+                                    <td>{{ '$ ' . number_format($temp, 2) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

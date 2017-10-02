@@ -257,7 +257,7 @@ Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
         'as' => 'show'
     ]);
 
-    Route::get('editar/{id?}', [
+    Route::get('editar/{price}', [
         'uses' => 'PriceController@edit',
         'as' => 'edit'
     ]);
@@ -285,7 +285,7 @@ Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
         'as' => 'show'
     ]);
 
-    Route::get('editar/{id?}', [
+    Route::get('editar/{expense}', [
         'uses' => 'ExpenseController@edit',
         'as' => 'edit'
     ]);
@@ -318,7 +318,7 @@ Route::group(['prefix' => 'operadores', 'as' => 'driver.'], function () {
         'as' => 'show'
     ]);
 
-    Route::get('editar/{id?}', [
+    Route::get('editar/{driver}', [
         'uses' => 'DriverController@edit',
         'as' => 'edit'
     ]);

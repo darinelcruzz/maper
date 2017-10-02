@@ -46,9 +46,7 @@ class GeneralServiceController extends Controller
     function pay(Service $service)
     {
         $cost = 0;
-        $ser = 'gen';
-
-        return view('services.generals.pay', compact('service', 'ser', 'cost'));
+        return view('services.generals.pay', compact('service','cost'));
     }
 
     function cancel(Service $service)
@@ -56,9 +54,9 @@ class GeneralServiceController extends Controller
         return view('services.generals.cancel', compact('service'));
     }
 
-    function deleteService($id)
+    function destroy(Service $service)
     {
-        Service::destroy($id);
+        $service->destroy();
 
         return back();
     }
