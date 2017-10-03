@@ -62,7 +62,7 @@
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>{{ $row->driverr->name }}</td>
+                  <td>{{ $row->driverr->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
                   <td>{{ $row->key }}</td>
                   <td>
                       <a href="{{ route('service.corporation.pay', ['id' => $row->id]) }}" class="btn btn-success">
