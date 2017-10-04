@@ -7,6 +7,17 @@ Route::get('salir', function (){
     return redirect('/');
 })->name('getout');
 
+// Tests
+Route::get('pruebas', function ()
+{
+    $services = App\Service::fromDateToDate('2017-08-04', '2017-10-02', 1);
+    $extraHours = [];
+    foreach ($services as $service) {
+        array_push($extraHours, $service->extraHours);
+    }
+    return $extraHours;
+});
+
 //Admin
 Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
     Route::get('caja', [
@@ -212,34 +223,6 @@ Route::group(['prefix' => 'productos', 'as' => 'product.'], function () {
     ]);
 });
 
-// Unidades
-Route::group(['prefix' => 'unidades', 'as' => 'unit.'], function () {
-    Route::get('crear', [
-        'uses' => 'UnitController@create',
-        'as' => 'create'
-    ]);
-
-    Route::post('crear', [
-        'uses' => 'UnitController@store',
-        'as' => 'store'
-    ]);
-
-    Route::get('/lista', [
-        'uses' => 'UnitController@show',
-        'as' => 'show'
-    ]);
-
-    Route::get('editar/{id?}', [
-        'uses' => 'UnitController@edit',
-        'as' => 'edit'
-    ]);
-
-    Route::post('cambiar', [
-        'uses' => 'UnitController@change',
-        'as' => 'change'
-    ]);
-});
-
 // Precios
 Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
     Route::get('crear', [
@@ -301,33 +284,66 @@ Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
     ]);
 });
 
-// Operadores
-Route::group(['prefix' => 'operadores', 'as' => 'driver.'], function () {
-    Route::get('crear', [
-        'uses' => 'DriverController@create',
-        'as' => 'create'
-    ]);
+// Recursos
+Route::get('recursos', [
+    'uses' => 'ResourcesController@show',
+    'as' => 'resources.show'
+]);
+    // Operadores
+    Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], function () {
+        Route::get('crear', [
+            'uses' => 'DriverController@create',
+            'as' => 'create'
+        ]);
 
-    Route::post('crear', [
-        'uses' => 'DriverController@store',
-        'as' => 'store'
-    ]);
+        Route::post('crear', [
+            'uses' => 'DriverController@store',
+            'as' => 'store'
+        ]);
 
-    Route::get('/lista', [
-        'uses' => 'DriverController@show',
-        'as' => 'show'
-    ]);
+        Route::get('editar/{driver}', [
+            'uses' => 'DriverController@edit',
+            'as' => 'edit'
+        ]);
 
-    Route::get('editar/{driver}', [
-        'uses' => 'DriverController@edit',
-        'as' => 'edit'
-    ]);
+        Route::post('cambiar', [
+            'uses' => 'DriverController@change',
+            'as' => 'change'
+        ]);
 
-    Route::post('cambiar', [
-        'uses' => 'DriverController@change',
-        'as' => 'change'
-    ]);
-});
+        Route::get('fecha', [
+            'uses' => 'DriverController@date',
+            'as' => 'date'
+        ]);
+
+        Route::post('reporte', [
+            'uses' => 'DriverController@format',
+            'as' => 'format'
+        ]);
+    });
+
+    // Unidades
+    Route::group(['prefix' => 'recursos/unidades', 'as' => 'resources.unit.'], function () {
+        Route::get('crear', [
+            'uses' => 'UnitController@create',
+            'as' => 'create'
+        ]);
+
+        Route::post('crear', [
+            'uses' => 'UnitController@store',
+            'as' => 'store'
+        ]);
+
+        Route::get('editar/{id?}', [
+            'uses' => 'UnitController@edit',
+            'as' => 'edit'
+        ]);
+
+        Route::post('cambiar', [
+            'uses' => 'UnitController@change',
+            'as' => 'change'
+        ]);
+    });
 
 // Usuarios
 Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
@@ -341,7 +357,7 @@ Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
         'as' => 'store'
     ]);
 
-    Route::get('/', [
+    Route::get('', [
         'uses' => 'UserController@show',
         'as' => 'show'
     ]);

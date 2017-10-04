@@ -66,6 +66,16 @@ class Service extends Model
         return $interval;
     }
 
+    function getExtraHoursAttribute()
+    {
+        $date_service = substr($this->date_service, 0, 10);
+        $start = new Date(strtotime("$date_service 17:00:00"));
+        $end = new Date(strtotime($this->date_return));
+        $interval = $start->diff($end);
+        $interval = $interval->format('%h');
+        return $interval;
+    }
+
     public function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
@@ -75,6 +85,12 @@ class Service extends Model
     {
         return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])
                     ->where('status', '!=', $status)->get();
+    }
+
+    function scopeFromDateToDate($query, $startDate, $endDate, $driver)
+    {
+        return $query->whereBetween('date_service', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
+                    ->where('driver', $driver)->get();
     }
 
 }

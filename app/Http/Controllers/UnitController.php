@@ -10,7 +10,7 @@ class UnitController extends Controller
 {
     public function create()
     {
-        return view('units.create');
+        return view('resources.units.create');
     }
 
     public function store(Request $request)
@@ -21,20 +21,20 @@ class UnitController extends Controller
         ]);
 
         $unit = Unit::create($request->all());
-        return redirect(route('unit.show'));
+        return redirect(route('resources.show'));
     }
 
     public function show()
     {
         $drivers = Driver::all();
         $units = Unit::all();
-        return view('units.show', compact('units', 'drivers'));
+        return view('resources.units.show', compact('units', 'drivers'));
     }
 
     public function edit($id)
     {
         $unit = Unit::find($id);
-        return view('units.edit', compact('unit'));
+        return view('resources.units.edit', compact('unit'));
     }
 
     public function change(Request $request)
@@ -45,12 +45,12 @@ class UnitController extends Controller
 
         Unit::find($request->id)->update($request->all());
 
-        return $this->show();
+        return redirect(route('resources.show'));
     }
 
     function details(Unit $unit)
     {
-        return view('units.details', compact('unit'));
+        return view('resources.units.details', compact('unit'));
     }
 
     function deleteSnit($id)

@@ -85,13 +85,13 @@ return [
         'title' => 'Recursos',
         'icon' => 'fa fa-truck',
         'submenu' => [
-            'createu' => [
-                'title' => 'Agregar unidad',
-                'route' => 'unit.create'
+            'list' => [
+                'title' => 'Listado',
+                'route' => 'resources.show'
             ],
-            'created' => [
-                'title' => 'Agregar operador',
-                'route' => 'driver.create'
+            'report' => [
+                'title' => 'HorasExtras',
+                'route' => 'resources.driver.date'
             ],
         ]
     ],
