@@ -56,14 +56,24 @@ class DriverController extends Controller
         $start = new Date(strtotime($request->start));
         $end = new Date(strtotime($request->end));
 
-        $services = Service::fromDateToDate($start, $end, 1);
-        $extraHours = [];
-        foreach ($services as $service) {
-            array_push($extraHours, $service->extraHours);
+        $drivers = Driver::all();
+        $totalExtras = [];
+
+        foreach ($drivers as $driver) {
+            $servicesID = [];
+            $services = Service::fromDateToDate($start, $end, $driver);
+
+            foreach ($services as $service) {
+                if (!$service->inSchedule) {
+                    array_push($servicesID, $service->id);
+                }
+            }
+
+            $totalExtras["$driver->name"] = $servicesID;
         }
 
         $range = $start->format('D, d/M/Y') . ' - ' . $end->format('D, d/M/Y');
-        return view('resources.drivers.format', compact('extraHours', 'range'));
+        return view('resources.drivers.format', compact('totalExtras', 'range', 'services'));
     }
 
     function destroy($id)

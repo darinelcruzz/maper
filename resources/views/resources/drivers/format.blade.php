@@ -34,7 +34,7 @@
     </style>
 </head>
 
-<body onload="window.print()">
+<body >
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
@@ -64,23 +64,21 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                @foreach ($services as $service)
+                                    <th>holi</th>
+                                @endforeach
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>{{ $extraHours}}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @foreach ($totalExtras as $driver => $extraHours)
+                                <tr>
+                                    <td>{{ $driver }}</td>
+                                    @foreach ($extraHours as $hour)
+                                        <td>{{ $hour }}</td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
