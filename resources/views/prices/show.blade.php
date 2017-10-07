@@ -23,7 +23,8 @@
                                   <td>{{ $type == 'otros' ? $price->id: $price->km }}</td>
                               @elseif ($td == 'name')
                                   <td>
-                                      {{ $price->name }} &nbsp;&nbsp;&nbsp;
+                                      {{ $price->name }}
+                                      &nbsp;&nbsp;&nbsp;
                                       <a href="{{ route('price.edit', ['id' => $price->id]) }}" title="EDITAR">
                                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                       </a>

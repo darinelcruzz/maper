@@ -16,14 +16,14 @@ class PriceController extends Controller
     {
         $this->validate($request, []);
 
-        $price = Price::create($request->all());
+        $price = Price::create($request->except(['service']));
         return redirect(route('price.show'));
     }
 
     public function show()
     {
         $prices = Price::all();
-        $types = ['otros', 'local', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
+        $types = ['otros', 'localG', 'localC', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
         $header = ['Km', 'Nombre', 'Moto', 'Coche', '3 Ton', '5 Ton', '10 Ton'];
         $body = ['km', 'name', 'moto', 'car', 'ton3', 'ton5', 'ton10'];
 
