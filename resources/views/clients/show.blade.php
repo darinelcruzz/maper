@@ -23,7 +23,7 @@
                   <td>{{ $client->id }}</td>
                   <td><a href="{{ route('client.details', ['id' => $client->id]) }}"> {{ $client->name }} </a></td>
                   <td>{{ $client->rfc }}</td>
-                  <td>{{ $client->address }}</td>
+                  <td>{{ $client->address . ' ' . $client->city }}</td>
                   <td>{{ $client->phone }}</td>
                   <td>{{ $client->email }}</td>
                   <td>{{ $client->contact }}</td>

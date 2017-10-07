@@ -13,7 +13,6 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
 Vue.component('product-table', require('./components/ProductTable.vue'));
 Vue.component('product-row', require('./components/ProductRow.vue'));
 
@@ -25,7 +24,27 @@ Vue.component('data-table-com', require('./components/lte/SmallDataTable.vue'));
 
 Vue.component('payment-box', require('./components/PaymentTemplate.vue'));
 
+
 const app = new Vue({
     el: '#app',
-    data: {}
+    data: {
+        entries: 1,
+        type: 'produccion',
+        products: [],
+        product_id: 1,
+        quantity: 0,
+        selected: '',
+        selectedDesign: '',
+    },
+    methods: {
+        disable(option) {
+            return option == 'existente';
+        }
+    },
+    created() {
+        axios.get('/products').then(response => {
+            this.products = response.data;
+        });
+    }
+
 });

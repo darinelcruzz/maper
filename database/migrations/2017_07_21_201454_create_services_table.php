@@ -31,6 +31,7 @@ class CreateServicesTable extends Migration
             $table->string('origin')->nullable();
             $table->string('destination')->nullable();
             $table->string('driver')->nullable();
+            $table->string('helper')->nullable();
             $table->string('unit')->nullable();
             $table->timestamp('date_service')->nullable();
             $table->timestamp('date_out')->nullable();
@@ -46,6 +47,8 @@ class CreateServicesTable extends Migration
             $table->float('discount')->nullable();
             $table->string('reason')->nullable();
             $table->string('pay')->nullable();
+            $table->timestamp('date_credit')->nullable();
+            $table->string('pay_credit')->nullable();
             $table->string('view')->nullable();
 
             $table->timestamps();

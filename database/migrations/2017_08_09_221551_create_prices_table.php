@@ -18,6 +18,7 @@ class CreatePricesTable extends Migration
 
             $table->string('name')->nullable();
             $table->string('type')->nullable();
+            $table->string('service')->nullable();
             $table->float('km')->nullable();
             $table->float('moto')->nullable();
             $table->float('car')->nullable();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 use App\Client;
 use App\Service;
 
@@ -52,11 +53,22 @@ class ClientController extends Controller
 
     public function details(Client $client)
     {
-        $services = Service::servicesByClient($client->id);
-        return view('clients.details', compact('client', 'services'));
+        $this->expire();
+        return view('clients.details', compact('client'));
     }
 
-    function deleteClient($id)
+    function expire()
+    {
+        $services = Service::where('status', 'credito')->get();
+        foreach ($services as $service) {
+            $interval = $service->getDays('date_out');
+            if ($interval > 40) {
+                Service::find($service->id)->update(['status' => 'vencida']);
+            }
+        }
+    }
+
+    function destroy($id)
     {
         Client::destroy($id);
 

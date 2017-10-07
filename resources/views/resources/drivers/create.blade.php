@@ -5,14 +5,16 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Nueva unidad</h3>
+                    <h3 class="box-title">Nuevo operador</h3>
                 </div>
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'unit.store', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.store', 'class' => 'form-horizontal']) !!}
                   <div class="box-body">
                     {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('number', ['label' => 'Número economico', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::text('description', ['tpl' => 'templates/oneline']) !!}
+                    {!! Field::time('start_hour', '08:00',['tpl' => 'templates/oneline']) !!}
+                    {!! Field::time('end_hour', '18:00',['tpl' => 'templates/oneline']) !!}
+                    {!! Field::number('driver_hour', ['tpl' => 'templates/oneline']) !!}
+                    {!! Field::number('helper_hour', ['tpl' => 'templates/oneline']) !!}
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer">

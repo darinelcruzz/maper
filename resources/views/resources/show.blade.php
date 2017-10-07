@@ -19,7 +19,7 @@
                   <td>{{ $row->name }}</td>
                   <td>{{ $row->description }}</td>
                   <td>
-                      <a href="{{ route('unit.edit', ['id' => $row->id]) }}">
+                      <a href="{{ route('resources.unit.edit', ['id' => $row->id]) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
                   </td>
@@ -32,6 +32,9 @@
         <template slot="header">
             <tr>
                 <th>Nombre</th>
+                <th>Horario</th>
+                <th>Hora Extra Operador</th>
+                <th>Hora Extra Apoyo</th>
                 <th>Editar</th>
             </tr>
         </template>
@@ -40,8 +43,11 @@
             @foreach($drivers as $row)
               <tr>
                   <td>{{ $row->name }}</td>
+                  <td>{{ $row->getHour('start_hour') }} - {{ $row->getHour('end_hour') }}</td>
+                  <td>${{ $row->driver_hour }}</td>
+                  <td>${{ $row->helper_hour }}</td>
                   <td>
-                      <a href="{{ route('driver.edit', ['id' => $row->id]) }}">
+                      <a href="{{ route('resources.driver.edit', ['id' => $row->id]) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
                   </td>
@@ -49,4 +55,18 @@
             @endforeach
         </template>
     </data-table>
+
+    <div class="row">
+        <div class="col-md-6">
+            <br><a href="{{ route('resources.unit.create')}}" class="btn btn-success btn-block">Agregar Unidad
+                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <br><a href="{{ route('resources.driver.create')}}" class="btn btn-success btn-block">Agregar Operador
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+
 @endsection

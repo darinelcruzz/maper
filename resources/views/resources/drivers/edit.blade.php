@@ -9,10 +9,14 @@
                 </div>
 
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'driver.change', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.change', 'class' => 'form-horizontal']) !!}
 
                     <div class="box-body">
                         {!! Field::text('name', $driver->name, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::time('start_hour', $driver->start_hour, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::time('end_hour',  $driver->end_hour, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::number('driver_hour', $driver->driver_hour, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::number('helper_hour', $driver->helper_hour, ['tpl' => 'templates/oneline']) !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

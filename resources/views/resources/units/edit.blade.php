@@ -9,7 +9,7 @@
                 </div>
 
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'unit.change', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'resources.unit.change', 'class' => 'form-horizontal']) !!}
 
                     <div class="box-body">
                         {!! Field::text('name', $unit->name, ['tpl' => 'templates/oneline']) !!}

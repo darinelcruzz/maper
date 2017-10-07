@@ -20,9 +20,9 @@
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                   <td>{{ $row->getShortDate('date_service') }}</td>
-                  <td>{{ $row->clientr->name }}</td>
+                  <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }}</a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>{{ $row->driverr->name }}</td>
+                  <td>{{ $row->driverr->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
                   <td>${{ $row->total }}</td>
                   <td>
                       <a href="{{ route('service.general.pay', ['id' => $row->id]) }}" class="btn btn-success">
@@ -62,7 +62,7 @@
                   <td>{{ $row->inventory }}</td>
                   <td>{{ $row->service }}</td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>{{ $row->driverr->name }}</td>
+                  <td>{{ $row->driverr->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
                   <td>{{ $row->key }}</td>
                   <td>
                       <a href="{{ route('service.corporation.pay', ['id' => $row->id]) }}" class="btn btn-success">
@@ -130,10 +130,10 @@
             @foreach($paid as $row)
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                  <td>{{ $row->getShortDate('date_out') }}</td>
-                  <td>{{ $row->clientr->name }}</td>
+                  <td>{{  $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out')}}</td>
+                  <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }} </a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                  <td>${{ $row->total }} - {{ $row->pay }}</td>
+                  <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                   <td>
                       <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -152,6 +152,7 @@
                 <th>Cliente</th>
                 <th>Marca</th>
                 <th>Importe</th>
+                <th>Pagar</th>
                 <th>Opciones</th>
             </tr>
         </template>
@@ -161,13 +162,13 @@
               <tr>
                   <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                   <td>{{ $row->getShortDate('date_out') }}</td>
-                  <td>{{ $row->clientr->name }}</td>
+                  <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }}</a></td>
                   <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                   <td>${{ $row->total }}</td>
                   <td>
-                      <a href="#" class="btn btn-success">
-                          <i class="fa fa-money" aria-hidden="true"></i>
-                      </a>
+                      @include('services/assign') &nbsp;
+                  </td>
+                  <td>
                       <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>

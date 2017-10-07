@@ -5,34 +5,25 @@
 </div>
 
 <div class="row">
-    @if($ser == 'gen')
-        <div class="col-md-4">
-            {!! Field::select('client', $clients, isset($service) ? $service->client: null, ['empty' => 'Seleccione al cliente'])!!}
-
-        </div>
-    @endif
     <div class="col-md-4">
         {!! Field::text('origin', isset($service) ? $service->origin: null)!!}
     </div>
     <div class="col-md-4">
         {!! Field::text('destination', isset($service) ? $service->destination: null)!!}
     </div>
-</div>
-
-<div class="row">
     <div class="col-md-4">
         {!! Field::number('amount', isset($service) ? $service->amount: null, ['label' => 'Arrastre estimado', 'min' => '0', 'step' => '.01'])!!}
    </div>
+</div>
+
+<div class="row">
     @if($ser == 'corp')
         <div class="col-md-4">
             {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'step' => '.01'])!!}
        </div>
     @endif
-</div>
-
-<div class="row">
     <div class="col-md-4">
-        <a href="https://google.com.mx/maps" target="_blank" class="btn btn-success">Google Maps
+        <br><a href="https://google.com.mx/maps" target="_blank" class="btn btn-success btn-block">Google Maps
             <i class="fa fa-map-pin" aria-hidden="true"></i>
         </a>
     </div>

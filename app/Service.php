@@ -14,6 +14,11 @@ class Service extends Model
         return $this->belongsTo(Driver::class, 'driver');
     }
 
+    function helperr()
+    {
+        return $this->belongsTo(Driver::class, 'helper');
+    }
+
     function unitr()
     {
         return $this->belongsTo(Unit::class, 'unit');
@@ -34,15 +39,10 @@ class Service extends Model
         return $query->where($col, $comparation, $service)->get();
     }
 
-    public function scopePayType($query, $date, $type)
+    public function scopePayType($query, $date, $type, $dateCol, $payCol)
     {
-        return $query->whereBetween('date_out', [$date . ' 00:00:00', $date . ' 23:59:59'])
-                    ->where('pay', $type)->get();
-    }
-
-    public function scopeServicesByClient($query, $client)
-    {
-        return $query->where('client', $client)->get();
+        return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
+                    ->where($payCol, $type)->get();
     }
 
     public function getDate($date)
@@ -57,8 +57,50 @@ class Service extends Model
         return $fdate->format('j/M/y, G:i');
     }
 
+    public function getWeekDate($date)
+    {
+        $fdate = new Date(strtotime($this->$date));
+        return $fdate->format('D j, M');
+    }
+
+    function getDays($date)
+    {
+        $today = Date::now();
+        $entry = new Date(strtotime($this->$date));
+        $interval = $entry->diff($today);
+        $interval = $interval->format('%a');
+        return $interval;
+    }
+
+    function getInScheduleAttribute()
+    {
+        $startHour = substr($this->date_service, 11);
+        ///dd($startHour);
+        $endHour = substr($this->date_return, 11);
+        $inSchedule = $startHour >= $this->driverr->start_hour && $endHour <= $this->driverr->end_hour;
+
+        $startDate = substr($this->date_service, 0, 10);
+        $endDate = substr($this->date_return, 0, 10);
+        $isSameDate = $startDate == $endDate;
+
+        return $isSameDate && $inSchedule;
+    }
+
     public function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
+
+    function scopeUntilDate($query, $date, $column = 'date_out', $status = 'cancelado')
+    {
+        return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])
+                    ->where('status', '!=', $status)->get();
+    }
+
+    function scopeFromDateToDate($query, $startDate, $endDate, $driver)
+    {
+        return $query->whereBetween('date_service', [$startDate . ' 00:00:00', $endDate . ' 23:59:59' ])
+                    ->where('driver', $driver->id)->get();
+    }
+
 }

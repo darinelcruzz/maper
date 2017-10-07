@@ -200,6 +200,12 @@ return [
         'ton5'                  => '5 Ton',
         'ton10'                 => '10 Ton',
         'pay'                   => 'método de pago',
+        'helper'                => 'apoyo',
+        'start_hour'            => 'hora entrada',
+        'end_hour'              => 'hora salida',
+        'driver_hour'           => 'hora extra operador',
+        'helper_hour'           => 'hora extra apoyo',
+
     ],
 
 ];

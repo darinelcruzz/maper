@@ -13,8 +13,8 @@
                 <div class="box-body">
 
                     @include('templates.principal')
-                    @include('templates.ubication')
                     @include('templates.car')
+                    @include('templates.ubication')
                     @include('templates.unit')
 
                 </div>
