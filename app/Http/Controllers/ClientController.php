@@ -20,6 +20,7 @@ class ClientController extends Controller
             'name' => 'required|unique:clients',
             'city' => 'required',
             'phone' => 'required',
+            'days' => 'required',
         ]);
 
         $client = Client::create($request->all());
@@ -44,6 +45,7 @@ class ClientController extends Controller
             'name' => 'required',
             'city' => 'required',
             'phone' => 'required',
+            'days' => 'required',
         ]);
 
         Client::find($request->id)->update($request->all());
@@ -53,16 +55,16 @@ class ClientController extends Controller
 
     public function details(Client $client)
     {
-        $this->expire();
+        $this->expire($client->days);
         return view('clients.details', compact('client'));
     }
 
-    function expire()
+    function expire($days)
     {
         $services = Service::where('status', 'credito')->get();
         foreach ($services as $service) {
             $interval = $service->getDays('date_out');
-            if ($interval > 40) {
+            if ($interval > $days) {
                 Service::find($service->id)->update(['status' => 'vencida']);
             }
         }

@@ -17,12 +17,15 @@ class CreateClientsTable extends Migration
             $table->increments('id');
 
             $table->string('name')->nullable();
+            $table->string('rfc')->nullable();
             $table->string('address')->nullable();
+            $table->integer('cp')->nullable();
+            $table->string('city')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('contact')->nullable();
-            $table->string('rfc')->nullable();
-            $table->string('city')->nullable();
+            $table->string('cellphone')->nullable();
+            $table->integer('days')->nullable();
 
             $table->timestamps();
         });

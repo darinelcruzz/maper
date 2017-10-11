@@ -8,8 +8,8 @@ use Jenssegers\Date\Date;
 class Client extends Model
 {
     protected $fillable = [
-    	'name', 'address', 'phone',
-    	'email', 'contact', 'rfc', 'city'
+    	'name', 'address', 'phone', 'email', 'contact', 'rfc',
+        'city', 'cp', 'cellphone', 'days'
     ];
 
     function getShortNameAttribute()

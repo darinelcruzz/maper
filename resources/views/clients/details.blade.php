@@ -12,14 +12,16 @@
                         <table style="width:100%">
                             <thead>
                                 <tr>
-                                    <th width="50%"><h4>Saldo</h4></th>
-                                    <th width="50%"><h4>Sin pagar</h4></th>
+                                    <th width="33%"><h4>Saldo</h4></th>
+                                    <th width="33%"><h4>Sin pagar</h4></th>
+                                    <th width="33%"><h4>Crédito</h4></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><h3>${{ $client->serviceTotal('pending') + $client->serviceTotal('expired') }}</h3></td>
                                     <td><h3>{{ $client->pending }}</h3></td>
+                                    <td><h3>{{ $client->days . ' dias' }}</h3></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -47,7 +49,7 @@
                     <template slot="body">
                         @foreach($client->expired_services as $row)
                           <tr>
-                              <td>{{ $row->id }}</td>
+                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                               <td>{{ $row->getShortDate('date_out') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                               <td>{{ $row->getDays('date_out') }}</td>
@@ -86,7 +88,7 @@
                     <template slot="body">
                         @foreach($client->pending_services as $row)
                           <tr>
-                              <td>{{ $row->id }}</td>
+                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                               <td>{{ $row->getShortDate('date_out') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                               <td>{{ $row->getDays('date_out') }}</td>
@@ -122,7 +124,7 @@
                     <template slot="body">
                         @foreach($client->paid_services as $row)
                           <tr>
-                              <td>{{ $row->id }}</td>
+                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                               <td>{{ $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                               <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>

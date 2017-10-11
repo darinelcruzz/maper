@@ -26,11 +26,11 @@ return [
         'icon' => 'fa fa-line-chart',
         'submenu' => [
             'cash' => [
-                'title' => 'Caja',
+                'title' => 'Ingresos Totales',
                 'route' => 'admin.cash'
             ],
             'expenses' => [
-                'title' => 'Gastos',
+                'title' => 'Caja',
                 'route' => 'expense.create'
             ],
         ]

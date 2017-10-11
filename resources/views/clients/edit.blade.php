@@ -15,11 +15,14 @@
                         {!! Field::text('name', $client->name, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('city', $client->city, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('phone', $client->phone, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::number('days', $client->days, ['tpl' => 'templates/oneline']) !!}
                         <hr>
                         {!! Field::text('address', $client->address, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::number('cp', $client->cp, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('rfc', $client->rfc, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::email('email', $client->email, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('contact', $client->contact, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('cellphone', $client->cellphone, ['tpl' => 'templates/oneline']) !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -27,8 +30,8 @@
                         {!! Form::submit('Agregar', ['class' => 'btn btn-info btn-block']) !!}
                     </div>
                     <!-- /.box-footer -->
-                {!! Form::close() !!}
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

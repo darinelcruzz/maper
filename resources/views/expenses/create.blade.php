@@ -83,11 +83,13 @@
                 <div class="box-body">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! Field::date('date_start', $date, ['tpl' => 'templates/withicon', 'label' => 'Inicio'],
 							['icon' => 'calendar-check-o']) !!}
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             {!! Field::date('date_end', $date, ['tpl' => 'templates/withicon', 'label' => 'Fin'],
 							['icon' => 'calendar-check-o']) !!}
                         </div>

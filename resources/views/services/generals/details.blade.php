@@ -103,6 +103,7 @@
                     </tbody>
                 </table>
                 <h2 align="right">Total: ${{ $service->amount }}</h2>
+                <h2 align="right">{{ $service->bill ? 'Fac. ' . $service->bill : '' }}</h2>
             </solid-box>
         </div>
     </div>
