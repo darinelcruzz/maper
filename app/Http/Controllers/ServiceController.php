@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
 use App\Service;
 use App\Unit;
+use App\Driver;
 
 class ServiceController extends Controller
 {
@@ -41,6 +42,13 @@ class ServiceController extends Controller
                 Service::find($service->id)->update(['status' => 'vencida']);
             }
         }
+    }
+
+    function changeExtras(Request $request)
+    {
+        Service::find($request->id)->update($request->all());
+
+        return redirect(route('resources.driver.date'));
     }
 
 }

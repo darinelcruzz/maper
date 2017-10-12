@@ -54,7 +54,7 @@ class Service extends Model
     public function getShortDate($date)
     {
         $fdate = new Date(strtotime($this->$date));
-        return $fdate->format('j/M/y, G:i');
+        return $fdate->format('j/M/y, h:i a');
     }
 
     public function getWeekDate($date)
@@ -75,7 +75,6 @@ class Service extends Model
     function getInScheduleAttribute()
     {
         $startHour = substr($this->date_service, 11);
-        ///dd($startHour);
         $endHour = substr($this->date_return, 11);
         $inSchedule = $startHour >= $this->driverr->start_hour && $endHour <= $this->driverr->end_hour;
 
@@ -97,10 +96,17 @@ class Service extends Model
                     ->where('status', '!=', $status)->get();
     }
 
-    function scopeFromDateToDate($query, $startDate, $endDate, $driver)
+    function scopeFromDateToDate($query, $startDate, $endDate, $driver, $type)
     {
-        return $query->whereBetween('date_service', [$startDate . ' 00:00:00', $endDate . ' 23:59:59' ])
-                    ->where('driver', $driver->id)->get();
+        return $query->whereBetween('date_service', [$startDate->format('Y-m-d 00:00:00'), $endDate->format('Y-m-d 23:59:59')])
+                        ->where($type, $driver->id)->get();
+    }
+
+    function scopePayed($query)
+    {
+        return $query->where('status', '!=' , 'pendiente' )
+                        ->where('status', '!=' , 'cancelado' )
+                        ->where('status', '!=' , 'corralon' )->get();
     }
 
 }

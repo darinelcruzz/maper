@@ -140,14 +140,14 @@
                             {{ $row->bill }}
                         @else
                             @include('services/bill')
-                      @endif
-                  </td>
-                  <td>
-                      <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                      </a>
-                  </td>
-              </tr>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
             @endforeach
         </template>
     </data-table>

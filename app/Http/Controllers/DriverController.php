@@ -18,8 +18,6 @@ class DriverController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:drivers',
-            'driver_hour' => 'required',
-            'helper_hour' => 'required',
         ]);
 
         $driver = Driver::create($request->all());
@@ -36,8 +34,6 @@ class DriverController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'driver_hour' => 'required',
-            'helper_hour' => 'required',
         ]);
 
         Driver::find($request->id)->update($request->all());
@@ -48,7 +44,16 @@ class DriverController extends Controller
     function date()
     {
         $date = Date::now()->format('Y-m-d');
-        return view('resources.drivers.date', compact('date'));
+
+        $services = Service::payed();
+        $outTime = [];
+
+        foreach ($services as $service) {
+            if (!$service->inSchedule) {
+                array_push($outTime, $service);
+            }
+        }
+        return view('resources.drivers.date', compact('date', 'outTime'));
     }
 
     function format(Request $request)
@@ -61,11 +66,17 @@ class DriverController extends Controller
 
         foreach ($drivers as $driver) {
             $servicesID = [];
-            $services = Service::fromDateToDate($start, $end, $driver);
-
+            
+            $services = Service::fromDateToDate($start, $end, $driver, 'driver');
             foreach ($services as $service) {
                 if (!$service->inSchedule) {
-                    array_push($servicesID, $service->id);
+                    array_push($servicesID, $service);
+                }
+            }
+            $services = Service::fromDateToDate($start, $end, $driver, 'helper');
+            foreach ($services as $service) {
+                if (!$service->inSchedule) {
+                    array_push($servicesID, $service);
                 }
             }
 

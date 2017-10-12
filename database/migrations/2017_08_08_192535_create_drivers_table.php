@@ -19,8 +19,6 @@ class CreateDriversTable extends Migration
             $table->string('name')->nullable();
             $table->time('start_hour')->nullable();
             $table->time('end_hour')->nullable();
-            $table->integer('driver_hour')->nullable();
-            $table->integer('helper_hour')->nullable();
 
             $table->timestamps();
         });

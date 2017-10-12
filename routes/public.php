@@ -36,6 +36,11 @@ Route::get('servicios', [
     'as' => 'service.show'
 ]);
 
+Route::post('servicios', [
+    'uses' => 'ServiceController@changeExtras',
+    'as' => 'service.changeExtras'
+]);
+
     // General
     Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], function () {
         Route::get('crear', [

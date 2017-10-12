@@ -13,8 +13,6 @@
                     {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
                     {!! Field::time('start_hour', '08:00',['tpl' => 'templates/oneline']) !!}
                     {!! Field::time('end_hour', '18:00',['tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('driver_hour', ['tpl' => 'templates/oneline']) !!}
-                    {!! Field::number('helper_hour', ['tpl' => 'templates/oneline']) !!}
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer">

@@ -29,9 +29,6 @@
             font-size: 11px;
         },
     </style>
-    <style type="text/css" media="print">
-        @page { size: landscape; }
-    </style>
 </head>
 
 <body >
@@ -60,27 +57,59 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                @foreach ($services as $service)
-                                    <th>holi</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($totalExtras as $driver => $extraHours)
+                    @foreach ($totalExtras as $driver => $extraHours)
+                        {{ $driver}}
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $driver }}</td>
-                                    @foreach ($extraHours as $hour)
-                                        <td>{{ $hour }}</td>
+                                    <th>#</th>
+                                    <th>Vehiculo</th>
+                                    <th>Ruta</th>
+                                    <th>Fecha</th>
+                                    <th>Operador / Ayuda</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+                            @php
+                                $total = 0;
+                            @endphp
+                            <tbody>
+                                <tr>
+                                    @foreach ($extraHours as $row)
+                                        <tr>
+                                            <td>{{ $row->id }}</td>
+                                            <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                            <td>{{ $row->origin }} - {{ $row->destination }}</td>
+                                            <td>{{ $row->getShortDate('date_service') }} - {{ $row->getShortDate('date_return') }}</td>
+                                            <td>{{ $row->driverr->name }}{{ $row->helper ? ' / ' . $row->helperr->name : '' }}</td>
+                                            <td>
+                                                @if ($row->driverr->name == $driver)
+                                                    Operador $ {{ $row->extra_driver }}
+                                                    @php
+                                                        $total = $row->extra_driver + $total;
+                                                    @endphp
+                                                @elseif ($row->helperr->name == $driver)
+                                                    Apoyo $ {{ $row->extra_helper }}
+                                                    @php
+                                                        $total = $row->extra_helper + $total;
+                                                    @endphp
+                                                @else
+                                                    Sin monto
+                                                @endif
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td><td></td><td></td><td></td>
+                                    <td><b>Total</b></td>
+                                    <td><b>$ {{ $total }}</b></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    @endforeach
                 </div>
             <!-- /.col -->
             </div>

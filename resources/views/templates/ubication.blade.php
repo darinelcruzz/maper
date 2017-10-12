@@ -12,14 +12,14 @@
         {!! Field::text('destination', isset($service) ? $service->destination: null)!!}
     </div>
     <div class="col-md-4">
-        {!! Field::number('amount', isset($service) ? $service->amount: null, ['label' => 'Arrastre estimado', 'min' => '0', 'step' => '.01'])!!}
+        {!! Field::number('amount', isset($service) ? $service->amount: null, ['label' => 'Arrastre estimado', 'min' => '0'])!!}
    </div>
 </div>
 
 <div class="row">
     @if($ser == 'corp')
         <div class="col-md-4">
-            {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'step' => '.01'])!!}
+            {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0'])!!}
        </div>
     @endif
     <div class="col-md-4">
