@@ -16,19 +16,22 @@ class PriceController extends Controller
     {
         $this->validate($request, []);
 
-        $price = Price::create($request->all());
+        $price = Price::create($request->except(['service']));
         return redirect(route('price.show'));
     }
 
     public function show()
     {
         $prices = Price::all();
-        return view('prices.show', compact('prices'));
+        $types = ['otros', 'localG', 'localC', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
+        $header = ['Km', 'Nombre', 'Moto', 'Coche', '3 Ton', '5 Ton', '10 Ton'];
+        $body = ['km', 'name', 'moto', 'car', 'ton3', 'ton5', 'ton10'];
+
+        return view('prices.show', compact('prices', 'types', 'body', 'header'));
     }
 
-    public function edit($id)
+    public function edit(Price $price)
     {
-        $price = Price::find($id);
         return view('prices.edit', compact('price'));
     }
 
@@ -46,7 +49,7 @@ class PriceController extends Controller
         return view('prices.details', compact('unit'));
     }
 
-    function deleteSnit($id)
+    function destroy($id)
     {
         Price::destroy($id);
 

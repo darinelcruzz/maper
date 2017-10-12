@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="Inventario {{ $service->inventory }}" color="box-default" collapsed=''>
+            <solid-box title="{{ $service->service }}" color="box-default" collapsed=''>
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -14,12 +14,17 @@
                                 <B>Descripción:</B><dd>{{ $service->description }}</dd>
                             </td>
                             <td>
-                                <B>Fecha y hora:</B><dd>{{ $service->formatted_date }}</dd>
+                                <B>Fecha y hora:</B><dd>{{ $service->getDate('date_service') }}</dd>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <B>Inventario:</B>
+                                <dd>{{ $service->inventory }}</dd>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <br>
                 <h3 class="box-title">Vehículo
                     <i class="fa fa-car" aria-hidden="true"></i>
                 </h3>
@@ -32,7 +37,7 @@
                                 <B>Tipo:</B><dd>{{ $service->type }}</dd>
                             </td>
                             <td>
-                                <B>Categoría:</B><dd>{{ $service->pricer->name }}</dd>
+                                <B>Categoría:</B><dd>{{ $service->category }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -50,7 +55,9 @@
                             <td>
                                 <B>Llave:</B><dd>{{ $service->key }}</dd>
                             </td>
-
+                            <td>
+                                <B>Modelo:</B><dd>{{ $service->model }}</dd>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -62,9 +69,6 @@
                 </div>
                 @include('templates.headTable')
                         <tr>
-                            <td>
-                                <B>Usuario:</B><dd>{{ $service->username }}</dd>
-                            </td>
                             <td>
                                 <B>Origen:</B><dd>{{ $service->origin }}</dd>
                             </td>
@@ -89,7 +93,7 @@
                                 <B>Unidad:</B><dd>{{ $service->unitr->description or '' }}</dd>
                             </td>
                             <td>
-                                <B>Regreso:</B><dd>{{ $service->formatted_date_return }}</dd>
+                                <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -113,10 +117,10 @@
                                 <B>Liberador:</B><dd>{{ $service->releaser }}</dd>
                             </td>
                             <td>
-                                <B>Fecha:</B><dd>{{ $service->formatted_date_out }}</dd>
+                                <B>Fecha:</B><dd>{{ $service->getDate('date_out') }}</dd>
                             </td>
                             <td>
-                                <B>Importe:</B><dd>${{ $service->amount + $service->maneuver + $service->pension }}</dd>
+                                <B>Importe:</B><dd>${{ $service->amount + $service->maneuver + $service->pension - $service->discount }}</dd>
                             </td>
                         </tr>
                     </tbody>

@@ -12,7 +12,8 @@
         {!! Field::text('type', isset($service) ? $service->type: null)!!}
     </div>
     <div class="col-md-4">
-        {!! Field::select('category', $prices, isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría']) !!}
+        {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Trantocamión'],
+            isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría']) !!}
     </div>
 </div>
 
@@ -32,9 +33,14 @@
     <div class="col-md-4">
         {!! Field::number('inventory', isset($service) ? $service->inventory: null, ['min' => '0'])!!}
     </div>
-    <div class="col-md-4">
-        {!! Field::select('key',
-            ['si' => 'Si', 'no' => 'No'], isset($service) ? $service->key: null, ['empty' => '¿Tenía llave?'])
-        !!}
-    </div>
+    @if($ser == 'corp')
+        <div class="col-md-4">
+            {!! Field::select('key',
+                ['si' => 'Si', 'no' => 'No'], isset($service) ? $service->key: null, ['empty' => '¿Tenía llave?'])
+            !!}
+        </div>
+        <div class="col-md-4">
+            {!! Field::number('model', isset($service) ? $service->model: null, ['min' => '0'])!!}
+        </div>
+    @endif
 </div>

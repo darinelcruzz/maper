@@ -6,11 +6,12 @@
 
 <div class="row">
     <div class="col-md-4">
-        {!! Field::select('driver', $drivers, isset($service) ? $service->driver: null, ['empty' => 'Seleccione al operador'])
-        !!}
+        {!! Field::select('driver', $drivers, isset($service) ? $service->driver: null, ['empty' => 'Seleccione al operador']) !!}
     </div>
-    <div class="col-md-4">
-        {!! Field::select('unit', $units, isset($service) ? $service->unit: null, ['empty' => 'Seleccione la unidad']) !!}
+    <div class="form group">
+        <div class="col-md-4">
+            {!! Field::select('unit', $units, isset($service) ? $service->unit: null, ['empty' => 'Seleccione la unidad']) !!}
+        </div>
     </div>
     <div class="col-md-4">
         <div id="field_date" class="form-group">
@@ -22,3 +23,16 @@
             </div>
         </div>
    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        {!! Field::select('helper', $drivers, isset($service) ? $service->helper: null, ['empty' => 'Seleccione al apoyo']) !!}
+    </div>
+    @if($ser == 'corp')
+       <div class="col-md-4">
+           {!! Field::select('lot',
+               ['cueva' => 'Cueva'], isset($service) ? $service->lot: null, ['empty' => 'Seleccione el corralón'])
+           !!}
+       </div>
+   @endif
+</div>

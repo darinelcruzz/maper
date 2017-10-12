@@ -10,6 +10,7 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "doctrine/dbal": "^2.5",
         "jenssegers/date": "^3.2",
+        "laracasts/utilities": "^3.0",
         "laravel/dusk": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

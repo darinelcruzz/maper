@@ -6,9 +6,9 @@ return [
         'title' => 'Servicios',
         'icon' => 'fa fa-ambulance',
         'submenu' => [
-            'public' => [
-                'title' => 'Publico General',
-                'route' => 'service.public.create'
+            'general' => [
+                'title' => 'General',
+                'route' => 'service.general.create'
             ],
             'corporation' => [
                 'title' => 'Coorporaciones',
@@ -17,6 +17,21 @@ return [
             'list' => [
                 'title' => 'Listado',
                 'route' => 'service.show'
+            ],
+        ]
+    ],
+
+    'admin' => [
+        'title' => 'Administración',
+        'icon' => 'fa fa-line-chart',
+        'submenu' => [
+            'cash' => [
+                'title' => 'Ingresos Totales',
+                'route' => 'admin.cash'
+            ],
+            'expenses' => [
+                'title' => 'Caja',
+                'route' => 'expense.create'
             ],
         ]
     ],
@@ -66,32 +81,17 @@ return [
         ]
     ],
 
-    'units' => [
-        'title' => 'Unidades',
+    'resources' => [
+        'title' => 'Recursos',
         'icon' => 'fa fa-truck',
         'submenu' => [
-            'create' => [
-                'title' => 'Agregar',
-                'route' => 'unit.create'
-            ],
             'list' => [
                 'title' => 'Listado',
-                'route' => 'unit.show'
+                'route' => 'resources.show'
             ],
-        ]
-    ],
-
-    'drivers' => [
-        'title' => 'Operadores',
-        'icon' => 'fa fa-id-card-o',
-        'submenu' => [
-            'create' => [
-                'title' => 'Agregar',
-                'route' => 'driver.create'
-            ],
-            'list' => [
-                'title' => 'Listado',
-                'route' => 'driver.show'
+            'report' => [
+                'title' => 'HorasExtras',
+                'route' => 'resources.driver.date'
             ],
         ]
     ],

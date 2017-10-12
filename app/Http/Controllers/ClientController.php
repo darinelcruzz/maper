@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 use App\Client;
+use App\Service;
 
 class ClientController extends Controller
 {
@@ -18,6 +20,7 @@ class ClientController extends Controller
             'name' => 'required|unique:clients',
             'city' => 'required',
             'phone' => 'required',
+            'days' => 'required',
         ]);
 
         $client = Client::create($request->all());
@@ -42,6 +45,7 @@ class ClientController extends Controller
             'name' => 'required',
             'city' => 'required',
             'phone' => 'required',
+            'days' => 'required',
         ]);
 
         Client::find($request->id)->update($request->all());
@@ -49,7 +53,24 @@ class ClientController extends Controller
         return $this->show();
     }
 
-    function deleteClient($id)
+    public function details(Client $client)
+    {
+        $this->expire($client->days);
+        return view('clients.details', compact('client'));
+    }
+
+    function expire($days)
+    {
+        $services = Service::where('status', 'credito')->get();
+        foreach ($services as $service) {
+            $interval = $service->getDays('date_out');
+            if ($interval > $days) {
+                Service::find($service->id)->update(['status' => 'vencida']);
+            }
+        }
+    }
+
+    function destroy($id)
     {
         Client::destroy($id);
 

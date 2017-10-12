@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="Inventario {{ $service->inventory }}" color="box-default" collapsed=''>
+            <solid-box title="{{ $service->clientr->name }}" color="box-default" collapsed=''>
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -17,7 +17,13 @@
                             </td>
                             <td>
                                 <B>Fecha y hora:</B>
-                                <dd>{{ $service->formatted_date }}</dd>
+                                <dd>{{ $service->getDate('date_service') }}</dd>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <B>Inventario:</B>
+                                <dd>{{ $service->inventory }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -34,7 +40,7 @@
                                 <B>Tipo:</B><dd>{{ $service->type }}</dd>
                             </td>
                             <td>
-                                <B>Categoría:</B><dd>{{ $service->pricer->name }}</dd>
+                                <B>Categoría:</B><dd>{{ $service->category }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +71,7 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Usuario:</B><dd>{{ $service->username }}</dd>
+                                <B>Cliente:</B><dd>{{ $service->clientr->name }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B><dd>{{ $service->origin }}</dd>
@@ -91,12 +97,13 @@
                                 <B>Unidad:</B><dd>{{ $service->unitr->description or '' }}</dd>
                             </td>
                             <td>
-                                <B>Regreso:</B><dd>{{ $service->formatted_date_return }}</dd>
+                                <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <h2 align="right">Total: ${{ $service->amount }}</h2>
+                <h2 align="right">{{ $service->bill ? 'Fac. ' . $service->bill : '' }}</h2>
             </solid-box>
         </div>
     </div>

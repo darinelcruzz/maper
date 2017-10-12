@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-    <data-table col="col-md-12" title="Cotizaciones pendientes" example="example1" color="box-default">
+    <data-table col="col-md-12" title="Usuarios" example="example1" color="box-default">
         <template slot="header">
             <tr>
                 <th>ID</th>

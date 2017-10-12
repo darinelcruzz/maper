@@ -3,48 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CorporationsRequest;
 use Jenssegers\Date\Date;
 use App\Service;
-use App\Unit;
-use App\Driver;
 use App\Price;
 
 class CorporationServiceController extends Controller
 {
     public function create()
     {
-        $units = Unit::pluck('description', 'id')->toArray();
-        $drivers = Driver::pluck('name', 'id')->toArray();
-        $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.corporations.create', compact('units', 'drivers', 'prices'));
+        return view('services.corporations.create');
     }
 
-    public function store(Request $request)
+    public function store(CorporationsRequest $request)
     {
-        $this->validate($request, [
-            'service' => 'required',
-            'lot' => 'required',
-            'key' => 'required',
-        ]);
-
         $service = Service::create($request->all());
+
         return redirect(route('service.show'));
-
     }
 
-    public function edit($id)
+    public function edit(Service $service)
     {
-        $service = Service::find($id);
-        $units = Unit::pluck('description', 'id')->toArray();
-        $drivers = Driver::pluck('name', 'id')->toArray();
-        $prices = Price::pluck('name', 'id')->toArray();
-        return view('services.corporations.edit', compact('service', 'units', 'drivers', 'prices'));
+        return view('services.corporations.edit', compact('service'));
     }
 
-    public function change(Request $request)
+    public function update(CorporationsRequest $request)
     {
-        $this->validate($request, []);
-
         Service::find($request->id)->update($request->all());
 
         return redirect(route('service.show'));
@@ -55,32 +39,37 @@ class CorporationServiceController extends Controller
         return view('services.corporations.details', compact('service'));
     }
 
+    function printLetter(Service $service)
+    {
+        $today = Date::now();
+        $date = $today->format('d \d\e F \d\e\l Y');
+        return view('services.corporations.letter', compact('service', 'date'));
+    }
+
     function pay(Service $service)
     {
         $entry = new Date(strtotime($service->date_service));
-        $entryHour = $entry->format('His');
-        //$entryDate = $entry->format('Ymd');
-        $today = Date::now();
-        $todayHour = $today->format('His');
-        //$todayDate = $today->format('Ymd');
-        $interval = $entry->diff($today);
-        $interval = $interval->format('%a');
 
-        if($todayHour < $entryHour)
-        {
-            $mul= $interval + 2;
-        }
-        else {
-            $mul = $interval + 1;
+        $interval = $service->getDays('date_service');
+
+        if(Date::now()->format('His') < $entry->format('His')) {
+            $penalty = $interval + 2;
+        } else {
+            $penalty = $interval + 1;
         }
 
-        $cost = Price::find($service->category)->pension * $mul;
-
+        if($service->category == 'Moto'){
+            $cost = Price::find(1)->moto * $penalty;
+        } elseif ($service->category == 'Coche') {
+            $cost = Price::find(1)->car * $penalty;
+        } else{
+            $cost = Price::find(1)->ton3 * $penalty;
+        }
 
         return view('services.corporations.pay', compact('service', 'cost'));
     }
 
-    function deleteService($id)
+    function destroy($id)
     {
         Service::destroy($id);
 

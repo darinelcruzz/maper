@@ -15,11 +15,14 @@
                         {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('city', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('phone', ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::number('days', ['tpl' => 'templates/oneline']) !!}
                         <hr>
                         {!! Field::text('address', ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::number('cp', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('rfc', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::email('email', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('contact', ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('cellphone', ['tpl' => 'templates/oneline']) !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

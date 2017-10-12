@@ -16,7 +16,9 @@ class CreateDriversTable extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->time('start_hour')->nullable();
+            $table->time('end_hour')->nullable();
 
             $table->timestamps();
         });

@@ -3,38 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 use App\Driver;
+use App\Service;
 
 class DriverController extends Controller
 {
-    public function create()
+    function create()
     {
-        return view('drivers.create');
+        return view('resources.drivers.create');
     }
 
-    public function store(Request $request)
+    function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|unique:drivers',
         ]);
 
         $driver = Driver::create($request->all());
-        return redirect(route('driver.show'));
+
+        return redirect(route('resources.show'));
     }
 
-    public function show()
+    function edit(Driver $driver)
     {
-        $drivers = Driver::all();
-        return view('drivers.show', compact('drivers'));
+        return view('resources.drivers.edit', compact('driver'));
     }
 
-    public function edit($id)
-    {
-        $driver = Driver::find($id);
-        return view('drivers.edit', compact('driver'));
-    }
-
-    public function change(Request $request)
+    function change(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -42,10 +38,56 @@ class DriverController extends Controller
 
         Driver::find($request->id)->update($request->all());
 
-        return $this->show();
+        return redirect(route('resources.show'));
     }
 
-    function deleteSnit($id)
+    function date()
+    {
+        $date = Date::now()->format('Y-m-d');
+
+        $services = Service::payed();
+        $outTime = [];
+
+        foreach ($services as $service) {
+            if (!$service->inSchedule) {
+                array_push($outTime, $service);
+            }
+        }
+        return view('resources.drivers.date', compact('date', 'outTime'));
+    }
+
+    function format(Request $request)
+    {
+        $start = new Date(strtotime($request->start));
+        $end = new Date(strtotime($request->end));
+
+        $drivers = Driver::all();
+        $totalExtras = [];
+
+        foreach ($drivers as $driver) {
+            $servicesID = [];
+            
+            $services = Service::fromDateToDate($start, $end, $driver, 'driver');
+            foreach ($services as $service) {
+                if (!$service->inSchedule) {
+                    array_push($servicesID, $service);
+                }
+            }
+            $services = Service::fromDateToDate($start, $end, $driver, 'helper');
+            foreach ($services as $service) {
+                if (!$service->inSchedule) {
+                    array_push($servicesID, $service);
+                }
+            }
+
+            $totalExtras["$driver->name"] = $servicesID;
+        }
+
+        $range = $start->format('D, d/M/Y') . ' - ' . $end->format('D, d/M/Y');
+        return view('resources.drivers.format', compact('totalExtras', 'range', 'services'));
+    }
+
+    function destroy($id)
     {
         Driver::destroy($id);
 

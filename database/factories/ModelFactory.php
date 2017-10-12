@@ -36,6 +36,29 @@ $factory->define(App\Unit::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Client::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Publico en General',
+        'city' => 'n/a',
+        'phone' => '0',
+    ];
+});
+
+$factory->define(App\Price::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Pensión',
+        'type' => 'otros',
+        'km' => null,
+        'moto' => '25',
+        'car' => '60',
+        'ton3' => '150',
+        'ton5' => '150',
+        'ton10' => '150',
+    ];
+});
+
 $factory->define(App\Driver::class, function (Faker\Generator $faker) {
 
     return [
@@ -43,20 +66,15 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Price::class, function (Faker\Generator $faker) {
-
-    return [
-        'name' => 'Automovil',
-        'pension' => '60',
-    ];
-});
-
 $factory->define(App\Service::class, function (Faker\Generator $faker) {
-    $service = array('Público general', 'Tránsito del Estado');
-
+    $service = array('General', 'Tránsito del Estado');
+    $status = array('pendiente', 'corralon');
+    $description = array('Servicio', 'Arrastre', 'Cola');
+    $index = $faker->numberBetween(0, 1);
+    //$service[$index],
     return [
-        'service' => 'Tránsito del Estado',
-        'description' => 'Servicio',
+        'service' => 'General',
+        'description' => $description[array_rand($description)],
         'brand' => 'Audi',
         'type' => 'A4',
         'category' => '1',
@@ -65,16 +83,32 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'color' => 'Gris',
         'inventory' => '001',
         'key' => 'si',
-        'username' => 'Victor',
+        'client' => '1',
         'origin' => 'Margaritas',
         'destination' => 'Comitán',
         'driver' => '1',
         'unit' => '1',
-        'date_service' => '2017-08-04 14:05:00',
+        'date_service' => '2017-10-04 14:05:00',
         'date_out' => null,
-        'date_return' => '2017-08-04 23:10:00',
-        'amount' => '600',
-        'status' => 'corralon',
+        'date_return' => '2017-10-04 23:10:00',
+        'amount' => $faker->numberBetween(100, 600),
+        'status' => 'pendiente',
         'lot'   => null,
+    ];
+});
+
+$factory->define(App\Price::class, function (Faker\Generator $faker) {
+    $types = ['otros', 'local', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
+
+    return [
+        'name' => $faker->word,
+        'type' => $types[array_rand($types)],
+        'km' => $faker->numberBetween(10, 50),
+        'moto' => $faker->numberBetween(50, 100),
+        'car' => $faker->numberBetween(100, 250),
+        'ton3' => $faker->numberBetween(150, 300),
+        'ton5' => $faker->numberBetween(280, 450),
+        'ton10' => $faker->numberBetween(500, 800),
+        'observation' => $faker->sentence,
     ];
 });

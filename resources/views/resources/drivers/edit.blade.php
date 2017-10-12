@@ -5,20 +5,20 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Editar unidad</h3>
+                    <h3 class="box-title">Editar operador</h3>
                 </div>
 
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'unit.change', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.change', 'class' => 'form-horizontal']) !!}
 
                     <div class="box-body">
-                        {!! Field::text('name', $unit->name, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('number', $unit->number, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('description', $unit->description, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('name', $driver->name, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::time('start_hour', $driver->start_hour, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::time('end_hour',  $driver->end_hour, ['tpl' => 'templates/oneline']) !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <input type="hidden" name="id" value="{{ $unit->id }}">
+                        <input type="hidden" name="id" value="{{ $driver->id }}">
                         {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
                     </div>
                     <!-- /.box-footer -->
