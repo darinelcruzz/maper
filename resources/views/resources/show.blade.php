@@ -33,8 +33,6 @@
             <tr>
                 <th>Nombre</th>
                 <th>Horario</th>
-                <th>Hora Extra Operador</th>
-                <th>Hora Extra Apoyo</th>
                 <th>Editar</th>
             </tr>
         </template>
@@ -44,8 +42,6 @@
               <tr>
                   <td>{{ $row->name }}</td>
                   <td>{{ $row->getHour('start_hour') }} - {{ $row->getHour('end_hour') }}</td>
-                  <td>${{ $row->driver_hour }}</td>
-                  <td>${{ $row->helper_hour }}</td>
                   <td>
                       <a href="{{ route('resources.driver.edit', ['id' => $row->id]) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

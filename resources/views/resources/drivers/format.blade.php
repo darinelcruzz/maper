@@ -66,7 +66,6 @@
                                     <th>Vehiculo</th>
                                     <th>Ruta</th>
                                     <th>Fecha</th>
-                                    <th>Operador / Ayuda</th>
                                     <th>Monto</th>
                                 </tr>
                             </thead>
@@ -81,7 +80,6 @@
                                             <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                             <td>{{ $row->origin }} - {{ $row->destination }}</td>
                                             <td>{{ $row->getShortDate('date_service') }} - {{ $row->getShortDate('date_return') }}</td>
-                                            <td>{{ $row->driverr->name }}{{ $row->helper ? ' / ' . $row->helperr->name : '' }}</td>
                                             <td>
                                                 @if ($row->driverr->name == $driver)
                                                     Operador $ {{ $row->extra_driver }}
@@ -103,8 +101,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td></td><td></td><td></td><td></td>
-                                    <td><b>Total</b></td>
+                                    <td></td><td></td><td></td>
+                                    <td align="right"><b>Total</b></td>
                                     <td><b>$ {{ $total }}</b></td>
                                 </tr>
                             </tfoot>
