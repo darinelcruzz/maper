@@ -44,7 +44,7 @@ class CreateServicesTable extends Migration
             $table->integer('maneuver')->nullable();
             $table->integer('pension')->nullable();
             $table->string('releaser')->nullable();
-            $table->integer('bill')->nullable();
+            $table->string('bill')->nullable();
             $table->integer('others')->nullable();
             $table->integer('discount')->nullable();
             $table->string('reason')->nullable();

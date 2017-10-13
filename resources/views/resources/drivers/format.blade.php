@@ -58,55 +58,59 @@
             <div class="row">
                 <div class="col-xs-12">
                     @foreach ($totalExtras as $driver => $extraHours)
-                        {{ $driver}}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Vehiculo</th>
-                                    <th>Ruta</th>
-                                    <th>Fecha</th>
-                                    <th>Monto</th>
-                                </tr>
-                            </thead>
-                            @php
-                                $total = 0;
-                            @endphp
-                            <tbody>
-                                <tr>
-                                    @foreach ($extraHours as $row)
-                                        <tr>
-                                            <td>{{ $row->id }}</td>
-                                            <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                                            <td>{{ $row->origin }} - {{ $row->destination }}</td>
-                                            <td>{{ $row->getShortDate('date_service') }} - {{ $row->getShortDate('date_return') }}</td>
-                                            <td>
-                                                @if ($row->driverr->name == $driver)
-                                                    Operador $ {{ $row->extra_driver }}
-                                                    @php
-                                                        $total = $row->extra_driver + $total;
-                                                    @endphp
-                                                @elseif ($row->helperr->name == $driver)
-                                                    Apoyo $ {{ $row->extra_helper }}
-                                                    @php
-                                                        $total = $row->extra_helper + $total;
-                                                    @endphp
-                                                @else
-                                                    Sin monto
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td><td></td><td></td>
-                                    <td align="right"><b>Total</b></td>
-                                    <td><b>$ {{ $total }}</b></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        @if ($extraHours)
+
+                            {{ $driver}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">#</th>
+                                        <th width="29%">Vehiculo</th>
+                                        <th width="29%">Ruta</th>
+                                        <th width="23%">Fecha</th>
+                                        <th width="14%">Monto</th>
+                                    </tr>
+                                </thead>
+                                @php
+                                    $total = 0;
+                                @endphp
+                                <tbody>
+                                    <tr>
+                                        @foreach ($extraHours as $row)
+                                            <tr>
+                                                <td>{{ $row->id }}</td>
+                                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                                <td>{{ $row->origin }} - {{ $row->destination }}</td>
+                                                <td>{{ $row->getShortDate('date_service') }} - {{ $row->getHour('date_return') }}</td>
+                                                <td>
+                                                    @if ($row->driverr->name == $driver && $row->extra_driver != null)
+                                                        Operador $ {{ $row->extra_driver }}
+                                                        @php
+                                                            $total = $row->extra_driver + $total;
+                                                        @endphp
+                                                    @elseif ($row->helperr->name == $driver && $row->extra_helper != null)
+                                                        Apoyo $ {{ $row->extra_helper }}
+                                                        @php
+                                                            $total = $row->extra_helper + $total;
+                                                        @endphp
+                                                    @else
+                                                        Sin monto
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td><td></td><td></td>
+                                        <td align="right"><b>Total</b></td>
+                                        <td><b>$ {{ $total }}</b></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        @endif
                     @endforeach
                 </div>
             <!-- /.col -->

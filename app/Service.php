@@ -57,6 +57,12 @@ class Service extends Model
         return $fdate->format('j/M/y, h:i a');
     }
 
+    public function getHour($date)
+    {
+        $fdate = new Date(strtotime($this->$date));
+        return $fdate->format('h:i a');
+    }
+
     public function getWeekDate($date)
     {
         $fdate = new Date(strtotime($this->$date));

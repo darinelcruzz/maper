@@ -289,6 +289,39 @@ Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
     ]);
 });
 
+// Bancos
+Route::group(['prefix' => 'banco', 'as' => 'bank.'], function () {
+    Route::get('crear', [
+        'uses' => 'BankController@create',
+        'as' => 'create'
+    ]);
+
+    Route::post('crear', [
+        'uses' => 'BankController@store',
+        'as' => 'store'
+    ]);
+
+    Route::get('/lista', [
+        'uses' => 'BankController@show',
+        'as' => 'show'
+    ]);
+
+    Route::get('editar/{bank}', [
+        'uses' => 'BankController@edit',
+        'as' => 'edit'
+    ]);
+
+    Route::post('cambiar', [
+        'uses' => 'BankController@change',
+        'as' => 'change'
+    ]);
+
+    Route::post('formato', [
+        'uses' => 'BankController@format',
+        'as' => 'format'
+    ]);
+});
+
 // Recursos
 Route::get('recursos', [
     'uses' => 'ResourcesController@show',
