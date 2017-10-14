@@ -26,11 +26,15 @@
                             {!! Field::select('bill',['no' => 'No', 'si' => 'Si'],
                                 isset($expense) ? $expense->bill: null, ['empty' => '¿Facturado?'])!!}
                         </div>
+                        <div class="col-md-6">
+                            {!! Field::text('folio', isset($expense) ? $expense->folio: null) !!}
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
+                    <input type="hidden" name="method" value="efectivo">
                     <input type="hidden" name="id" value="{{ $expense->id }}">
                     {!! Form::submit('Editar', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
