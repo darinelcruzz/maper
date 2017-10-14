@@ -30,12 +30,6 @@
                             {!! Field::text('folio', isset($expense) ? $expense->folio: null) !!}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            {!! Field::select('type',['abono' => 'Abono', 'cargo' => 'Cargo'],
-                                isset($expense) ? $expense->bill: null, ['empty' => '¿Facturado?'])!!}
-                        </div>
-                    </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

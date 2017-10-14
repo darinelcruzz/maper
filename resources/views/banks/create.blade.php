@@ -95,7 +95,13 @@
                             <td>{{ $row->getShortDate('date_out') }}</td>
                             <td></td>
                             <td></td>
-                            <td></td>
+                            <td>
+                                @if ($row->ret != null)
+                                    {{ $row->ret }}
+                                @else
+                                    @include('services/ret')
+                                @endif
+                            </td>
                             <td>$ {{ $row->total }}</td>
                       </tr>
                     @endforeach
