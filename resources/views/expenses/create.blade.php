@@ -122,7 +122,6 @@
                     <th>Abono</th>
                     <th>Saldo</th>
                     <th></th>
-                    <th></th>
                 </tr>
             </template>
 
@@ -146,7 +145,6 @@
                         <td>{{ $row->type == 'cargo' ? '$' . $row->amount : '' }}</td>
                         <td>{{ $row->type == 'cargo' ? '' : '$' . $row->amount }}</td>
                         <td>{{ '$' . $temp }}</td>
-                        <td>{{ $row->method ? 'editado' : 'no editado' }}</td>
                         <td>
                             <a href="{{ route('expense.edit', ['id' => $row->id]) }}">
                                 <i class="fa fa-edit"></i>
