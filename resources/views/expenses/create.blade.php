@@ -7,7 +7,7 @@
         <div class="col-md-6 col-lg-12">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Gasto</h3>
+                    <h3 class="box-title">Gastos en Efectivo</h3>
                 </div>
                 <!-- form start -->
                 {!! Form::open(['method' => 'POST', 'route' => 'expense.store']) !!}
@@ -26,12 +26,16 @@
                         <div class="col-md-6">
                             {!! Field::select('bill',['no' => 'No', 'si' => 'Si'], ['empty' => '¿Facturado?'])!!}
                         </div>
+                        <div class="col-md-6">
+                            {!! Field::text('folio') !!}
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                     <input type="hidden" name="type" value="cargo">
+                    <input type="hidden" name="method" value="efectivo">
                     {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->
@@ -63,6 +67,8 @@
                 <div class="box-footer">
                     <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                     <input type="hidden" name="type" value="abono">
+                    <input type="hidden" name="bill" value="0">
+                    <input type="hidden" name="method" value="efectivo">
                     {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->
@@ -110,6 +116,7 @@
                 <tr>
                     <th>#</th>
                     <th>Descripción</th>
+                    <th>Folio</th>
                     <th>Fecha</th>
                     <th>Cargo</th>
                     <th>Abono</th>
@@ -122,23 +129,24 @@
                 @php
                     $temp = 0;
                 @endphp
-                @foreach($expenses as $expense)
+                @foreach($expenses as $row)
                     @php
-                        if ($expense->type != 'cargo') {
-                            $temp += $expense->amount;
+                        if ($row->type != 'cargo') {
+                            $temp += $row->amount;
                         } else {
-                            $temp -= $expense->amount;
+                            $temp -= $row->amount;
                         }
                     @endphp
                     <tr>
-                        <td>{{ $expense->id }}</td>
-                        <td>{{ $expense->description }} {{ $expense->bill == 'si' ? '- Facturado' : '' }}</td>
-                        <td>{{ $expense->getShortDate('date') }}</td>
-                        <td>{{ $expense->type == 'cargo' ? '$' . $expense->amount : '' }}</td>
-                        <td>{{ $expense->type == 'cargo' ? '' : '$' . $expense->amount }}</td>
+                        <td>{{ $row->id }}</td>
+                        <td>{{ $row->description }} {{ $row->bill == 'si' ? '- Facturado' : '' }}</td>
+                        <td>{{ $row->folio }}</td>
+                        <td>{{ $row->getShortDate('date') }}</td>
+                        <td>{{ $row->type == 'cargo' ? '$' . $row->amount : '' }}</td>
+                        <td>{{ $row->type == 'cargo' ? '' : '$' . $row->amount }}</td>
                         <td>{{ '$' . $temp }}</td>
                         <td>
-                            <a href="{{ route('expense.edit', ['id' => $expense->id]) }}">
+                            <a href="{{ route('expense.edit', ['id' => $row->id]) }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                         </td>

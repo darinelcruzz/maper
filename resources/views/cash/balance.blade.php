@@ -49,10 +49,7 @@
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
 					@endforeach
-
 		        </template>
-
-
 				<template slot="footer">
 					<tr>
 						<td></td><td></td><td></td>
@@ -125,7 +122,7 @@
 			</div>
 
 			<div class="col-lg-6 col-md-4">
-				<div class="small-box bg-primary">
+				<div class="small-box bg-danger">
 					<div class="inner">
 						<p>Crédito</p>
 						<h3>$ {{ $methodsA['Credito'] + $methodsB['Credito'] }}</h3>

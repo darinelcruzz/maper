@@ -10,7 +10,7 @@ class ExpenseController extends Controller
 {
     public function create()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::where('method','efectivo')->get();
         $date = Date::now()->format('Y-m-d');
 
         return view('expenses.create', compact('expenses', 'date'));
@@ -18,7 +18,11 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, []);
+        $this->validate($request, [
+            'description' => 'required',
+            'amount' => 'required',
+            'bill' => 'required',
+        ]);
 
         $expense = Expense::create($request->all());
         return redirect(route('expense.create'));

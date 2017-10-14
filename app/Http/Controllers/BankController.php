@@ -4,31 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\Bank;
+use App\Expense;
 use App\Service;
 
 class BankController extends Controller
 {
     public function create()
     {
-        $banks = Bank::all();
-        $services = Service::where('pay','!=', 'Efectivo')->Where('pay_credit','!=', 'Efectivo')->orWhere('pay','!=', 'credito')->get();
+        $expenses = Expense::where('method','banco')->get();
+        $services = Service::where('bill', '!=','n/a')->get();
         $date = Date::now()->format('Y-m-d');
 
-        return view('banks.create', compact('banks', 'date', 'services'));
+        return view('banks.create', compact('date', 'services', 'expenses'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, []);
 
-        $expense = Bank::create($request->all());
-        return redirect(route('expense.create'));
+        $expense = Expense::create($request->all());
+        return redirect(route('bank.create'));
     }
 
-    public function edit(Bank $expense)
+    public function edit(Expense $expense)
     {
-        $banks = Bank::all();
+        $banks = Expense::all();
         return view('banks.edit', compact('expense', 'banks'));
     }
 
@@ -36,14 +36,14 @@ class BankController extends Controller
     {
         $this->validate($request, []);
 
-        Bank::find($request->id)->update($request->all());
+        Expense::find($request->id)->update($request->all());
 
         return $this->create();
     }
 
     public function format(Request $request)
     {
-        $banks = Bank::whereBetween('date', [$request->date_start . ' 00:00:00', $request->date_end . ' 23:59:59'])->get();
+        $banks = Expense::whereBetween('date', [$request->date_start . ' 00:00:00', $request->date_end . ' 23:59:59'])->get();
         $start = new Date(strtotime($request->date_start));
         $end = new Date(strtotime($request->date_end));
         $range = $start->format('D, d/M/Y') . ' - ' . $end->format('D, d/M/Y');
