@@ -38,7 +38,8 @@ class CreateServicesTable extends Migration
             $table->timestamp('date_service')->nullable();
             $table->timestamp('date_out')->nullable();
             $table->timestamp('date_return')->nullable();
-            $table->integer('amount')->nullable();
+            $table->double('amount')->nullable();
+            $table->double('ret')->nullable();
             $table->string('status')->nullable();
             $table->string('lot')->nullable();
             $table->integer('maneuver')->nullable();

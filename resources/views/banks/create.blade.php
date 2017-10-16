@@ -17,7 +17,7 @@
                                 {!! Field::text('description') !!}
                             </div>
                             <div class="col-md-6">
-                                {!! Field::number('amount') !!}
+                                {!! Field::number('amount', ['min' => '0', 'step' => '.01']) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -29,37 +29,8 @@
                     <div class="box-footer">
                         <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                         <input type="hidden" name="type" value="cargo">
-                        <input type="hidden" name="method" value="banco">
+                        <input type="hidden" name="method" value="b">
                         {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
-                    </div>
-                {!! Form::close() !!}
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-12">
-            <div class="box box-info  collapsed-box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Imprimir formato</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-                {!! Form::open(['method' => 'POST', 'route' => 'bank.format']) !!}
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                {!! Field::date('date_start', $date, ['tpl' => 'templates/withicon', 'label' => 'Inicio'],
-    							['icon' => 'calendar-check-o']) !!}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {!! Field::date('date_end', $date, ['tpl' => 'templates/withicon', 'label' => 'Fin'],
-    							['icon' => 'calendar-check-o']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        {!! Form::submit('Buscar', ['class' => 'btn btn-black btn-block']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>
@@ -82,27 +53,32 @@
                 </template>
                 @php
                     $totalAll = 0;
+                    $sub = 0;
+                    $iva = 0;
                 @endphp
                 <template slot="body">
                     @foreach($services as $row)
                         @php
-                            //$totalAll = $row->total ++;
+                            $sub = ($row->total + $row->ret)/1.16;
+                            $iva = $sub * 0.16;
+
+                            $totalAll += $row->total;
                         @endphp
                         <tr>
                             <td>{{ $row->id }}</td>
                             <td>{{ $row->bill }}</td>
                             <td>{{ $row->clientr->name }}</td>
                             <td>{{ $row->getShortDate('date_out') }}</td>
-                            <td></td>
-                            <td></td>
+                            <td>$ {{ number_format($sub, 2) }}</td>
+                            <td>$ {{ number_format($iva, 2) }}</td>
                             <td>
-                                @if ($row->ret != null)
-                                    {{ $row->ret }}
+                                @if ($row->ret >= 0)
+                                    $ {{  number_format($row->ret,2) }}
                                 @else
                                     @include('banks/ret')
                                 @endif
                             </td>
-                            <td>$ {{ $row->total }}</td>
+                            <td>$ {{ number_format($row->total, 2) }}</td>
                       </tr>
                     @endforeach
                 </template>
@@ -110,7 +86,7 @@
                     <tr>
                         <td></td><td></td><td></td><td></td><td></td><td></td>
                         <td><b>Total:</b></td>
-                        <td>$ {{ $totalAll }}</td>
+                        <td>$ {{ number_format($totalAll,2) }}</td>
                     </tr>
                 </template>
             </data-table-com>
@@ -130,19 +106,23 @@
                 </template>
                 @php
                     $totalAll = 0;
+                    $sub = 0;
+                    $iva = 0;
                 @endphp
                 <template slot="body">
                     @foreach($expenses as $row)
                         @php
                             $totalAll += $row->amount;
+                            $sub = $row->amount/1.16;
+                            $iva = $sub * 0.16;
                         @endphp
                         <tr>
                             <td>{{ $row->id }}</td>
                             <td>{{ $row->description }}</td>
                             <td>{{ $row->getShortDate('date') }}</td>
-                            <td></td>
-                            <td></td>
-                            <td>$ {{ $row->amount }}</td>
+                            <td>$ {{ number_format($sub, 2) }}</td>
+                            <td>$ {{ number_format($iva, 2) }}</td>
+                            <td>$ {{ number_format($row->amount, 2) }}</td>
                       </tr>
                     @endforeach
                 </template>
@@ -150,7 +130,7 @@
                     <tr>
                         <td></td><td></td><td></td><td></td>
                         <td><b>Total:</b></td>
-                        <td>$ {{ $totalAll }}</td>
+                        <td>$ {{ number_format($totalAll, 2) }}</td>
                     </tr>
                 </template>
             </data-table-com>

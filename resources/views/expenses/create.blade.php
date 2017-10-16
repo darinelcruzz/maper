@@ -19,7 +19,7 @@
                             {!! Field::text('description') !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::number('amount') !!}
+                            {!! Field::number('amount', ['min' => '0', 'step' => '.01']) !!}
                         </div>
                     </div>
                     <div class="row">
@@ -35,7 +35,7 @@
                 <div class="box-footer">
                     <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                     <input type="hidden" name="type" value="cargo">
-                    <input type="hidden" name="method" value="efectivo">
+                    <input type="hidden" name="method" value="e">
                     {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->
@@ -142,9 +142,9 @@
                         <td>{{ $row->description }} {{ $row->bill == 'si' ? '- Facturado' : '' }}</td>
                         <td>{{ $row->folio }}</td>
                         <td>{{ $row->getShortDate('date') }}</td>
-                        <td>{{ $row->type == 'cargo' ? '$' . $row->amount : '' }}</td>
-                        <td>{{ $row->type == 'cargo' ? '' : '$' . $row->amount }}</td>
-                        <td>{{ '$' . $temp }}</td>
+                        <td>{{ $row->type == 'cargo' ? '$' . number_format($row->amount,2) : '' }}</td>
+                        <td>{{ $row->type == 'cargo' ? '' : '$' . number_format($row->amount,2) }}</td>
+                        <td>{{ '$' . number_format($temp,2) }}</td>
                         <td>
                             <a href="{{ route('expense.edit', ['id' => $row->id]) }}">
                                 <i class="fa fa-edit"></i>

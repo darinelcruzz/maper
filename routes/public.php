@@ -316,6 +316,11 @@ Route::group(['prefix' => 'banco', 'as' => 'bank.'], function () {
         'as' => 'change'
     ]);
 
+    Route::post('actualizar', [
+        'uses' => 'BankController@update',
+        'as' => 'update'
+    ]);
+
     Route::post('formato', [
         'uses' => 'BankController@format',
         'as' => 'format'

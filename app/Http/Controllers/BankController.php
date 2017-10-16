@@ -35,8 +35,15 @@ class BankController extends Controller
     public function change(Request $request)
     {
         $this->validate($request, []);
-
         Expense::find($request->id)->update($request->all());
+
+        return $this->create();
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, []);
+        Service::find($request->id)->update($request->all());
 
         return $this->create();
     }
