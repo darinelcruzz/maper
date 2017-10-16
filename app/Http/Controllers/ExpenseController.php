@@ -10,7 +10,7 @@ class ExpenseController extends Controller
 {
     public function create()
     {
-        $expenses = Expense::where('method','efectivo')->get();
+        $expenses = Expense::where('method','e')->get();
         $date = Date::now()->format('Y-m-d');
 
         return view('expenses.create', compact('expenses', 'date'));

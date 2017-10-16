@@ -11,7 +11,7 @@ class BankController extends Controller
 {
     public function create()
     {
-        $expenses = Expense::where('method','banco')->get();
+        $expenses = Expense::where('method','b')->get();
         $services = Service::where('bill', '!=','n/a')->get();
         $date = Date::now()->format('Y-m-d');
 
