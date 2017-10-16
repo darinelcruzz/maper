@@ -18,6 +18,7 @@
                         @include('templates.unit')
                         @if($service->status != 'pendiente')
                             @include('templates.pay', ['cost' => $service->pension])
+                            @include('templates.others')
                             <input type="hidden" name="view" value="editPayed">
                         @else
                             <input type="hidden" name="view" value="edit">

@@ -306,7 +306,7 @@ Route::group(['prefix' => 'banco', 'as' => 'bank.'], function () {
         'as' => 'show'
     ]);
 
-    Route::get('editar/{bank}', [
+    Route::get('editar/{expense}', [
         'uses' => 'BankController@edit',
         'as' => 'edit'
     ]);

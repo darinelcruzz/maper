@@ -52,7 +52,7 @@
                     </tr>
                 </template>
                 @php
-                    $totalAll = 0;
+                    $totalAllI = 0;
                     $sub = 0;
                     $iva = 0;
                 @endphp
@@ -62,10 +62,10 @@
                             $sub = ($row->total + $row->ret)/1.16;
                             $iva = $sub * 0.16;
 
-                            $totalAll += $row->total;
+                            $totalAllI += $row->total;
                         @endphp
                         <tr>
-                            <td>{{ $row->id }}</td>
+                            <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                             <td>{{ $row->bill }}</td>
                             <td>{{ $row->clientr->name }}</td>
                             <td>{{ $row->getShortDate('date_out') }}</td>
@@ -86,7 +86,7 @@
                     <tr>
                         <td></td><td></td><td></td><td></td><td></td><td></td>
                         <td><b>Total:</b></td>
-                        <td>$ {{ number_format($totalAll,2) }}</td>
+                        <td>$ {{ number_format($totalAllI,2) }}</td>
                     </tr>
                 </template>
             </data-table-com>
@@ -102,17 +102,18 @@
                         <th>Sub</th>
                         <th>Iva</th>
                         <th>Total</th>
+                        <th></th>
                     </tr>
                 </template>
                 @php
-                    $totalAll = 0;
+                    $totalAllE = 0;
                     $sub = 0;
                     $iva = 0;
                 @endphp
                 <template slot="body">
                     @foreach($expenses as $row)
                         @php
-                            $totalAll += $row->amount;
+                            $totalAllE += $row->amount;
                             $sub = $row->amount/1.16;
                             $iva = $sub * 0.16;
                         @endphp
@@ -123,6 +124,12 @@
                             <td>$ {{ number_format($sub, 2) }}</td>
                             <td>$ {{ number_format($iva, 2) }}</td>
                             <td>$ {{ number_format($row->amount, 2) }}</td>
+                            <td>
+                                <a href="{{ route('bank.edit', ['id' => $row->id]) }}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+
                       </tr>
                     @endforeach
                 </template>
@@ -130,10 +137,21 @@
                     <tr>
                         <td></td><td></td><td></td><td></td>
                         <td><b>Total:</b></td>
-                        <td>$ {{ number_format($totalAll, 2) }}</td>
+                        <td>$ {{ number_format($totalAllE, 2) }}</td>
                     </tr>
                 </template>
             </data-table-com>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <div class="small-box bg-green">
+            <div class="inner">
+                <p>Saldo en Cuenta</p>
+                <h3>$ {{ number_format($totalAllI - $totalAllE,2) }}</h3>
+            </div>
+            <div class="icon">
+                <i class="fa fa-university"></i>
+            </div>
         </div>
     </div>
 </div>

@@ -28,8 +28,8 @@ class BankController extends Controller
 
     public function edit(Expense $expense)
     {
-        $banks = Expense::all();
-        return view('banks.edit', compact('expense', 'banks'));
+        $expenses =Expense::where('method','b')->get();
+        return view('banks.edit', compact('expense', 'expenses'));
     }
 
     public function change(Request $request)

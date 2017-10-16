@@ -30,7 +30,7 @@ class ExpenseController extends Controller
 
     public function edit(Expense $expense)
     {
-        $expenses = Expense::all();
+        $expenses = Expense::where('method','e')->get();
         return view('expenses.edit', compact('expense', 'expenses'));
     }
 
