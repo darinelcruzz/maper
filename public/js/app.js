@@ -24985,6 +24985,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -45437,13 +45445,77 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": "",
       "selected": ""
     }
-  }, [_vm._v("Elija ruta")]), _vm._v(" "), _vm._l((_vm.routes), function(route) {
-    return _c('option', {
+  }, [_vm._v("Elija ruta")]), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Local general"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'localG') ? _c('option', {
       domProps: {
         "value": route.id
       }
-    }, [_vm._v("\n                    " + _vm._s(route.name) + "\n                ")])
-  })], 2)])]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.moto) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.car) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.ton3) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.ton5) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.ton10) + "\n    ")])])
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  })), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Local corporaciones"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'localC') ? _c('option', {
+      domProps: {
+        "value": route.id
+      }
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  })), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Ruta 1"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'Ruta 1') ? _c('option', {
+      domProps: {
+        "value": route.id
+      }
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  })), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Ruta 2"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'Ruta 2') ? _c('option', {
+      domProps: {
+        "value": route.id
+      }
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  })), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Ruta 3"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'Ruta 3') ? _c('option', {
+      domProps: {
+        "value": route.id
+      }
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  })), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Ruta 4"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'Ruta 4') ? _c('option', {
+      domProps: {
+        "value": route.id
+      }
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  })), _vm._v(" "), _c('optgroup', {
+    attrs: {
+      "label": "Ruta 5"
+    }
+  }, _vm._l((_vm.routes), function(route) {
+    return (route.type == 'Ruta 5') ? _c('option', {
+      domProps: {
+        "value": route.id
+      }
+    }, [_vm._v(_vm._s(route.name))]) : _vm._e()
+  }))])])]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.moto))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.car))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.ton3))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.ton5))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.ton10))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
