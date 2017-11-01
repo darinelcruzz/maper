@@ -347,61 +347,61 @@ Route::get('recursos', [
     'uses' => 'ResourcesController@show',
     'as' => 'resources.show'
 ]);
-    // Operadores
-    Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], function () {
-        Route::get('crear', [
-            'uses' => 'DriverController@create',
-            'as' => 'create'
-        ]);
+// Operadores
+Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], function () {
+    Route::get('crear', [
+        'uses' => 'DriverController@create',
+        'as' => 'create'
+    ]);
 
-        Route::post('crear', [
-            'uses' => 'DriverController@store',
-            'as' => 'store'
-        ]);
+    Route::post('crear', [
+        'uses' => 'DriverController@store',
+        'as' => 'store'
+    ]);
 
-        Route::get('editar/{driver}', [
-            'uses' => 'DriverController@edit',
-            'as' => 'edit'
-        ]);
+    Route::get('editar/{driver}', [
+        'uses' => 'DriverController@edit',
+        'as' => 'edit'
+    ]);
 
-        Route::post('cambiar', [
-            'uses' => 'DriverController@change',
-            'as' => 'change'
-        ]);
+    Route::post('cambiar', [
+        'uses' => 'DriverController@change',
+        'as' => 'change'
+    ]);
 
-        Route::get('fecha', [
-            'uses' => 'DriverController@date',
-            'as' => 'date'
-        ]);
+    Route::get('fecha', [
+        'uses' => 'DriverController@date',
+        'as' => 'date'
+    ]);
 
-        Route::post('reporte', [
-            'uses' => 'DriverController@format',
-            'as' => 'format'
-        ]);
-    });
+    Route::post('reporte', [
+        'uses' => 'DriverController@format',
+        'as' => 'format'
+    ]);
+});
 
-    // Unidades
-    Route::group(['prefix' => 'recursos/unidades', 'as' => 'resources.unit.'], function () {
-        Route::get('crear', [
-            'uses' => 'UnitController@create',
-            'as' => 'create'
-        ]);
+// Unidades
+Route::group(['prefix' => 'recursos/unidades', 'as' => 'resources.unit.'], function () {
+    Route::get('crear', [
+        'uses' => 'UnitController@create',
+        'as' => 'create'
+    ]);
 
-        Route::post('crear', [
-            'uses' => 'UnitController@store',
-            'as' => 'store'
-        ]);
+    Route::post('crear', [
+        'uses' => 'UnitController@store',
+        'as' => 'store'
+    ]);
 
-        Route::get('editar/{id?}', [
-            'uses' => 'UnitController@edit',
-            'as' => 'edit'
-        ]);
+    Route::get('editar/{id?}', [
+        'uses' => 'UnitController@edit',
+        'as' => 'edit'
+    ]);
 
-        Route::post('cambiar', [
-            'uses' => 'UnitController@change',
-            'as' => 'change'
-        ]);
-    });
+    Route::post('cambiar', [
+        'uses' => 'UnitController@change',
+        'as' => 'change'
+    ]);
+});
 
 // Usuarios
 Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {

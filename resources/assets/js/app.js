@@ -13,8 +13,8 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('product-table', require('./components/ProductTable.vue'));
-Vue.component('product-row', require('./components/ProductRow.vue'));
+Vue.component('route-table', require('./components/RouteTable.vue'));
+Vue.component('route-row', require('./components/RouteRow.vue'));
 
 Vue.component('row-woc', require('./components/lte/SingleElementRow.vue'));
 Vue.component('solid-box', require('./components/lte/SolidBox.vue'));

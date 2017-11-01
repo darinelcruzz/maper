@@ -51,6 +51,12 @@ class Service extends Model
         return $fdate->format('l, j F Y h:i a');
     }
 
+    function getWeekDayAttribute()
+    {
+        $date = new Date(strtotime($this->date_service));
+        return $date->format('l');
+    }
+
     public function getShortDate($date)
     {
         $fdate = new Date(strtotime($this->$date));
@@ -80,15 +86,20 @@ class Service extends Model
 
     function getInScheduleAttribute()
     {
-        $startHour = substr($this->date_service, 11);
-        $endHour = substr($this->date_return, 11);
-        $inSchedule = $startHour >= $this->driverr->start_hour && $endHour <= $this->driverr->end_hour;
-
         $startDate = substr($this->date_service, 0, 10);
         $endDate = substr($this->date_return, 0, 10);
         $isSameDate = $startDate == $endDate;
 
-        return $isSameDate && $inSchedule;
+        $driverEndHour = $this->driverr->end_hour;
+        if ($isSameDate && $this->week_day == 'sábado') {
+            $driverEndHour = '14:00:00';
+        }
+
+        $startHour = substr($this->date_service, 11);
+        $endHour = substr($this->date_return, 11);
+        $inSchedule = $startHour >= $this->driverr->start_hour && $endHour <= $driverEndHour;
+
+        return $isSameDate && $inSchedule && $this->week_day != 'domingo';
     }
 
     public function getTotalAttribute()

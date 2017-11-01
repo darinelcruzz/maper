@@ -10,10 +10,7 @@ Route::get('salir', function (){
 // Tests
 Route::get('pruebas', function ()
 {
-    $services = App\Service::fromDateToDate('2017-08-04', '2017-10-02', 1);
-    $extraHours = [];
-    foreach ($services as $service) {
-        array_push($extraHours, $service->extraHours);
-    }
-    return $extraHours;
+    $service = App\Service::find(2);
+
+    return $service->in_schedule ? 'true': 'false';
 });
