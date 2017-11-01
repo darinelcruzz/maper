@@ -12,12 +12,13 @@ class CorporationServiceController extends Controller
 {
     public function create()
     {
-        return view('services.corporations.create');
+        $prices = Price::all();
+        return view('services.corporations.create', compact('prices'));
     }
 
     public function store(CorporationsRequest $request)
     {
-        $service = Service::create($request->all());
+        $service = Service::create($request->except(['routes']));
 
         return redirect(route('service.show'));
     }

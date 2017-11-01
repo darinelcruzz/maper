@@ -5,7 +5,7 @@
                 <h4 class="modal-title">Rutas</h4>
             </div>
             <div class="modal-body">
-                <route-table :routes="{{ $prices }}" type="car"></route-table>
+                <route-table :routes="{{ $prices }}"></route-table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>

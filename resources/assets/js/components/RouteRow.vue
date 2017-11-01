@@ -3,7 +3,7 @@
         <td>
             <div class="form-group">
                 <select class="form-control" name="routes[]" v-model="route_id">
-                    <option value="" selected>Seleccione una ruta</option>
+                    <option value="" selected>Elija ruta</option>
                     <option v-for="route in routes" :value="route.id">
                         {{ route.name }}
                     </option>
@@ -12,19 +12,19 @@
         </td>
 
         <td>
-            {{ moto }}
+            $ {{ moto }}
         </td>
         <td>
-            {{ car }}
+            $ {{ car }}
         </td>
         <td>
-            {{ ton3 }}
+            $ {{ ton3 }}
         </td>
         <td>
-            {{ ton5 }}
+            $ {{ ton5 }}
         </td>
         <td>
-            {{ ton10 }}
+            $ {{ ton10 }}
         </td>
     </tr>
 </template>
@@ -41,14 +41,24 @@ export default {
             ton10: 0,
         };
     },
-    props: ['routes', 'type'],
+    props: ['routes', 'num'],
     watch: {
         route_id: function (val, oldVal) {
-            this.moto = this.routes[val - 1].moto;
-            this.car = this.routes[val - 1].car;
-            this.ton3 = this.routes[val - 1].ton3;
-            this.ton5 = this.routes[val - 1].ton5;
-            this.ton10 = this.routes[val - 1].ton10;
+            if(val == "") {
+                this.moto = 0;
+                this.car = 0;
+                this.ton3 = 0;
+                this.ton5 = 0;
+                this.ton10 = 0;
+            } else {
+                this.moto = this.routes[val - 1].moto;
+                this.car = this.routes[val - 1].car;
+                this.ton3 = this.routes[val - 1].ton3;
+                this.ton5 = this.routes[val - 1].ton5;
+                this.ton10 = this.routes[val - 1].ton10;
+            }
+
+            this.$emit('prices', this.num, this.moto, this.car, this.ton3, this.ton5, this.ton10);
         },
     },
     created() {

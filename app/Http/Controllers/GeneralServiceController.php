@@ -19,7 +19,7 @@ class GeneralServiceController extends Controller
 
     public function store(GeneralRequest $request)
     {
-        $service = Service::create($request->all());
+        $service = Service::create($request->except(['routes']));
         return redirect(route('service.show'));
 
     }

@@ -24998,14 +24998,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    props: ['routes', 'type'],
+    props: ['routes', 'num'],
     watch: {
         route_id: function route_id(val, oldVal) {
-            this.moto = this.routes[val - 1].moto;
-            this.car = this.routes[val - 1].car;
-            this.ton3 = this.routes[val - 1].ton3;
-            this.ton5 = this.routes[val - 1].ton5;
-            this.ton10 = this.routes[val - 1].ton10;
+            if (val == "") {
+                this.moto = 0;
+                this.car = 0;
+                this.ton3 = 0;
+                this.ton5 = 0;
+                this.ton10 = 0;
+            } else {
+                this.moto = this.routes[val - 1].moto;
+                this.car = this.routes[val - 1].car;
+                this.ton3 = this.routes[val - 1].ton3;
+                this.ton5 = this.routes[val - 1].ton5;
+                this.ton10 = this.routes[val - 1].ton10;
+            }
+
+            this.$emit('prices', this.num, this.moto, this.car, this.ton3, this.ton5, this.ton10);
         }
     },
     created: function created() {
@@ -25048,22 +25058,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            header: [{ name: 'Ruta', width: 'width: 40%' }, { name: 'Moto', width: 'width: 12%' }, { name: 'Carro', width: 'width: 12%' }, { name: '3 T', width: 'width: 12%' }, { name: '5 T', width: 'width: 12%' }, { name: '10 T', width: 'width: 12%' }],
-            total: 0
+            header: [{ name: 'Ruta', width: 'width: 30%' }, { name: 'Moto', width: 'width: 14%' }, { name: 'Carro', width: 'width: 14%' }, { name: '3 T', width: 'width: 14%' }, { name: '5 T', width: 'width: 14%' }, { name: '10 T', width: 'width: 14%' }],
+            totals: [{ subtotals: [0, 0, 0, 0], total: 0 }, { subtotals: [0, 0, 0, 0], total: 0 }, { subtotals: [0, 0, 0, 0], total: 0 }, { subtotals: [0, 0, 0, 0], total: 0 }, { subtotals: [0, 0, 0, 0], total: 0 }]
         };
     },
 
-    props: ['routes', 'type'],
+    props: ['routes'],
 
     methods: {
-        addToTotal: function addToTotal(total, num) {
-            this.subtotals[num - 1] = total;
+        addToTotal: function addToTotal(num, moto, car, ton3, ton5, ton10) {
+            this.totals[0].subtotals[num - 1] = moto;
+            this.totals[1].subtotals[num - 1] = car;
+            this.totals[2].subtotals[num - 1] = ton3;
+            this.totals[3].subtotals[num - 1] = ton5;
+            this.totals[4].subtotals[num - 1] = ton10;
 
-            this.total = this.subtotals.reduce(function (total, value) {
+            this.totals[0].total = this.totals[0].subtotals.reduce(function (total, value) {
+                return total + value;
+            }, 0);
+            this.totals[1].total = this.totals[1].subtotals.reduce(function (total, value) {
+                return total + value;
+            }, 0);
+            this.totals[2].total = this.totals[2].subtotals.reduce(function (total, value) {
+                return total + value;
+            }, 0);
+            this.totals[3].total = this.totals[3].subtotals.reduce(function (total, value) {
+                return total + value;
+            }, 0);
+            this.totals[4].total = this.totals[4].subtotals.reduce(function (total, value) {
                 return total + value;
             }, 0);
         }
@@ -45408,13 +45437,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": "",
       "selected": ""
     }
-  }, [_vm._v("Seleccione una ruta")]), _vm._v(" "), _vm._l((_vm.routes), function(route) {
+  }, [_vm._v("Elija ruta")]), _vm._v(" "), _vm._l((_vm.routes), function(route) {
     return _c('option', {
       domProps: {
         "value": route.id
       }
     }, [_vm._v("\n                    " + _vm._s(route.name) + "\n                ")])
-  })], 2)])]), _vm._v(" "), _c('td', [_vm._v("\n        " + _vm._s(_vm.moto) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        " + _vm._s(_vm.car) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        " + _vm._s(_vm.ton3) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        " + _vm._s(_vm.ton5) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        " + _vm._s(_vm.ton10) + "\n    ")])])
+  })], 2)])]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.moto) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.car) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.ton3) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.ton5) + "\n    ")]), _vm._v(" "), _c('td', [_vm._v("\n        $ " + _vm._s(_vm.ton10) + "\n    ")])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -45477,28 +45506,40 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }))]), _vm._v(" "), _c('tbody', [_c('route-row', {
     attrs: {
       "routes": _vm.routes,
-      "type": _vm.type
+      "num": 1
+    },
+    on: {
+      "prices": _vm.addToTotal
     }
   }), _vm._v(" "), _c('route-row', {
     attrs: {
       "routes": _vm.routes,
-      "type": _vm.type
+      "num": 2
+    },
+    on: {
+      "prices": _vm.addToTotal
     }
   }), _vm._v(" "), _c('route-row', {
     attrs: {
       "routes": _vm.routes,
-      "type": _vm.type
+      "num": 3
+    },
+    on: {
+      "prices": _vm.addToTotal
     }
   }), _vm._v(" "), _c('route-row', {
     attrs: {
       "routes": _vm.routes,
-      "type": _vm.type
+      "num": 4
+    },
+    on: {
+      "prices": _vm.addToTotal
     }
-  })], 1), _vm._v(" "), _c('tfoot', [_c('tr', [_c('td', [_c('b', [_vm._v("Total:")])]), _vm._v(" "), _c('td', {
-    attrs: {
-      "colspan": "4"
+  })], 1), _vm._v(" "), _c('tfoot', [_c('tr', [_c('td', {
+    staticStyle: {
+      "text-align": "center"
     }
-  }), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.total))])])])], 1)])
+  }, [_c('b', [_vm._v("TOTAL")])]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.totals[0].total))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.totals[1].total))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.totals[2].total))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.totals[3].total))]), _vm._v(" "), _c('td', [_vm._v("$ " + _vm._s(_vm.totals[4].total))])])])], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
