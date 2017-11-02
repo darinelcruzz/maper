@@ -98,10 +98,10 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Price::class, function (Faker\Generator $faker) {
-    $types = ['otros', 'local', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
+    $types = ['otros', 'localG', 'localC', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
 
     return [
-        'name' => $faker->word,
+        'name' => $faker->state . ' - ' . $faker->state,
         'type' => $types[array_rand($types)],
         'km' => $faker->numberBetween(10, 50),
         'moto' => $faker->numberBetween(50, 100),

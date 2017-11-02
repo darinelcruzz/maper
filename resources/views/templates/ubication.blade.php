@@ -27,4 +27,12 @@
             <i class="fa fa-map-pin" aria-hidden="true"></i>
         </a>
     </div>
+    <div class="col-md-4">
+        <br>
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-default">
+            Tabulador
+        </button>
+    </div>
 </div>
+
+@include('templates.tabmodal')

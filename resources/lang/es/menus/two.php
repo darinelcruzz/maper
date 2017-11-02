@@ -3,7 +3,7 @@
 return [
 
     'service' => [
-        'title' => 'Servicios',
+        'title' => 'No',
         'icon' => 'fa fa-ambulance',
         'submenu' => [
             'general' => [
@@ -22,7 +22,7 @@ return [
     ],
 
     'admin' => [
-        'title' => 'Administración',
+        'title' => 'Va',
         'icon' => 'fa fa-line-chart',
         'submenu' => [
             'cash' => [
@@ -41,7 +41,7 @@ return [
     ],
 
     'clients' => [
-        'title' => 'Clientes',
+        'title' => 'Poder',
         'icon' => 'fa fa-users',
         'submenu' => [
             'create' => [
@@ -56,7 +56,7 @@ return [
     ],
 
     'providers' => [
-        'title' => 'Proveedores',
+        'title' => 'Editar',
         'icon' => 'fa fa-handshake-o',
         'submenu' => [
             'create' => [

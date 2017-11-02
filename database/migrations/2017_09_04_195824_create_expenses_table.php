@@ -21,6 +21,8 @@ class CreateExpensesTable extends Migration
             $table->integer('amount')->nullable();
             $table->string('type')->nullable();
             $table->string('bill')->nullable();
+            $table->string('folio')->nullable();
+            $table->string('method')->nullable();
 
             $table->timestamps();
         });
