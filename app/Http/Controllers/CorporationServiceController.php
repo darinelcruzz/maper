@@ -25,7 +25,8 @@ class CorporationServiceController extends Controller
 
     public function edit(Service $service)
     {
-        return view('services.corporations.edit', compact('service'));
+        $prices = Price::all();
+        return view('services.corporations.edit', compact('service'. 'prices'));
     }
 
     public function update(CorporationsRequest $request)

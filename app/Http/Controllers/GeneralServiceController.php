@@ -26,7 +26,8 @@ class GeneralServiceController extends Controller
 
     public function edit(Service $service)
     {
-        return view('services.generals.edit', compact('service'));
+        $prices = Price::all();
+        return view('services.generals.edit', compact('service', 'prices'));
     }
 
     public function change(GeneralRequest $request)

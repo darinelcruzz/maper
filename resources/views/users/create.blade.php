@@ -16,8 +16,8 @@
                     {!! Field::password('password2', ['label' => 'Repite contraseña', 'tpl' => 'templates/oneline']) !!}
 
                     {!! Field::select('level',
-                        ['1' => 'Admin', '2' => 'Ventas', '3' => 'Gerente', '4' => 'Ingeniero', '5' => 'Operador'],
-                        ['label' => 'Jerarquía', 'template' => 'templates/oneline']) !!}
+                        ['1' => 'Administración', '2' => 'Contabilidad'],
+                        ['label' => 'Jerarquía', 'template' => 'templates/oneline', 'empty' => 'Seleccione un puesto']) !!}
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
