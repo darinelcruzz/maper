@@ -1,36 +1,34 @@
 <?php
 
+function usesas($uses, $as)
+{
+    return ['uses' => $uses, 'as' => $as];
+}
+
+function usesas2($ctrl, $fun)
+{
+    return ['uses' => "$ctrl@$fun", 'as' => $fun];
+}
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
 // Aseguradoras
 Route::group(['prefix' => 'aseguradoras/ike', 'as' => 'ike.'], function () {
-    Route::get('/', [
-        'uses' => 'IkeServiceController@index',
-        'as' => 'index'
-    ]);
+    $ctrl = 'IkeServiceController';
 
-    Route::get('/{ikeservice}', [
-        'uses' => 'IkeServiceController@show',
-        'as' => 'show'
-    ]);
+    Route::get('/', usesas("$ctrl@index", 'index'));
 
-    Route::get('crear', [
-        'uses' => 'IkeServiceController@create',
-        'as' => 'create'
-    ]);
+    Route::get('/{ikeservice}', usesas("$ctrl@show", 'show'));
 
-    Route::post('crear', [
-        'uses' => 'IkeServiceController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('editar/{ikeservice}', [
-        'uses' => 'IkeServiceController@edit',
-        'as' => 'edit'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::post('editar', [
-        'uses' => 'IkeServiceController@update',
-        'as' => 'update'
-    ]);
+    Route::get('editar/{ikeservice}', usesas("$ctrl@edit", 'edit'));
+
+    Route::post('editar', usesas("$ctrl@update", 'update'));
 });
 
 //Admin
@@ -56,290 +54,148 @@ Route::post('servicios', [
     'as' => 'service.changeExtras'
 ]);
 
-    // General
-    Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], function () {
-        Route::get('crear', [
-            'uses' => 'GeneralServiceController@create',
-            'as' => 'create'
-        ]);
+// General
+Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], function () {
+    $ctrl = 'GeneralServiceController';
 
-        Route::post('crear', [
-            'uses' => 'GeneralServiceController@store',
-            'as' => 'store'
-        ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-        Route::get('editar/{service}', [
-            'uses' => 'GeneralServiceController@edit',
-            'as' => 'edit'
-        ]);
+    Route::get('editar/{service}', usesas("$ctrl@edit", 'edit'));
 
-        Route::get('eliminar/{id}', [
-            'uses' => 'GeneralServiceController@deleteClient',
-            'as' => 'delete'
-        ]);
+    Route::get('eliminar/{id}', usesas("$ctrl@deleteClient", 'delete'));
 
-        Route::post('cambiar', [
-            'uses' => 'GeneralServiceController@change',
-            'as' => 'change'
-        ]);
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 
-        Route::get('detalles/{service}', [
-            'uses' => 'GeneralServiceController@details',
-            'as' => 'details'
-        ]);
+    Route::get('detalles/{service}', usesas("$ctrl@details", 'details'));
 
-        Route::get('pago/{service}', [
-            'uses' => 'GeneralServiceController@pay',
-            'as' => 'pay'
-        ]);
+    Route::get('pago/{service}', usesas("$ctrl@pay", 'pay'));
 
-        Route::post('pago', [
-            'uses' => 'GeneralServiceController@change',
-            'as' => 'setPayMethod'
-        ]);
+    Route::post('pago', usesas("$ctrl@change", 'setPayMethod'));
 
-        Route::get('cancelar/{service}', [
-            'uses' => 'GeneralServiceController@cancel',
-            'as' => 'cancel'
-        ]);
-    });
+    Route::get('cancelar/{service}', usesas("$ctrl@cancel", 'cancel'));
+});
 
-    // Corporaciones
-    Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporation.'], function () {
-        Route::get('crear', [
-            'uses' => 'CorporationServiceController@create',
-            'as' => 'create'
-        ]);
+// Corporaciones
+Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporation.'], function () {
+    $ctrl = 'CorporationServiceController';
 
-        Route::post('crear', [
-            'uses' => 'CorporationServiceController@store',
-            'as' => 'store'
-        ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-        Route::get('editar/{service}', [
-            'uses' => 'CorporationServiceController@edit',
-            'as' => 'edit'
-        ]);
+    Route::get('editar/{service}', usesas("$ctrl@edit", 'edit'));
 
-        Route::get('eliminar/{id}', [
-            'uses' => 'CorporationServiceController@deleteClient',
-            'as' => 'delete'
-        ]);
+    Route::get('eliminar/{id}', usesas("$ctrl@deleteClient", 'delete'));
 
-        Route::post('cambiar', [
-            'uses' => 'CorporationServiceController@update',
-            'as' => 'update'
-        ]);
+    Route::post('cambiar', usesas("$ctrl@update", 'update'));
 
-        Route::get('detalles/{service}', [
-            'uses' => 'CorporationServiceController@details',
-            'as' => 'details'
-        ]);
+    Route::get('detalles/{service}', usesas("$ctrl@details", 'details'));
 
-        Route::get('pago/{service}', [
-            'uses' => 'CorporationServiceController@pay',
-            'as' => 'pay'
-        ]);
+    Route::get('pago/{service}', usesas("$ctrl@pay", 'pay'));
 
-        Route::get('formato/{service}', [
-            'uses' => 'CorporationServiceController@printLetter',
-            'as' => 'print'
-        ]);
-    });
+    Route::get('formato/{service}', usesas("$ctrl@printLetter", 'print'));
+});
 
 // Clientes
 Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {
-    Route::get('crear', [
-        'uses' => 'ClientController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'ClientController';
 
-    Route::post('crear', [
-        'uses' => 'ClientController@store',
-        'as' => 'store'
-    ]);
+    Route::get('/', usesas("$ctrl@show", 'show'));
 
-    Route::get('/', [
-        'uses' => 'ClientController@show',
-        'as' => 'show'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('editar/{id}', [
-        'uses' => 'ClientController@edit',
-        'as' => 'edit'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::get('eliminar/{id}', [
-        'uses' => 'ClientController@deleteClient',
-        'as' => 'delete'
-    ]);
+    Route::get('editar/{id}', usesas("$ctrl@edit", 'edit'));
 
-    Route::post('cambiar', [
-        'uses' => 'ClientController@change',
-        'as' => 'change'
-    ]);
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 
-    Route::get('detalles/{client}', [
-        'uses' => 'ClientController@details',
-        'as' => 'details'
-    ]);
+    Route::get('detalles/{client}', usesas("$ctrl@details", 'details'));
+
+    Route::get('eliminar/{id}', usesas("$ctrl@deleteClient", 'delete'));
 });
 
 // Proveedores
 Route::group(['prefix' => 'proveedores', 'as' => 'provider.'], function () {
-    Route::get('crear', [
-        'uses' => 'ProviderController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'ProviderController';
 
-    Route::post('crear', [
-        'uses' => 'ProviderController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('/', [
-        'uses' => 'ProviderController@show',
-        'as' => 'show'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::get('editar/{id?}', [
-        'uses' => 'ProviderController@edit',
-        'as' => 'edit'
-    ]);
+    Route::get('/', usesas("$ctrl@show", 'show'));
 
-    Route::post('cambiar', [
-        'uses' => 'ProviderController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{id?}', usesas("$ctrl@edit", 'edit'));
+
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 });
 
 // Productos
 Route::group(['prefix' => 'productos', 'as' => 'product.'], function () {
-    Route::get('crear', [
-        'uses' => 'ProductController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'ProductController';
 
-    Route::post('crear', [
-        'uses' => 'ProductController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create",'create'));
 
-    Route::get('/lista', [
-        'uses' => 'ProductController@show',
-        'as' => 'show'
-    ]);
+    Route::post('crear', usesas("$ctrl@store",'store'));
 
-    Route::get('editar/{id?}', [
-        'uses' => 'ProductController@edit',
-        'as' => 'edit'
-    ]);
+    Route::get('/lista', usesas("$ctrl@show",'show'));
 
-    Route::post('cambiar', [
-        'uses' => 'ProductController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{id?}', usesas("$ctrl@edit",'edit'));
+
+    Route::post('cambiar', usesas("$ctrl@change",'change'));
 });
 
 // Precios
 Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
-    Route::get('crear', [
-        'uses' => 'PriceController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'PriceController';
 
-    Route::post('crear', [
-        'uses' => 'PriceController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('/lista', [
-        'uses' => 'PriceController@show',
-        'as' => 'show'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::get('editar/{price}', [
-        'uses' => 'PriceController@edit',
-        'as' => 'edit'
-    ]);
+    Route::get('/lista', usesas("$ctrl@show", 'show'));
 
-    Route::post('cambiar', [
-        'uses' => 'PriceController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{price}', usesas("$ctrl@edit", 'edit'));
+
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 });
 
 // Gastos
 Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
-    Route::get('crear', [
-        'uses' => 'ExpenseController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'ExpenseController';
 
-    Route::post('crear', [
-        'uses' => 'ExpenseController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('/lista', [
-        'uses' => 'ExpenseController@show',
-        'as' => 'show'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::get('editar/{expense}', [
-        'uses' => 'ExpenseController@edit',
-        'as' => 'edit'
-    ]);
+    Route::get('/lista', usesas("$ctrl@show", 'show'));
 
-    Route::post('cambiar', [
-        'uses' => 'ExpenseController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{expense}', usesas("$ctrl@edit", 'edit'));
 
-    Route::post('formato', [
-        'uses' => 'ExpenseController@format',
-        'as' => 'format'
-    ]);
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
+
+    Route::post('formato', usesas("$ctrl@format", 'format'));
 });
 
 // Bancos
 Route::group(['prefix' => 'banco', 'as' => 'bank.'], function () {
-    Route::get('crear', [
-        'uses' => 'BankController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'BankController';
 
-    Route::post('crear', [
-        'uses' => 'BankController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('/lista', [
-        'uses' => 'BankController@show',
-        'as' => 'show'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::get('editar/{expense}', [
-        'uses' => 'BankController@edit',
-        'as' => 'edit'
-    ]);
+    Route::get('/lista', usesas("$ctrl@show", 'show'));
 
-    Route::post('cambiar', [
-        'uses' => 'BankController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{expense}', usesas("$ctrl@edit", 'edit'));
 
-    Route::post('actualizar', [
-        'uses' => 'BankController@update',
-        'as' => 'update'
-    ]);
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 
-    Route::post('formato', [
-        'uses' => 'BankController@format',
-        'as' => 'format'
-    ]);
+    Route::post('actualizar', usesas("$ctrl@update", 'update'));
+
+    Route::post('formato', usesas("$ctrl@format", 'format'));
 });
 
 // Recursos
@@ -347,82 +203,42 @@ Route::get('recursos', [
     'uses' => 'ResourcesController@show',
     'as' => 'resources.show'
 ]);
+
 // Operadores
 Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], function () {
-    Route::get('crear', [
-        'uses' => 'DriverController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'DriverController';
 
-    Route::post('crear', [
-        'uses' => 'DriverController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('editar/{driver}', [
-        'uses' => 'DriverController@edit',
-        'as' => 'edit'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::post('cambiar', [
-        'uses' => 'DriverController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{driver}', usesas("$ctrl@edit", 'edit'));
 
-    Route::get('fecha', [
-        'uses' => 'DriverController@date',
-        'as' => 'date'
-    ]);
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 
-    Route::post('reporte', [
-        'uses' => 'DriverController@format',
-        'as' => 'format'
-    ]);
+    Route::get('fecha', usesas("$ctrl@date", 'date'));
+
+    Route::post('reporte', usesas("$ctrl@format", 'format'));
 });
 
 // Unidades
 Route::group(['prefix' => 'recursos/unidades', 'as' => 'resources.unit.'], function () {
-    Route::get('crear', [
-        'uses' => 'UnitController@create',
-        'as' => 'create'
-    ]);
+    $ctrl = 'UnitController';
 
-    Route::post('crear', [
-        'uses' => 'UnitController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas("$ctrl@create", 'create'));
 
-    Route::get('editar/{id?}', [
-        'uses' => 'UnitController@edit',
-        'as' => 'edit'
-    ]);
+    Route::post('crear', usesas("$ctrl@store", 'store'));
 
-    Route::post('cambiar', [
-        'uses' => 'UnitController@change',
-        'as' => 'change'
-    ]);
+    Route::get('editar/{id?}', usesas("$ctrl@edit", 'edit'));
+
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 });
 
 // Usuarios
 Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
-    Route::get('crear', [
-        'uses' => 'UserController@create',
-        'as' => 'create'
-    ]);
+    Route::get('/', usesas('UserController@show', 'show'));
 
-    Route::post('crear', [
-        'uses' => 'UserController@store',
-        'as' => 'store'
-    ]);
+    Route::get('crear', usesas('UserController@create', 'create'));
 
-    Route::get('', [
-        'uses' => 'UserController@show',
-        'as' => 'show'
-    ]);
+    Route::post('crear', usesas('UserController@store', 'store'));
 });
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
