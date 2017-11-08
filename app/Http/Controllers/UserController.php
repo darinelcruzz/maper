@@ -41,7 +41,32 @@ class UserController extends Controller
             'id', 'name', 'email', 'pass', 'level'
         ]);
 
-
         return view('users.show', compact('users'));
+    }
+
+	function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    function update(Request $request)
+    {
+		$this->validate($request, [
+			'name' => 'required',
+			'email' => 'required',
+			'password' => 'required',
+			'password2' => 'required|same:password',
+
+		]);
+
+        User::find($request->id)->update([
+			'name' => $request->name,
+			'email' => $request->email,
+			'password' => Hash::make($request->password),
+			'pass' => $request->password,
+			'level' => $request->level
+        ]);
+
+        return redirect(route('user.show'));
     }
 }

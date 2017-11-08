@@ -236,9 +236,15 @@ Route::group(['prefix' => 'recursos/unidades', 'as' => 'resources.unit.'], funct
 
 // Usuarios
 Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
-    Route::get('/', usesas('UserController@show', 'show'));
+    $ctrl = 'UserController';
 
-    Route::get('crear', usesas('UserController@create', 'create'));
+    Route::get('/', ['uses' => "$ctrl@show", 'as' => 'show']);
 
-    Route::post('crear', usesas('UserController@store', 'store'));
+    Route::get('crear', usesas("$ctrl@create", 'create'));
+
+    Route::post('crear', usesas("$ctrl@store", 'store'));
+
+    Route::get('editar/{user}', usesas("$ctrl@edit", 'edit'));
+
+    Route::post('cambiar', usesas("$ctrl@change", 'change'));
 });
