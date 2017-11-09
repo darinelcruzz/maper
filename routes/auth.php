@@ -5,11 +5,6 @@ function usesas($uses, $as)
     return ['uses' => $uses, 'as' => $as];
 }
 
-function usesas2($ctrl, $fun)
-{
-    return ['uses' => "$ctrl@$fun", 'as' => $fun];
-}
-
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
