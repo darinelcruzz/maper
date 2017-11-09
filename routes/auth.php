@@ -1,10 +1,5 @@
 <?php
 
-function usesas($uses, $as)
-{
-    return ['uses' => $uses, 'as' => $as];
-}
-
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
