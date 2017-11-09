@@ -17,7 +17,7 @@
                 <div id="field_amount" class="form-group">
                     <label for="amount" class="control-label">Arrastre</label>
                     <div class="controls">
-                        <input min="0" class="form-control" v-model="vamount" id="amount" name="amount" type="number">
+                        <input min="0" class="form-control" v-model="vamount" id="amount" name="amount" type="number" step="0.01">
                     </div>
                 </div>
             </div>

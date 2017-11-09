@@ -44729,7 +44729,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "min": "0",
       "id": "amount",
       "name": "amount",
-      "type": "number"
+      "type": "number",
+      "step": "0.01"
     },
     domProps: {
       "value": (_vm.vamount)
