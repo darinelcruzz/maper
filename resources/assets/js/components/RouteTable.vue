@@ -19,7 +19,6 @@
                     <td>$ {{ totals[1].total }}</td>
                     <td>$ {{ totals[2].total }}</td>
                     <td>$ {{ totals[3].total }}</td>
-                    <td>$ {{ totals[4].total }}</td>
                 </tr>
             </tfoot>
         </table>
@@ -31,15 +30,13 @@ export default {
     data() {
         return {
             header: [
-                { name:'Ruta', width: 'width: 30%' },
-                { name:'Moto', width: 'width: 14%' },
-                { name:'Carro', width: 'width: 14%' },
-                { name:'3 T', width: 'width: 14%' },
-                { name:'5 T', width: 'width: 14%' },
-                { name:'10 T', width: 'width: 14%' },
+                { name:'Ruta', width: 'width: 40%' },
+                { name:'Carro', width: 'width: 15%' },
+                { name:'3 T', width: 'width: 15%' },
+                { name:'5 T', width: 'width: 15%' },
+                { name:'10 T', width: 'width: 15%' },
             ],
             totals: [
-                { subtotals: [0, 0, 0, 0], total: 0},
                 { subtotals: [0, 0, 0, 0], total: 0},
                 { subtotals: [0, 0, 0, 0], total: 0},
                 { subtotals: [0, 0, 0, 0], total: 0},
@@ -50,12 +47,11 @@ export default {
     props: ['routes'],
 
     methods: {
-        addToTotal(num, moto, car, ton3, ton5, ton10) {
-            this.totals[0].subtotals[num - 1] = moto;
-            this.totals[1].subtotals[num - 1] = car;
-            this.totals[2].subtotals[num - 1] = ton3;
-            this.totals[3].subtotals[num - 1] = ton5;
-            this.totals[4].subtotals[num - 1] = ton10;
+        addToTotal(num, car, ton3, ton5, ton10) {
+            this.totals[0].subtotals[num - 1] = car;
+            this.totals[1].subtotals[num - 1] = ton3;
+            this.totals[2].subtotals[num - 1] = ton5;
+            this.totals[3].subtotals[num - 1] = ton10;
 
             this.totals[0].total = this.totals[0].subtotals.reduce(function (total, value) {
                 return total + value;
@@ -67,9 +63,6 @@ export default {
                 return total + value;
             }, 0);
             this.totals[3].total = this.totals[3].subtotals.reduce(function (total, value) {
-                return total + value;
-            }, 0);
-            this.totals[4].total = this.totals[4].subtotals.reduce(function (total, value) {
                 return total + value;
             }, 0);
         },

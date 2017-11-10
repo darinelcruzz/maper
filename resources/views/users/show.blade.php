@@ -2,25 +2,29 @@
 
 @section('main-content')
 
-    <data-table col="col-md-12" title="Usuarios" example="example1" color="box-default">
+    <data-table col="col-md-8" title="Usuarios" example="example1" color="box-default">
         <template slot="header">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Usuario</th>
-                <th>Contraseña</th>
                 <th>Nivel</th>
+                <th></th>
             </tr>
         </template>
 
         <template slot="body">
             @foreach($users as $row)
-              <tr>
-                  <td>{{ $row->id }}</td>
-                  <td>{{ $row->name }}</td>
-                  <td>{{ $row->email }}</td>
-                  <td>{{ $row->pass }}</td>
-                  <td>{{ $row->level }}</td>
+                <tr>
+                    <td>{{ $row->id }}</td>
+                    <td>{{ $row->name }}</td>
+                    <td>{{ $row->email }}</td>
+                    <td>{{ $row->level }}</td>
+                    <td>
+                        <a href="{{ route('user.edit', ['id' => $row->id])}}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
               </tr>
             @endforeach
         </template>

@@ -7,7 +7,16 @@ use Jenssegers\Date\Date;
 
 class Service extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'service','description', 'brand', 'type', 'model',
+        'category', 'load', 'plate', 'color', 'inventory',
+        'key', 'client', 'origin', 'destination', 'driver',
+        'extra_driver', 'helper', 'extra_helper', 'unit',
+        'date_service', 'date_out', 'date_return', 'amount',
+        'ret', 'status', 'lot', 'maneuver', 'pension', 'releaser',
+        'bill', 'others', 'discount', 'reason', 'pay', 'date_credit',
+        'pay_credit', 'view'
+    ];
 
     function driverr()
     {

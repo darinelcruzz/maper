@@ -7,7 +7,10 @@ use Jenssegers\Date\Date;
 
 class Expense extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'description', 'date', 'amount', 'type', 'bill',
+        'folio', 'method'
+    ];
 
     public function getShortDate($date)
     {
