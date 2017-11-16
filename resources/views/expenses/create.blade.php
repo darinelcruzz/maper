@@ -68,7 +68,7 @@
                     <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                     <input type="hidden" name="type" value="abono">
                     <input type="hidden" name="bill" value="0">
-                    <input type="hidden" name="method" value="efectivo">
+                    <input type="hidden" name="method" value="e">
                     {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
                 <!-- /.box-footer -->
