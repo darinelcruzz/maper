@@ -19,7 +19,7 @@
                         @include('templates.unit')
                         @if($service->status != 'corralon')
                             @include('templates.pay', ['cost' => $service->pension])
-                            @include('templates.others)
+                            @include('templates.others')
                         @endif
 
                     </div>
