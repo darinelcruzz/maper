@@ -8,7 +8,7 @@ use App\Service;
 
 class AdministrationController extends Controller
 {
-    public function cash(Request $request)
+    function cash(Request $request)
     {
         $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
 
@@ -20,23 +20,12 @@ class AdministrationController extends Controller
         $methodsB = [];
 
         foreach ($methods as $method) {
-            $methodsA[$method] = $this->getTotal(Service::payType($date, $method,'date_out', 'pay'));
-            $methodsB[$method] = $this->getTotal(Service::payType($date, $method, 'date_credit', 'pay_credit'));
+            $methodsA[$method] = Service::payType($date, $method,'date_out', 'pay')->sum('total');
+            $methodsB[$method] = Service::payType($date, $method, 'date_credit', 'pay_credit')->sum('total');
         }
 
-        $total = $this->getTotal($all) + $this->getTotal($creditAll);
+        $total = $all->sum('total') + $creditAll->sum('total');
 
         return view('cash.balance', compact('date', 'all', 'creditAll', 'methodsA', 'methodsB', 'total'));
-    }
-
-    public function getTotal($services)
-    {
-        $total = 0;
-
-        foreach ($services as $service) {
-            $total += $service->total;
-        }
-
-        return $total;
     }
 }
