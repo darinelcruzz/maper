@@ -39,7 +39,7 @@ class ServiceController extends Controller
         foreach ($services as $service) {
             $interval = $service->getDays('date_out');
             if ($interval > 40 ) {
-                Service::find($service->id)->update(['status' => 'vencida']);
+                $service->update(['status' => 'vencida']);
             }
         }
     }
