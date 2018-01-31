@@ -59,8 +59,10 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
     $ctrl = 'InsurerServiceController';
 
     Route::get('/', usesas($ctrl, 'index'));
-    Route::get('crear', usesas($ctrl, 'create'));
-    Route::post('crear', usesas($ctrl, 'store'));
+    Route::get('agregar', usesas($ctrl, 'create'));
+    Route::post('agregar', usesas($ctrl, 'store'));
+    Route::get('editar/{insurerService}', usesas($ctrl, 'edit'));
+    Route::post('editar', usesas($ctrl, 'update'));
 });
 
 // Clientes

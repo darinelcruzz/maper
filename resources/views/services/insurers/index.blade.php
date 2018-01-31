@@ -25,7 +25,12 @@
                         <tbody>
                             @foreach ($services as $service)
                                 <tr>
-                                    <td>{{ $service->id }}</td>
+                                    <td>
+                                        {{ $service->id }}
+                                        <a href="{{ route('service.insurer.edit', ['insurerService' => $service->id])}}">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
                                     <td>{{ $service->insurer->name }}</td>
                                     <td>{{ $service->date }}</td>
                                     <td>{{ $service->client }}</td>

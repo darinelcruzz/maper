@@ -48,7 +48,10 @@ class InsurerServiceController extends Controller
 
     function edit(InsurerService $insurerService)
     {
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        $insurers = Insurer::pluck('name', 'id')->toArray();
 
+        return view('services.insurers.edit', compact('drivers', 'insurers', 'insurerService'));
     }
 
     function update(Request $request, InsurerService $insurerService)
