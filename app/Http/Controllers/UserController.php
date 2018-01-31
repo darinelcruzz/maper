@@ -8,12 +8,12 @@ use App\User;
 
 class UserController extends Controller
 {
-	public function create()
+	function create()
 	{
 		return view('users.create');
 	}
 
-	public function store(Request $request)
+	function store(Request $request)
     {
     	$this->validate($request, [
     		'name' => 'required',
@@ -35,7 +35,7 @@ class UserController extends Controller
     	return redirect(route('user.show'));
     }
 
-    public function show()
+	function index()
     {
         $users = User::get([
             'id', 'name', 'email', 'pass', 'level'
@@ -55,8 +55,7 @@ class UserController extends Controller
 			'name' => 'required',
 			'email' => 'required',
 			'password' => 'required',
-			'password2' => 'required|same:password',
-
+			'password2' => 'required|same:password'
 		]);
 
         User::find($request->id)->update([

@@ -205,8 +205,9 @@ return [
         'end_hour'              => 'hora salida',
         'driver_hour'           => 'hora extra operador',
         'helper_hour'           => 'hora extra apoyo',
-        'days'                  => 'dias de crédito',
-
+        'days'                  => 'días de crédito',
+        'business_name'         => 'razón social',
+        'rfc'                   => 'R.F.C.',
     ],
 
 ];

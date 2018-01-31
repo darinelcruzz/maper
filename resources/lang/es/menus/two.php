@@ -14,6 +14,10 @@ return [
                 'title' => 'Coorporaciones',
                 'route' => 'service.corporation.create'
             ],
+            'insurers' => [
+                'title' => 'Aseguradoras',
+                'route' => 'service.insurer.create'
+            ],
             'list' => [
                 'title' => 'Listado',
                 'route' => 'service.show'
@@ -36,6 +40,21 @@ return [
             'bank' => [
                 'title' => 'Banco',
                 'route' => 'bank.create'
+            ],
+        ]
+    ],
+
+    'insurers' => [
+        'title' => 'Aseguradoras',
+        'icon' => 'fa fa-briefcase',
+        'submenu' => [
+            'index' => [
+                'title' => 'Lista',
+                'route' => 'insurer.index'
+            ],
+            'create' => [
+                'title' => 'Agregar',
+                'route' => 'insurer.create'
             ],
         ]
     ],
@@ -110,7 +129,7 @@ return [
             ],
             'list' => [
                 'title' => 'Listado',
-                'route' => 'user.show'
+                'route' => 'user.index'
             ],
         ]
     ],

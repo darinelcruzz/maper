@@ -60,9 +60,12 @@ $factory->define(App\Price::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Driver::class, function (Faker\Generator $faker) {
+    $time = $faker->time('H:i', '10:00 am');
 
     return [
-        'name' => 'Deberlín',
+        'name' => $faker->firstNameMale,
+        'start_hour' => $time,
+        'end_hour' => date('H:i', strtotime("$time + 10 hours")),
     ];
 });
 

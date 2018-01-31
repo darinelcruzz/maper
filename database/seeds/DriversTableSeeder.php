@@ -4,13 +4,8 @@ use Illuminate\Database\Seeder;
 
 class DriversTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        factory(App\Driver::class, 1)->create();
+        factory(App\Driver::class, 5)->create();
     }
 }
