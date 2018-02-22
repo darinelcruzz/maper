@@ -25,7 +25,7 @@ class CreateInsurerServicesTable extends Migration
             $table->string('type')->nullable();
             $table->string('color')->nullable();
             $table->string('location');
-            $table->string('destiny');
+            $table->string('destination');
             $table->string('client');
             $table->double('amount')->default(0);
             $table->string('contact')->nullable();
@@ -33,6 +33,9 @@ class CreateInsurerServicesTable extends Migration
             $table->string('end')->nullable();
             $table->string('file1')->nullable();
             $table->string('file2')->nullable();
+            $table->string('method')->nullable();
+            $table->date('payment_date')->nullable();
+            $table->string('bill')->nullable();
             $table->string('status')->default('pendiente');
 
             $table->timestamps();

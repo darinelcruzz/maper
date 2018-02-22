@@ -208,6 +208,9 @@ return [
         'days'                  => 'días de crédito',
         'business_name'         => 'razón social',
         'rfc'                   => 'R.F.C.',
+        'location'              => 'ubicación',
+        'vehicule'              => 'vehículo',
+        'destiny'               => 'destino',
     ],
 
 ];

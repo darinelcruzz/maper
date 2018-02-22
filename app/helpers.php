@@ -13,3 +13,12 @@ function fdate($original_date, $format = 'Y-m-d')
     $date = Date::createFromFormat('Y-m-d H:i:s', $original_date);
     return $date->format($format);
 }
+
+function drawHeader(...$titles)
+{
+    echo "<template slot=\"header\"><tr>";
+    foreach ($titles as $title) {
+        echo "<th>" . ucfirst($title) . "</th>";
+    }
+    echo "</tr></template>";
+}

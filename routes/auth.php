@@ -63,6 +63,9 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
     Route::post('agregar', usesas($ctrl, 'store'));
     Route::get('editar/{insurerService}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'update'));
+    Route::get('{insurerService}', usesas($ctrl, 'show'));
+    Route::post('pagar', usesas($ctrl, 'pay'));
+    Route::post('factura', usesas($ctrl, 'bill'));
 });
 
 // Clientes

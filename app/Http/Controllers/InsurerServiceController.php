@@ -30,7 +30,7 @@ class InsurerServiceController extends Controller
             'driver_id' => 'required',
             'vehicule' => 'required',
             'location' => 'required',
-            'destiny' => 'required',
+            'destination' => 'required',
             'client' => 'required',
             'amount' => 'required',
             'contact' => 'required'
@@ -38,12 +38,12 @@ class InsurerServiceController extends Controller
 
         InsurerService::create($request->all());
 
-        return redirect(route('service.insurer.index'));
+        return redirect(route('service.show'));
     }
 
     function show(InsurerService $insurerService)
     {
-
+        return view('services.insurers.show', compact('insurerService'));
     }
 
     function edit(InsurerService $insurerService)
@@ -57,6 +57,28 @@ class InsurerServiceController extends Controller
     function update(Request $request, InsurerService $insurerService)
     {
 
+    }
+
+    function pay(Request $request)
+    {
+        $service = InsurerService::find($request->id);
+        $service->update([
+            'method' => $request->method,
+            'payment_date' => date('Y-m-d'),
+            'status' => 'pagado'
+        ]);
+
+        return back();
+    }
+
+    function bill(Request $request)
+    {
+        $service = InsurerService::find($request->id);
+        $service->update([
+            'bill' => $request->bill
+        ]);
+
+        return back();
     }
 
     function destroy(InsurerService $insurerService)

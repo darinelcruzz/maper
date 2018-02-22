@@ -45,7 +45,7 @@
                                 {!! Field::text('location', $insurerService->location, ['tpl' => 'templates/withicon'], ['icon' => 'globe']) !!}
                             </div>
                             <div class="col-md-6">
-                                {!! Field::text('destiny', $insurerService->destiny, ['tpl' => 'templates/withicon'], ['icon' => 'map-marker']) !!}
+                                {!! Field::text('destination', $insurerService->destiny, ['tpl' => 'templates/withicon'], ['icon' => 'map-marker']) !!}
                             </div>
                         </div>
 

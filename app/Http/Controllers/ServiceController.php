@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
+use App\InsurerService;
 use App\Service;
 use App\Unit;
 use App\Driver;
@@ -26,10 +27,11 @@ class ServiceController extends Controller
         $credit = Service::where('service', 'General')
                         ->where('status', 'credito')
                         ->orWhere('status', 'vencida')->get();
+        $creditI = InsurerService::all();
         $cancel = Service::where('service', 'General')
                         ->where('status', 'cancelado')->get();
 
-        return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit', 'cancel'));
+        return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit', 'cancel', 'creditI'));
     }
 
     function expire()

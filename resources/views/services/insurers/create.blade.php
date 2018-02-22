@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {!! Field::select('insurer_id', $insurers, null,
-                                    ['tpl' => 'templates/withicon', 'empty' => 'Seleccione aseguradora'],
+                                    ['tpl' => 'templates/withicon', 'empty' => 'Seleccione aseguradora', 'label' => 'Aseguradora'],
                                     ['icon' => 'medkit'])
                                 !!}
                             </div>
@@ -20,7 +20,7 @@
                         </div>
 
                         {!! Field::select('driver_id', $drivers, null,
-                            ['tpl' => 'templates/withicon', 'empty' => 'Seleccione operador'],
+                            ['tpl' => 'templates/withicon', 'empty' => 'Seleccione operador', 'label' => 'Conductor'],
                             ['icon' => 'bus'])
                         !!}
                         {!! Field::text('vehicule', ['tpl' => 'templates/withicon'], ['icon' => 'car']) !!}
@@ -45,7 +45,7 @@
                                 {!! Field::text('location', ['tpl' => 'templates/withicon'], ['icon' => 'globe']) !!}
                             </div>
                             <div class="col-md-6">
-                                {!! Field::text('destiny', ['tpl' => 'templates/withicon'], ['icon' => 'map-marker']) !!}
+                                {!! Field::text('destination', ['tpl' => 'templates/withicon'], ['icon' => 'map-marker']) !!}
                             </div>
                         </div>
 
@@ -63,10 +63,10 @@
                                 {!! Field::text('contact', ['tpl' => 'templates/withicon'], ['icon' => 'calendar-o']) !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('end', ['tpl' => 'templates/withicon'], ['icon' => 'calendar-times-o']) !!}
+                                {!! Field::text('end', ['tpl' => 'templates/withicon', 'label' => 'Término'], ['icon' => 'calendar-times-o']) !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('assignment', ['tpl' => 'templates/withicon'], ['icon' => 'clock-o']) !!}
+                                {!! Field::text('assignment', ['tpl' => 'templates/withicon', 'label' => 'Asignación'], ['icon' => 'clock-o']) !!}
                             </div>
                         </div>
 

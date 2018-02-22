@@ -3,17 +3,8 @@
 @section('main-content')
 
     <data-table col="col-md-12" title="General" example="example1" color="box-primary" collapsed="collapsed-box">
-        <template slot="header">
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Vehículo</th>
-                <th>Operador</th>
-                <th>Estimado</th>
-                <th>Opciones</th>
-            </tr>
-        </template>
+
+        {{ drawHeader('ID', 'fecha', 'cliente', 'vehículo', 'operador', 'estimado', 'opciones') }}
 
         <template slot="body">
             @foreach($general as $row)
@@ -41,18 +32,8 @@
     </data-table>
 
     <data-table col="col-md-12" title="Corporaciones" example="example2" color="box-primary" collapsed="collapsed-box">
-        <template slot="header">
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Inventario</th>
-                <th>Tipo</th>
-                <th>Vehículo</th>
-                <th>Operador</th>
-                <th>Llave</th>
-                <th>Opciones</th>
-            </tr>
-        </template>
+
+        {{ drawHeader('ID', 'fecha', 'inventario', 'tipo', 'vehículo', 'operador', 'llave', 'opciones') }}
 
         <template slot="body">
             @foreach($corps as $row)
@@ -78,18 +59,8 @@
     </data-table>
 
     <data-table col="col-md-12" title="Liberados" example="example4" color="box-success" collapsed="collapsed-box">
-        <template slot="header">
-            <tr>
-                <th>ID</th>
-                <th>Fecha Liberación</th>
-                <th>Inventario</th>
-                <th>Tipo</th>
-                <th>Marca</th>
-                <th>Liberador</th>
-                <th>Importe</th>
-                <th>Opciones</th>
-            </tr>
-        </template>
+
+        {{ drawHeader('ID', 'fecha Liberación', 'inventario', 'tipo', 'marca', 'liberador', 'importe', 'opciones') }}
 
         <template slot="body">
             @foreach($release as $row)
@@ -115,17 +86,8 @@
     </data-table>
 
     <data-table col="col-md-12" title="Pagados" example="example3" color="box-success" collapsed="collapsed-box">
-        <template slot="header">
-            <tr>
-                <th>ID</th>
-                <th>Fecha Pago</th>
-                <th>Cliente</th>
-                <th>Marca</th>
-                <th>Importe</th>
-                <th>Factura</th>
-                <th>Opciones</th>
-            </tr>
-        </template>
+
+        {{ drawHeader('ID', 'fecha Pago', 'cliente', 'marca', 'importe', 'factura', 'opciones') }}
 
         <template slot="body">
             @foreach($paid as $row)
@@ -149,21 +111,49 @@
                     </td>
                 </tr>
             @endforeach
+            @foreach($creditI as $row)
+                @if ($row->status == 'pagado')
+                    <tr>
+                        <td>
+                            <a href="{{ route('service.insurer.show', ['insurerService' => $row->id]) }}">
+                                {{ $row->id }} (A)
+                            </a>
+                        </td>
+                        <td>{{ fdate($row->date . '00:00:00', 'D, d/M/Y') }}</td>
+                        <td>{{ $row->insurer->name }}</td>
+                        <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
+                        <td>$ {{ number_format($row->amount, 2) }}</td>
+                        <td>
+                            @if ($row->bill != null)
+                                {{ $row->bill }}
+                            @else
+                                {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.bill']) !!}
+                                  <div class="input-group input-group-sm">
+                                      <input type="hidden" name="id" value="{{ $row->id }}">
+                                      <input type="text" name="bill">
+                                      <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-success btn-flat btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                      </span>
+                                  </div>
+                                {!! Form::close() !!}
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('service.insurer.edit', ['insurerService' => $row->id])}}" class="btn btn-info">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito" example="example5" color="box-teal" collapsed="collapsed-box">
-        <template slot="header">
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Marca</th>
-                <th>Importe</th>
-                <th>Pagar</th>
-                <th>Opciones</th>
-            </tr>
-        </template>
+    <data-table col="col-md-12" title="Crédito" example="example5" color="box-info" collapsed="collapsed-box">
+
+        {{ drawHeader('ID', 'fecha', 'cliente/Aseguradora', 'marca', 'importe', 'pagar', 'opciones') }}
 
         <template slot="body">
             @foreach($credit as $row)
@@ -172,7 +162,7 @@
                     <td>{{ $row->getShortDate('date_out') }}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->clientr->id]) }}"> {{ $row->clientr->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>${{ $row->total }}</td>
+                    <td>$ {{ number_format($row->total, 2) }}</td>
                     <td>
                         @include('services/assign') &nbsp;
                     </td>
@@ -183,20 +173,35 @@
                     </td>
                 </tr>
             @endforeach
+            @foreach($creditI as $row)
+                @if ($row->status == 'pendiente')
+                    <tr>
+                        <td>
+                            <a href="{{ route('service.insurer.show', ['insurerService' => $row->id]) }}">
+                                {{ $row->id }} (A)
+                            </a>
+                        </td>
+                        <td>{{ fdate($row->date . '00:00:00', 'D, d/M/Y') }}</td>
+                        <td>{{ $row->insurer->name }}</td>
+                        <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
+                        <td>$ {{ number_format($row->amount, 2) }}</td>
+                        <td>
+                            @include('services/insurers/assign') &nbsp;
+                        </td>
+                        <td>
+                            <a href="{{ route('service.insurer.edit', ['insurerService' => $row->id])}}" class="btn btn-info">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
         </template>
     </data-table>
 
     <data-table col="col-md-12" title="Cancelados" example="example6" color="box-danger" collapsed="collapsed-box">
-        <template slot="header">
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Marca</th>
-                <th>Importe</th>
-                <th>Razón</th>
-            </tr>
-        </template>
+
+        {{ drawHeader('ID', 'fecha', 'cliente', 'marca', 'importe', 'opciones') }}
 
         <template slot="body">
             @foreach($cancel as $row)
@@ -205,7 +210,7 @@
                     <td>{{ $row->getShortDate('date_out') }}</td>
                     <td>{{ $row->clientr->name }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>${{ $row->total }}</td>
+                    <td>$ {{ number_format($row->total, 2) }}</td>
                     <td>{{ $row->reason }}</td>
                 </tr>
             @endforeach

@@ -37,7 +37,7 @@
                                     <td>{{ $service->driver->name }}</td>
                                     <td>{{ $service->vehicule }}</td>
                                     <td>{{ $service->location }}</td>
-                                    <td>{{ $service->destiny }}</td>
+                                    <td>{{ $service->destination }}</td>
                                     <td>{{ $service->amount }}</td>
                                     <td>{{ $service->contact }}</td>
                                 </tr>
