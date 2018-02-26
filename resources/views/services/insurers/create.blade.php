@@ -54,7 +54,7 @@
                                 {!! Field::text('client', ['tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
                             </div>
                             <div class="col-md-6">
-                                {!! Field::number('amount', 0, ['tpl' => 'templates/withicon', 'step' => '0.1'], ['icon' => 'usd']) !!}
+                                {!! Field::number('amount', 0, ['tpl' => 'templates/withicon', 'step' => '0.01'], ['icon' => 'usd']) !!}
                             </div>
                         </div>
 
