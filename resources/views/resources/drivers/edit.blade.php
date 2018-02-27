@@ -3,12 +3,7 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Editar operador</h3>
-                </div>
-
-                <!-- form start -->
+            <simple-box title="Nuevo operador" color="warning">
                 {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.change', 'class' => 'form-horizontal']) !!}
 
                     <div class="box-body">
@@ -19,11 +14,11 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <input type="hidden" name="id" value="{{ $driver->id }}">
-                        {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
+                        {!! Form::submit('Agregar', ['class' => 'btn btn-warning btn-block']) !!}
                     </div>
                     <!-- /.box-footer -->
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
     </div>
 @endsection

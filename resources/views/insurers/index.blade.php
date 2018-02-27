@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <solid-box title="Lista de aseguradoras" color="box-danger">
+            <solid-box title="Lista de aseguradoras" color="danger">
                 <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>

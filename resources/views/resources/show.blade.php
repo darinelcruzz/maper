@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-    <data-table col="col-md-12" title="Unidades" example="example1" color="box-default">
+    <data-table col="col-md-12" title="Unidades" example="example1" color="default" button>
         <template slot="header">
             <tr>
                 <th>Número</th>
@@ -28,7 +28,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Operadores" example="example2" color="box-default">
+    <data-table col="col-md-12" title="Operadores" example="example2" color="default" button>
         <template slot="header">
             <tr>
                 <th>Nombre</th>

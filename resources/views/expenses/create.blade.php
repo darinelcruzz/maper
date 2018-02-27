@@ -5,11 +5,8 @@
 <div class="row">
     <div class="col-md-12 col-lg-4">
         <div class="col-md-6 col-lg-12">
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Gastos en Efectivo</h3>
-                </div>
-                <!-- form start -->
+            <simple-box title="Gastos efectivo" color="danger">
+
                 {!! Form::open(['method' => 'POST', 'route' => 'expense.store']) !!}
 
                 <div class="box-body">
@@ -40,17 +37,10 @@
                 </div>
                 <!-- /.box-footer -->
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
         <div class="col-md-6 col-lg-12">
-            <div class="box box-success  collapsed-box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Abonos</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-                <!-- form start -->
+            <simple-box title="Abonos" color="success" collapsed button>
                 {!! Form::open(['method' => 'POST', 'route' => 'expense.store']) !!}
 
                 <div class="box-body">
@@ -63,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.box-body -->
+
                 <div class="box-footer">
                     <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                     <input type="hidden" name="type" value="abono">
@@ -73,45 +63,34 @@
                 </div>
                 <!-- /.box-footer -->
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
         <div class="col-md-6 col-lg-12">
-            <div class="box box-info  collapsed-box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Imprimir formato</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-                <!-- form start -->
+            <simple-box title="Imprimir" color="info" collapsed button>
                 {!! Form::open(['method' => 'POST', 'route' => 'expense.format']) !!}
-
-                <div class="box-body">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            {!! Field::date('date_start', $date, ['tpl' => 'templates/withicon', 'label' => 'Inicio'],
-							['icon' => 'calendar-check-o']) !!}
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {!! Field::date('date_start', $date, ['tpl' => 'templates/withicon', 'label' => 'Inicio'],
+    							['icon' => 'calendar-check-o']) !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {!! Field::date('date_end', $date, ['tpl' => 'templates/withicon', 'label' => 'Fin'],
+    							['icon' => 'calendar-check-o']) !!}
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            {!! Field::date('date_end', $date, ['tpl' => 'templates/withicon', 'label' => 'Fin'],
-							['icon' => 'calendar-check-o']) !!}
-                        </div>
+                    <div class="box-footer">
+                        {!! Form::submit('Buscar', ['class' => 'btn btn-black btn-block']) !!}
                     </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    {!! Form::submit('Buscar', ['class' => 'btn btn-black btn-block']) !!}
-                </div>
-                <!-- /.box-footer -->
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
     </div>
     <div class="col-md-12 col-lg-8">
-        <data-table-com title="Movimientos" example="example1" color="box-default">
+        <data-table-com title="Movimientos" example="example1" color="default">
             <template slot="header">
                 <tr>
                     <th>#</th>

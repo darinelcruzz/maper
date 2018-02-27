@@ -3,10 +3,7 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Editar unidad</h3>
-                </div>
+            <simple-box title="Editar precio" color="warning">
 
                 {!! Form::open(['method' => 'POST', 'route' => 'price.change', 'class' => 'form-horizontal']) !!}
 
@@ -26,10 +23,10 @@
                     </div>
                     <div class="box-footer">
                         <input type="hidden" name="id" value="{{ $price->id }}">
-                        {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
+                        {!! Form::submit('Agregar', ['class' => 'btn btn-warning btn-block']) !!}
                     </div>
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
     </div>
 @endsection

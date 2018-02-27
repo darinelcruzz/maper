@@ -3,7 +3,7 @@
 @section('main-content')
 	<div class="row">
 		<div class="col-md-5">
-			<solid-box title="Buscar" color="box-primary" collapsed="collapsed-box">
+			<solid-box title="Buscar" color="primary" collapsed button>
 				{!! Form::open(['method' => 'POST', 'route' => 'admin.cash']) !!}
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
@@ -19,7 +19,7 @@
 
 	<div class="row">
 		<div class="col-lg-8 col-md-12">
-			<data-table-com title="Ingresos" example="example1" color="box-success">
+			<data-table-com title="Ingresos" example="example1" color="success">
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>

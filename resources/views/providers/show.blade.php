@@ -1,8 +1,7 @@
 @extends('admin')
 
 @section('main-content')
-    <data-table col="col-md-12" title="Proveedores"
-        example="example1" color="box-default">
+    <data-table col="col-md-12" title="Proveedores" example="example1" color="default">
         <template slot="header">
             <tr>
                 <th>#</th>
