@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\InsurerService;
 use App\Driver;
+use App\Unit;
 use App\Insurer;
 use Illuminate\Http\Request;
 
@@ -18,17 +19,19 @@ class InsurerServiceController extends Controller
     function create()
     {
         $drivers = Driver::pluck('name', 'id')->toArray();
+        $units = Unit::pluck('name', 'id')->toArray();
         $insurers = Insurer::pluck('name', 'id')->toArray();
-        return view('services.insurers.create', compact('drivers', 'insurers'));
+        return view('services.insurers.create', compact('drivers', 'units', 'insurers'));
     }
 
     function store(Request $request)
     {
         $this->validate($request, [
             'insurer_id' => 'required',
-            'date' => 'required',
+            'date_service' => 'required',
             'driver_id' => 'required',
-            'vehicule' => 'required',
+            'unit_id' => 'required',
+            'brand' => 'required',
             'location' => 'required',
             'destination' => 'required',
             'client' => 'required',

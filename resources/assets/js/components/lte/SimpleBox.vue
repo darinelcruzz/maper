@@ -1,5 +1,5 @@
 <template lang="html">
-    <div :class="[colorBox, {'box box-solid': true, 'collapsed-box': isCollapsed}]">
+    <div :class="[colorBox, {'box': true, 'collapsed-box': isCollapsed}]">
         <div class="box-header with-border">
             <h3 class="box-title">{{ title }}</h3>
             <div v-if="showButton" class="box-tools pull-right">
@@ -24,6 +24,7 @@ export default {
             colorBox: 'box-',
         };
     },
+
     props: ['title', 'color', 'button', 'collapsed'],
     created() {
         this.isCollapsed = this.collapsed == '';

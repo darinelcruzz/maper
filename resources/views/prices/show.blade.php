@@ -4,7 +4,7 @@
 
     @foreach ($types as $type)
         <data-table col="col-md-12" title="{{ ucfirst($type) }}"
-            example="example{{ $loop->index + 1 }}" color="box-primary" collapsed="collapsed-box">
+            example="example{{ $loop->index + 1 }}" color="primary" collapsed button>
 
             <template slot="header">
                 <tr>

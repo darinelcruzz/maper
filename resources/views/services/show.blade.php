@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-    <data-table col="col-md-12" title="General" example="example1" color="box-primary" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="General" example="example1" color="primary" collapsed button>
 
         {{ drawHeader('ID', 'fecha', 'cliente', 'vehículo', 'operador', 'estimado', 'opciones') }}
 
@@ -31,7 +31,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Corporaciones" example="example2" color="box-primary" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Corporaciones" example="example2" color="primary" collapsed button>
 
         {{ drawHeader('ID', 'fecha', 'inventario', 'tipo', 'vehículo', 'operador', 'llave', 'opciones') }}
 
@@ -58,7 +58,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Liberados" example="example4" color="box-success" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Liberados" example="example4" color="success" collapsed button>
 
         {{ drawHeader('ID', 'fecha Liberación', 'inventario', 'tipo', 'marca', 'liberador', 'importe', 'opciones') }}
 
@@ -85,7 +85,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Pagados" example="example3" color="box-success" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Pagados" example="example3" color="success" collapsed button>
 
         {{ drawHeader('ID', 'fecha Pago', 'cliente', 'marca', 'importe', 'factura', 'opciones') }}
 
@@ -119,7 +119,7 @@
                                 {{ $row->id }} (A)
                             </a>
                         </td>
-                        <td>{{ fdate($row->date . '00:00:00', 'D, d/M/Y') }}</td>
+                        <td>{{ fdate($row->date_service , 'D, d/M/Y H:m') }}</td>
                         <td>{{ $row->insurer->name }}</td>
                         <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
                         <td>$ {{ number_format($row->amount, 2) }}</td>
@@ -151,7 +151,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito" example="example5" color="box-info" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Crédito" example="example5" color="info" collapsed button>
 
         {{ drawHeader('ID', 'fecha', 'cliente/Aseguradora', 'marca', 'importe', 'pagar', 'opciones') }}
 
@@ -181,7 +181,7 @@
                                 {{ $row->id }} (A)
                             </a>
                         </td>
-                        <td>{{ fdate($row->date . '00:00:00', 'D, d/M/Y') }}</td>
+                        <td>{{ fdate($row->date_service , 'D, d/M/Y H:m') }}</td>
                         <td>{{ $row->insurer->name }}</td>
                         <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
                         <td>$ {{ number_format($row->amount, 2) }}</td>
@@ -199,7 +199,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Cancelados" example="example6" color="box-danger" collapsed="collapsed-box">
+    <data-table col="col-md-12" title="Cancelados" example="example6" color="danger" collapsed button>
 
         {{ drawHeader('ID', 'fecha', 'cliente', 'marca', 'importe', 'opciones') }}
 

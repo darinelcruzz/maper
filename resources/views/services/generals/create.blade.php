@@ -1,5 +1,9 @@
 @extends('admin')
 
+@section('htmlheader_title')
+    General
+@endsection
+
 @section('main-content')
     <div class="row">
         <div class="col-md-12">
