@@ -216,6 +216,7 @@ return [
         'destiny'               => 'destino',
         'file1'                 => 'dato 1',
         'file2'                 => 'dato 2',
+        'credit'                => 'credito',
     ],
 
 ];

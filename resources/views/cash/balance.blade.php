@@ -55,7 +55,7 @@
 								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
 								<td>{{ $row->description }}</td>
 								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-								<td>{{ $row->status }}</td>
+								<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
 								<td></td>
 								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
 							</tr>
@@ -79,7 +79,7 @@
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td></td><td></td><td></td><td></td>
+						<td></td><td></td><td></td><td></td><td></td>
 						<td><b>Total:</b></td>
 						<td>$ {{ $total + $service }} </td>
 					</tr>
