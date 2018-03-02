@@ -111,23 +111,7 @@
                     </td>
                 </tr>
             @endforeach
-            @foreach($creditI as $row)
-                @if ($row->status == 'pagado')
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
 
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                @endif
-            @endforeach
         </template>
     </data-table>
 
@@ -152,22 +136,6 @@
                         </a>
                     </td>
                 </tr>
-            @endforeach
-            @foreach($creditI as $row)
-                @if ($row->status == 'pendiente')
-                    <tr>
-                        <td>
-
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                        </td>
-                    </tr>
-                @endif
             @endforeach
         </template>
     </data-table>
