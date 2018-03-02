@@ -20,14 +20,6 @@
                     @include('templates.car')
                     @include('templates.ubication')
                     @include('templates.unit')
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::select('credit',
-                                ['1' => 'Si', '2' => 'No'], isset($service) ? $service->lot: null, ['empty' => '¿Será a crédito?'])
-                            !!}
-                        </div>
-                    </div>
 
 
                 </div>
