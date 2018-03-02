@@ -20,7 +20,7 @@ class CorporationServiceController extends Controller
     {
         $service = Service::create($request->except(['routes']));
 
-        return redirect(route('service.show'));
+        return redirect(route('admin.cash'));
     }
 
     public function edit(Service $service)

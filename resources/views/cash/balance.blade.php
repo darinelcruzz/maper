@@ -85,7 +85,7 @@
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td></td><td></td><td></td><td></td><td></td>
+						<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 						<td><b>Total:</b></td>
 						<td>$ {{ $total + $service }} </td>
 					</tr>
