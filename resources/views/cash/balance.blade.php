@@ -18,13 +18,15 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-8 col-md-12">
+		<div class="col-md-12">
 			<data-table-com title="Ingresos" example="example1" color="success">
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>
 		                <th>Servicio</th>
+						<th>Descripción</th>
 		                <th>Tipo</th>
+						<th>Status</th>
                         <th>Forma de Pago</th>
 		                <th>Monto</th>
 		            </tr>
@@ -34,7 +36,9 @@
 						<tr>
 	                        <td>{{ $row->id }}</td>
 	                        <td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
+							<td>{{ $row->description }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+							<td>{{ $row->status }}</td>
 	                        <td>{{ $row->pay }}</td>
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
@@ -51,6 +55,7 @@
 								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
 								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 								<td>{{ $row->status }}</td>
+								<td></td>
 								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
 							</tr>
 							@php
@@ -73,7 +78,7 @@
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td></td><td></td><td></td>
+						<td></td><td></td><td></td><td></td>
 						<td><b>Total:</b></td>
 						<td>$ {{ $total + $service }} </td>
 					</tr>
@@ -81,8 +86,8 @@
 		    </data-table-com>
 		</div>
 
-		<div class="col-lg-4 col-md-12">
-			<div class="col-lg-6 col-md-4">
+		<div class="col-md-12">
+			<div class="col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Efectivo</p>
@@ -94,7 +99,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-lg-6 col-md-4">
+			<div class="col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Tarjeta débito</p>
@@ -106,7 +111,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-lg-6 col-md-4">
+			<div class="col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Tarjeta crédito</p>
@@ -118,7 +123,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-lg-6 col-md-4">
+			<div class="col-md-4">
 	  			<div class="small-box bg-info">
 	    			<div class="inner">
 	    				<p>Cheques</p>
@@ -130,7 +135,7 @@
 	  			</div>
 	    	</div>
 
-			<div class="col-lg-6 col-md-4">
+			<div class="col-md-4">
 				<div class="small-box bg-info">
 					<div class="inner">
 						<p>Transferencias</p>
@@ -142,7 +147,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-6 col-md-4">
+			<div class="col-md-4">
 				<div class="small-box bg-danger">
 					<div class="inner">
 						<p>Crédito</p>
