@@ -114,36 +114,16 @@
             @foreach($creditI as $row)
                 @if ($row->status == 'pagado')
                     <tr>
-                        <td>
-                            <a href="{{ route('service.insurer.show', ['insurerService' => $row->id]) }}">
-                                {{ $row->id }} (A)
-                            </a>
-                        </td>
                         <td></td>
-                        <td>{{ $row->insurer->name }}</td>
-                        <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
-                        <td>$ {{ number_format($row->amount, 2) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
-                            @if ($row->bill != null)
-                                {{ $row->bill }}
-                            @else
-                                {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.bill']) !!}
-                                  <div class="input-group input-group-sm">
-                                      <input type="hidden" name="id" value="{{ $row->id }}">
-                                      <input type="text" name="bill">
-                                      <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-success btn-flat btn-xs">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                      </span>
-                                  </div>
-                                {!! Form::close() !!}
-                            @endif
+
                         </td>
                         <td>
-                            <a href="{{ route('service.insurer.edit', ['insurerService' => $row->id])}}" class="btn btn-info">
-                                <i class="fa fa-pencil-square-o"></i>
-                            </a>
+                            
                         </td>
                     </tr>
                 @endif
@@ -177,21 +157,14 @@
                 @if ($row->status == 'pendiente')
                     <tr>
                         <td>
-                            <a href="{{ route('service.insurer.show', ['insurerService' => $row->id]) }}">
-                                {{ $row->id }} (A)
-                            </a>
+
                         </td>
                         <td></td>
-                        <td>{{ $row->insurer->name }}</td>
-                        <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
-                        <td>$ {{ number_format($row->amount, 2) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
-                            @include('services/insurers/assign') &nbsp;
-                        </td>
-                        <td>
-                            <a href="{{ route('service.insurer.edit', ['insurerService' => $row->id])}}" class="btn btn-info">
-                                <i class="fa fa-pencil-square-o"></i>
-                            </a>
                         </td>
                     </tr>
                 @endif
