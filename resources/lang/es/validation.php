@@ -185,7 +185,9 @@ return [
         'origin'                => 'origen',
         'destination'           => 'destino',
         'driver'                => 'operador',
+        'driver_id'                => 'operador',
         'unit'                  => 'unidad',
+        'unit_id'                  => 'unidad',
         'lot'                   => 'corralón',
         'pension'               => 'pensión',
         'maneuver'              => 'maniobra',
@@ -201,6 +203,7 @@ return [
         'ton10'                 => '10 Ton',
         'pay'                   => 'método de pago',
         'helper'                => 'apoyo',
+        'helper_id'                => 'apoyo',
         'start_hour'            => 'hora entrada',
         'end_hour'              => 'hora salida',
         'driver_hour'           => 'hora extra operador',
@@ -211,6 +214,8 @@ return [
         'location'              => 'ubicación',
         'vehicule'              => 'vehículo',
         'destiny'               => 'destino',
+        'file1'                 => 'dato 1',
+        'file2'                 => 'dato 2',
     ],
 
 ];

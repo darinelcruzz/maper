@@ -16,21 +16,21 @@ class CreateInsurerServicesTable extends Migration
         Schema::create('insurer_services', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->date('date');
-            $table->integer('driver_id');
             $table->integer('insurer_id');
-            $table->string('vehicule');
-            $table->string('plate')->nullable();
-            $table->string('model')->nullable();
+            $table->string('brand');
             $table->string('type')->nullable();
+            $table->string('model')->nullable();
+            $table->string('plate')->nullable();
             $table->string('color')->nullable();
+            $table->string('client');
             $table->string('location');
             $table->string('destination');
-            $table->string('client');
+            $table->integer('driver_id');
+            $table->timestamp('date_service');
             $table->double('amount')->default(0);
-            $table->string('contact')->nullable();
-            $table->string('assignment')->nullable();
-            $table->string('end')->nullable();
+            $table->timestamp('contact')->nullable();
+            $table->timestamp('assignment')->nullable();
+            $table->timestamp('end')->nullable();
             $table->string('file1')->nullable();
             $table->string('file2')->nullable();
             $table->string('method')->nullable();

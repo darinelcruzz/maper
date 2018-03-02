@@ -3,10 +3,7 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Nuevo usuario</h3>
-                </div>
+            <simple-box title="Editar usuario" color="warning">
                 <!-- form start -->
                 {!! Form::open(['method' => 'POST', 'route' => 'user.store', 'class' => 'form-horizontal']) !!}
                   <div class="box-body">
@@ -22,11 +19,11 @@
                   <!-- /.box-body -->
                   <div class="box-footer">
                       <input type="hidden" name="user" value="1">
-                    {!! Form::submit('Agregar', ['class' => 'btn btn-black btn-block']) !!}
+                    {!! Form::submit('Agregar', ['class' => 'btn btn-warning btn-block']) !!}
                   </div>
                   <!-- /.box-footer -->
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
     </div>
 @endsection

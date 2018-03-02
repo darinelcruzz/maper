@@ -30,7 +30,7 @@ return [
         'icon' => 'fa fa-line-chart',
         'submenu' => [
             'cash' => [
-                'title' => 'Ingresos Diarios',
+                'title' => 'Consentrado',
                 'route' => 'admin.cash'
             ],
             'expenses' => [

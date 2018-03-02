@@ -5,11 +5,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-4">
         <div class="col-md-6 col-lg-12">
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Gastos en Banco</h3>
-                </div>
-
+            <simple-box title="Gastos en Banco" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => 'bank.store']) !!}
                     <div class="box-body">
                         <div class="row">
@@ -33,12 +29,12 @@
                         {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
                     </div>
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
     </div>
     <div class="col-md-12 col-lg-8">
         <div class="col-md-12">
-            <data-table-com title="Ingresos" example="example1" color="box-default">
+            <data-table-com title="Ingresos" example="example1" color="default">
                 <template slot="header">
                     <tr>
                         <th>#</th>
@@ -93,7 +89,7 @@
         </div>
 
         <div class="col-md-12">
-            <data-table-com title="Egresos" example="example2" color="box-default">
+            <data-table-com title="Egresos" example="example2" color="default">
                 <template slot="header">
                     <tr>
                         <th>#</th>

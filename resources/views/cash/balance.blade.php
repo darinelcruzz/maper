@@ -3,7 +3,7 @@
 @section('main-content')
 	<div class="row">
 		<div class="col-md-5">
-			<solid-box title="Buscar" color="box-primary" collapsed="collapsed-box">
+			<solid-box title="Buscar" color="primary" collapsed button>
 				{!! Form::open(['method' => 'POST', 'route' => 'admin.cash']) !!}
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
@@ -19,7 +19,7 @@
 
 	<div class="row">
 		<div class="col-lg-8 col-md-12">
-			<data-table-com title="Ingresos" example="example1" color="box-success">
+			<data-table-com title="Ingresos" example="example1" color="success">
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>
@@ -40,6 +40,27 @@
 	                    </tr>
 					@endforeach
 
+					@php
+						$service = 0;
+					@endphp
+
+					@foreach ($services as $row)
+						@if ($row->date_service =! $row->date_out )
+							<tr>
+								<td>{{ $row->id }}</td>
+								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
+								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+								<td>{{ 'Servicio' }}</td>
+								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
+							</tr>
+							@php
+							if ($row->service == 'General') {
+								$service =+ $row->total;
+							}
+							@endphp
+						@endif
+					@endforeach
+
 					@foreach ($creditAll as $row)
 						<tr>
 	                        <td>{{ $row->id }}</td>
@@ -54,7 +75,7 @@
 					<tr>
 						<td></td><td></td><td></td>
 						<td><b>Total:</b></td>
-						<td>$ {{ $total }} </td>
+						<td>$ {{ $total + $service }} </td>
 					</tr>
 				</template>
 		    </data-table-com>
@@ -125,7 +146,7 @@
 				<div class="small-box bg-danger">
 					<div class="inner">
 						<p>Crédito</p>
-						<h3>$ {{ $methodsA['Credito'] + $methodsB['Credito'] }}</h3>
+						<h3>$ {{ $methodsA['Credito'] + $methodsB['Credito'] + $service }}</h3>
 					</div>
 					<div class="icon">
 						<i class="fa fa-calendar"></i>

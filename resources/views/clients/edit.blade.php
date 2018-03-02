@@ -3,12 +3,8 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Editar cliente</h3>
-                </div>
+            <simple-box title="Editar cliente" color="warning">
 
-                <!-- form start -->
                 {!! Form::open(['method' => 'POST', 'route' => 'client.change', 'class' => 'form-horizontal']) !!}
 
                     <div class="box-body">
@@ -24,14 +20,14 @@
                         {!! Field::text('contact', $client->contact, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('cellphone', $client->cellphone, ['tpl' => 'templates/oneline']) !!}
                     </div>
-                    <!-- /.box-body -->
+
                     <div class="box-footer">
                         <input type="hidden" name="id" value="{{ $client->id }}">
-                        {!! Form::submit('Agregar', ['class' => 'btn btn-info btn-block']) !!}
+                        {!! Form::submit('Agregar', ['class' => 'btn btn-warning btn-block']) !!}
                     </div>
-                    <!-- /.box-footer -->
+
                     {!! Form::close() !!}
-                </div>
+                </simple-box>
             </div>
         </div>
     @endsection
