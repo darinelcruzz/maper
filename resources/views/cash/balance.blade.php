@@ -76,8 +76,11 @@
 					@foreach ($creditAll as $row)
 						<tr>
 	                        <td>{{ $row->id }}</td>
+							<td>{{ $row->inventory }}</td>
+							<td></td>
 	                        <td>{{ $row->clientr->name }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+							<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
 	                        <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
