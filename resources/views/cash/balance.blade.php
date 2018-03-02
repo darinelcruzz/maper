@@ -50,7 +50,7 @@
 								<td>{{ $row->id }}</td>
 								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
 								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-								<td>{{ 'Servicio' }}</td>
+								<td>{{ $row->status }}</td>
 								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
 							</tr>
 							@php
