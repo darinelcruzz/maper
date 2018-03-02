@@ -53,6 +53,7 @@
 							<tr>
 								<td>{{ $row->id }}</td>
 								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
+								<td>{{ $row->description }}</td>
 								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 								<td>{{ $row->status }}</td>
 								<td></td>
