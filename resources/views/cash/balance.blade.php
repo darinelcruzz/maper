@@ -23,6 +23,8 @@
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>
+						<th>Inv</th>
+						<th>Folio</th>
 		                <th>Servicio</th>
 						<th>Descripción</th>
 		                <th>Tipo</th>
@@ -35,6 +37,8 @@
 					@foreach ($all as $row)
 						<tr>
 	                        <td>{{ $row->id }}</td>
+							<td>{{ $row->inventory }}</td>
+							<td></td>
 	                        <td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
 							<td>{{ $row->description }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -52,6 +56,8 @@
 						@if ($row->date_service =! $row->date_out )
 							<tr>
 								<td>{{ $row->id }}</td>
+								<td>{{ $row->inventory }}</td>
+								<td></td>
 								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
 								<td>{{ $row->description }}</td>
 								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
