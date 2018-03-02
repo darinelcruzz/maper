@@ -119,7 +119,7 @@
                                 {{ $row->id }} (A)
                             </a>
                         </td>
-                        <td>{{ fdate($row->date_service , 'D, d/M/Y H:m') }}</td>
+                        <td></td>
                         <td>{{ $row->insurer->name }}</td>
                         <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
                         <td>$ {{ number_format($row->amount, 2) }}</td>
@@ -181,7 +181,7 @@
                                 {{ $row->id }} (A)
                             </a>
                         </td>
-                        <td>{{ fdate($row->date_service , 'D, d/M/Y H:m') }}</td>
+                        <td></td>
                         <td>{{ $row->insurer->name }}</td>
                         <td>{{ $row->model }} - {{ $row->type }} - {{ $row->color }}</td>
                         <td>$ {{ number_format($row->amount, 2) }}</td>
