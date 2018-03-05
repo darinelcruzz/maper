@@ -49,7 +49,7 @@
                             {!! Field::text('description') !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::number('amount') !!}
+                            {!! Field::number('amount', ['step' => '0.01', 'min' => '0']) !!}
                         </div>
                     </div>
                 </div>
