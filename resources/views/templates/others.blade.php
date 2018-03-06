@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        {!! Field::number('ret', isset($service) ? $service->ret: null, ['min' => '0', 'step' => '0.01'])!!}
+        {!! Field::number('ret', isset($service) ? $service->ret: null, ['min' => '-1', 'step' => '0.01'])!!}
     </div>
     <div class="col-md-4">
         {!! Field::text('bill', isset($service) ? $service->bill: null)!!}

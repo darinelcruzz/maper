@@ -6,10 +6,10 @@
 
 <div class="row">
     <div class="col-md-4">
-        {!! Field::select('driver', $drivers, isset($service) ? $service->driver: null, ['empty' => 'Seleccione al operador']) !!}
+        {!! Field::select('driver_id', $drivers, isset($service) ? $service->driver_id : null, ['empty' => 'Seleccione al operador']) !!}
     </div>
     <div class="col-md-4">
-        {!! Field::select('unit', $units, isset($service) ? $service->unit: null, ['empty' => 'Seleccione la unidad']) !!}
+        {!! Field::select('unit_id', $units, isset($service) ? $service->unit_id : null, ['empty' => 'Seleccione la unidad']) !!}
     </div>
     <div class="col-md-4">
         <div id="field_date" class="form-group">

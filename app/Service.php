@@ -10,17 +10,27 @@ class Service extends Model
     protected $fillable = [
         'service','description', 'brand', 'type', 'model',
         'category', 'load', 'plate', 'color', 'inventory',
-        'key', 'client', 'origin', 'destination', 'driver',
-        'extra_driver', 'helper', 'extra_helper', 'unit',
+        'key', 'client_id', 'origin', 'destination', 'driver_id',
+        'extra_driver', 'helper', 'extra_helper', 'unit_id',
         'date_service', 'date_out', 'date_return', 'amount',
         'ret', 'status', 'lot', 'maneuver', 'pension', 'releaser',
         'bill', 'others', 'discount', 'reason', 'pay', 'date_credit',
         'pay_credit', 'view'
     ];
 
-    function driverr()
+    function driver()
     {
-        return $this->belongsTo(Driver::class, 'driver');
+        return $this->belongsTo(Driver::class);
+    }
+
+    function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
     function helperr()
@@ -28,19 +38,9 @@ class Service extends Model
         return $this->belongsTo(Driver::class, 'helper');
     }
 
-    function unitr()
-    {
-        return $this->belongsTo(Unit::class, 'unit');
-    }
-
     function pricer()
     {
         return $this->belongsTo(Price::class, 'category');
-    }
-
-    function clientr()
-    {
-        return $this->belongsTo(Client::class, 'client');
     }
 
     public function scopeService($query, $comparation, $service, $col)

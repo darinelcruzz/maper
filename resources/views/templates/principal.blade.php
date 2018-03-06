@@ -21,7 +21,7 @@
         </div>
     @elseif($ser == 'gen')
             <div class="col-md-4">
-                {!! Field::select('client', $clients, isset($service) ? $service->client: null, ['empty' => 'Seleccione al cliente'])!!}
+                {!! Field::select('client_id', $clients, isset($service) ? $service->client_id: null, ['empty' => 'Seleccione al cliente'])!!}
             </div>
     @endif
 </div>

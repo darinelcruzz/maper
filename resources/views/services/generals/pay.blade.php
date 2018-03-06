@@ -4,7 +4,7 @@
 
     <div id="payment" class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->clientr->name }}" color="default">
+            <solid-box title="{{ $service->client->name }}" color="default">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
                 @include('templates.headTable')
                         <tr>
@@ -42,7 +42,6 @@
 
                 @include('templates.pay')
 
-                <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="status" value="pagado">
                     <input type="hidden" name="id" value="{{ $service->id }}">

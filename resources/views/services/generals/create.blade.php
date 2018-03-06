@@ -11,7 +11,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Nuevo servicio General</h3>
                 </div>
-                <!-- form start -->
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.store']) !!}
 
                 <div class="box-body">
@@ -28,9 +27,15 @@
                     <input type="hidden" name="status" value="pendiente">
                     <input type="hidden" name="service" value="General">
                     <input type="hidden" name="view" value="create">
-                    {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! Form::submit('Pagado', ['class' => 'btn btn-success btn-block', 'name' => 'pagado']) !!}
+                        </div>
+                        <div class="col-md-6">
+                            {!! Form::submit('Crédito', ['class' => 'btn btn-danger btn-block', 'name' => 'credito']) !!}
+                        </div>
+                    </div>
                 </div>
-                <!-- /.box-footer -->
                 {!! Form::close() !!}
             </div>
         </div>

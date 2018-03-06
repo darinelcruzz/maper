@@ -27,18 +27,18 @@ class CreateServicesTable extends Migration
             $table->string('color')->nullable();
             $table->integer('inventory')->nullable();
             $table->string('key')->nullable();
-            $table->string('client')->nullable();
+            $table->string('client_id')->nullable();
             $table->string('origin')->nullable();
             $table->string('destination')->nullable();
-            $table->string('driver')->nullable();
+            $table->string('driver_id')->nullable();
             $table->integer('extra_driver')->nullable();
             $table->string('helper')->nullable();
             $table->integer('extra_helper')->nullable();
-            $table->string('unit')->nullable();
+            $table->string('unit_id')->nullable();
             $table->timestamp('date_service')->nullable();
-            $table->timestamp('date_out')->nullable();
             $table->timestamp('date_return')->nullable();
-            $table->double('amount')->nullable();
+            $table->timestamp('date_out')->nullable();
+            $table->double('amount')->default(0);
             $table->double('ret')->default(-1);
             $table->string('status')->nullable();
             $table->string('lot')->nullable();
@@ -53,6 +53,7 @@ class CreateServicesTable extends Migration
             $table->timestamp('date_credit')->nullable();
             $table->string('pay_credit')->nullable();
             $table->string('view')->nullable();
+            $table->string('serial')->nullable();
 
             $table->timestamps();
         });

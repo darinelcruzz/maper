@@ -25631,7 +25631,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['title', 'example', 'color']
+    data: function data() {
+        return {
+            isCollapsed: false,
+            showButton: false,
+            colorBox: 'box-'
+        };
+    },
+
+    props: ['title', 'example', 'color', 'collapsed', 'button'],
+    created: function created() {
+        this.isCollapsed = this.collapsed == '';
+        this.showButton = this.button == '';
+        this.colorBox += this.color;
+    }
 });
 
 /***/ }),
@@ -44449,7 +44462,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('solid-box', {
     attrs: {
       "title": _vm.title,
-      "color": _vm.color
+      "color": _vm.color,
+      "collapsed": _vm.collapsed,
+      "button": _vm.button
     }
   }, [_c('div', {
     staticClass: "table-responsive"

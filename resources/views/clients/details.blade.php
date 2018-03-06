@@ -35,7 +35,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Vencidas" example="example1" color="box-danger">
+                <data-table-com title="Vencidas" example="example1" color="danger" button>
                     <template slot="header">
                         <tr>
                             <th>ID</th>
@@ -74,7 +74,7 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Pendientes" example="example2" color="box-warning">
+                <data-table-com title="Pendientes" example="example2" color="warning" button>
                     <template slot="header">
                         <tr>
                             <th>ID</th>
@@ -110,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Pagadas" example="example3" color="box-success" collapsed="collapsed-box">
+                <data-table-com title="Pagadas" example="example3" color="success" collapsed button>
                     <template slot="header">
                         <tr>
                             <th>ID</th>

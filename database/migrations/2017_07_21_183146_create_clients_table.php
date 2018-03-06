@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
             $table->increments('id');
 
             $table->string('name')->nullable();
+            $table->string('social')->nullable();
             $table->string('rfc')->nullable();
             $table->string('address')->nullable();
             $table->integer('cp')->nullable();

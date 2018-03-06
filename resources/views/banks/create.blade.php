@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-12 col-lg-8">
         <div class="col-md-12">
-            <data-table-com title="Ingresos" example="example1" color="default">
+            <data-table-com title="Ingresos" example="example1" color="success">
                 <template slot="header">
                     <tr>
                         <th>#</th>
@@ -55,10 +55,11 @@
                 <template slot="body">
                     @foreach($services as $row)
                         @php
-                            $sub = ($row->total + $row->ret)/1.16;
-                            $iva = $sub * 0.16;
+                            $sub = $row->total;
+                            $iva = ($sub * 1.16)-$sub;
+                            $total = $sub + $iva;
 
-                            $totalAllI += $row->total;
+                            $totalAllI += $total;
                         @endphp
                         <tr>
                             <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
@@ -74,7 +75,7 @@
                                     @include('banks/ret')
                                 @endif
                             </td>
-                            <td>$ {{ number_format($row->total, 2) }}</td>
+                            <td>$ {{ number_format($total, 2) }}</td>
                       </tr>
                     @endforeach
                 </template>
@@ -89,7 +90,7 @@
         </div>
 
         <div class="col-md-12">
-            <data-table-com title="Egresos" example="example2" color="default">
+            <data-table-com title="Egresos" example="example2" color="danger">
                 <template slot="header">
                     <tr>
                         <th>#</th>

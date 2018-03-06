@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->service }}" color="box-default" collapsed=''>
+            <solid-box title="{{ 'Id ' . $service->id . ' - ' . $service->service }}" color="default">
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -87,16 +87,19 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Operador:</B><dd>{{ $service->driver }}</dd>
+                                <B>Operador:</B><dd>{{ $service->driver->name }}</dd>
                             </td>
                             <td>
-                                <B>Unidad:</B><dd>{{ $service->unitr->description or '' }}</dd>
+                                <B>Unidad:</B><dd>{{ $service->unit->description }}</dd>
                             </td>
                             <td>
                                 <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                <B>Apoyo:</B><dd>{{ $service->helperr->name or 'N/A' }}</dd>
+                            </td>
                             <td>
                                 <B>Corralón:</B><dd>{{ $service->lot }}</dd>
                             </td>

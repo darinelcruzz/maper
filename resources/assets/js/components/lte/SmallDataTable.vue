@@ -1,5 +1,5 @@
 <template lang="html">
-    <solid-box :title="title" :color="color">
+    <solid-box :title="title" :color="color" :collapsed="collapsed" :button="button">
         <div class="table-responsive">
             <table :id="example" class="table table-bordered table-striped">
                 <thead>
@@ -18,6 +18,18 @@
 
 <script>
 export default {
-    props: ['title', 'example', 'color'],
+    data() {
+        return {
+            isCollapsed: false,
+            showButton: false,
+            colorBox: 'box-',
+        };
+    },
+    props: ['title', 'example', 'color', 'collapsed', 'button'],
+    created() {
+        this.isCollapsed = this.collapsed == '';
+        this.showButton = this.button == '';
+        this.colorBox += this.color;
+    }
 }
 </script>

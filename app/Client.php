@@ -9,7 +9,7 @@ class Client extends Model
 {
     protected $fillable = [
     	'name', 'rfc', 'address', 'cp', 'city', 'phone', 'email',
-        'contact', 'cellphone', 'days'
+        'contact', 'cellphone', 'days', 'social'
     ];
 
     function getShortNameAttribute()

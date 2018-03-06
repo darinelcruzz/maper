@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->clientr->name }}" color="box-default" collapsed=''>
+            <solid-box title="{{ 'Id ' . $service->id . ' - ' . $service->client->name }}" color="default">
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -71,7 +71,7 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Cliente:</B><dd>{{ $service->clientr->name }}</dd>
+                                <B>Cliente:</B><dd>{{ $service->client->name }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B><dd>{{ $service->origin }}</dd>
@@ -91,13 +91,18 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Operador:</B><dd>{{ $service->driverr->name }}</dd>
+                                <B>Operador:</B><dd>{{ $service->driver->name }}</dd>
                             </td>
                             <td>
-                                <B>Unidad:</B><dd>{{ $service->unitr->description or '' }}</dd>
+                                <B>Unidad:</B><dd>{{ $service->unit->description or '' }}</dd>
                             </td>
                             <td>
                                 <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <B>Apoyo:</B><dd>{{ $service->helperr->name or 'N/A' }}</dd>
                             </td>
                         </tr>
                     </tbody>

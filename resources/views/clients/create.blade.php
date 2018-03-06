@@ -11,6 +11,7 @@
                         {!! Field::text('phone', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::number('days', ['tpl' => 'templates/oneline']) !!}
                         <hr>
+                        {!! Field::text('social', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('address', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::number('cp', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('rfc', ['tpl' => 'templates/oneline']) !!}

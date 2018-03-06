@@ -4,7 +4,7 @@ getShortDate(@extends('admin')
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->clientr->name }}" color="box-default" collapsed=''>
+            <solid-box title="{{ $service->clientr->name }}" color="default">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
                 @include('templates.headTable')
                         <tr>

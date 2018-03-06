@@ -20,7 +20,17 @@ class GeneralServiceController extends Controller
     public function store(GeneralRequest $request)
     {
         $service = Service::create($request->except(['routes']));
-        return redirect(route('admin.cash'));
+        if(isset($_POST['pagado']))
+        {
+            return redirect(route('service.general.pay', ['id' => $service->id]));
+        }
+        else if(isset($_POST['credito']))
+        {
+            Service::find($service->id)->update([
+                'status' => 'credito'
+            ]);
+            return redirect(route('admin.cash'));
+        }
 
     }
 
@@ -37,7 +47,7 @@ class GeneralServiceController extends Controller
             'status' => $request->pay == 'Credito' ? 'credito' : $request->status
         ]);
 
-        return redirect(route('service.show'));
+        return redirect(route('admin.cash'));
     }
 
     function details(Service $service)
