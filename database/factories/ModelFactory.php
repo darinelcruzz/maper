@@ -69,37 +69,6 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Service::class, function (Faker\Generator $faker) {
-    $service = array('General', 'Tránsito del Estado');
-    $status = array('pendiente', 'corralon');
-    $description = array('Servicio', 'Arrastre', 'Cola');
-    $index = $faker->numberBetween(0, 1);
-    //$service[$index],
-    return [
-        'service' => 'General',
-        'description' => $description[array_rand($description)],
-        'brand' => 'Audi',
-        'type' => 'A4',
-        'category' => '1',
-        'load' => '0',
-        'plate' => 'CV-56-56',
-        'color' => 'Gris',
-        'inventory' => '001',
-        'key' => 'si',
-        'client_id' => '1',
-        'origin' => 'Margaritas',
-        'destination' => 'Comitán',
-        'driver_id' => '1',
-        'unit_id' => '1',
-        'date_service' => '2017-10-04 14:05:00',
-        'date_out' => null,
-        'date_return' => '2017-10-04 23:10:00',
-        'amount' => $faker->numberBetween(100, 600),
-        'status' => 'pendiente',
-        'lot'   => null,
-    ];
-});
-
 $factory->define(App\Price::class, function (Faker\Generator $faker) {
     $types = ['otros', 'localG', 'localC', 'Ruta 1', 'Ruta 2', 'Ruta 3', 'Ruta 4', 'Ruta 5'];
 

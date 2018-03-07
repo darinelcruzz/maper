@@ -25,23 +25,22 @@ class GeneralRequest extends FormRequest
     {
         return [
             'description' => 'sometimes|required',
-            'amount' => 'sometimes|required',
+            'maneuver' => 'sometimes|required',
             'brand' => 'sometimes|required',
             'type' => 'sometimes|required',
             'category' => 'sometimes|required',
             'load' => 'sometimes|required',
             'plate' => 'sometimes|required',
             'color' => 'sometimes|required',
-            'client_id' => 'sometimes|required',
             'origin' => 'sometimes|required',
             'destination' => 'sometimes|required',
             'driver_id' => 'sometimes|required',
             'unit_id' => 'sometimes|required',
-            'date_return' => 'sometimes|required',
             'amount' => 'sometimes|required',
-            'maneuver' => 'sometimes|required',
-            'others' => 'sometimes|required',
             'pay' => 'sometimes|required',
+            'client_id' => 'sometimes|required',
+            'date_return' => 'sometimes|required',
+            'others' => 'sometimes|required',
             'reason' => 'sometimes|required'
         ];
     }

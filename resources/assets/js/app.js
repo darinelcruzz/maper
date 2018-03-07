@@ -25,6 +25,9 @@ Vue.component('data-table-com', require('./components/lte/SmallDataTable.vue'));
 
 Vue.component('payment-box', require('./components/PaymentTemplate.vue'));
 
+Vue.component('dropdown', require('./components/lte/DropdownButton.vue'));
+Vue.component('ddi', require('./components/lte/DropdownItem.vue'));
+
 
 const app = new Vue({
     el: '#app',

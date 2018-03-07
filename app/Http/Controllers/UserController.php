@@ -32,7 +32,7 @@ class UserController extends Controller
 			'user' => $request->user
 		]);
 
-    	return redirect(route('user.show'));
+    	return redirect(route('user.index'));
     }
 
 	function index()
@@ -66,6 +66,6 @@ class UserController extends Controller
 			'level' => $request->level
         ]);
 
-        return redirect(route('user.show'));
+        return redirect(route('user.index'));
     }
 }

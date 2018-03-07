@@ -4,28 +4,30 @@
 
     <data-table col="col-md-12" title="General" example="example1" color="primary" collapsed button>
 
-        {{ drawHeader('ID', 'fecha', 'cliente', 'vehículo', 'operador', 'estimado', 'opciones') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha', 'cliente', 'vehículo', 'operador', 'estimado') }}
 
         <template slot="body">
             @foreach($general as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td>
+                        <dropdown color="primary" icon="cogs">
+                            <ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
+                                icon="dollar" text="Pagar">
+                            </ddi>
+                            <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+                                icon="times" text="Cancelar">
+                            </ddi>
+                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+                                icon="pencil-square-o" text="Editar">
+                            </ddi>
+                        </dropdown>
+                    </td>
                     <td>{{ $row->getShortDate('date_service') }}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>{{ $row->driver->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
                     <td>${{ $row->total }}</td>
-                    <td>
-                        <a href="{{ route('service.general.pay', ['id' => $row->id]) }}" class="btn btn-success">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ route('service.general.cancel', ['id' => $row->id]) }}" class="btn btn-danger">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ route('service.general.edit', ['id' => $row->id]) }}"  class="btn btn-info">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                    </td>
                 </tr>
             @endforeach
         </template>
@@ -33,26 +35,28 @@
 
     <data-table col="col-md-12" title="Corporaciones" example="example2" color="primary" collapsed button>
 
-        {{ drawHeader('ID', 'fecha', 'inventario', 'tipo', 'vehículo', 'operador', 'llave', 'opciones') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha', 'inventario', 'tipo', 'vehículo', 'operador', 'llave') }}
 
         <template slot="body">
             @foreach($corps as $row)
                 <tr>
                     <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td>
+                        <dropdown color="primary" icon="cogs">
+                            <ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+                                icon="hand-peace-o" text="Liberar">
+                            </ddi>
+                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+                                icon="pencil-square-o" text="Editar">
+                            </ddi>
+                        </dropdown>
+                    </td>
                     <td>{{ $row->getShortDate('date_service') }}</td>
                     <td>{{ $row->inventory }}</td>
                     <td>{{ $row->service }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>{{ $row->driver->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
                     <td>{{ $row->key }}</td>
-                    <td>
-                        <a href="{{ route('service.corporation.pay', ['id' => $row->id]) }}" class="btn btn-success">
-                            <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                    </td>
                 </tr>
             @endforeach
         </template>
@@ -60,26 +64,28 @@
 
     <data-table col="col-md-12" title="Liberados" example="example4" color="success" collapsed button>
 
-        {{ drawHeader('ID', 'fecha Liberación', 'inventario', 'tipo', 'marca', 'liberador', 'importe', 'opciones') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha Liberación', 'inventario', 'tipo', 'marca', 'liberador', 'importe') }}
 
         <template slot="body">
             @foreach($release as $row)
                 <tr>
                     <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td>
+                        <dropdown color="success" icon="cogs">
+                            <ddi to="{{ route('service.corporation.print', ['id' => $row->id]) }}"
+                                icon="print" text="Imprimir">
+                            </ddi>
+                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+                                icon="pencil-square-o" text="Editar">
+                            </ddi>
+                        </dropdown>
+                    </td>
                     <td>{{ $row->getShortDate('date_out') }}</td>
                     <td>{{ $row->inventory }}</td>
                     <td>{{ $row->service }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>{{ $row->releaser }}</td>
                     <td>${{ $row->total }} - {{ $row->pay }}</td>
-                    <td>
-                        <a href="{{ route('service.corporation.print', ['id' => $row->id]) }}" class="btn btn-default">
-                            <i class="fa fa-print" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ route('service.corporation.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                    </td>
                 </tr>
             @endforeach
         </template>
@@ -105,9 +111,11 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
+                        @if (Auth::user()->level == 1)
+                            <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -131,9 +139,11 @@
                         @include('services/assign') &nbsp;
                     </td>
                     <td>
-                        <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
+                        @if (Auth::user()->level == 1)
+                            <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

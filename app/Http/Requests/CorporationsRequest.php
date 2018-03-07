@@ -33,18 +33,18 @@ class CorporationsRequest extends FormRequest
             'load' => 'sometimes|required',
             'plate' => 'sometimes|required',
             'color' => 'sometimes|required',
-            'key' => 'sometimes|required',
-            'model' => 'sometimes|required',
             'origin' => 'sometimes|required',
             'destination' => 'sometimes|required',
             'driver_id' => 'sometimes|required',
             'unit_id' => 'sometimes|required',
+            'amount' => 'sometimes|required',
+            'pay' => 'sometimes|required',
+            'key' => 'sometimes|required',
+            'model' => 'sometimes|required',
             'date_return' => 'sometimes|required',
             'lot' => 'sometimes|required',
             'releaser' => 'sometimes|required',
-            'amount' => 'sometimes|required',
             'discount' => 'sometimes|required',
-            'pay' => 'sometimes|required',
         ];
     }
 }

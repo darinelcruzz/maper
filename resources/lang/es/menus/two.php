@@ -3,7 +3,7 @@
 return [
 
     'service' => [
-        'title' => 'No',
+        'title' => 'Servicios',
         'icon' => 'fa fa-ambulance',
         'submenu' => [
             'general' => [
@@ -14,10 +14,10 @@ return [
                 'title' => 'Coorporaciones',
                 'route' => 'service.corporation.create'
             ],
-            'insurers' => [
+            /*'insurers' => [
                 'title' => 'Aseguradoras',
                 'route' => 'service.insurer.create'
-            ],
+            ],*/
             'list' => [
                 'title' => 'Listado',
                 'route' => 'service.show'
@@ -26,11 +26,11 @@ return [
     ],
 
     'admin' => [
-        'title' => 'Va',
+        'title' => 'Administración',
         'icon' => 'fa fa-line-chart',
         'submenu' => [
             'cash' => [
-                'title' => 'Ingresos Diarios',
+                'title' => 'Consentrado',
                 'route' => 'admin.cash'
             ],
             'expenses' => [
@@ -60,7 +60,7 @@ return [
     ],
 
     'clients' => [
-        'title' => 'Poder',
+        'title' => 'Clientes',
         'icon' => 'fa fa-users',
         'submenu' => [
             'create' => [
@@ -75,7 +75,7 @@ return [
     ],
 
     'providers' => [
-        'title' => 'Editar',
+        'title' => 'Proveedores',
         'icon' => 'fa fa-handshake-o',
         'submenu' => [
             'create' => [
@@ -115,21 +115,6 @@ return [
             'report' => [
                 'title' => 'HorasExtras',
                 'route' => 'resources.driver.date'
-            ],
-        ]
-    ],
-
-    'users' => [
-        'title' => 'Usuarios',
-        'icon' => 'fa fa-key',
-        'submenu' => [
-            'create' => [
-                'title' => 'Agregar',
-                'route' => 'user.create'
-            ],
-            'list' => [
-                'title' => 'Listado',
-                'route' => 'user.index'
             ],
         ]
     ],
