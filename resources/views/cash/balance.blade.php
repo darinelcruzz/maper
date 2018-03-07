@@ -19,10 +19,11 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<data-table-com title="Ingresos" example="example1" color="success">
+			<data-table-com title="Ingresos del {{  fdate($date, 'd/F/Y', 'Y-m-d') }}" example="example1" color="success">
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>
+						<th>Motivo</th>
 						<th>Inv</th>
 						<th>Folio</th>
 		                <th>Servicio</th>
@@ -34,64 +35,74 @@
 		            </tr>
 				</template>
 				<template slot="body">
-					@foreach ($all as $row)
+					@php
+						$sum = 0;
+					@endphp
+
+					@foreach ($services as $row)
+						@if ($row->date_service =! $row->date_out)
+							<tr>
+								<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+								<td>Servicio</td>
+								<td>{{ $row->inventory }}</td>
+								<td></td>
+								<td>{{ $row->service == 'General' ? $row->client->name : $row->service }}</td>
+								<td>{{ $row->description }}</td>
+								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+								<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
+								<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>
+								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
+							</tr>
+							@php
+								if ($row->status == 'credito') {
+									$sum += $row->total;
+								}
+							@endphp
+						@endif
+					@endforeach
+
+					@foreach ($payed as $row)
 						<tr>
-	                        <td>{{ $row->id }}</td>
+	                        <td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>Pago</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
-	                        <td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
+	                        <td>{{ $row->service == 'General' ? $row->client->name : $row->service }}</td>
 							<td>{{ $row->description }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>{{ $row->status }}</td>
 	                        <td>{{ $row->pay }}</td>
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
+						@php
+							$sum += $row->total;
+						@endphp
 					@endforeach
 
-					@php
-						$service = 0;
-					@endphp
-
-					@foreach ($services as $row)
-						@if ($row->date_service =! $row->date_out )
-							<tr>
-								<td>{{ $row->id }}</td>
-								<td>{{ $row->inventory }}</td>
-								<td></td>
-								<td>{{ $row->service == 'General' ? $row->clientr->name : $row->service }}</td>
-								<td>{{ $row->description }}</td>
-								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-								<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
-								<td></td>
-								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
-							</tr>
-							@php
-							if ($row->service == 'General') {
-								$service =+ $row->total;
-							}
-							@endphp
-						@endif
-					@endforeach
-
-					@foreach ($creditAll as $row)
+					@foreach ($credit as $row)
 						<tr>
-	                        <td>{{ $row->id }}</td>
+	                        <td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>Pago crédito</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
-	                        <td>{{ $row->clientr->name }}</td>
+	                        <td>{{ $row->client->name }}</td>
 							<td>{{ $row->description }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
-	                        <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
+	                        <td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>
 	                        <td>${{ $row->total }}</td>
 	                    </tr>
+						@php
+							$sum += $row->total;
+						@endphp
 					@endforeach
+
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+						<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 						<td><b>Total:</b></td>
-						<td>$ {{ $total + $service }} </td>
+						<td>$ {{ $sum }} </td>
 					</tr>
 				</template>
 		    </data-table-com>
@@ -162,7 +173,7 @@
 				<div class="small-box bg-danger">
 					<div class="inner">
 						<p>Crédito</p>
-						<h3>$ {{ $methodsA['Credito'] + $methodsB['Credito'] + $service }}</h3>
+						<h3>$ {{ $methodsB['Credito'] + $methodsC['Credito'] }}</h3>
 					</div>
 					<div class="icon">
 						<i class="fa fa-calendar"></i>

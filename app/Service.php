@@ -116,10 +116,15 @@ class Service extends Model
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 
-    function scopeUntilDate($query, $date, $column = 'date_out', $status = 'cancelado')
+    function scopeUntilDate($query, $date, $column = 'date_out')
+    {
+        return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
+    }
+
+    function scopeUntilDateWhere($query, $date, $column = 'date_out', $colWhere = 'status', $data = 'credito' ,$condition = '=!')
     {
         return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])
-                    ->where('status', '!=', $status)->get();
+                        ->where($colWhere,$condition,$data)->get();
     }
 
     function scopeFromDateToDate($query, $startDate, $endDate, $driver, $type)
