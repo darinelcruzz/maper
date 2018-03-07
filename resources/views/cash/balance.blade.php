@@ -35,20 +35,6 @@
 		            </tr>
 				</template>
 				<template slot="body">
-					@foreach ($all as $row)
-						<tr>
-	                        <td>{{ $row->id }}</td>
-							<td>{{ $row->inventory }}</td>
-							<td></td>
-	                        <td>{{ $row->service == 'General' ? $row->client->name : $row->service }}</td>
-							<td>{{ $row->description }}</td>
-	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-							<td>{{ $row->status }}</td>
-	                        <td>{{ $row->pay }}</td>
-	                        <td>${{ $row->total }}</td>
-	                    </tr>
-					@endforeach
-
 					@php
 						$sum = 0;
 					@endphp
@@ -79,6 +65,24 @@
 						<tr>
 	                        <td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
 							<td>Pago</td>
+							<td>{{ $row->inventory }}</td>
+							<td></td>
+	                        <td>{{ $row->service == 'General' ? $row->client->name : $row->service }}</td>
+							<td>{{ $row->description }}</td>
+	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+							<td>{{ $row->status }}</td>
+	                        <td>{{ $row->pay }}</td>
+	                        <td>${{ $row->total }}</td>
+	                    </tr>
+						@php
+							$sum += $row->total;
+						@endphp
+					@endforeach
+
+					@foreach ($credit as $row)
+						<tr>
+	                        <td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>Pago crédito</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
 	                        <td>{{ $row->client->name }}</td>
