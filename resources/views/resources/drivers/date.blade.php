@@ -51,7 +51,7 @@
                         <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                         <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                         <td>{{ $row->origin }} <br> {{ $row->destination }}</td>
-                        <td>{{ $row->getShortDate('date_service') }} <br> {{ $row->getShortDate('date_return') }}</td>
+                        <td>{{ $row->date_service }} <br> {{ $row->date_return }}</td>
                         <td>
                             {{ $row->driver->name }} <br>
                             {{ $row->extra_driver ?  '$ ' . number_format($row->extra_driver, 2): '' }}
