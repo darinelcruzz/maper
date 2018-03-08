@@ -93,24 +93,6 @@ class Service extends Model
         return $interval;
     }
 
-    function getInScheduleAttribute()
-    {
-        $startDate = substr($this->date_service, 0, 10);
-        $endDate = substr($this->date_return, 0, 10);
-        $isSameDate = $startDate == $endDate;
-
-        $driverEndHour = $this->driverr->end_hour;
-        if ($isSameDate && $this->week_day == 'sábado') {
-            $driverEndHour = '14:00:00';
-        }
-
-        $startHour = substr($this->date_service, 11);
-        $endHour = substr($this->date_return, 11);
-        $inSchedule = $startHour >= $this->driverr->start_hour && $endHour <= $driverEndHour;
-
-        return $isSameDate && $inSchedule && $this->week_day != 'domingo';
-    }
-
     public function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;

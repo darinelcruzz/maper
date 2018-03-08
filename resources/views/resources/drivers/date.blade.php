@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="col-md-12 col-lg-9">
-        <data-table-com title="Servicios con Extras" example="example1" color="box-default">
+        <data-table-com title="Servicios con Extras" example="example1" color="danger">
             <template slot="header">
                 <tr>
                     <th>#</th>
@@ -49,29 +49,16 @@
                 @foreach ($outTime as $row)
                     <tr>
                         <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                        <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                         <td>{{ $row->origin }} <br> {{ $row->destination }}</td>
                         <td>{{ $row->getShortDate('date_service') }} <br> {{ $row->getShortDate('date_return') }}</td>
                         <td>
-                            {{ $row->driverr->name }} <br>
-                            @if ($row->extra_driver != null)
-                                $ {{ $row->extra_driver }}
-                            @else
-                                @include('resources/drivers/extraDriver')
-                            @endif
+                            {{ $row->driver->name }} <br>
+                            {{ $row->extra_driver ?  '$ ' . number_format($row->extra_driver, 2): '' }}
                         </td>
                         <td>
-                            @if ($row->helper != null)
-                                {{ $row->helperr->name }} <br>
-                                @if ($row->extra_helper != null)
-                                    $ {{ $row->extra_helper }}
-                                @else
-                                    @include('resources/drivers/extraHelper')
-                                @endif
-                            @else
-                                n/a
-                            @endif
-
+                            {{ $row->helperr->name or '' }} <br>
+                            {{ $row->extra_helper ?  '$ ' . number_format($row->extra_helper, 2): '' }}
                         </td>
                     </tr>
                 @endforeach
