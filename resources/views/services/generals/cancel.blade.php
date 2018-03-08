@@ -4,13 +4,13 @@ getShortDate(@extends('admin')
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->clientr->name }}" color="default">
+            <solid-box title="{{ $service->client->name }}" color="default">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>
                                 <B>Fecha y hora:</B>
-                                <dd>{{ $service->getDate('date_service') }}</dd>
+                                <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B>

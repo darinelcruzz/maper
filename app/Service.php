@@ -54,36 +54,6 @@ class Service extends Model
                     ->where($payCol, $type)->get();
     }
 
-    public function getDate($date)
-    {
-        $fdate = new Date(strtotime($this->$date));
-        return $fdate->format('l, j F Y h:i a');
-    }
-
-    function getWeekDayAttribute()
-    {
-        $date = new Date(strtotime($this->date_service));
-        return $date->format('l');
-    }
-
-    public function getShortDate($date)
-    {
-        $fdate = new Date(strtotime($this->$date));
-        return $fdate->format('j/M/y, h:i a');
-    }
-
-    public function getHour($date)
-    {
-        $fdate = new Date(strtotime($this->$date));
-        return $fdate->format('h:i a');
-    }
-
-    public function getWeekDate($date)
-    {
-        $fdate = new Date(strtotime($this->$date));
-        return $fdate->format('D j, M');
-    }
-
     function getDays($date)
     {
         $today = Date::now();

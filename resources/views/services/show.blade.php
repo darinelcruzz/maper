@@ -23,7 +23,7 @@
                             </ddi>
                         </dropdown>
                     </td>
-                    <td>{{ $row->getShortDate('date_service') }}</td>
+                    <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>{{ $row->driver->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
@@ -51,7 +51,7 @@
                             </ddi>
                         </dropdown>
                     </td>
-                    <td>{{ $row->getShortDate('date_service') }}</td>
+                    <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                     <td>{{ $row->inventory }}</td>
                     <td>{{ $row->service }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -80,7 +80,7 @@
                             </ddi>
                         </dropdown>
                     </td>
-                    <td>{{ $row->getShortDate('date_out') }}</td>
+                    <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
                     <td>{{ $row->inventory }}</td>
                     <td>{{ $row->service }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -99,7 +99,7 @@
             @foreach($paid as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                    <td>{{  $row->pay_credit ? $row->getShortDate('date_credit') : $row->getShortDate('date_out')}}</td>
+                    <td>{{  $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a')}}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
@@ -125,13 +125,13 @@
 
     <data-table col="col-md-12" title="Crédito" example="example5" color="info" collapsed button>
 
-        {{ drawHeader('ID', 'fecha', 'cliente/Aseguradora', 'marca', 'importe', 'pagar', 'opciones') }}
+        {{ drawHeader('ID', 'fecha servicio', 'cliente/Aseguradora', 'marca', 'importe', 'pagar', 'opciones') }}
 
         <template slot="body">
             @foreach($credit as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                    <td>{{ $row->getShortDate('date_out') }}</td>
+                    <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>$ {{ number_format($row->total, 2) }}</td>
@@ -158,7 +158,7 @@
             @foreach($cancel as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                    <td>{{ $row->getShortDate('date_out') }}</td>
+                    <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
                     <td>{{ $row->client->name }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>$ {{ number_format($row->total, 2) }}</td>

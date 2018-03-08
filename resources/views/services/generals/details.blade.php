@@ -8,22 +8,19 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Servicio:</B>
-                                <dd>{{ $service->service }}</dd>
+                                <B>Servicio:</B><dd>{{ $service->service }}</dd>
                             </td>
                             <td>
-                                <B>Descripción:</B>
-                                <dd>{{ $service->description }}</dd>
+                                <B>Descripción:</B><dd>{{ $service->description }}</dd>
                             </td>
                             <td>
-                                <B>Fecha y hora:</B>
-                                <dd>{{ $service->getDate('date_service') }}</dd>
+                                <B>Fecha y hora del servicio:</B>
+                                <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <B>Inventario:</B>
-                                <dd>{{ $service->inventory }}</dd>
+                                <B>Inventario:</B><dd>{{ $service->inventory }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -97,7 +94,7 @@
                                 <B>Unidad:</B><dd>{{ $service->unit->description or '' }}</dd>
                             </td>
                             <td>
-                                <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
+                                <B>Regreso:</B><dd>{{ fdate($service->date_return, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                         <tr>

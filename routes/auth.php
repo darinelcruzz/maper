@@ -1,7 +1,9 @@
 <?php
 
 Route::get('/', function () {
+    expire();
     return view('welcome');
+
 })->name('home');
 
 // Aseguradoras
