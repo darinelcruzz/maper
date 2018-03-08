@@ -23,7 +23,7 @@ class Client extends Model
 
     function services()
     {
-        return $this->hasMany(Service::class, 'client');
+        return $this->hasMany(Service::class, 'client_id');
     }
 
     function getPaidServicesAttribute()

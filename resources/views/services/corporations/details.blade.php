@@ -8,13 +8,16 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Servicio:</B><dd>{{ $service->service }}</dd>
+                                <B>Servicio:</B>
+                                <dd>{{ $service->service }}</dd>
                             </td>
                             <td>
-                                <B>Descripción:</B><dd>{{ $service->description }}</dd>
+                                <B>Descripción:</B>
+                                <dd>{{ $service->description }}</dd>
                             </td>
                             <td>
-                                <B>Fecha y hora:</B><dd>{{ $service->getDate('date_service') }}</dd>
+                                <B>Fecha y hora:</B>
+                                <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -93,7 +96,8 @@
                                 <B>Unidad:</B><dd>{{ $service->unit->description }}</dd>
                             </td>
                             <td>
-                                <B>Regreso:</B><dd>{{ $service->getDate('date_return') }}</dd>
+                                <B>Regreso:</B>
+                                <dd>{{ fdate($service->date_return, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                         <tr>
@@ -120,10 +124,12 @@
                                 <B>Liberador:</B><dd>{{ $service->releaser }}</dd>
                             </td>
                             <td>
-                                <B>Fecha:</B><dd>{{ $service->getDate('date_out') }}</dd>
+                                <B>Fecha de liberación:</B>
+                                <dd>{{fdate($service->date_out, 'l, j F Y h:i a') }}</dd>
                             </td>
                             <td>
-                                <B>Importe:</B><dd>${{ $service->amount + $service->maneuver + $service->pension - $service->discount }}</dd>
+                                <B>Importe:</B>
+                                <dd>${{ $service->amount + $service->maneuver + $service->pension - $service->discount }}</dd>
                             </td>
                         </tr>
                     </tbody>

@@ -14,8 +14,6 @@ class ServiceController extends Controller
 
     function show()
     {
-        $this->expire();
-
         $general = Service::where('status', 'pendiente')->get();
         $corps = Service::where('service', '!=', 'General')
                         ->where('status', 'corralon')->get();
@@ -32,18 +30,6 @@ class ServiceController extends Controller
                         ->where('status', 'cancelado')->get();
 
         return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit', 'cancel', 'creditI'));
-    }
-
-    function expire()
-    {
-        $services = Service::where('status', 'credito')->get();
-
-        foreach ($services as $service) {
-            $interval = $service->getDays('date_out');
-            if ($interval > 40 ) {
-                $service->update(['status' => 'vencida']);
-            }
-        }
     }
 
     function changeExtras(Request $request)

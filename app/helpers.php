@@ -22,3 +22,15 @@ function drawHeader(...$titles)
     }
     echo "</tr></template>";
 }
+
+function expire()
+{
+    $services = App\Service::where('status', 'credito')->get();
+
+    foreach ($services as $service) {
+        $interval = $service->getDays('date_service');
+        if ($interval > $service->client->days ) {
+            $service->update(['status' => 'vencida']);
+        }
+    }
+}
