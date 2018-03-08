@@ -81,9 +81,9 @@
                                                 <td>{{ $row->id }}</td>
                                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                                 <td>{{ $row->origin }} - {{ $row->destination }}</td>
-                                                <td>{{ $row->getShortDate('date_service') }} - {{ $row->getHour('date_return') }}</td>
+                                                <td>{{ $row->date_service }} - {{ $row->date_return }}</td>
                                                 <td>
-                                                    @if ($row->driverr->name == $driver && $row->extra_driver != null)
+                                                    @if ($row->driver->name == $driver && $row->extra_driver != null)
                                                         Operador $ {{ $row->extra_driver }}
                                                         @php
                                                             $total = $row->extra_driver + $total;

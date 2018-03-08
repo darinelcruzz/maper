@@ -66,8 +66,8 @@ class DriverController extends Controller
 
         foreach ($drivers as $driver) {
             $servicesID = [];
-            
-            $services = Service::fromDateToDate($start, $end, $driver, 'driver');
+
+            $services = Service::fromDateToDate($start, $end, $driver, 'driver_id');
             foreach ($services as $service) {
                 if (!$service->inSchedule) {
                     array_push($servicesID, $service);
