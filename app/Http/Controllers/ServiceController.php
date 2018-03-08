@@ -46,11 +46,18 @@ class ServiceController extends Controller
         }
     }
 
-    function changeExtras(Request $request)
+    function editHour(Service $service)
     {
-        Service::find($request->id)->update($request->all());
+        return view('services.edit_hour', compact('service'));
+    }
 
-        return redirect(route('resources.driver.date'));
+    function updateHour(Request $request)
+    {
+        $service = Service::find($request->id);
+
+        $service->update($request->all());
+
+        return redirect(route('admin.cash'));
     }
 
 }

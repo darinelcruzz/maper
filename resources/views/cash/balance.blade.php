@@ -23,6 +23,7 @@
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>
+						<th><i class="fa fa-cogs"></i></th>
 						<th>Motivo</th>
 						<th>Inv</th>
 						<th>Folio</th>
@@ -43,6 +44,28 @@
 						@if ($row->date_service =! $row->date_out)
 							<tr>
 								<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+								<td>
+									<dropdown color="success" icon="cogs">
+										@if ($row->service == 'General')
+											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
+				                                icon="dollar" text="Pagar">
+				                            </ddi>
+											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+				                                icon="clock-o" text="Hora de regreso">
+				                            </ddi>
+				                            <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+				                                icon="times" text="Muerto">
+				                            </ddi>
+										@else
+											<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+				                                icon="hand-peace-o" text="Liberar">
+				                            </ddi>
+											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+				                                icon="clock-o" text="Hora de regreso">
+				                            </ddi>
+										@endif
+			                        </dropdown>
+								</td>
 								<td>Servicio</td>
 								<td>{{ $row->inventory }}</td>
 								<td></td>
@@ -64,6 +87,28 @@
 					@foreach ($payed as $row)
 						<tr>
 	                        <td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>
+								<dropdown color="success" icon="cogs">
+									@if ($row->service == 'General')
+										<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
+											icon="dollar" text="Pagar">
+										</ddi>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso">
+										</ddi>
+										<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+											icon="times" text="Muerto">
+										</ddi>
+									@else
+										<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+											icon="hand-peace-o" text="Liberar">
+										</ddi>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso">
+										</ddi>
+									@endif
+								</dropdown>
+							</td>
 							<td>Pago</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
@@ -82,6 +127,28 @@
 					@foreach ($credit as $row)
 						<tr>
 	                        <td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>
+								<dropdown color="success" icon="cogs">
+									@if ($row->service == 'General')
+										<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
+											icon="dollar" text="Pagar">
+										</ddi>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso">
+										</ddi>
+										<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+											icon="times" text="Muerto">
+										</ddi>
+									@else
+										<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+											icon="hand-peace-o" text="Liberar">
+										</ddi>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso">
+										</ddi>
+									@endif
+								</dropdown>
+							</td>
 							<td>Pago crédito</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
@@ -100,7 +167,7 @@
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+						<td colspan="8"></td>
 						<td><b>Total:</b></td>
 						<td>$ {{ $sum }} </td>
 					</tr>
@@ -110,75 +177,45 @@
 
 		<div class="col-md-12">
 			<div class="col-md-4">
-	  			<div class="small-box bg-info">
-	    			<div class="inner">
-	    				<p>Efectivo</p>
-	      				<h3>$ {{ $methodsA['Efectivo'] + $methodsB['Efectivo'] }}</h3>
-	    			</div>
-	    			<div class="icon">
-	      				<i class="fa fa-money"></i>
-	    			</div>
-	  			</div>
+				<icon-box color="info" icon="money">
+					<p>Efectivo</p>
+					<h3>$ {{ $methodsA['Efectivo'] + $methodsB['Efectivo'] }}</h3>
+				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
-	  			<div class="small-box bg-info">
-	    			<div class="inner">
-	    				<p>Tarjeta débito</p>
-	      				<h3>$ {{ $methodsA['T. Debito'] + $methodsB['T. Debito'] }}</h3>
-	    			</div>
-	    			<div class="icon">
-	      				<i class="fa fa-credit-card"></i>
-	    			</div>
-	  			</div>
+				<icon-box color="info" icon="credit-card">
+					<p>Tarjeta débito</p>
+					<h3>$ {{ $methodsA['T. Debito'] + $methodsB['T. Debito'] }}</h3>
+				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
-	  			<div class="small-box bg-info">
-	    			<div class="inner">
-	    				<p>Tarjeta crédito</p>
-	      				<h3>$ {{ $methodsA['T. Credito'] + $methodsB['T. Credito'] }}</h3>
-	    			</div>
-	    			<div class="icon">
-	      				<i class="fa fa-credit-card-alt"></i>
-	    			</div>
-	  			</div>
+				<icon-box color="info" icon="credit-card-alt">
+					<p>Tarjeta crédito</p>
+					<h3>$ {{ $methodsA['T. Credito'] + $methodsB['T. Credito'] }}</h3>
+				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
-	  			<div class="small-box bg-info">
-	    			<div class="inner">
-	    				<p>Cheques</p>
-	      				<h3>$ {{ $methodsA['Cheque'] + $methodsB['Cheque'] }}</h3>
-	    			</div>
-	    			<div class="icon">
-	      				<i class="fa fa-pencil"></i>
-	    			</div>
-	  			</div>
+				<icon-box color="info" icon="pencil">
+					<p>Cheques</p>
+					<h3>$ {{ $methodsA['Cheque'] + $methodsB['Cheque'] }}</h3>
+				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
-				<div class="small-box bg-info">
-					<div class="inner">
-						<p>Transferencias</p>
-						<h3>$ {{ $methodsA['Transferencia'] + $methodsB['Transferencia'] }}</h3>
-					</div>
-					<div class="icon">
-						<i class="fa fa-exchange"></i>
-					</div>
-				</div>
+				<icon-box color="info" icon="exchange">
+					<p>Transferencias</p>
+					<h3>$ {{ $methodsA['Transferencia'] + $methodsB['Transferencia'] }}</h3>
+				</icon-box>
 			</div>
 
 			<div class="col-md-4">
-				<div class="small-box bg-danger">
-					<div class="inner">
-						<p>Crédito</p>
-						<h3>$ {{ $methodsB['Credito'] + $methodsC['Credito'] }}</h3>
-					</div>
-					<div class="icon">
-						<i class="fa fa-calendar"></i>
-					</div>
-				</div>
+				<icon-box color="danger" icon="calendar">
+					<p>Crédito</p>
+					<h3>$ {{ $methodsB['Credito'] + $methodsC['Credito'] }}</h3>
+				</icon-box>
 			</div>
 
 			<div class="col-md-12">

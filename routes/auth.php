@@ -22,8 +22,8 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
 
 // Servicios
 Route::get('servicios', usesas('ServiceController', 'show', 'service.show'));
-
-Route::post('servicios', usesas('ServiceController@changeExtras', 'changeExtras', 'service.changeExtras'));
+Route::get('servicios/horas/{service}', usesas('ServiceController', 'editHour', 'service.editHour'));
+Route::post('servicios/horas', usesas('ServiceController', 'updateHour', 'service.updateHour'));
 
 // General
 Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], function () {
