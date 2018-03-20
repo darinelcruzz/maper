@@ -85,11 +85,4 @@ class Service extends Model
                         ->where($type, $driver->id)->get();
     }
 
-    function scopePayed($query)
-    {
-        return $query->where('status', '!=' , 'pendiente' )
-                        ->where('status', '!=' , 'cancelado' )
-                        ->where('status', '!=' , 'corralon' )->get();
-    }
-
 }

@@ -45,15 +45,9 @@ class DriverController extends Controller
     {
         $date = Date::now()->format('Y-m-d');
 
-        $services = Service::payed();
-        $outTime = [];
+        $services = Service::where('extra_driver', '>', 0)->get();
 
-        foreach ($services as $service) {
-            if (!$service->inSchedule) {
-                array_push($outTime, $service);
-            }
-        }
-        return view('resources.drivers.date', compact('date', 'outTime'));
+        return view('resources.drivers.date', compact('date', 'services'));
     }
 
     function format(Request $request)

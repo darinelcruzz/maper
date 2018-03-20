@@ -46,12 +46,12 @@
                 </tr>
             </template>
             <template slot="body">
-                @foreach ($outTime as $row)
+                @foreach ($services as $row)
                     <tr>
                         <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                         <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
-                        <td>{{ $row->origin }} <br> {{ $row->destination }}</td>
-                        <td>{{ $row->date_service }} <br> {{ $row->date_return }}</td>
+                        <td><b>Origen:</b>{{ $row->origin }} <br><b>Destino:</b> {{ $row->destination }}</td>
+                        <td><b>Serv:</b>{{ fdate($row->date_service, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->date_return, ' l, j/F/Y H:s') }}</td>
                         <td>
                             {{ $row->driver->name }} <br>
                             {{ $row->extra_driver ?  '$ ' . number_format($row->extra_driver, 2): '' }}

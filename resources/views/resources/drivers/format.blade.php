@@ -81,18 +81,20 @@
                                                 <td>{{ $row->id }}</td>
                                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                                 <td>{{ $row->origin }} - {{ $row->destination }}</td>
-                                                <td>{{ $row->date_service }} - {{ $row->date_return }}</td>
+                                                <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }} - {{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                                                 <td>
                                                     @if ($row->driver->name == $driver && $row->extra_driver != null)
                                                         Operador $ {{ $row->extra_driver }}
                                                         @php
                                                             $total = $row->extra_driver + $total;
                                                         @endphp
-                                                    @elseif ($row->helperr->name == $driver && $row->extra_helper != null)
-                                                        Apoyo $ {{ $row->extra_helper }}
-                                                        @php
-                                                            $total = $row->extra_helper + $total;
-                                                        @endphp
+                                                    @elseif ($row->helper)
+                                                        @if ($row->helperr->name == $driver && $row->extra_helper != null)
+                                                            Apoyo $ {{ $row->extra_helper }}
+                                                            @php
+                                                                $total = $row->extra_helper + $total;
+                                                            @endphp
+                                                        @endif
                                                     @else
                                                         Sin monto
                                                     @endif
