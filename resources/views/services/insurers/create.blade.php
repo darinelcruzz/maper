@@ -17,7 +17,7 @@
                         <div class="col-md-4">
                             <div id="field_date" class="form-group">
                                 <label for="date_service" class="control-label">
-                                    Fecha y hora:
+                                    Fecha y hora de servicio
                                 </label>
                                 <div class="controls">
                                     <input class="form-control" id="date_service" name="date_service" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
@@ -60,6 +60,15 @@
                             {!! Field::text('color', isset($service) ? $service->color: null)!!}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {!! Field::text('load', isset($service) ? $service->load: null)!!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Field::number('inventory', isset($service) ? $service->inventory: null)!!}
+                        </div>
+
+                    </div>
 
                     <div class="box-header with-border">
                         <h3 class="box-title">Ubicación
@@ -68,14 +77,23 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            {!! Field::text('location') !!}
+                            {!! Field::text('origin', isset($service) ? $service->origin: null) !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Field::text('destination') !!}
+                            {!! Field::text('destination', isset($service) ? $service->destination: null) !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Field::number('amount', 0, ['step' => '0.01', 'label' => 'Importe estimado']) !!}
+                            {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado']) !!}
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {!! Field::number('maneuver', 0, ['min' => '0']) !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Field::number('pension', 0, ['min' => '0']) !!}
+                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -105,18 +123,18 @@
                         </div>
                         <div class="col-md-4">
                             <div id="field_date" class="form-group">
-                                <label for="end" class="control-label">
+                                <label for="date_return" class="control-label">
                                     Fecha y hora regreso:
                                 </label>
                                 <div class="controls">
-                                    <input class="form-control" id="end" name="end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
+                                    <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
                                 </div>
                             </div>
                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            {!! Field::select('helper_id', $drivers, null, ['empty' => 'Seleccione operador']) !!}
+                            {!! Field::select('helper', $drivers, null, ['empty' => 'Seleccione operador']) !!}
                         </div>
                     </div>
 
@@ -128,40 +146,55 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            {!! Field::text('client') !!}
+                            {!! Field::text('client', isset($service) ? $service->client: null) !!}
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div id="field_date" class="form-group">
-                                <label for="contact" class="control-label">
-                                    Fecha y hora contacto:
+                                <label for="date_contact" class="control-label">
+                                    Fecha y hora contacto
                                 </label>
                                 <div class="controls">
-                                    <input class="form-control" id="contact" name="contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
+                                    <input class="form-control" id="date_contact" name="date_contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : date('Y-m-d\TH:i') }}">
                                 </div>
                             </div>
                        </div>
                        <div class="col-md-4">
                            <div id="field_date" class="form-group">
-                               <label for="assignment" class="control-label">
-                                   Fecha y hora asignación:
+                               <label for="date_assignment" class="control-label">
+                                   Fecha y hora asignación
                                </label>
                                <div class="controls">
-                                   <input class="form-control" id="assignment" name="assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
+                                   <input class="form-control" id="date_assignment" name="date_assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : date('Y-m-d\TH:i') }}">
+                               </div>
+                           </div>
+                      </div>
+                       <div class="col-md-4">
+                           <div id="field_date" class="form-group">
+                               <label for="date_end" class="control-label">
+                                   Fecha y hora término
+                               </label>
+                               <div class="controls">
+                                   <input class="form-control" id="date_end" name="date_end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : date('Y-m-d\TH:i') }}">
                                </div>
                            </div>
                       </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            {!! Field::text('file1') !!}
+                            {!! Field::text('folio', isset($service) ? $service->folio: null) !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Field::text('file2') !!}
+                            {!! Field::text('file', isset($service) ? $service->file: null) !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Field::text('sinister', isset($service) ? $service->sinister: null) !!}
                         </div>
                     </div>
 
                     <div class="box-footer">
-                        <input type="hidden" name="status" value="pendiente">
+                        <input type="hidden" name="status" value="credito">
                         {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 {!! Form::close() !!}
             </simple-box>

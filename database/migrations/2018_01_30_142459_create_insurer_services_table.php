@@ -26,7 +26,6 @@ class CreateInsurerServicesTable extends Migration
             $table->string('plate')->nullable();
             $table->string('color')->nullable();
             $table->integer('inventory')->nullable();
-            $table->string('key')->nullable();
             $table->string('client')->nullable();
             $table->string('origin')->nullable();
             $table->string('destination')->nullable();
@@ -41,10 +40,8 @@ class CreateInsurerServicesTable extends Migration
             $table->double('amount')->default(0);
             $table->double('ret')->default(-1);
             $table->string('status')->nullable();
-            $table->string('lot')->nullable();
             $table->integer('maneuver')->nullable();
             $table->integer('pension')->nullable();
-            $table->string('releaser')->nullable();
             $table->string('bill')->nullable();
             $table->integer('others')->nullable();
             $table->integer('discount')->nullable();

@@ -215,8 +215,8 @@ return [
         'location'              => 'ubicación',
         'vehicule'              => 'vehículo',
         'destiny'               => 'destino',
-        'file1'                 => 'dato 1',
-        'file2'                 => 'dato 2',
+        'file'                  => 'expediente',
+        'sinister'              => 'siniestro',
         'credit'                => 'credito',
     ],
 

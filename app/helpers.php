@@ -14,6 +14,11 @@ function fdate($original_date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:
     return $date->format($format);
 }
 
+function fnumber($original_number)
+{
+    return '$ ' . number_format($original_number, 2);
+}
+
 function drawHeader(...$titles)
 {
     echo "<template slot=\"header\"><tr>";

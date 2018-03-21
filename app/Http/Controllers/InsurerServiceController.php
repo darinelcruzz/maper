@@ -32,11 +32,11 @@ class InsurerServiceController extends Controller
             'driver_id' => 'required',
             'unit_id' => 'required',
             'brand' => 'required',
-            'location' => 'required',
+            'origin' => 'required',
             'destination' => 'required',
             'client' => 'required',
             'amount' => 'required',
-            'contact' => 'required'
+            'folio' => 'required'
         ]);
 
         InsurerService::create($request->all());

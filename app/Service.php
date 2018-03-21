@@ -10,11 +10,11 @@ class Service extends Model
     protected $fillable = [
         'service','description', 'brand', 'type', 'model',
         'category', 'load', 'plate', 'color', 'inventory',
-        'key', 'client_id', 'origin', 'destination', 'driver_id',
+        'client_id', 'origin', 'destination', 'driver_id',
         'extra_driver', 'helper', 'extra_helper', 'unit_id',
         'date_service', 'date_out', 'date_return', 'amount',
-        'ret', 'status', 'lot', 'maneuver', 'pension', 'releaser',
-        'bill', 'others', 'discount', 'reason', 'pay', 'date_credit',
+        'ret', 'status', 'maneuver', 'pension', 'bill','others',
+        'discount', 'reason', 'pay', 'date_credit',
         'pay_credit', 'view'
     ];
 
