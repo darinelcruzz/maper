@@ -28,71 +28,70 @@
         th, td {
             font-size: 11px;
         },
+
+        html, body { overflow: hidden; }
     </style>
 </head>
 
 <body onload="window.print()">
-    <div class="wrapper">
-        <section class="invoice">
-            <div class="row">
-                <div class="col-xs-3">
-                    <center>
-                        <img width="100px" src="{{ asset('/img/MAPER.png') }}">
-                    </center>
-                </div>
-                <div class="col-xs-6">
-                    <h4 align="center">
-                        <b>Gastos</b><br>
-                    </h4>
-                    <h5 align="center">
-                        <b>{{ $range }}</b>
-                    </h5><br><br>
-                </div>
+    <section class="invoice">
+        <div class="row">
+            <div class="col-xs-3">
+                <center>
+                    <img width="100px" src="{{ asset('/img/MAPER.png') }}">
+                </center>
             </div>
+            <div class="col-xs-6">
+                <h4 align="center">
+                    <b>Gastos</b><br>
+                </h4>
+                <h5 align="center">
+                    <b>{{ $range }}</b>
+                </h5><br><br>
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Fecha</th>
-                                <th>Descripción</th>
-                                <th>Cargo</th>
-                                <th>Abono</th>
-                                <th>Saldo</th>
-                            </tr>
-                        </thead>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Cargo</th>
+                            <th>Abono</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
 
-                        <tbody>
+                    <tbody>
+                        @php
+                            $temp = 0;
+                        @endphp
+                        @foreach($expenses as $row)
                             @php
-                                $temp = 0;
+                                if (!$row->isCharge) {
+                                    $temp += $row->amount;
+                                } else {
+                                    $temp -= $row->amount;
+                                }
                             @endphp
-                            @foreach($expenses as $row)
-                                @php
-                                    if (!$row->isCharge) {
-                                        $temp += $row->amount;
-                                    } else {
-                                        $temp -= $row->amount;
-                                    }
-                                @endphp
-                                <tr>
-                                    <td>{{ $row->id }}</td>
-                                    <td>{{ $row->getDate('date') }}</td>
-                                    <td>{{ $row->isBilled ? "$row->description - Facturado" : $row->description }}</td>
-                                    <td>{{ $row->isCharge ? $row->famount : '' }}</td>
-                                    <td>{{ $row->isCharge ? '' : $row->famount }}</td>
-                                    <td>{{ '$ ' . number_format($temp, 2) }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            <!-- /.col -->
+                            <tr>
+                                <td>{{ $row->id }}</td>
+                                <td>{{ $row->getDate('date') }}</td>
+                                <td>{{ $row->isBilled ? "$row->description - Facturado" : $row->description }}</td>
+                                <td>{{ $row->isCharge ? $row->famount : '' }}</td>
+                                <td>{{ $row->isCharge ? '' : $row->famount }}</td>
+                                <td>{{ '$ ' . number_format($temp, 2) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
+        <!-- /.col -->
+        </div>
 
-        </section>
-    </div>
-<!-- ./wrapper -->
+    </section>
 </body>
 </html>
