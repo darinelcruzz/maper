@@ -65,7 +65,6 @@
                         </tr>
                     </thead>
 
-<<<<<<< HEAD
                         <tbody>
                             @foreach($expenses as $row)
                                 @php
@@ -88,31 +87,6 @@
                     </table>
                 </div>
             <!-- /.col -->
-=======
-                    <tbody>
-                        @php
-                            $temp = 0;
-                        @endphp
-                        @foreach($expenses as $row)
-                            @php
-                                if (!$row->isCharge) {
-                                    $temp += $row->amount;
-                                } else {
-                                    $temp -= $row->amount;
-                                }
-                            @endphp
-                            <tr>
-                                <td>{{ $row->id }}</td>
-                                <td>{{ $row->getDate('date') }}</td>
-                                <td>{{ $row->isBilled ? "$row->description - Facturado" : $row->description }}</td>
-                                <td>{{ $row->isCharge ? $row->famount : '' }}</td>
-                                <td>{{ $row->isCharge ? '' : $row->famount }}</td>
-                                <td>{{ '$ ' . number_format($temp, 2) }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
->>>>>>> 1f5c1555f420d39add7e74bd3d831f403e759ec4
             </div>
         <!-- /.col -->
         </div>
