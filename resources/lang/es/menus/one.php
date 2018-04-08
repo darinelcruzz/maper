@@ -14,10 +14,10 @@ return [
                 'title' => 'Coorporaciones',
                 'route' => 'service.corporation.create'
             ],
-            'insurers' => [
+            /*'insurers' => [
                 'title' => 'Aseguradoras',
                 'route' => 'service.insurer.create'
-            ],
+            ],*/
             'list' => [
                 'title' => 'Listado',
                 'route' => 'service.show'

@@ -65,15 +65,12 @@
                         </thead>
 
                         <tbody>
-                            @php
-                                $temp = 0;
-                            @endphp
                             @foreach($expenses as $row)
                                 @php
                                     if (!$row->isCharge) {
-                                        $temp += $row->amount;
+                                        $former += $row->amount;
                                     } else {
-                                        $temp -= $row->amount;
+                                        $former -= $row->amount;
                                     }
                                 @endphp
                                 <tr>
@@ -82,7 +79,7 @@
                                     <td>{{ $row->isBilled ? "$row->description - Facturado" : $row->description }}</td>
                                     <td>{{ $row->isCharge ? $row->famount : '' }}</td>
                                     <td>{{ $row->isCharge ? '' : $row->famount }}</td>
-                                    <td>{{ '$ ' . number_format($temp, 2) }}</td>
+                                    <td>{{ '$ ' . number_format($former, 2) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

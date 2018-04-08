@@ -82,7 +82,8 @@ class Service extends Model
     function scopeFromDateToDate($query, $startDate, $endDate, $driver, $type)
     {
         return $query->whereBetween('date_service', [$startDate->format('Y-m-d 00:00:00'), $endDate->format('Y-m-d 23:59:59')])
-                        ->where($type, $driver->id)->get();
+                        ->where($type, $driver->id)
+                        ->where('extra_driver', '>', 0)->get();
     }
 
 }

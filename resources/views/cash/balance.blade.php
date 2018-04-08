@@ -41,9 +41,9 @@
 					@endphp
 
 					@foreach ($services as $row)
-						@if ($row->date_service =! $row->date_out)
+						@if ($row->date_service != $row->date_out)
 							<tr>
-								<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+								<td>ja<a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
 								<td>
 									<dropdown color="success" icon="cogs">
 										@if ($row->service == 'General')
@@ -167,7 +167,7 @@
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td colspan="8"></td>
+						<td colspan="9"></td>
 						<td><b>Total:</b></td>
 						<td>$ {{ $sum }} </td>
 					</tr>
