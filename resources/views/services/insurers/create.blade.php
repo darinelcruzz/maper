@@ -195,6 +195,7 @@
 
                     <div class="box-footer">
                         <input type="hidden" name="status" value="credito">
+                        <input type="hidden" name="pay" value="credito">
                         {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 {!! Form::close() !!}
             </simple-box>

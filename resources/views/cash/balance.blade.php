@@ -19,12 +19,11 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<data-table-com title="Ingresos del {{  fdate($date, 'd/F/Y', 'Y-m-d') }}" example="example1" color="success">
+			<data-table-com title="Servicios del {{  fdate($date, 'd/F/Y', 'Y-m-d') }}" example="example1" color="success" button>
 		        <template slot="header">
 		            <tr>
 		                <th>ID</th>
 						<th><i class="fa fa-cogs"></i></th>
-						<th>Motivo</th>
 						<th>Inv</th>
 						<th>Folio</th>
 		                <th>Servicio</th>
@@ -39,50 +38,106 @@
 					@php
 						$sum = 0;
 					@endphp
-
 					@foreach ($services as $row)
 						@if ($row->date_service != $row->date_out)
 							<tr>
-								<td>ja<a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+								<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
 								<td>
 									<dropdown color="success" icon="cogs">
 										@if ($row->service == 'General')
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
-				                                icon="dollar" text="Pagar">
-				                            </ddi>
+												icon="dollar" text="Pagar">
+											</ddi>
 											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-				                                icon="clock-o" text="Hora de regreso">
-				                            </ddi>
-				                            <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
-				                                icon="times" text="Muerto">
-				                            </ddi>
+												icon="clock-o" text="Hora de regreso">
+											</ddi>
+											<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+												icon="times" text="Muerto">
+											</ddi>
 										@else
 											<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
-				                                icon="hand-peace-o" text="Liberar">
-				                            </ddi>
+												icon="hand-peace-o" text="Liberar">
+											</ddi>
 											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-				                                icon="clock-o" text="Hora de regreso">
-				                            </ddi>
+												icon="clock-o" text="Hora de regreso">
+											</ddi>
 										@endif
-			                        </dropdown>
+									</dropdown>
 								</td>
-								<td>Servicio</td>
 								<td>{{ $row->inventory }}</td>
 								<td></td>
-								<td>{{ $row->service == 'General' ? $row->client->name : $row->service }}</td>
+								@if ($row->service == 'General')
+									<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
+								@else
+									<td>{{ $row->service }}</td>
+								@endif
 								<td>{{ $row->description }}</td>
 								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-								<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
-								<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>
-								<td>${{ $row->service == 'General' ? $row->total : 0 }}</td>
+								<td>
+									{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
+								</td>
+								<td>{{ $row->pay == 'credito' ? $row->pay_credit : $row->pay }}</td>
+								<td>${{ $row->total }}</td>
 							</tr>
 							@php
-								if ($row->status == 'credito') {
-									$sum += $row->total;
-								}
+								$sum += $row->total;
 							@endphp
 						@endif
 					@endforeach
+
+					@foreach ($insurerServ as $row)
+						<tr>
+	                        <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>
+								<dropdown color="success" icon="cogs">
+								</dropdown>
+							</td>
+							<td>{{ $row->inventory }}</td>
+							<td>{{ $row->folio }}</td>
+	                        <td>{{ $row->insurer->name }}</td>
+							<td>{{ $row->description }}</td>
+	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+							<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
+	                        <td>{{ $row->pay_credit }}</td>
+	                        <td>${{ $row->total }}</td>
+	                    </tr>
+						@php
+							$sum += $row->total;
+						@endphp
+					@endforeach
+				</template>
+				<template slot="footer">
+					<tr>
+						<td colspan="8"></td>
+						<td><b>Total:</b></td>
+						<td>$ {{ $sum }} </td>
+					</tr>
+				</template>
+		    </data-table-com>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<data-table-com title="Ingresos del {{  fdate($date, 'd/F/Y', 'Y-m-d') }}" example="example2" color="success" button>
+		        <template slot="header">
+		            <tr>
+		                <th>ID</th>
+						<th><i class="fa fa-cogs"></i></th>
+						<th>Inv</th>
+						<th>Folio</th>
+		                <th>Servicio</th>
+						<th>Descripción</th>
+		                <th>Tipo</th>
+						<th>Status</th>
+                        <th>Forma de Pago</th>
+		                <th>Monto</th>
+		            </tr>
+				</template>
+				<template slot="body">
+					@php
+						$sum = 0;
+					@endphp
 
 					@foreach ($payed as $row)
 						<tr>
@@ -109,10 +164,13 @@
 									@endif
 								</dropdown>
 							</td>
-							<td>Pago</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
-	                        <td>{{ $row->service == 'General' ? $row->client->name : $row->service }}</td>
+							@if ($row->service == 'General')
+								<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
+							@else
+								<td>{{ $row->service }}</td>
+							@endif
 							<td>{{ $row->description }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>{{ $row->status }}</td>
@@ -149,10 +207,9 @@
 									@endif
 								</dropdown>
 							</td>
-							<td>Pago crédito</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
-	                        <td>{{ $row->client->name }}</td>
+							<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
 							<td>{{ $row->description }}</td>
 	                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
@@ -167,7 +224,7 @@
 		        </template>
 				<template slot="footer">
 					<tr>
-						<td colspan="9"></td>
+						<td colspan="8"></td>
 						<td><b>Total:</b></td>
 						<td>$ {{ $sum }} </td>
 					</tr>
@@ -214,7 +271,7 @@
 			<div class="col-md-4">
 				<icon-box color="danger" icon="calendar">
 					<p>Crédito</p>
-					<h3>$ {{ $methodsB['Credito'] + $methodsC['Credito'] }}</h3>
+					<h3>$ {{ $methodsB['Credito'] + $methodsC['Credito'] + $methodsD['Credito'] }}</h3>
 				</icon-box>
 			</div>
 
