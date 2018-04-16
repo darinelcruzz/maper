@@ -9,6 +9,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>R.F.C.</th>
                                 <th>Dirección</th>
@@ -19,7 +20,8 @@
                         <tbody>
                             @foreach ($insurers as $insurer)
                                 <tr>
-                                    <td>{{ $insurer->name }}</td>
+                                    <td>{{ $insurer->id}}</td>
+                                    <td><a href="{{ route('insurer.details', ['id' => $insurer->id]) }}"> {{ $insurer->name }} </a></td>
                                     <td>{{ $insurer->rfc }}</td>
                                     <td>{{ $insurer->address }}</td>
                                     <td>{{ $insurer->phone }}</td>

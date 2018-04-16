@@ -9,12 +9,12 @@ use App\Service;
 
 class ClientController extends Controller
 {
-    public function create()
+    function create()
     {
         return view('clients.create');
     }
 
-    public function store(Request $request)
+    function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|unique:clients',
@@ -27,19 +27,19 @@ class ClientController extends Controller
         return redirect(route('client.show'));
     }
 
-    public function show()
+    function show()
     {
         $clients = Client::all();
         return view('clients.show', compact('clients'));
     }
 
-    public function edit($id)
+    function edit($id)
     {
         $client = Client::find($id);
         return view('clients.edit', compact('client'));
     }
 
-    public function change(Request $request)
+    function change(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -53,7 +53,7 @@ class ClientController extends Controller
         return $this->show();
     }
 
-    public function details(Client $client)
+    function details(Client $client)
     {
         $this->expire($client->days);
         return view('clients.details', compact('client'));

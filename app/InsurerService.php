@@ -18,7 +18,7 @@ class InsurerService extends Model
         return $this->belongsTo(Driver::class);
     }
 
-    public function getTotalAttribute()
+    function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
@@ -28,9 +28,10 @@ class InsurerService extends Model
         return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
     }
 
-    public function scopePayType($query, $date, $type, $dateCol, $payCol)
+    function scopePayType($query, $date, $type, $dateCol, $payCol)
     {
         return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
                     ->where($payCol, $type)->get();
     }
+    
 }

@@ -32,4 +32,9 @@ class InsurerController extends Controller
 
         return redirect(route('insurer.index'));
     }
+
+    function details(Insurer $insurer)
+    {
+        return view('insurers.details', compact('insurer'));
+    }
 }

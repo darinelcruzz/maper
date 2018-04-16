@@ -15,6 +15,7 @@ Route::group(['prefix' => 'aseguradoras', 'as' => 'insurer.'], function () {
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{insurer}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'update'));
+    Route::get('detalles/{insurer}', usesas($ctrl, 'details'));
 });
 
 //Admin
