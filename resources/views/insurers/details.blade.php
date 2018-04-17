@@ -18,7 +18,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><h3>${{ $insurer->serviceTotal('credit') + $insurer->serviceTotal('expired') }}</h3></td>
+                                    <td><h3>${{ $insurer->serviceTotal('credit') + $insurer->serviceTotal('inserted') + $insurer->serviceTotal('disputed') + $insurer->serviceTotal('approved') + $insurer->serviceTotal('invoiced') }}</h3></td>
                                     <td><h3>{{ $insurer->pending }}</h3></td>
                                 </tr>
                             </tbody>
@@ -33,36 +33,86 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Vencidas" example="example1" color="danger" button>
-                    <template slot="header">
-                        <tr>
-                            <th>ID</th>
-                            <th>Fecha</th>
-                            <th>Vehículo</th>
-                            <th>Dias</th>
-                            <th>Monto</th>
-                        </tr>
-                    </template>
-
+                <data-table-com title="Credito ({{ $insurer->serviceNumber('credit') }})" example="example1" color="primary" collapsed button>
+                    {{ drawHeader('ID', 'Fecha', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
-                        @foreach($insurer->expired_services as $row)
-                          <tr>
-                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                              <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                              <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{ $row->getDays('date_service') }}</td>
-                              <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
-                          </tr>
+                        @foreach($insurer->credit_services as $row)
+                            <tr>
+                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
+                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                <td>
+                                    <dropdown color="success" icon="cogs">
+        									<ddi to=""
+        										icon="arrow-down" text="Ingresado">
+        									</ddi>
+        							</dropdown>
+                                </td>
+                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                            </tr>
                         @endforeach
                     </template>
-
                     <template slot="footer">
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Total</th>
-                            <th>${{ $insurer->serviceTotal('expired')}}</th>
+                            <th colspan="4">Total</th>
+                            <th>{{ $insurer->serviceTotal('credit', true) }}</th>
+                        </tr>
+                    </template>
+                </data-table-com>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <data-table-com title="Ingresados  ({{ $insurer->serviceNumber('inserted') }})" example="example2" color="primary" collapsed button>
+                    {{ drawHeader('ID', 'Fecha', 'Vehículo', '', 'Monto')}}
+                    <template slot="body">
+                        @foreach($insurer->inserted_services as $row)
+                            <tr>
+                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
+                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                <td>
+                                    <dropdown color="success" icon="cogs">
+        									<ddi to=""
+        										icon="arrow-right" text="Aprobado">
+        									</ddi>
+        									<ddi to=""
+        										icon="arrow-down" text="Disputa">
+        									</ddi>
+        							</dropdown>
+                                </td>
+                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                            </tr>
+                        @endforeach
+                    </template>
+                    <template slot="footer">
+                        <tr>
+                            <th colspan="4">Total</th>
+                            <th>{{ $insurer->serviceTotal('inserted', true)}}</th>
+                        </tr>
+                    </template>
+                </data-table-com>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <data-table-com title="Disputa  ({{ $insurer->serviceNumber('disputed') }})" example="example3" color="danger" collapsed button>
+                    {{ drawHeader('ID', 'Fecha', 'Vehículo', '', 'Monto')}}
+                    <template slot="body">
+                        @foreach($insurer->disputed_services as $row)
+                            <tr>
+                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
+                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                <td></td>
+                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                            </tr>
+                        @endforeach
+                    </template>
+                    <template slot="footer">
+                        <tr>
+                            <th colspan="4">Total</th>
+                            <th>{{ $insurer->serviceTotal('disputed', true)}}</th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -72,35 +122,23 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Credito" example="example2" color="warning" button>
-                    <template slot="header">
-                        <tr>
-                            <th>ID</th>
-                            <th>Fecha</th>
-                            <th>Vehículo</th>
-                            <th>Dias</th>
-                            <th>Monto</th>
-                        </tr>
-                    </template>
-
+                <data-table-com title="Aprobado  ({{ $insurer->serviceNumber('approved') }})" example="example4" color="warning" collapsed button>
+                    {{ drawHeader('ID', 'Fecha', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
-                        @foreach($insurer->credit_services as $row)
-                          <tr>
-                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                              <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                              <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td></td>
-                              <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
-                          </tr>
+                        @foreach($insurer->approved_services as $row)
+                            <tr>
+                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
+                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                <td>@include('insurers/bill')</td>
+                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                            </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Total</th>
-                            <th>${{ $insurer->serviceTotal('credit') }}</th>
+                            <th colspan="4">Total</th>
+                            <th>{{ $insurer->serviceTotal('approved', true)}}</th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -108,34 +146,46 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Pagadas" example="example3" color="success" collapsed button>
-                    <template slot="header">
-                        <tr>
-                            <th>ID</th>
-                            <th>Fecha Pago</th>
-                            <th>Vehículo</th>
-                            <th>Método</th>
-                            <th>Monto</th>
-                        </tr>
-                    </template>
-
+                <data-table-com title="Facturado  ({{ $insurer->serviceNumber('invoiced') }})" example="example5" color="info" collapsed button>
+                    {{ drawHeader('ID', 'Fecha', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
-                        @foreach($insurer->paid_services as $row)
-                          <tr>
-                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                              <td>{{ $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a') }}</td>
-                              <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
-                              <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
-                          </tr>
+                        @foreach($insurer->invoiced_services as $row)
+                            <tr>
+                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
+                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                <td></td>
+                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                            </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Total</th>
+                            <th colspan="4">Total</th>
+                            <th>{{ $insurer->serviceTotal('invoiced', true)}}</th>
+                        </tr>
+                    </template>
+                </data-table-com>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <data-table-com title="Pagadas ({{ $insurer->serviceNumber('paid') }})" example="example6" color="success" collapsed button>
+                    {{ drawHeader('ID', 'Fecha Pago', 'Vehículo', 'Método', 'Monto')}}
+                    <template slot="body">
+                        @foreach($insurer->paid_services as $row)
+                            <tr>
+                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td>{{ $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a') }}</td>
+                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                                <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
+                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                            </tr>
+                        @endforeach
+                    </template>
+                    <template slot="footer">
+                        <tr>
+                            <th colspan="4">Total</th>
                             <th>{{ $insurer->serviceTotal('paid', true)}}</th>
                         </tr>
                     </template>
