@@ -45,7 +45,7 @@
                             {!! Field::text('type', isset($service) ? $service->type: null)!!}
                         </div>
                         <div class="col-md-4">
-                            {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Trantocamión'],
+                            {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión'],
                                 isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría']) !!}
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                             {!! Field::select('driver_id', $drivers, null, ['empty' => 'Seleccione operador']) !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Field::select('unit_id', $units, null, ['empty' => 'Seleccione operador']) !!}
+                            {!! Field::select('unit_id', $units, null, ['empty' => 'Seleccione unidad']) !!}
                         </div>
                         <div class="col-md-4">
                             <div id="field_date" class="form-group">

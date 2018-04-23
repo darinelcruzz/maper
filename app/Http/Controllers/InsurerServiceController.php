@@ -57,9 +57,20 @@ class InsurerServiceController extends Controller
         return view('services.insurers.edit', compact('drivers', 'insurers', 'insurerService'));
     }
 
-    function update(Request $request, InsurerService $insurerService)
+    function update(Request $request)
     {
+        InsurerService::find($request->id)->update($request->all());
 
+        return back();
+    }
+
+    function updateStatus(InsurerService $insurerService, $status)
+    {
+        $insurerService->update([
+            'status' => $status
+        ]);
+
+        return back();
     }
 
     function pay(Request $request)

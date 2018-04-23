@@ -11,13 +11,13 @@ use App\Price;
 
 class GeneralServiceController extends Controller
 {
-    public function create()
+    function create()
     {
         $prices = Price::all();
         return view('services.generals.create', compact('prices'));
     }
 
-    public function store(GeneralRequest $request)
+    function store(GeneralRequest $request)
     {
         $service = Service::create($request->except(['routes']));
         if(isset($_POST['pagado']))
@@ -35,13 +35,13 @@ class GeneralServiceController extends Controller
 
     }
 
-    public function edit(Service $service)
+    function edit(Service $service)
     {
         $prices = Price::all();
         return view('services.generals.edit', compact('service', 'prices'));
     }
 
-    public function change(GeneralRequest $request)
+    function change(GeneralRequest $request)
     {
         Service::find($request->id)->update($request->all());
         Service::find($request->id)->update([
