@@ -14,6 +14,7 @@
                                 <th>R.F.C.</th>
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
+                                <th>Saldo</th>
                             </tr>
                         </thead>
 
@@ -25,6 +26,7 @@
                                     <td>{{ $insurer->rfc }}</td>
                                     <td>{{ $insurer->address }}</td>
                                     <td>{{ $insurer->phone }}</td>
+                                    <td>{{ fnumber($insurer->total_sum) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

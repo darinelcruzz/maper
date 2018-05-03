@@ -64,6 +64,11 @@ class Insurer extends Model
         return $total;
     }
 
+    function getTotalSumAttribute()
+    {
+        return $this->serviceTotal('credit') + $this->serviceTotal('inserted') + $this->serviceTotal('disputed') + $this->serviceTotal('approved') + $this->serviceTotal('invoiced');
+    }
+
     function serviceNumber($status) {
         $sattribute = $status . "_services";
         $total = 0;

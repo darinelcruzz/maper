@@ -18,7 +18,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><h3>${{ $insurer->serviceTotal('credit') + $insurer->serviceTotal('inserted') + $insurer->serviceTotal('disputed') + $insurer->serviceTotal('approved') + $insurer->serviceTotal('invoiced') }}</h3></td>
+                                    <td><h3>{{ fnumber($insurer->total_sum) }}</h3></td>
                                     <td><h3>{{ $insurer->pending }}</h3></td>
                                 </tr>
                             </tbody>
@@ -34,12 +34,12 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Credito ({{ $insurer->serviceNumber('credit') }})" example="example1" color="primary" collapsed button>
-                    {{ drawHeader('ID', 'Fecha serv', 'Folio', 'Vehículo', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->credit_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                                <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
@@ -65,12 +65,12 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Ingresados  ({{ $insurer->serviceNumber('inserted') }})" example="example2" color="primary" collapsed button>
-                    {{ drawHeader('ID', 'Fecha serv', 'Folio', 'Vehículo', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->inserted_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                                <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
@@ -99,12 +99,12 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Disputa  ({{ $insurer->serviceNumber('disputed') }})" example="example3" color="danger" collapsed button>
-                    {{ drawHeader('ID', 'Fecha serv', 'Folio', 'Vehículo', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->disputed_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                                <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
@@ -132,12 +132,12 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Aprobado  ({{ $insurer->serviceNumber('approved') }})" example="example4" color="warning" collapsed button>
-                    {{ drawHeader('ID', 'Fecha serv', 'Folio', 'Vehículo', 'Factura', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Factura', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->approved_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                                <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>@include('insurers/bill')</td>
@@ -157,12 +157,12 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Facturado  ({{ $insurer->serviceNumber('invoiced') }})" example="example5" color="info" collapsed button>
-                    {{ drawHeader('ID', 'Fecha serv', 'Folio', 'Vehículo', 'Factura', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Factura', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->invoiced_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                                <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>{{ $row->bill }}</td>
