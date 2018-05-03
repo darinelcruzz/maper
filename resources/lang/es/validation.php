@@ -156,7 +156,7 @@ return [
         'quantity'              => 'cantidad',
         'caliber'               => 'calibre',
         'specific'              => 'peso especifico',
-        'client'             => 'cliente',
+        'client'                => 'cliente',
         'client_id'             => 'cliente',
         'order'                 => 'orden',
         'added'                 => 'existente',
@@ -204,7 +204,7 @@ return [
         'ton10'                 => '10 Ton',
         'pay'                   => 'método de pago',
         'helper'                => 'apoyo',
-        'helper_id'                => 'apoyo',
+        'helper_id'             => 'apoyo',
         'start_hour'            => 'hora entrada',
         'end_hour'              => 'hora salida',
         'driver_hour'           => 'hora extra operador',
@@ -218,6 +218,8 @@ return [
         'file'                  => 'expediente',
         'sinister'              => 'siniestro',
         'credit'                => 'credito',
+        'user'                  => 'usuario',
+        'booth'                 => 'cabina'
     ],
 
 ];

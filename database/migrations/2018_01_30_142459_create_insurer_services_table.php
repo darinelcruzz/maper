@@ -26,7 +26,7 @@ class CreateInsurerServicesTable extends Migration
             $table->string('plate')->nullable();
             $table->string('color')->nullable();
             $table->integer('inventory')->nullable();
-            $table->string('client')->nullable();
+            $table->string('user')->nullable();
             $table->string('origin')->nullable();
             $table->string('destination')->nullable();
             $table->integer('driver_id')->nullable();
@@ -34,7 +34,7 @@ class CreateInsurerServicesTable extends Migration
             $table->string('helper')->nullable();
             $table->integer('extra_helper')->nullable();
             $table->string('unit_id')->nullable();
-            $table->timestamp('date_service')->nullable();
+            $table->string('booth')->nullable();
             $table->timestamp('date_return')->nullable();
             $table->timestamp('date_assignment')->nullable();
             $table->double('amount')->default(0);

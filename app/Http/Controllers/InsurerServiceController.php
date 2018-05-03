@@ -19,7 +19,7 @@ class InsurerServiceController extends Controller
     function create()
     {
         $drivers = Driver::pluck('name', 'id')->toArray();
-        $units = Unit::pluck('name', 'id')->toArray();
+        $units = Unit::pluck('description', 'id')->toArray();
         $insurers = Insurer::pluck('name', 'id')->toArray();
         return view('services.insurers.create', compact('drivers', 'units', 'insurers'));
     }

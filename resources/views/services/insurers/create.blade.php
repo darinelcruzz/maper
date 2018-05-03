@@ -16,11 +16,11 @@
                         </div>
                         <div class="col-md-4">
                             <div id="field_date" class="form-group">
-                                <label for="date_service" class="control-label">
-                                    Fecha y hora de servicio
+                                <label for="date_assignment" class="control-label">
+                                    Fecha y hora asignación
                                 </label>
                                 <div class="controls">
-                                    <input class="form-control" id="date_service" name="date_service" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
+                                    <input class="form-control" id="date_assignment" name="date_assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : date('Y-m-d\TH:i') }}">
                                 </div>
                             </div>
                         </div>
@@ -83,17 +83,19 @@
                             {!! Field::text('destination', isset($service) ? $service->destination: null) !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado']) !!}
+                            {!! Field::text('user', isset($service) ? $service->client: null) !!}
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-4">
+                            {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado']) !!}
+                        </div>
                         <div class="col-md-4">
                             {!! Field::number('maneuver', 0, ['min' => '0']) !!}
                         </div>
                         <div class="col-md-4">
                             {!! Field::number('pension', 0, ['min' => '0']) !!}
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -106,6 +108,43 @@
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-default">
                                 Tabulador
                             </button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div id="field_date" class="form-group">
+                                <label for="date_contact" class="control-label">
+                                    Fecha y hora contacto
+                                </label>
+                                <div class="controls">
+                                    <input class="form-control" id="date_contact" name="date_contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : date('Y-m-d\TH:i') }}">
+                                </div>
+                            </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div id="field_date" class="form-group">
+                               <label for="date_end" class="control-label">
+                                   Fecha y hora término
+                               </label>
+                               <div class="controls">
+                                   <input class="form-control" id="date_end" name="date_end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : date('Y-m-d\TH:i') }}">
+                               </div>
+                           </div>
+                      </div>
+                      <div class="col-md-4">
+                          {!! Field::text('booth', isset($service) ? $service->booth: null) !!}
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {!! Field::text('folio', isset($service) ? $service->folio: null) !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Field::text('file', isset($service) ? $service->file: null, ['label' => 'Asistencia']) !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Field::text('sinister', isset($service) ? $service->sinister: null) !!}
                         </div>
                     </div>
 
@@ -135,61 +174,6 @@
                     <div class="row">
                         <div class="col-md-4">
                             {!! Field::select('helper', $drivers, null, ['empty' => 'Seleccione operador']) !!}
-                        </div>
-                    </div>
-
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Extras
-                            <i class="fa fa-plus-square" aria-hidden="true"></i>
-                        </h3>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('client', isset($service) ? $service->client: null) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div id="field_date" class="form-group">
-                                <label for="date_contact" class="control-label">
-                                    Fecha y hora contacto
-                                </label>
-                                <div class="controls">
-                                    <input class="form-control" id="date_contact" name="date_contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : date('Y-m-d\TH:i') }}">
-                                </div>
-                            </div>
-                       </div>
-                       <div class="col-md-4">
-                           <div id="field_date" class="form-group">
-                               <label for="date_assignment" class="control-label">
-                                   Fecha y hora asignación
-                               </label>
-                               <div class="controls">
-                                   <input class="form-control" id="date_assignment" name="date_assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : date('Y-m-d\TH:i') }}">
-                               </div>
-                           </div>
-                      </div>
-                       <div class="col-md-4">
-                           <div id="field_date" class="form-group">
-                               <label for="date_end" class="control-label">
-                                   Fecha y hora término
-                               </label>
-                               <div class="controls">
-                                   <input class="form-control" id="date_end" name="date_end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : date('Y-m-d\TH:i') }}">
-                               </div>
-                           </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('folio', isset($service) ? $service->folio: null) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('file', isset($service) ? $service->file: null) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('sinister', isset($service) ? $service->sinister: null) !!}
                         </div>
                     </div>
 
