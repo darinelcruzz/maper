@@ -16,7 +16,7 @@ class AdministrationController extends Controller
         $services = Service::untilDate($date, 'date_service');
         $payed = Service::untilDate($date);
         $credit = Service::untilDate($date, 'date_credit');
-        $insurerServ = InsurerService::untilDate($date, 'date_service');
+        $insurerServ = InsurerService::untilDate($date, 'date_assignment');
 
         $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
         $methodsA = [];
@@ -28,7 +28,7 @@ class AdministrationController extends Controller
             $methodsA[$method] = Service::payType($date, $method,'date_out', 'pay')->sum('total');
             $methodsB[$method] = Service::payType($date, $method, 'date_credit', 'pay_credit')->sum('total');
             $methodsC[$method] = Service::payType($date, $method, 'date_service', 'pay')->sum('total');
-            $methodsD[$method] = InsurerService::payType($date, $method, 'date_service', 'pay')->sum('total');
+            $methodsD[$method] = InsurerService::payType($date, $method, 'date_assignment', 'pay')->sum('total');
         }
 
         $total = $payed->sum('total') + $credit->sum('total');
