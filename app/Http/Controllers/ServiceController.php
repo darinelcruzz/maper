@@ -25,7 +25,7 @@ class ServiceController extends Controller
         $credit = Service::where('service', 'General')
                         ->where('status', 'credito')
                         ->orWhere('status', 'vencida')->get();
-        $creditI = InsurerService::all();
+        $creditI = InsurerService::where('status', '!=', 'Pagado')->get();
         $cancel = Service::where('service', 'General')
                         ->where('status', 'cancelado')->get();
 

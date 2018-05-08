@@ -26,6 +26,7 @@ class CorporationsRequest extends FormRequest
         return [
             'service' => 'sometimes|required',
             'description' => 'sometimes|required',
+            'date_service' => 'sometimes|required',
             'maneuver' => 'sometimes|required',
             'brand' => 'sometimes|required',
             'type' => 'sometimes|required',

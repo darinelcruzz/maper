@@ -150,7 +150,24 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Cancelados" example="example6" color="danger" collapsed button>
+    <data-table col="col-md-12" title="Crédito Aseguradoras" example="example6" color="info" collapsed button>
+
+        {{ drawHeader('ID', 'asiganci{on', 'cliente/Aseguradora', 'marca', 'importe') }}
+
+        <template slot="body">
+            @foreach($creditI as $row)
+                <tr>
+                    <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td>{{ fdate($row->date_assignment, 'j/M/y, h:i a') }}</td>
+                    <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
+                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                    <td>$ {{ number_format($row->total, 2) }}</td>
+                </tr>
+            @endforeach
+        </template>
+    </data-table>
+
+    <data-table col="col-md-12" title="Cancelados" example="example7" color="danger" collapsed button>
 
         {{ drawHeader('ID', 'fecha', 'cliente', 'marca', 'importe', 'opciones') }}
 
