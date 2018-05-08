@@ -8,7 +8,7 @@
                 Fecha y hora:
             </label>
             <div class="controls">
-                <input class="form-control" id="date_service" name="date_service" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
+                <input class="form-control" id="date_service" name="date_service" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : '' }}">
             </div>
         </div>
    </div>

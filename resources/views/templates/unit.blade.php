@@ -17,7 +17,7 @@
                 Fecha y hora regreso:
             </label>
             <div class="controls">
-                <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_return)) : date('Y-m-d\TH:i') }}">
+                <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_return)) : '' }}">
             </div>
         </div>
    </div>

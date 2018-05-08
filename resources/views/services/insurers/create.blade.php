@@ -20,7 +20,7 @@
                                     Fecha y hora asignación
                                 </label>
                                 <div class="controls">
-                                    <input class="form-control" id="date_assignment" name="date_assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : date('Y-m-d\TH:i') }}">
+                                    <input class="form-control" id="date_assignment" name="date_assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : '' }}">
                                 </div>
                             </div>
                         </div>
