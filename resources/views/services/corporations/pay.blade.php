@@ -35,6 +35,12 @@
                                 <dd>$ {{ $service->maneuver }}</dd>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <b>Pensión</b>
+                                <dd>{{ $penalty }}días X ${{ $cost/$penalty }} = ${{ $cost }}</dd>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <br>

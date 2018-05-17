@@ -18,6 +18,6 @@ $factory->define(App\Service::class, function (Faker $faker) {
         'destination' => $faker->city,
         'driver_id' => $faker->randomElement(array('1', '2', '3', '4', '5')),
         'unit_id' => 1,
-        'pay' => 'credito',
+        'pay' => 'Credito',
     ];
 });

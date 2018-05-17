@@ -16,6 +16,7 @@ class ServicesTableSeeder extends Seeder
         factory(App\Service::class, 5)->create([
             'service' => 'General',
             'client_id' => 1,
+            'date_service' => date('Y-m-d H:i:s'),
             'date_return' => date('Y-m-d H:i:s'),
             'status' => 'pendiente'
         ]);
@@ -24,9 +25,11 @@ class ServicesTableSeeder extends Seeder
             factory(App\Service::class)->create([
                 'service' => $corps[array_rand($corps)],
                 'key' => 'si',
+                'date_service' => date('Y-m-d H:i:s'),
                 'date_return' => date('Y-m-d H:i:s'),
                 'lot' => 'Cueva',
-                'status' => 'corralon'
+                'status' => 'corralon',
+                'pay' => NULL
             ]);
         }
     }

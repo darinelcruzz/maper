@@ -44,8 +44,7 @@ class CorporationServiceController extends Controller
     function printLetter(Service $service)
     {
         $today = Date::now();
-        $date = $today->format('d \d\e F \d\e\l Y');
-        return view('services.corporations.letter', compact('service', 'date'));
+        return view('services.corporations.letter', compact('service'));
     }
 
     function pay(Service $service)
@@ -68,7 +67,7 @@ class CorporationServiceController extends Controller
             $cost = Price::find(1)->ton3 * $penalty;
         }
 
-        return view('services.corporations.pay', compact('service', 'cost'));
+        return view('services.corporations.pay', compact('service', 'cost', 'penalty'));
     }
 
     function destroy($id)

@@ -10,8 +10,8 @@
 	                <th>Servicio</th>
 					<th>Descripción</th>
 	                <th>Tipo</th>
-					<th>Status</th>
-                    <th>Forma de Pago</th>
+					<th>Estatus</th>
+                    <th>Método</th>
 	                <th>Monto</th>
 	            </tr>
 			</template>
@@ -20,7 +20,7 @@
 					$sum = 0;
 				@endphp
 				@foreach ($services as $row)
-					@if ($row->date_service != $row->date_out)
+					@if (fdate($row->date_service) != fdate($row->date_out))
 						<tr>
 							<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
 							<td>
@@ -30,18 +30,28 @@
 											icon="dollar" text="Pagar">
 										</ddi>
 										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-											icon="clock-o" text="Hora de regreso">
+											icon="clock-o" text="Hora de regreso/Extras">
 										</ddi>
 										<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
 											icon="times" text="Muerto">
 										</ddi>
 									@else
-										<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
-											icon="hand-peace-o" text="Liberar">
-										</ddi>
-										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-											icon="clock-o" text="Hora de regreso">
-										</ddi>
+										@if ($row->status == 'liberado')
+											<ddi to="{{ route('service.corporation.print', ['id' => $row->id]) }}"
+				                                icon="print" text="Imprimir">
+				                            </ddi>
+											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+												icon="clock-o" text="Hora de regreso/Extras">
+											</ddi>
+										@else
+											<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+												icon="hand-peace-o" text="Liberar">
+											</ddi>
+											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+												icon="clock-o" text="Hora de regreso/Extras">
+											</ddi>
+										@endif
+
 									@endif
 								</dropdown>
 							</td>
@@ -55,10 +65,13 @@
 							<td>{{ $row->description }}</td>
 							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
-								{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
+								{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}
+								{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
+								{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
+								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 							</td>
 							<td>{{ $row->pay == 'credito' ? $row->pay_credit : $row->pay }}</td>
-							<td>${{ $row->total }}</td>
+							<td>{{ fnumber($row->total) }}</td>
 						</tr>
 						@php
 							$sum += $row->total;
@@ -80,7 +93,7 @@
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
                         <td>{{ $row->pay_credit }}</td>
-                        <td>${{ $row->total }}</td>
+                        <td>{{ fnumber($row->total) }}</td>
                     </tr>
 					@php
 						$sum += $row->total;
@@ -91,7 +104,7 @@
 				<tr>
 					<td colspan="8"></td>
 					<td><b>Total:</b></td>
-					<td>$ {{ $sum }} </td>
+					<td>{{ fnumber($sum) }} </td>
 				</tr>
 			</template>
 	    </data-table-com>

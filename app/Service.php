@@ -43,12 +43,12 @@ class Service extends Model
         return $this->belongsTo(Price::class, 'category');
     }
 
-    public function scopeService($query, $comparation, $service, $col)
+    function scopeService($query, $comparation, $service, $col)
     {
         return $query->where($col, $comparation, $service)->get();
     }
 
-    public function scopePayType($query, $date, $type, $dateCol, $payCol)
+    function scopePayType($query, $date, $type, $dateCol, $payCol)
     {
         return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
                     ->where($payCol, $type)->get();
@@ -63,10 +63,11 @@ class Service extends Model
         return $interval;
     }
 
-    public function getTotalAttribute()
+    function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
+
 
     function scopeUntilDate($query, $date, $column = 'date_out')
     {

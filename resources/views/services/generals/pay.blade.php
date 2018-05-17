@@ -32,7 +32,7 @@
                             </td>
                             <td>
                                 <B>Importe estimado:</B>
-                                <dd>${{ $service->amount }}</dd>
+                                <dd>${{ $service->total }}</dd>
                             </td>
                         </tr>
 

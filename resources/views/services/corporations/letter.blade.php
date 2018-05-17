@@ -29,6 +29,10 @@
             text-align:justify;
             text-indent:50px;
         },
+        body {
+            text-align:center;
+            text-indent:50px;
+        },
         td {
             height: 10px;
         }
@@ -56,7 +60,7 @@
             </div>
         </div>
         <h5 align="right">
-            Comitán de Domínguez, Chiapas a {{ $date }} <br><br>
+            Comitán de Domínguez, Chiapas a {{ fdate($service->date_out, 'd \d\e F \d\e\l Y') }} <br><br>
         </h5>
 
         <h5 align="left">
@@ -81,29 +85,33 @@
 
         <table align="center" border="1">
             <tr>
-                <th width="80px">MARCA:</th>
-                <td width="250px">{{ $service->brand }}</td>
+                <th width="90px"> &nbsp; MARCA:</th>
+                <td width="250px"> &nbsp; {{ $service->brand }}</td>
             </tr>
             <tr>
-                <th>TIPO:</th>
-                <td>{{ $service->type }}</td>
+                <th> &nbsp; TIPO:</th>
+                <td> &nbsp; {{ $service->type }}</td>
             </tr>
             <tr>
-                <th>COLOR:</th>
-                <td>{{ $service->color }}</td>
+                <th> &nbsp; COLOR:</th>
+                <td> &nbsp; {{ $service->color }}</td>
             </tr>
             <tr>
-                <th>MODELO:</th>
-                <td>{{ $service->model }}</td>
+                <th> &nbsp; MODELO:</th>
+                <td> &nbsp; {{ $service->model }}</td>
             </tr>
             <tr>
-                <th>PLACAS:</th>
-                <td>{{ $service->plate }}</td>
+                <th> &nbsp; PLACAS:</th>
+                <td> &nbsp; {{ $service->plate }}</td>
             </tr>
         </table><br>
-        <h4 align="center">
-            El día {{ $date }}
-        </h4><br><br><br>
+        <body align="center">
+            El día {{ fdate($service->date_out, 'd \d\e F \d\e\l \a\ñ\o Y') }} y hago constar que
+            el importe total pagado por la liberación del vehículo es la cantidad de:
+            <h4>
+                <b>{{ fnumber($service->total) }}</b>
+            </h4>
+        </body><br><br><br><br>
 
         <h5 align="center">
             _____________________________________<br><br>
