@@ -15,7 +15,7 @@ class Service extends Model
         'date_service', 'date_out', 'date_return', 'amount',
         'ret', 'status', 'maneuver', 'pension', 'bill','others',
         'discount', 'reason', 'pay', 'date_credit',
-        'pay_credit', 'view'
+        'pay_credit', 'view', 'releaser'
     ];
 
     function driver()

@@ -28,7 +28,7 @@ class InsurerServiceController extends Controller
     {
         $this->validate($request, [
             'insurer_id' => 'required',
-            'date_service' => 'required',
+            'date_assignment' => 'required',
             'driver_id' => 'required',
             'unit_id' => 'required',
             'brand' => 'required',

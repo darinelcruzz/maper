@@ -118,7 +118,7 @@
                                     Fecha y hora contacto
                                 </label>
                                 <div class="controls">
-                                    <input class="form-control" id="date_contact" name="date_contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : date('Y-m-d\TH:i') }}">
+                                    <input class="form-control" id="date_contact" name="date_contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : '' }}">
                                 </div>
                             </div>
                        </div>
@@ -128,7 +128,7 @@
                                    Fecha y hora término
                                </label>
                                <div class="controls">
-                                   <input class="form-control" id="date_end" name="date_end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : date('Y-m-d\TH:i') }}">
+                                   <input class="form-control" id="date_end" name="date_end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : '' }}">
                                </div>
                            </div>
                       </div>
@@ -166,7 +166,7 @@
                                     Fecha y hora regreso:
                                 </label>
                                 <div class="controls">
-                                    <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : date('Y-m-d\TH:i') }}">
+                                    <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : '' }}">
                                 </div>
                             </div>
                        </div>

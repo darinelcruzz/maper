@@ -39,7 +39,6 @@ class GeneralRequest extends FormRequest
             'amount' => 'sometimes|required',
             'pay' => 'sometimes|required',
             'client_id' => 'sometimes|required',
-            'date_return' => 'sometimes|required',
             'others' => 'sometimes|required',
             'reason' => 'sometimes|required'
         ];

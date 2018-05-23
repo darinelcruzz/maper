@@ -42,7 +42,6 @@ class CorporationsRequest extends FormRequest
             'pay' => 'sometimes|required',
             'key' => 'sometimes|required',
             'model' => 'sometimes|required',
-            'date_return' => 'sometimes|required',
             'lot' => 'sometimes|required',
             'releaser' => 'sometimes|required',
             'discount' => 'sometimes|required',
