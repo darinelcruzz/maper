@@ -34,7 +34,7 @@ class InsurerServiceController extends Controller
             'brand' => 'required',
             'origin' => 'required',
             'destination' => 'required',
-            'client' => 'required',
+            'user' => 'required',
             'amount' => 'required',
             'folio' => 'required'
         ]);

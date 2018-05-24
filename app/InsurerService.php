@@ -33,5 +33,5 @@ class InsurerService extends Model
         return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
                     ->where($payCol, $type)->get();
     }
-    
+
 }
