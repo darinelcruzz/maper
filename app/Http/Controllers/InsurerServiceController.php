@@ -51,8 +51,6 @@ class InsurerServiceController extends Controller
 
     function edit(InsurerService $insurerService)
     {
-        $drivers = Driver::pluck('name', 'id')->toArray();
-        $insurers = Insurer::pluck('name', 'id')->toArray();
 
         return view('services.insurers.edit', compact('drivers', 'insurers', 'insurerService'));
     }
@@ -61,7 +59,7 @@ class InsurerServiceController extends Controller
     {
         InsurerService::find($request->id)->update($request->all());
 
-        return back();
+        return redirect(route('service.show'));
     }
 
     function updateStatus(InsurerService $insurerService, $status)
