@@ -219,7 +219,8 @@ return [
         'sinister'              => 'siniestro',
         'credit'                => 'credito',
         'user'                  => 'usuario',
-        'booth'                 => 'cabina'
+        'booth'                 => 'cabina',
+        'retention'             => 'retención'
     ],
 
 ];

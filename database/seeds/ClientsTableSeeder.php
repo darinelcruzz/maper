@@ -4,12 +4,7 @@ use Illuminate\Database\Seeder;
 
 class ClientsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    function run()
     {
         factory(App\Client::class, 1)->create();
     }

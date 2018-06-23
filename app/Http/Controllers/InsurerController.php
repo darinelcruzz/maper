@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Insurer;
+use App\Invoice;
 
 class InsurerController extends Controller
 {
@@ -35,6 +36,10 @@ class InsurerController extends Controller
 
     function details(Insurer $insurer)
     {
-        return view('insurers.details', compact('insurer'));
+        $pendings = Invoice::where('insurer_id', $insurer->id)
+                            ->where('status', 'pendiente')->get();
+        $paids = Invoice::where('insurer_id', $insurer->id)
+                            ->where('status', 'pagado')->get();
+        return view('insurers.details', compact('insurer', 'pendings', 'paids'));
     }
 }

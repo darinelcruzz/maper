@@ -49,13 +49,13 @@
         									</ddi>
         							</dropdown>
                                 </td>
-                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                                <td>${{ $row->total }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5">Total</th>
+                            <th colspan="5"><span class="pull-right">Total</span></th>
                             <th>{{ $insurer->serviceTotal('credit', true) }}</th>
                         </tr>
                     </template>
@@ -83,13 +83,13 @@
         									</ddi>
         							</dropdown>
                                 </td>
-                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                                <td>${{ $row->total }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5">Total</th>
+                            <th colspan="5"><span class="pull-right">Total</span></th>
                             <th>{{ $insurer->serviceTotal('inserted', true)}}</th>
                         </tr>
                     </template>
@@ -114,13 +114,13 @@
         									</ddi>
         							</dropdown>
                                 </td>
-                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                                <td>${{ $row->total }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5">Total</th>
+                            <th colspan="5"><span class="pull-right">Total</span></th>
                             <th>{{ $insurer->serviceTotal('disputed', true)}}</th>
                         </tr>
                     </template>
@@ -132,7 +132,7 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Aprobado  ({{ $insurer->serviceNumber('approved') }})" example="example4" color="warning" collapsed button>
-                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Factura', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->approved_services as $row)
                             <tr>
@@ -140,14 +140,14 @@
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                                <td>@include('insurers/bill')</td>
-                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                                <td>${{ $row->total }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5">Total</th>
+                            <th colspan="3"><a class="btn btn-xs btn-primary btn-block" href="{{ route('invoice.create', ['insurer_id' => $insurer->id]) }}">Facturar</a></th>
+                            <th colspan="1"><span class="pull-right"><span class="pull-right">Total</span></span></th>
                             <th>{{ $insurer->serviceTotal('approved', true)}}</th>
                         </tr>
                     </template>
@@ -156,25 +156,31 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Facturado  ({{ $insurer->serviceNumber('invoiced') }})" example="example5" color="info" collapsed button>
-                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Factura', '', 'Monto')}}
+                <data-table-com title="Facturado  ()" example="example5" color="info" collapsed button>
+                    {{ drawHeader('ID', 'Factura', 'Fecha', 'Ret', 'IVA','', 'Monto')}}
                     <template slot="body">
-                        @foreach($insurer->invoiced_services as $row)
+                        @foreach($pendings as $row)
                             <tr>
-                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
-                                <td>{{ $row->folio }}</td>
-                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                                <td>{{ $row->bill }}</td>
-                                <td></td>
-                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                                <td>{{ $row->id }}</td>
+                                <td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
+                                <td>{{ fdate($row->date, 'j/M/y', 'Y-m-d') }}</td>
+                                <td>{{ fnumber($row->retention) }}</td>
+                                <td>{{ fnumber($row->iva) }}</td>
+                                <td>
+                                    <dropdown color="info" icon="cogs">
+        									<ddi to="{{ route('invoice.edit', ['service' => $row->id, 'status' => 'pagado'])}}"
+        										icon="dollar" text="Pagar">
+        									</ddi>
+        							</dropdown>
+                                </td>
+                                <td>{{ fnumber($row->amount) }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="6">Total</th>
-                            <th>{{ $insurer->serviceTotal('invoiced', true)}}</th>
+                            <th colspan="5"><span class="pull-right">Total</span></th>
+                            <th></th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -182,25 +188,25 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Pagadas ({{ $insurer->serviceNumber('paid') }})" example="example6" color="success" collapsed button>
-                    {{ drawHeader('ID', 'Fecha Pago', 'Folio', 'Vehículo', 'Método', 'Factura', 'Monto')}}
+                <data-table-com title="Pagadas ()" example="example6" color="success" collapsed button>
+                    {{ drawHeader('ID', 'Factura', 'Fecha', 'Pago', 'Ret', 'IVA', 'Monto')}}
                     <template slot="body">
-                        @foreach($insurer->paid_services as $row)
+                        @foreach($paids as $row)
                             <tr>
-                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                                <td>{{ fdate($row->date_credit, 'j/M/y') }}</td>
-                                <td>{{ $row->folio }}</td>
-                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                                <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
-                                <td>{{ $row->bill }}</td>
-                                <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
+                                <td>{{ $row->id }}</td>
+                                <td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
+                                <td>{{ fdate($row->date, 'j/M/y', 'Y-m-d') }}</td>
+                                <td>{{ fdate($row->date_pay, 'j/M/y', 'Y-m-d') }}</td>
+                                <td>{{ fnumber($row->retention) }}</td>
+                                <td>{{ fnumber($row->iva) }}</td>
+                                <td>{{ fnumber($row->amount) }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="6">Total</th>
-                            <th>{{ $insurer->serviceTotal('paid', true)}}</th>
+                            <th colspan="6"><span class="pull-right">Total</span></th>
+                            <th></th>
                         </tr>
                     </template>
                 </data-table-com>

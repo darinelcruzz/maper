@@ -141,6 +141,18 @@ Route::group(['prefix' => 'bancos', 'as' => 'bank.'], function () {
     Route::post('formato', usesas($ctrl, 'format'));
 });
 
+// Facturas
+Route::group(['prefix' => 'facturas', 'as' => 'invoice.'], function () {
+    $ctrl = 'InvoiceController';
+
+    Route::get('/', usesas($ctrl, 'index'));
+    Route::get('crear/{insurer}', usesas($ctrl, 'create'));
+    Route::post('crear', usesas($ctrl, 'store'));
+    Route::get('editar/{expense}', usesas($ctrl, 'edit'));
+    Route::post('editar', usesas($ctrl, 'update'));
+    Route::get('detalles/{invoice}', usesas($ctrl, 'show'));
+});
+
 // Recursos
 Route::get('recursos', usesas('ResourcesController', 'show', 'resources.show'));
 
