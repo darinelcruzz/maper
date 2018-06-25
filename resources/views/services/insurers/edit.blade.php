@@ -3,27 +3,9 @@
 @section('main-content')
 
     <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <solid-box title="Editar servicio" color="box-danger">
                     {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.update']) !!}
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                {!! Field::select('insurer_id', $insurers, $insurerService->insurer_id,
-                                    ['tpl' => 'templates/withicon', 'empty' => 'Seleccione aseguradora'],
-                                    ['icon' => 'medkit'])
-                                !!}
-                            </div>
-                            <div class="col-md-6">
-                                {!! Field::date('date', $insurerService->date, ['tpl' => 'templates/withicon'], ['icon' => 'calendar']) !!}
-                            </div>
-                        </div>
-
-                        {!! Field::select('driver_id', $drivers, $insurerService->driver_id,
-                            ['tpl' => 'templates/withicon', 'empty' => 'Seleccione operador'],
-                            ['icon' => 'bus'])
-                        !!}
-                        {!! Field::text('vehicule', $insurerService->vehicule, ['tpl' => 'templates/withicon'], ['icon' => 'car']) !!}
 
                         <div class="row">
                             <div class="col-md-3">
@@ -42,34 +24,26 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Field::text('location', $insurerService->location, ['tpl' => 'templates/withicon'], ['icon' => 'globe']) !!}
+                                {!! Field::text('origin', $insurerService->origin, ['tpl' => 'templates/withicon'], ['icon' => 'globe']) !!}
                             </div>
                             <div class="col-md-6">
-                                {!! Field::text('destination', $insurerService->destiny, ['tpl' => 'templates/withicon'], ['icon' => 'map-marker']) !!}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                {!! Field::text('client', $insurerService->client, ['tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
-                            </div>
-                            <div class="col-md-6">
-                                {!! Field::number('amount', $insurerService->amount, ['tpl' => 'templates/withicon', 'step' => '0.1'], ['icon' => 'usd']) !!}
+                                {!! Field::text('destination', $insurerService->destination, ['tpl' => 'templates/withicon'], ['icon' => 'map-marker']) !!}
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4">
-                                {!! Field::text('contact', $insurerService->contact, ['tpl' => 'templates/withicon'], ['icon' => 'calendar-o']) !!}
+                                {!! Field::number('amount', $insurerService->amount, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado']) !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('end', $insurerService->end, ['tpl' => 'templates/withicon'], ['icon' => 'calendar-times-o']) !!}
+                                {!! Field::number('maneuver', $insurerService->maneuver, ['min' => '0']) !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::text('assignment', $insurerService->assignment, ['tpl' => 'templates/withicon'], ['icon' => 'clock-o']) !!}
+                                {!! Field::number('pension', $insurerService->pension, ['min' => '0']) !!}
                             </div>
                         </div>
 
+                        <input type="hidden" name="id" value="{{ $insurerService->id }}">
                         {!! Form::submit('Guardar cambios', ['class' => 'btn btn-danger pull-right']) !!}
 
                     {!! Form::close() !!}

@@ -152,12 +152,19 @@
 
     <data-table col="col-md-12" title="Crédito Aseguradoras" example="example6" color="info" collapsed button>
 
-        {{ drawHeader('ID', 'asiganci{on', 'cliente/Aseguradora', 'marca', 'importe') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'asiganci{on', 'cliente/Aseguradora', 'marca', 'importe') }}
 
         <template slot="body">
             @foreach($creditI as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td>
+                        <dropdown color="primary" icon="cogs">
+                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
+                                icon="pencil-square-o" text="Editar">
+                            </ddi>
+                        </dropdown>
+                    </td>
                     <td>{{ fdate($row->date_assignment, 'j/M/y, h:i a') }}</td>
                     <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
