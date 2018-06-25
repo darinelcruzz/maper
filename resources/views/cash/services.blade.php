@@ -92,7 +92,7 @@
 						<td>{{ $row->description }}</td>
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
-                        <td>{{ $row->pay_credit }}</td>
+                        <td></td>
                         <td>{{ fnumber($row->total) }}</td>
                     </tr>
 					@php
