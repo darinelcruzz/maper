@@ -20,7 +20,7 @@
     </style>
 </head>
 
-<body>
+<body onload="window.print()">
     <section class="invoice">
 		<div class="row">
             <div class="col-xs-3">

@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-5">
 			<solid-box title="Buscar" color="primary">
-				{!! Form::open(['method' => 'POST', 'route' => 'admin.report']) !!}
+				{!! Form::open(['method' => 'POST', 'route' => 'admin.report', 'target' => '_blank']) !!}
 					<div class="row">
 						<div class="col-md-6">
 							{!! Field::date('start', $date, ['tpl' => 'templates/withicon'],

@@ -19,7 +19,7 @@ function fdate($original_date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:
 
 function fnumber($original_number)
 {
-    return '$ ' . number_format($original_number, 2);
+    return '$' . number_format($original_number, 2);
 }
 
 function drawHeader(...$titles)
