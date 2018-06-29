@@ -220,7 +220,9 @@ return [
         'credit'                => 'credito',
         'user'                  => 'usuario',
         'booth'                 => 'cabina',
-        'retention'             => 'retención'
+        'retention'             => 'retención',
+        'start'                 => 'de',
+        'end'                   => 'hasta',
     ],
 
 ];

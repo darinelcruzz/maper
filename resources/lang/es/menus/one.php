@@ -41,6 +41,10 @@ return [
                 'title' => 'Banco',
                 'route' => 'bank.create'
             ],
+            'report' => [
+                'title' => 'Reporte',
+                'route' => 'admin.search'
+            ],
         ]
     ],
 
