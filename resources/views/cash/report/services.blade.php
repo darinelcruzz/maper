@@ -48,7 +48,7 @@
 					<tr>
 						<td>{{ $row->inventory }}</td>
 						<td>{{ $row->folio }}</td>
-                        <td>{{ $row->insurer->business }}</td>
+                        <td>{{ $row->insurer->name }}</td>
 						<td>{{ $row->description }}</td>
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status }}</td>
