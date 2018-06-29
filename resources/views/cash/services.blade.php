@@ -1,20 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
-		<data-table-com title="Servicios del {{  fdate($date, 'd/F/Y', 'Y-m-d') }}" example="example1" color="success" button>
-	        <template slot="header">
-	            <tr>
-	                <th>ID</th>
-					<th><i class="fa fa-cogs"></i></th>
-					<th>Inv</th>
-					<th>Folio</th>
-	                <th>Servicio</th>
-					<th>Descripción</th>
-	                <th>Tipo</th>
-					<th>Estatus</th>
-                    <th>Método</th>
-	                <th>Monto</th>
-	            </tr>
-			</template>
+		<data-table-com title="Servicios del {{  fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example1" color="success" button>
+	        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
 					$sum = 0;

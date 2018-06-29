@@ -23,14 +23,21 @@ class InsurerService extends Model
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 
-    function scopeUntilDate($query, $date, $column = 'date_out')
+    function scopeUntilDate($query, $start, $column = 'date_out', $end = NULL)
     {
-        return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
+        if ($end == NULL) {
+            return $query->whereBetween($column, [$start . ' 00:00:00', $start . ' 23:59:59'])->get();
+        }
+        return $query->whereBetween($column, [$start . ' 00:00:00', $end . ' 23:59:59'])->get();
+
     }
 
-    function scopePayType($query, $date, $type, $dateCol, $payCol)
+    function scopePayType($query, $start, $type, $dateCol, $payCol, $end=NULL)
     {
-        return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
+        if ($end == NULL) {
+            return $query->whereBetween($dateCol, [$start . ' 00:00:00', $start . ' 23:59:59'])->get();
+        }
+        return $query->whereBetween($dateCol, [$start . ' 00:00:00', $end . ' 23:59:59'])->get();
     }
 
 }

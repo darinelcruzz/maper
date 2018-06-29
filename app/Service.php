@@ -48,9 +48,21 @@ class Service extends Model
         return $query->where($col, $comparation, $service)->get();
     }
 
-    function scopePayType($query, $date, $type, $dateCol, $payCol)
+    function scopeUntilDate($query, $start, $column = 'date_out', $end = NULL)
     {
-        return $query->whereBetween($dateCol, [$date . ' 00:00:00', $date . ' 23:59:59'])
+        if ($end == NULL) {
+            return $query->whereBetween($column, [$start . ' 00:00:00', $start . ' 23:59:59'])->get();
+        }
+        return $query->whereBetween($column, [$start . ' 00:00:00', $end . ' 23:59:59'])->get();
+    }
+
+    function scopePayType($query, $start, $type, $dateCol, $payCol, $end = NULL)
+    {
+        if ($end == NULL) {
+            return $query->whereBetween($dateCol, [$start . ' 00:00:00', $start . ' 23:59:59'])
+                    ->where($payCol, $type)->get();
+        }
+        return $query->whereBetween($dateCol, [$start . ' 00:00:00', $end . ' 23:59:59'])
                     ->where($payCol, $type)->get();
     }
 
@@ -66,12 +78,6 @@ class Service extends Model
     function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
-    }
-
-
-    function scopeUntilDate($query, $date, $column = 'date_out')
-    {
-        return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])->get();
     }
 
     function scopeUntilDateWhere($query, $date, $column = 'date_out', $colWhere = 'status', $data = 'credito' ,$condition = '=!')

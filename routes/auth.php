@@ -20,7 +20,11 @@ Route::group(['prefix' => 'aseguradoras', 'as' => 'insurer.'], function () {
 
 //Admin
 Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
-    Route::match(['get', 'post'], 'caja', usesas('AdministrationController', 'cash'));
+    $ctrl = 'AdministrationController';
+
+    Route::match(['get', 'post'], 'caja', usesas($ctrl, 'cash'));
+    Route::get('buscar', usesas($ctrl, 'search'));
+    Route::post('reporte', usesas($ctrl, 'report'));
 });
 
 // Servicios

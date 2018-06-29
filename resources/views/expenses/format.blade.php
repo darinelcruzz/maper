@@ -64,7 +64,6 @@
                             <th>Saldo</th>
                         </tr>
                     </thead>
-
                         <tbody>
                             @foreach($expenses as $row)
                                 @php
@@ -86,9 +85,7 @@
                         </tbody>
                     </table>
                 </div>
-            <!-- /.col -->
             </div>
-        <!-- /.col -->
         </div>
 
     </section>
