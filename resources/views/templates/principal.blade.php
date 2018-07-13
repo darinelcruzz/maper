@@ -16,7 +16,7 @@
         <div class="col-md-4">
             {!! Field::select('service',
                 ['Tránsito del Estado' => 'Tránsito del Estado', 'Vialidad Municipal' => 'Vialidad Municipal', 'Policia Municipal' => 'Policia Municipal',
-                'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal'], isset($service) ? $service->service: null, ['empty' => '¿A que corresponde?'])
+                'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal', 'PGR' => 'PGR'], isset($service) ? $service->service: null, ['empty' => '¿A que corresponde?'])
             !!}
         </div>
     @elseif($ser == 'gen')

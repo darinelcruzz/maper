@@ -31,7 +31,12 @@ class CorporationServiceController extends Controller
 
     public function update(CorporationsRequest $request)
     {
-        Service::find($request->id)->update($request->all());
+        $service = Service::find($request->id);
+        $service->update($request->all());
+        if ($service->status == 'liberado' && $service->folio == NULL) {
+            $lastFree = Service::orderByDesc('folio')->first();
+            $service->update(['folio' => $lastFree->folio+1]);
+        }
 
         return redirect(route('admin.cash'));
     }

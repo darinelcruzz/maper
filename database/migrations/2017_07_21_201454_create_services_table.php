@@ -54,6 +54,7 @@ class CreateServicesTable extends Migration
             $table->string('pay_credit')->nullable();
             $table->string('view')->nullable();
             $table->string('serial')->nullable();
+            $table->integer('folio')->nullable();
 
             $table->timestamps();
         });

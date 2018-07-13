@@ -42,30 +42,31 @@
 <body onload="window.print();">
 <div class="wrapper">
     <section class="invoice">
-        <div class="row">
-            <div class="col-xs-3">
-                <center>
-                    <img width="150px" src="{{ asset('/img/MAPER.png') }}">
-                </center>
-            </div>
-            <div class="col-xs-9">
-                <h5 align="center">
-                    <b>JOSE ALFREDO FIGUEROA ESPINOSA <br>
-                    FIEA9004203X1</b><br>
-                    4° AV Poniente Norte No. 11, Barrio Guadalupe <br>
-                    Comitán de Domínguez, Chiapas <br>
-                    Tel. (963) 2 07 05 Cel. (044) 963 103 64 77 <br>
-                    Corralón: 5° Calle Norte Poniente No. 204, Barrio La Cueva
-                </h5><br><br>
-            </div>
+        <div class="col-xs-3">
+            <center>
+                <img width="150px" src="{{ asset('/img/MAPER.png') }}">
+            </center>
         </div>
+        <div class="col-xs-9">
+            <h5 align="center">
+                <b>JOSE ALFREDO FIGUEROA ESPINOSA <br>
+                FIEA9004203X1</b><br>
+                4° AV Poniente Norte No. 11, Barrio Guadalupe <br>
+                Comitán de Domínguez, Chiapas <br>
+                Tel. (963) 2 07 05 Cel. (044) 963 103 64 77 <br>
+                Corralón: 5° Calle Norte Poniente No. 204, Barrio La Cueva
+            </h5>
+        </div>
+        <h4 align="right">
+            FOLIO: {{ $service->folio }}
+        </h4>
         <h5 align="right">
             Comitán de Domínguez, Chiapas a {{ fdate($service->date_out, 'd \d\e F \d\e\l Y') }} <br><br>
         </h5>
 
         <h5 align="left">
             <b>A QUIEN CORRESPONDA</b><br>
-            <b>PRESENTE</b><br>
+            <b>PRESENTE</b><br><br>
         </h5>
         <p>Con la presente, la empresa <b><u>Servicio de Grúas "MAPER"</u></b> hace de su conocimiento,
             que no se hace responsable por daño, robo o descontento (objetos personales, fallas mecánicas,
@@ -81,7 +82,7 @@
 
         Es por ello que: <br><br>
         <p>Yo <b>{{ $service->releaser }}</b>, en pleno uso de mis facultades, acepto los términos expuestos anteriormente y deslindo de
-        cualquier responsabilidad de robo o falla mecánica a: <b><u>SERVICIO DE GRÚAS "MAPER"</u></b>, y recibo de conformidad la unidad:</p><br>
+        cualquier responsabilidad de robo o falla mecánica a: <b><u>SERVICIO DE GRÚAS "MAPER"</u></b>, y recibo de conformidad la unidad:</p>
 
         <table align="center" border="1">
             <tr>
@@ -108,13 +109,13 @@
         <body align="center">
             El día {{ fdate($service->date_out, 'd \d\e F \d\e\l \a\ñ\o Y') }} y hago constar que
             el importe total pagado por la liberación del vehículo es la cantidad de:
-            <h4>
+            <big>
                 <b>{{ fnumber($service->total) }}</b>
-            </h4>
+            </big>
         </body><br><br><br><br>
 
         <h5 align="center">
-            _____________________________________<br><br>
+            _____________________________________<br>
             NOMBRE Y FIRMA
         </h5>
     </section>
