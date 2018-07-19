@@ -223,6 +223,7 @@ return [
         'retention'             => 'retención',
         'start'                 => 'de',
         'end'                   => 'hasta',
+        'base_salary'           => 'sueldo base',
     ],
 
 ];
