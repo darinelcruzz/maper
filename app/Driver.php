@@ -13,7 +13,7 @@ class Driver extends Model
 
     function services()
     {
-        return $this->hasMany(Service::class, 'driver');
+        return $this->hasMany(Service::class);
     }
 
     function getHour($hour)
@@ -21,5 +21,4 @@ class Driver extends Model
         $fhour = new Date(strtotime($this->$hour));
         return $fhour->format('h:i a');
     }
-
 }

@@ -192,3 +192,11 @@ Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
     Route::get('editar/{user}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'update'));
 });
+
+// Descuentos
+Route::group(['prefix' => 'descuentos', 'as' => 'discount.'], function () {
+    $ctrl = 'DiscountController';
+
+    Route::get('/', usesas($ctrl, 'index'));
+    Route::post('crear', usesas($ctrl, 'store'));
+});

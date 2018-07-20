@@ -116,9 +116,13 @@ return [
                 'title' => 'Listado',
                 'route' => 'resources.show'
             ],
-            'report' => [
+            'extras' => [
                 'title' => 'HorasExtras',
                 'route' => 'resources.driver.date'
+            ],
+            'discounts' => [
+                'title' => 'Descuentos',
+                'route' => 'discount.index'
             ],
         ]
     ],

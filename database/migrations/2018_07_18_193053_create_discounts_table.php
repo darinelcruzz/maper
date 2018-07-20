@@ -16,6 +16,11 @@ class CreateDiscountsTable extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('reason');          
+            $table->double('amount')->default(0);           
+            $table->date('discounted_at');            
+            $table->integer('driver_id');          
+
             $table->timestamps();
         });
     }

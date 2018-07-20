@@ -2,43 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Discount;
+use App\{Discount, Driver};
 use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
     function index()
     {
-        //
-    }
-
-    function create()
-    {
-        //
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        $discounts = Discount::all();
+        return view('resources.drivers.discounts', compact('drivers', 'discounts'));
     }
 
     function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'reason' => 'required',
+            'amount' => 'required',
+            'discounted_at' => 'required',
+            'driver_id' => 'required'
+        ]);
 
-    function show(Discount $discount)
-    {
-        //
-    }
+        Discount::create($request->all());
 
-    function edit(Discount $discount)
-    {
-        //
-    }
-
-    function update(Request $request, Discount $discount)
-    {
-        //
-    }
-
-    function destroy(Discount $discount)
-    {
-        //
+        return redirect(route('discount.index'));
     }
 }

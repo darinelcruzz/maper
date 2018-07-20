@@ -42,3 +42,15 @@ function expire()
         }
     }
 }
+
+function daycount($day, $start, $end, $counter)
+{
+    if($start > $end)
+    {
+        return $counter;
+    }
+    else
+    {
+        return daycount($day, strtotime("next ".$day, $start), $end, $counter+1);
+    }
+}

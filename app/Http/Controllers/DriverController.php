@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\Driver;
-use App\Service;
+use App\{Driver, Service, Discount};
 
 class DriverController extends Controller
 {
@@ -52,11 +51,14 @@ class DriverController extends Controller
 
     function format(Request $request)
     {
-        $start = new Date(strtotime($request->start));
-        $end = new Date(strtotime($request->end));
+        $start = $request->start;
+        $end = $request->end;
 
         $drivers = Driver::all();
+        $discounts = Discount::whereBetween('discounted_at', [$start, $end])->get();
         $totalExtras = [];
+
+        $pay_days = daycount('saturday', strtotime($start), strtotime($end), 0);
 
         foreach ($drivers as $driver) {
             $servicesID = [];
@@ -74,11 +76,10 @@ class DriverController extends Controller
                 }
             }
 
-            $totalExtras["$driver->name"] = $servicesID;
+            $totalExtras[$driver->id] = $servicesID;
         }
 
-        $range = $start->format('D, d/M/Y') . ' - ' . $end->format('D, d/M/Y');
-        return view('resources.drivers.format', compact('totalExtras', 'range', 'services'));
+        return view('resources.drivers.format', compact('totalExtras', 'drivers', 'start', 'end', 'discounts', 'pay_days'));
     }
 
     function destroy($id)
