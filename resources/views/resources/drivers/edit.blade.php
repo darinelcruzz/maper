@@ -11,7 +11,7 @@
                         {!! Field::time('start_hour', $driver->start_hour, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::time('end_hour',  $driver->end_hour, ['tpl' => 'templates/oneline']) !!}
                         {!! Field::number('base_salary', $driver->base_salary, ['tpl' => 'templates/oneline', 'step' => '0.01', 'min' => '0']) !!}
-                        {!! Field::select('type', ['conductor' => 'Conductor', 'oficina' => 'Oficina'], $driver->type, 
+                        {!! Field::select('type', ['operador' => 'Operador', 'oficina' => 'Oficina'], $driver->type, 
                             ['tpl' => 'templates/oneline', 'empty' => 'Seleccione tipo de empleado']) 
                         !!}
                     </div>
