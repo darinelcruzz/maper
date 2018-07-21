@@ -13,7 +13,7 @@ class CorporationsComposer
     function compose(View $view)
     {
         $view->units = Unit::pluck('description', 'id')->toArray();
-        $view->drivers = Driver::pluck('name', 'id')->toArray();
+        $view->drivers = Driver::where('type', 'operador')->pluck('name', 'id')->toArray();
         $view->clients = Client::pluck('name', 'id')->toArray();
         $view->ser = 'corp';
     }

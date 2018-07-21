@@ -58,100 +58,98 @@
             <div class="row">
                 <div class="col-xs-12">
                     @foreach ($drivers as $driver)
-                        @if($totalExtras[$driver->id])
-                            {{ $driver->name }}
-                            <table class="table">
-                                <thead>
+                        {{ $driver->name }}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="29%">Vehiculo</th>
+                                    <th width="29%">Ruta</th>
+                                    <th width="23%">Fecha</th>
+                                    <th width="14%">Monto</th>
+                                </tr>
+                            </thead>
+                            @php
+                                $total = 0;
+                            @endphp
+                            <tbody>
+                                @foreach ($totalExtras[$driver->id] as $service)
                                     <tr>
-                                        <th width="5%">#</th>
-                                        <th width="29%">Vehiculo</th>
-                                        <th width="29%">Ruta</th>
-                                        <th width="23%">Fecha</th>
-                                        <th width="14%">Monto</th>
-                                    </tr>
-                                </thead>
-                                @php
-                                    $total = 0;
-                                @endphp
-                                <tbody>
-                                    @foreach ($totalExtras[$driver->id] as $service)
-                                        <tr>
-                                            <td>{{ $service->id }}</td>
-                                            <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
-                                            <td>{{ $service->origin }} - {{ $service->destination }}</td>
-                                            <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }} - {{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
-                                            <td>
-                                                @if ($service->driver->name == $driver->name && $service->extra_driver != null)
-                                                    Operador $ {{ $service->extra_driver }}
+                                        <td>{{ $service->id }}</td>
+                                        <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                                        <td>{{ $service->origin }} - {{ $service->destination }}</td>
+                                        <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }} - {{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                                        <td>
+                                            @if ($service->driver->name == $driver->name && $service->extra_driver != null)
+                                                Operador $ {{ $service->extra_driver }}
+                                                @php
+                                                    $total = $service->extra_driver + $total;
+                                                @endphp
+                                            @elseif ($service->helper)
+                                                @if ($service->helperr->name == $driver->name && $service->extra_helper != null)
+                                                    Apoyo $ {{ $service->extra_helper }}
                                                     @php
-                                                        $total = $service->extra_driver + $total;
+                                                        $total = $service->extra_helper + $total;
                                                     @endphp
-                                                @elseif ($service->helper)
-                                                    @if ($service->helperr->name == $driver->name && $service->extra_helper != null)
-                                                        Apoyo $ {{ $service->extra_helper }}
-                                                        @php
-                                                            $total = $service->extra_helper + $total;
-                                                        @endphp
-                                                    @endif
-                                                @else
-                                                    Sin monto
                                                 @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    @foreach($discounts->where('driver_id', $driver->id) as $discount)
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><em>Descuento</em><br>{{ $discount->reason }}</td>
-                                            <td>{{ fdate($discount->discounted_at, 'j/M/y', 'Y-m-d') }}</td>
-                                            <td>&ndash; {{ fnumber($discount->amount) }}</td>
-                                            @php
-                                                $total -= $discount->amount;
-                                            @endphp
-                                        </tr>
-                                    @endforeach
-                                    @if(fdate($start, 'D', 'Y-m-d') == 'sáb')
+                                            @else
+                                                Sin monto
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                @foreach($discounts->where('driver_id', $driver->id) as $discount)
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td><em>Descuento</em><br>{{ $discount->reason }}</td>
+                                        <td>{{ fdate($discount->discounted_at, 'j/M/y', 'Y-m-d') }}</td>
+                                        <td>&ndash; {{ fnumber($discount->amount) }}</td>
+                                        @php
+                                            $total -= $discount->amount;
+                                        @endphp
+                                    </tr>
+                                @endforeach
+                                @if(fdate($start, 'D', 'Y-m-d') == 'sáb')
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td><em>Sueldo</em></td>
+                                        <td>{{ fdate($start, 'j/M/y', 'Y-m-d') }}</td>
+                                        <td>{{ fnumber($driver->base_salary) }}</td>
+                                        @php
+                                            $total += $driver->base_salary;
+                                        @endphp
+                                    </tr>
+                                @endif
+                                @php
+                                    $startt = $start;
+                                @endphp
+                                @for($i = 1; $i < $pay_days; $i++)
+                                    @php
+                                        $nextSat = strtotime("next saturday", strtotime($startt));
+                                        $startt = date('Y-m-d', $nextSat);
+                                    @endphp
+                                    @if($nextSat <= strtotime($end))
                                         <tr>
                                             <td colspan="2"></td>
                                             <td><em>Sueldo</em></td>
-                                            <td>{{ fdate($start, 'j/M/y', 'Y-m-d') }}</td>
+                                            <td>{{ fdate(date('Y-m-d', $nextSat), 'j/M/y', 'Y-m-d') }}</td>
                                             <td>{{ fnumber($driver->base_salary) }}</td>
                                             @php
                                                 $total += $driver->base_salary;
                                             @endphp
                                         </tr>
                                     @endif
-                                    @php
-                                        $startt = $start;
-                                    @endphp
-                                    @for($i = 1; $i < $pay_days; $i++)
-                                        @php
-                                            $nextSat = strtotime("next saturday", strtotime($startt));
-                                            $startt = date('Y-m-d', $nextSat);
-                                        @endphp
-                                        @if($nextSat <= strtotime($end))
-                                            <tr>
-                                                <td colspan="2"></td>
-                                                <td><em>Sueldo</em></td>
-                                                <td>{{ fdate(date('Y-m-d', $nextSat), 'j/M/y', 'Y-m-d') }}</td>
-                                                <td>{{ fnumber($driver->base_salary) }}</td>
-                                                @php
-                                                    $total += $driver->base_salary;
-                                                @endphp
-                                            </tr>
-                                        @endif
-                                    @endfor
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td align="right"><b>Total</b></td>
-                                        <td><b>{{ fnumber($total) }}</b></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        @endif
+                                @endfor
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td align="right"><b>Total</b></td>
+                                    <td><b>{{ fnumber($total) }}</b></td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     @endforeach
                 </div>
             <!-- /.col -->
