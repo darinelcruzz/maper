@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<data-table-com title="Ingresos del {{ fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example2" color="success" button>
-			{{ drawHeader('ID', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
+			{{ drawHeader('ID', '<i class="fa fa-clock-o"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
 					$sum = 0;
@@ -10,6 +10,11 @@
 				@foreach ($payed as $row)
 					<tr>
 						<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+						<td>
+							<a href="{{ route('service.editHour', ['id' => $row->id]) }}" class="btn btn-success btn-xs">
+								<i class="fa fa-clock-o"></i>
+							</a>
+						</td>
 						<td>{{ $row->inventory }}</td>
 						<td></td>
 						@if ($row->service == 'General')
