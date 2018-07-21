@@ -9,7 +9,7 @@ class AddTypeToDriversTable extends Migration
     public function up()
     {
         Schema::table('drivers', function (Blueprint $table) {
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->double('base_salary')->default(0);
         });
     }

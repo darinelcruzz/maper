@@ -117,7 +117,7 @@ return [
                 'route' => 'resources.show'
             ],
             'extras' => [
-                'title' => 'HorasExtras',
+                'title' => 'Pagos',
                 'route' => 'resources.driver.date'
             ],
             'discounts' => [
