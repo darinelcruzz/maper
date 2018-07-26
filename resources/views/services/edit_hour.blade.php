@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            {!! Field::number('inventory', 0, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
+                            {!! Field::number('inventory', $service->inventory, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
                         </div>
                     </div>
                     <h4>Horas extra</h4>
@@ -30,7 +30,7 @@
                             </span>
                         </div>
                         <div class="col-md-4">
-                            {!! Field::number('extra_driver', 0, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
+                            {!! Field::number('extra_driver', $service->extra_driver, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
                         </div>
                     </div>
 
