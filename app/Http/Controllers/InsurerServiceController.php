@@ -71,6 +71,20 @@ class InsurerServiceController extends Controller
         return back();
     }
 
+    function editHour(InsurerService $insurerService)
+    {
+        return view('services.insurers.edit_hour', compact('insurerService'));
+    }
+
+    function updateHour(Request $request)
+    {
+        $service = InsurerService::find($request->id);
+
+        $service->update($request->all());
+
+        return redirect(route('admin.cash'));
+    }
+
     function pay(Request $request)
     {
         $service = InsurerService::find($request->id);

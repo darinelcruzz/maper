@@ -71,6 +71,12 @@
                         <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
 						<td>
 							<dropdown color="success" icon="cogs">
+								<ddi to="{{ route('service.insurer.editHour', ['id' => $row->id]) }}"
+									icon="clock-o" text="Hora de regreso/Extras">
+								</ddi>
+								{{-- <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+									icon="times" text="Muerto">
+								</ddi> --}}
 							</dropdown>
 						</td>
 						<td>{{ $row->inventory }}</td>
