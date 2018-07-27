@@ -75,7 +75,7 @@
 			</template>
 			<template slot="footer">
 				<tr>
-					<td colspan="7"></td>
+					<td colspan="8"></td>
 					<td><b>Total:</b></td>
 					<td>{{ fnumber($sum) }} </td>
 				</tr>

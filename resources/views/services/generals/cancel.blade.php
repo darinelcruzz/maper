@@ -1,4 +1,4 @@
-getShortDate(@extends('admin')
+@extends('admin')
 
 @section('main-content')
 
@@ -43,8 +43,10 @@ getShortDate(@extends('admin')
                 <div class="col-md-5">
                     {!! Field::text('reason', isset($service) ? $service->reason: null)!!}
                 </div>
+                <div class="col-md-5">
+                    {!! Field::number('amount', isset($service) ? $service->amount: null)!!}
+                </div>
 
-                <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="status" value="cancelado">
                     <input type="hidden" name="id" value="{{ $service->id }}">
