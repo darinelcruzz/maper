@@ -4,9 +4,11 @@
     <section class="sidebar">
         <!-- Sidebar Menu -->
         @if (Auth::check())
-            @if (Auth::user()->level > 1)
+            @if (Auth::user()->level == 3)
+                @include('adminlte::layouts.partials.menu_items', ['items' => trans('menus/three')])
+            @elseif (Auth::user()->level == 2)
                 @include('adminlte::layouts.partials.menu_items', ['items' => trans('menus/two')])
-            @else
+            @elseif (Auth::user()->level == 1)
                 @include('adminlte::layouts.partials.menu_items', ['items' => trans('menus/one')])
             @endif
         @endif

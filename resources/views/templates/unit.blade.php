@@ -29,7 +29,7 @@
     @if($ser == 'corp')
        <div class="col-md-4">
            {!! Field::select('lot',
-               ['cueva' => 'Cueva'], isset($service) ? $service->lot: null, ['empty' => 'Seleccione el corralón'])
+               ['cueva' => 'Cueva'], isset($service) ? $service->lot : null, ['empty' => 'Seleccione el corralón'])
            !!}
        </div>
    @endif
