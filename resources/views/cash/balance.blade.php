@@ -15,6 +15,13 @@
 				{!! Form::close() !!}
 			</solid-box>
 		</div>
+		<div class="col-md-5">
+			<span class="pull-right">
+				<a href="{{ route('service.insurer.create') }}" class="btn btn-danger">Aseguradoras</a>
+				<a href="{{ route('service.general.create') }}" class="btn btn-success">General</a>
+				<a href="{{ route('service.corporation.create') }}" class="btn btn-warning">Corporaciones</a>
+			</span>
+		</div>
 	</div>
 	@include('cash.services')
 	@include('cash.ingresses')

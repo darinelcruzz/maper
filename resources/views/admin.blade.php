@@ -5,7 +5,7 @@
     @include('adminlte::layouts.partials.htmlheader', ['headerTitle' => 'Intranet'])
 @show
 
-<body class="skin-red sidebar-mini">
+<body class="skin-red sidebar-mini {{ Auth::user()->level == 3 ? 'sidebar-collapse': '' }}">
     <div id="app" v-cloak>
         <div class="wrapper">
 
