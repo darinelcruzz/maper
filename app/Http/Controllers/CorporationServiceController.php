@@ -48,8 +48,12 @@ class CorporationServiceController extends Controller
 
     function printLetter(Service $service)
     {
-        $today = Date::now();
         return view('services.corporations.letter', compact('service'));
+    }
+
+    function printTicket(Service $service)
+    {
+        return view('services.corporations.ticket', compact('service'));
     }
 
     function pay(Service $service)

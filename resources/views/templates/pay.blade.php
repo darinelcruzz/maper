@@ -1,4 +1,4 @@
-<payment-box ser="{{ $ser }}" amount="{{ $service->amount or 0 }}" maneuver="{{ $service->maneuver or 0 }}" others="{{ $service->others or 0 }}" pension="{{ $cost or 0 }}" discount="0">
+<payment-box ser="{{ $ser }}" amount="{{ $service->amount or 0 }}" maneuver="{{ $service->maneuver or 0 }}" others="{{ $service->others or 0 }}" pension="{{ $cost or 0 }}" discount="{{ $service->discount or 0 }}">
     <template slot="releaser">
         {!! Field::text('releaser', isset($service) ? $service->releaser: null)!!}
     </template>

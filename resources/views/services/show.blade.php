@@ -72,7 +72,7 @@
                     <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
                         <dropdown color="success" icon="cogs">
-                            <ddi to="{{ route('service.corporation.print', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
                                 icon="print" text="Imprimir">
                             </ddi>
                             <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"

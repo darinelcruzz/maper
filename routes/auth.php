@@ -13,7 +13,7 @@ Route::group(['prefix' => 'aseguradoras', 'as' => 'insurer.'], function () {
     Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{insurer}', usesas($ctrl, 'edit'));
+    Route::get('editar/{insurer}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));
     Route::get('detalles/{insurer}', usesas($ctrl, 'details'));
 });
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{service}', usesas($ctrl, 'edit'));
+    Route::get('editar/{service}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
@@ -52,11 +52,13 @@ Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporatio
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{service}', usesas($ctrl, 'edit'));
+    Route::get('editar/{service}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
-    Route::get('formato/{service}', usesas($ctrl, "printLetter", 'print'));
+    Route::get('formato/{service}', usesas($ctrl, 'printLetter'));
+    Route::get('ticket/{service}', usesas($ctrl, 'printTicket'));
+
 });
 
 // Aseguradoras
@@ -66,7 +68,7 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
     Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{insurerService}', usesas($ctrl, 'edit'));
+    Route::get('editar/{insurerService}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));
     Route::get('actualizar/{insurerService}/{status}', usesas($ctrl, 'updateStatus'));
     Route::get('horas/{insurerService}', usesas($ctrl, 'editHour', 'editHour'));
@@ -83,7 +85,7 @@ Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {
     Route::get('/', usesas($ctrl, 'show'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{id}', usesas($ctrl, 'edit'));
+    Route::get('editar/{id}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('detalles/{client}', usesas($ctrl, 'details'));
     Route::get('eliminar/{id}', usesas($ctrl, "deleteClient", 'delete'));
@@ -96,7 +98,7 @@ Route::group(['prefix' => 'proveedores', 'as' => 'provider.'], function () {
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('/', usesas($ctrl, 'show'));
-    Route::get('editar/{id?}', usesas($ctrl, 'edit'));
+    Route::get('editar/{id?}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
 });
 
@@ -107,7 +109,7 @@ Route::group(['prefix' => 'productos', 'as' => 'product.'], function () {
     Route::get('/', usesas($ctrl,'show'));
     Route::get('crear', usesas($ctrl,'create'));
     Route::post('crear', usesas($ctrl,'store'));
-    Route::get('editar/{id}', usesas($ctrl,'edit'));
+    Route::get('editar/{id}', usesas($ctrl,'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl,'change'));
 });
 
@@ -118,7 +120,7 @@ Route::group(['prefix' => 'precios', 'as' => 'price.'], function () {
     Route::get('/', usesas($ctrl, 'show'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{price}', usesas($ctrl, 'edit'));
+    Route::get('editar/{price}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
 });
 
@@ -129,7 +131,7 @@ Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
     Route::get('/', usesas($ctrl, 'show'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{expense}', usesas($ctrl, 'edit'));
+    Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::post('formato', usesas($ctrl, 'format'));
 });
@@ -141,7 +143,7 @@ Route::group(['prefix' => 'bancos', 'as' => 'bank.'], function () {
     Route::get('/', usesas($ctrl, 'show'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{expense}', usesas($ctrl, 'edit'));
+    Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::post('actualizar', usesas($ctrl, 'update'));
     Route::post('formato', usesas($ctrl, 'format'));
@@ -154,7 +156,7 @@ Route::group(['prefix' => 'facturas', 'as' => 'invoice.'], function () {
     Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear/{insurer}', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{expense}', usesas($ctrl, 'edit'));
+    Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));
     Route::get('detalles/{invoice}', usesas($ctrl, 'show'));
 });
@@ -168,7 +170,7 @@ Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], f
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{driver}', usesas($ctrl, 'edit'));
+    Route::get('editar/{driver}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('fecha', usesas($ctrl, 'date'));
     Route::post('reporte', usesas($ctrl, 'format'));
@@ -180,7 +182,7 @@ Route::group(['prefix' => 'recursos/unidades', 'as' => 'resources.unit.'], funct
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{id}', usesas($ctrl, 'edit'));
+    Route::get('editar/{id}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
 });
 
@@ -191,7 +193,7 @@ Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
     Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{user}', usesas($ctrl, 'edit'));
+    Route::get('editar/{user}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));
 });
 

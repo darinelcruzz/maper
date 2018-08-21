@@ -1,4 +1,15 @@
 <div class="row">
+    @if($ser == 'gen')
+        <div class="col-md-4">
+            {!! Field::select('client_id', $clients, isset($service) ? $service->client_id: null, ['empty' => 'Seleccione al cliente'])!!}
+        </div>
+        {{-- <div class="col-md-1">
+            <br>
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#client">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </button>
+        </div> --}}
+    @endif
     <div class="col-md-4">
         {!! Field::text('description', isset($service) ? $service->description: null)!!}
     </div>
@@ -19,9 +30,6 @@
                 'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal', 'PGR' => 'PGR'], isset($service) ? $service->service: null, ['empty' => '¿A que corresponde?'])
             !!}
         </div>
-    @elseif($ser == 'gen')
-            <div class="col-md-4">
-                {!! Field::select('client_id', $clients, isset($service) ? $service->client_id: null, ['empty' => 'Seleccione al cliente'])!!}
-            </div>
     @endif
 </div>
+@include('templates.clientmodal')

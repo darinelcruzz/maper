@@ -11,9 +11,20 @@
 					<tr>
 						<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
 						<td>
-							<a href="{{ route('service.editHour', ['id' => $row->id]) }}" class="btn btn-success btn-xs">
-								<i class="fa fa-clock-o"></i>
-							</a>
+							<dropdown color="success" icon="cogs">
+								@if ($row->service == 'General')
+									<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+										icon="clock-o" text="Hora de regreso/Extras">
+									</ddi>
+								@else
+									<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
+										icon="print" text="Imprimir">
+									</ddi>
+									<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+										icon="clock-o" text="Hora de regreso/Extras">
+									</ddi>
+								@endif
+							</dropdown>
 						</td>
 						<td>{{ $row->inventory }}</td>
 						<td></td>

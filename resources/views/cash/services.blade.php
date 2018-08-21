@@ -13,9 +13,11 @@
 							<td>
 								<dropdown color="success" icon="cogs">
 									@if ($row->service == 'General')
-										<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
-											icon="dollar" text="Pagar">
-										</ddi>
+										@if ($row->status != 'pagado')
+											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
+												icon="dollar" text="Pagar">
+											</ddi>
+										@endif
 										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 											icon="clock-o" text="Hora de regreso/Extras">
 										</ddi>
@@ -24,7 +26,7 @@
 										</ddi>
 									@else
 										@if ($row->status == 'liberado')
-											<ddi to="{{ route('service.corporation.print', ['id' => $row->id]) }}"
+											<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
 				                                icon="print" text="Imprimir">
 				                            </ddi>
 											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"

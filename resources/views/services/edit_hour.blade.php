@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <solid-box color="danger" title="Editar horas">
+            <solid-box color="danger" title="Editar horas id = {{ $service->id }}">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.updateHour'])!!}
                     <div class="row">
                         <div class="col-md-7">
@@ -17,9 +17,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            {!! Field::number('inventory', $service->inventory, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
-                        </div>
+                        @if ($service->inventory < 1)
+                            <div class="col-md-5">
+                                {!! Field::number('inventory', ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator'])!!}
+                            </div>
+                        @else
+                            <div class="col-md-5">
+                                {!! Field::number('inventory', $service->inventory, ['tpl' => 'templates/withicon', 'min' => '0', 'disabled'], ['icon' => 'calculator'])!!}
+                            </div>
+                        @endif
                     </div>
                     <h4>Horas extra</h4>
                     <div class="row">
@@ -29,9 +35,15 @@
                                 <h4>{{ $service->driver->name }}</h4>
                             </span>
                         </div>
-                        <div class="col-md-4">
-                            {!! Field::number('extra_driver', $service->extra_driver, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
-                        </div>
+                        @if ($service->extra_driver < 1)
+                            <div class="col-md-6">
+                                {!! Field::number('extra_driver', $service->extra_driver, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
+                            </div>
+                        @else
+                            <div class="col-md-6">
+                                {!! Field::number('extra_driver', $service->extra_driver, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
+                            </div>
+                        @endif
                     </div>
 
                     @if ($service->helper)
@@ -42,9 +54,15 @@
                                     <h4>{{ $service->helper }}</h4>
                                 </span>
                             </div>
-                            <div class="col-md-6">
-                                {!! Field::number('extra_helper', 0, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
-                            </div>
+                            @if ($service->extra_helper < 1)
+                                <div class="col-md-6">
+                                    {!! Field::number('extra_helper', $service->extra_helper, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
+                                </div>
+                            @else
+                                <div class="col-md-6">
+                                    {!! Field::number('extra_helper', $service->extra_helper, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
+                                </div>
+                            @endif
                         </div>
                     @endif
 
