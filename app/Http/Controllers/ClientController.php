@@ -18,12 +18,16 @@ class ClientController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:clients',
-            'city' => 'required',
+            'city' => 'sometimes|required',
             'phone' => 'required',
-            'days' => 'required',
+            'days' => 'sometimes|required',
         ]);
 
         $client = Client::create($request->all());
+        
+        if ($request->city == NULL) {
+            return back();
+        }
         return redirect(route('client.show'));
     }
 

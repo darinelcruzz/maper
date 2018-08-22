@@ -1,14 +1,14 @@
 <div class="row">
     @if($ser == 'gen')
-        <div class="col-md-4">
-            {!! Field::select('client_id', $clients, isset($service) ? $service->client_id: null, ['empty' => 'Seleccione al cliente'])!!}
+        <div class="col-md-3">
+            {!! Field::select('client_id', $clients, isset($service) ? $service->client_id: null, ['empty' => 'Seleccione al cliente', 'class' => 'select2'])!!}
         </div>
-        {{-- <div class="col-md-1">
+        <div class="col-md-1">
             <br>
             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#client">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
             </button>
-        </div> --}}
+        </div>
     @endif
     <div class="col-md-4">
         {!! Field::text('description', isset($service) ? $service->description: null)!!}
