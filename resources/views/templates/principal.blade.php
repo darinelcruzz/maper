@@ -32,4 +32,3 @@
         </div>
     @endif
 </div>
-@include('templates.clientmodal')

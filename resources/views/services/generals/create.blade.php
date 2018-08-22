@@ -40,4 +40,5 @@
             </div>
         </div>
     </div>
+    @include('templates.clientmodal')
 @endsection
