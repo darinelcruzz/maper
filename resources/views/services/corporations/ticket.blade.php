@@ -54,15 +54,17 @@
                 4° AV Poniente Norte No. 11, Barrio Guadalupe <br>
                 Comitán de Domínguez, Chiapas <br>
                 Tel. (963) 2 07 05 Cel. (044) 963 103 64 77 <br>
-                Corralón: 5° Calle Norte Poniente No. 204, Barrio La Cueva
+                Corralón: 5° Calle Norte Poniente No. 204, <br>
+                Barrio La Cueva
             </h5>
         </div>
-        <h4 align="left">
-            LIBERADO
-        </h4>
-        <h4 align="right">
-            FOLIO: {{ $service->folio }}
-        </h4>
+        <div>
+            <big><b>LIBERADO</b></big>
+            <span class="pull-right">
+                <big><b>FOLIO: {{ $service->folio }}</b></big>
+            </span>
+        </div>
+
         <h5 align="right">
             {{ fdate($service->date_out, 'd \d\e F \d\e\l Y') }} <br><br>
         </h5>
@@ -71,13 +73,11 @@
             <b>GRUAS MAPER HACE ENTREGA DEL VEHICULO:</b><br>
         </h5>
 
-        <h5><b>MARCA: </b>{{ $service->brand }} &nbsp;&nbsp;&nbsp;&nbsp;  <b>TIPO: </b>{{ $service->type }}</h5>
-        <h5><b>MODELO: </b>{{ $service->model }} &nbsp;&nbsp;&nbsp;&nbsp;  <b>PLACAS: </b>{{ $service->plate }}</h5>
+        <h5><b>MARCA: </b>{{ $service->brand }} <span class="pull-right"><b>TIPO: </b>{{ $service->type }}</span></h5>
+        <h5><b>MODELO: </b>{{ $service->model }} <span class="pull-right"><b>PLACAS: </b>{{ $service->plate }}</span></h5>
         <h5><b>COLOR: </b>{{ $service->color }}</h5>
         <h5><b>AL SR. (A): </b>{{ $service->releaser }}</h5>
-
-
-
+        <hr><hr>
     </section>
 </div>
 </body>

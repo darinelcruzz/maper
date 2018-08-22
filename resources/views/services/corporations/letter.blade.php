@@ -40,7 +40,6 @@
 </head>
 
 <body onload="window.print();">
-<div class="wrapper">
     <section class="invoice">
         <div class="col-xs-3">
             <center>
@@ -119,7 +118,5 @@
             NOMBRE Y FIRMA
         </h5>
     </section>
-</div>
-<!-- ./wrapper -->
 </body>
 </html>
