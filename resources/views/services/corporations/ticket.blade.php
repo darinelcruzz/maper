@@ -44,7 +44,7 @@
     <section class="invoice">
         <div class="row">
             <center>
-                <img width="150px" src="{{ asset('/img/MAPER.png') }}">
+                <img width="130px" src="{{ asset('/img/MAPER.png') }}">
             </center>
         </div>
         <div class="row">
@@ -77,7 +77,7 @@
         <h5><b>MODELO: </b>{{ $service->model }} <span class="pull-right"><b>PLACAS: </b>{{ $service->plate }}</span></h5>
         <h5><b>COLOR: </b>{{ $service->color }}</h5>
         <h5><b>AL SR. (A): </b>{{ $service->releaser }}</h5>
-        <hr><hr>
+        <br><br>_
     </section>
 </div>
 </body>
