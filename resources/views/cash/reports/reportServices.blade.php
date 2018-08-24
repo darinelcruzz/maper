@@ -30,7 +30,7 @@
             </div>
             <div class="col-xs-6">
                 <h4 align="center">
-                    <b>Reporte</b><br>
+                    <b>Reporte de servicios</b><br>
                 </h4>
                 <h5 align="center">
                     <b>{{ $fdate }}</b>
@@ -40,12 +40,12 @@
         <h4 align="center">
             <b>Servicios</b><br>
         </h4>
-		@include('cash.report.services')
+		@include('cash.reports.services')
 
         <h4 align="center">
             <b>Ingresos</b><br>
         </h4>
-		@include('cash.report.ingresses')
+		@include('cash.reports.ingresses')
 
 		<div class="row">
 			<div class="col-md-12">

@@ -28,7 +28,7 @@ class GeneralServiceController extends Controller
         {
             Service::find($service->id)->update([
                 'status' => 'credito',
-                'pay' => 'credito',
+                'pay' => 'Credito',
             ]);
             return redirect(route('admin.cash'));
         }

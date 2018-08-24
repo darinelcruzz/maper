@@ -35,9 +35,11 @@ class InsurerService extends Model
     function scopePayType($query, $start, $type, $dateCol, $payCol, $end=NULL)
     {
         if ($end == NULL) {
-            return $query->whereBetween($dateCol, [$start . ' 00:00:00', $start . ' 23:59:59'])->get();
+            return $query->whereBetween($dateCol, [$start . ' 00:00:00', $start . ' 23:59:59'])
+                            ->where($payCol, $type)->get();
         }
-        return $query->whereBetween($dateCol, [$start . ' 00:00:00', $end . ' 23:59:59'])->get();
+        return $query->whereBetween($dateCol, [$start . ' 00:00:00', $end . ' 23:59:59'])
+                            ->where($payCol, $type)->get();
     }
 
 }

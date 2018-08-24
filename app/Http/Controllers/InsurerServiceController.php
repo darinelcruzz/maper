@@ -41,7 +41,7 @@ class InsurerServiceController extends Controller
 
         InsurerService::create($request->all());
 
-        return redirect(route('service.show'));
+        return redirect(route('admin.cash'));
     }
 
     function show(InsurerService $insurerService)

@@ -37,6 +37,8 @@ class CreateInsurerServicesTable extends Migration
             $table->string('booth')->nullable();
             $table->timestamp('date_return')->nullable();
             $table->timestamp('date_assignment')->nullable();
+            $table->timestamp('date_pay')->nullable();
+            $table->string('pay')->default('Credito');
             $table->string('status')->default('credito');
             $table->double('amount')->default(0);
             $table->integer('maneuver')->nullable();

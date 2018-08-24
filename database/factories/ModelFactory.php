@@ -67,6 +67,7 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
         'start_hour' => $time,
         'end_hour' => date('H:i', strtotime("$time + 10 hours")),
         'type' => 'operador',
+        'base_salary' => $faker->numberBetween(0, 800),
     ];
 });
 
