@@ -3,6 +3,7 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>Inv</th>
 					<th>Folio</th>
 					<th>Servicio</th>
@@ -20,6 +21,7 @@
 
 				@foreach ($payed as $row)
 					<tr>
+						<td>{{ $row->id . 'S' }}</td>
 						<td>{{ $row->inventory }}</td>
 						<td></td>
 						@if ($row->service == 'General')
@@ -40,7 +42,7 @@
 
 				@foreach ($credit as $row)
 					<tr>
-						<td></td>
+						<td>{{ $row->id . 'S' }}</td>
 						<td>{{ $row->inventory }}</td>
 						<td></td>
 						<td>{{ $row->client->name }}</td>
@@ -58,9 +60,9 @@
 			</body>
 			<tfooter>
 				<tr>
-					<td colspan="6"></td>
+					<td colspan="7"></td>
 					<td><b>Total:</b></td>
-					<td>{{ fnumber($sum) }} </td>
+					<td><b>{{ fnumber($sum) }}</b></td>
 				</tr>
 			</tfooter>
 		</table>

@@ -3,6 +3,7 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>Inv</th>
 					<th>Folio</th>
 					<th>Servicio</th>
@@ -20,6 +21,7 @@
 				@foreach ($services as $row)
 					@if (fdate($row->date_service) != fdate($row->date_out))
 						<tr>
+							<td>{{ $row->id . 'S' }}</td>
 							<td>{{ $row->inventory }}</td>
 							<td></td>
 							@if ($row->service == 'General')
@@ -46,6 +48,7 @@
 
 				@foreach ($insurerServ as $row)
 					<tr>
+						<td>{{ $row->id . 'A' }}</td>
 						<td>{{ $row->inventory }}</td>
 						<td>{{ $row->folio }}</td>
                         <td>{{ $row->insurer->name }}</td>
@@ -62,9 +65,9 @@
 			</body>
 			<tfooter>
 				<tr>
-					<td colspan="6"></td>
+					<td colspan="7"></td>
 					<td><b>Total:</b></td>
-					<td>{{ fnumber($sum) }} </td>
+					<td><b>{{ fnumber($sum) }}</b></td>
 				</tr>
 			</tfooter>
 	    </table>
