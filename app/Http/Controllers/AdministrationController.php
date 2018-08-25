@@ -16,29 +16,9 @@ class AdministrationController extends Controller
         $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
         $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
 
-        $services = Service::untilDate($date, 'date_service');
-        $payed = Service::untilDate($date);
-        $credit = Service::untilDate($date, 'date_credit');
-        $insurerServ = InsurerService::untilDate($date, 'date_assignment');
+        $variables = $this->getMethods($date);
 
-        $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
-        $methodsA = [];
-        $methodsB = [];
-        $methodsC = [];
-        $methodsD = [];
-        $methodsE = [];
-
-        foreach ($methods as $method) {
-            $methodsA[$method] = Service::payType($date, $method,'date_out', 'pay')->sum('total');
-            $methodsB[$method] = Service::payType($date, $method, 'date_credit', 'pay_credit')->sum('total');
-            $methodsC[$method] = Service::payType($date, $method, 'date_service', 'pay')->sum('total');
-            $methodsD[$method] = InsurerService::payType($date, $method, 'date_assignment', 'pay')->sum('total');
-            $methodsE[$method] = InsurerService::payType($date, $method, 'date_pay', 'pay')->sum('total');
-        }
-
-        $total = $payed->sum('total') + $credit->sum('total');
-
-        return view('cash.balance', compact('date', 'fdate', 'payed', 'services', 'credit', 'insurerServ', 'methodsA', 'methodsB', 'methodsC', 'methodsD', 'total'));
+        return view('cash.balance', compact('date', 'fdate'))->with($variables);
     }
 
     function search()
@@ -53,25 +33,7 @@ class AdministrationController extends Controller
         $end = $request->end == 0 ? Date::now()->format('Y-m-d') : $request->end;
         $fdate= fdate($start, 'D, d/M/Y', 'Y-m-d') . ' al ' . fdate($end, 'D, d/M/Y', 'Y-m-d');
 
-        $services = Service::untilDate($start, 'date_service', $end);
-        $payed = Service::untilDate($start, 'date_out', $end);
-        $credit = Service::untilDate($start, 'date_credit', $end);
-        $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
-
-        $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
-        $methodsA = [];
-        $methodsB = [];
-        $methodsC = [];
-        $methodsD = [];
-        $methodsE = [];
-
-        foreach ($methods as $method) {
-            $methodsA[$method] = Service::payType($start, $method, 'date_out', 'pay', $end)->sum('total');
-            $methodsB[$method] = Service::payType($start, $method, 'date_credit', 'pay_credit', $end)->sum('total');
-            $methodsC[$method] = Service::payType($start, $method, 'date_service', 'pay', $end)->sum('total');
-            $methodsD[$method] = InsurerService::payType($start, $method, 'date_assignment', 'pay', $end)->sum('total');
-            $methodsE[$method] = InsurerService::payType($start, $method, 'date_pay', 'pay', $end)->sum('total');
-        }
+        $variables = $this->getMethods($start, $end);
 
         $drivers = Driver::all();
         $discounts = Discount::whereBetween('discounted_at', [$start, $end])->get();
@@ -95,8 +57,7 @@ class AdministrationController extends Controller
             $totalExtras[$driver->id] = array_sum($extraHours);
         }
 
-        $total = $payed->sum('total') + $credit->sum('total');
-        return view('cash.reports.reportBalance', compact('fdate', 'methodsA', 'methodsB', 'methodsC', 'methodsD', 'total', 'totalExtras', 'drivers', 'discounts', 'pay_days'));
+        return view('cash.reports.reportBalance', compact('fdate', 'totalExtras', 'drivers', 'discounts', 'pay_days'))->with($variables);
     }
 
     function reportServices(Request $request)
@@ -105,10 +66,19 @@ class AdministrationController extends Controller
         $end = $request->end == 0 ? Date::now()->format('Y-m-d') : $request->end;
         $fdate= fdate($start, 'D, d/M/Y', 'Y-m-d') . ' al ' . fdate($end, 'D, d/M/Y', 'Y-m-d');
 
+        $variables = $this->getMethods($start, $end);
+
+        return view('cash.reports.reportServices', compact('fdate'))->with($variables);
+    }
+
+    function getMethods($start, $end = NULL)
+    {
         $services = Service::untilDate($start, 'date_service', $end);
         $payed = Service::untilDate($start, 'date_out', $end);
         $credit = Service::untilDate($start, 'date_credit', $end);
         $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
+        $insurerPayed = InsurerService::untilDate($start, 'date_pay', $end);
+        $total = $payed->sum('total') + $credit->sum('total');
 
         $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
         $methodsA = [];
@@ -125,7 +95,17 @@ class AdministrationController extends Controller
             $methodsE[$method] = InsurerService::payType($start, $method, 'date_pay', 'pay', $end)->sum('total');
         }
 
-        $total = $payed->sum('total') + $credit->sum('total');
-        return view('cash.reports.reportServices', compact('fdate', 'payed', 'services', 'credit', 'insurerServ', 'methodsA', 'methodsB', 'methodsC', 'methodsD', 'total'));
+        return [
+            'methodsA' => $methodsA,
+            'methodsB' => $methodsB,
+            'methodsC' => $methodsC,
+            'methodsD' => $methodsD,
+            'methodsE' => $methodsE,
+            'credit' => $credit,
+            'payed' => $payed,
+            'total' => $total,
+            'services' => $services,
+            'insurerServ' => $insurerServ,
+        ];
     }
 }

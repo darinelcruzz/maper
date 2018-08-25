@@ -7,8 +7,6 @@
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('/plugins/iCheck/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('/plugins/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/dataTables.bootstrap.css') }}">
 
     <style>

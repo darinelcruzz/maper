@@ -7,7 +7,6 @@
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('/plugins/iCheck/all.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/dataTables.bootstrap.css') }}">
 
     <style>
@@ -36,6 +35,18 @@
                 </h5>
             </div>
         </div>
+
+        @php
+            $expenses = 0;
+        @endphp
+        @foreach ($drivers as $driver)
+            @php
+                $salary = $driver->base_salary * $pay_days;
+                $extras = $totalExtras[$driver->id];
+                $discount = $discounts->where('driver_id', $driver->id)->sum('amount');
+                $expenses += $salary + $extras- $discount;
+            @endphp
+        @endforeach
 
 		<div class="row">
 			<div class="col-md-12">
@@ -89,13 +100,13 @@
                 <div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p><b>Gastos</b></p>
-						<h4>Nos falta</h4>
+						<h4>{{ fnumber($expenses) }}</h4>
 					</div>
 				</div>
                 <div class="col-xs-12">
 					<div align="center" color="success" class="text-muted well well-sm">
 						<p><b>Utilidades</b></p>
-						<h4>Nos falta</h4>
+						<h4>{{ fnumber($total - $expenses) }}</h4>
 					</div>
 				</div>
 			</div>

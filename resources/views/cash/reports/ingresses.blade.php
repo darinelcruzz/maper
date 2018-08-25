@@ -7,6 +7,7 @@
 					<th>Inv</th>
 					<th>Folio</th>
 					<th>Servicio</th>
+					<th>Fecha</th>
 					<th>Descripción</th>
 					<th>Vehiculo</th>
 					<th>Estatus</th>
@@ -29,6 +30,7 @@
 						@else
 							<td>{{ $row->service }}</td>
 						@endif
+						<td>{{ fdate($row->date_service, 'd-m-Y') }}</td>
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status }}</td>
@@ -46,6 +48,7 @@
 						<td>{{ $row->inventory }}</td>
 						<td></td>
 						<td>{{ $row->client->name }}</td>
+						<td>{{ fdate($row->date_service, 'd-m-Y') }}</td>
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
@@ -60,7 +63,7 @@
 			</body>
 			<tfooter>
 				<tr>
-					<td colspan="7"></td>
+					<td colspan="8"></td>
 					<td><b>Total:</b></td>
 					<td><b>{{ fnumber($sum) }}</b></td>
 				</tr>
