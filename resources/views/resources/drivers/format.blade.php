@@ -8,8 +8,6 @@
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="{{ asset('/plugins/iCheck/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('/plugins/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/dataTables.bootstrap.css') }}">
 
     <style>
@@ -19,7 +17,7 @@
     </style>
 </head>
 
-<body >
+<body>
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
@@ -66,18 +64,22 @@
                                         <td>{{ $service->id }}</td>
                                         <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
                                         <td>{{ $service->origin }} - {{ $service->destination }}</td>
-                                        <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }} - {{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                                        @if ($service->insurer_id > 1)
+                                            <td>{{ fdate($service->date_assignment, 'j/M/y, h:i a') }} - {{ fdate($service->date_return, 'j/M/y, h:i a') }}</td>
+                                        @else
+                                            <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }} - {{ fdate($service->date_return, 'j/M/y, h:i a') }}</td>
+                                        @endif
                                         <td>
                                             @if ($service->driver->name == $driver->name && $service->extra_driver != null)
                                                 Operador $ {{ $service->extra_driver }}
                                                 @php
-                                                    $total = $service->extra_driver + $total;
+                                                    $total += $service->extra_driver;
                                                 @endphp
                                             @elseif ($service->helper)
                                                 @if ($service->helperr->name == $driver->name && $service->extra_helper != null)
                                                     Apoyo $ {{ $service->extra_helper }}
                                                     @php
-                                                        $total = $service->extra_helper + $total;
+                                                        $total += $service->extra_helper;
                                                     @endphp
                                                 @endif
                                             @else

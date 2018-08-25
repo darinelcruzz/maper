@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\{Driver, Service, Discount};
+use App\{Driver, Service, Discount, InsurerService};
 
 class DriverController extends Controller
 {
@@ -65,15 +65,20 @@ class DriverController extends Controller
 
             $services = Service::fromDateToDate($start, $end, $driver, 'driver_id');
             foreach ($services as $service) {
-                if (!$service->inSchedule) {
-                    array_push($servicesID, $service);
-                }
+                array_push($servicesID, $service);
             }
             $services = Service::fromDateToDate($start, $end, $driver, 'helper');
             foreach ($services as $service) {
-                if (!$service->inSchedule) {
-                    array_push($servicesID, $service);
-                }
+                array_push($servicesID, $service);
+            }
+
+            $services = InsurerService::fromDateToDate($start, $end, $driver, 'driver_id');
+            foreach ($services as $service) {
+                array_push($servicesID, $service);
+            }
+            $services = InsurerService::fromDateToDate($start, $end, $driver, 'helper');
+            foreach ($services as $service) {
+                array_push($servicesID, $service);
             }
 
             $totalExtras[$driver->id] = $servicesID;

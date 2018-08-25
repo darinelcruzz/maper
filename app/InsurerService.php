@@ -18,6 +18,11 @@ class InsurerService extends Model
         return $this->belongsTo(Driver::class);
     }
 
+    function helperr()
+    {
+        return $this->belongsTo(Driver::class, 'helper');
+    }
+
     function getTotalAttribute()
     {
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
