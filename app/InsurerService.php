@@ -42,4 +42,11 @@ class InsurerService extends Model
                             ->where($payCol, $type)->get();
     }
 
+    function scopeFromDateToDate($query, $startDate, $endDate, $driver, $type)
+    {
+        return $query->whereBetween('date_assignment', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
+                        ->where($type, $driver->id)
+                        ->where('extra_driver', '>', 0)->get();
+    }
+
 }

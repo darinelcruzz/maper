@@ -42,14 +42,23 @@ class AdministrationController extends Controller
         $pay_days = daycount('saturday', strtotime($start), strtotime($end), 0) - 1;
         foreach ($drivers as $driver) {
             $extraHours = [];
-
+            //general
             $services = Service::fromDateToDate($start, $end, $driver, 'driver_id');
-
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
             $services = Service::fromDateToDate($start, $end, $driver, 'helper');
+            foreach ($services as $service) {
+                array_push($extraHours, $service->extra_helper);
+            }
+            //aseguradoras
+            $services = InsurerService::fromDateToDate($start, $end, $driver, 'driver_id');
+            foreach ($services as $service) {
+                array_push($extraHours, $service->extra_driver);
+            }
+
+            $services = InsurerService::fromDateToDate($start, $end, $driver, 'helper');
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
