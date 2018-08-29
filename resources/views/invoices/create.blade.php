@@ -16,15 +16,17 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Field::number('iva', ['step' => '0.01', 'min' => '0']) !!}
+                                {!! Field::number('amount', ['step' => '0.01', 'min' => '0', 'v-model' => 'total']) !!}
                             </div>
                             <div class="col-md-6">
-                                {!! Field::number('retention', ['step' => '0.01', 'min' => '0']) !!}
+                                <p>IVA</p>
+                                <input type="number" name="iva2" :value="iva" disabled>
+                                <input type="hidden" name="iva" :value="iva">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
-                                {!! Field::number('amount', ['step' => '0.01', 'min' => '0']) !!}
+                            <div class="col-md-offset-6 col-md-6">
+                                {!! Field::number('retention', ['step' => '0.01', 'min' => '0']) !!}
                             </div>
                         </div>
                         <data-table example='1'>

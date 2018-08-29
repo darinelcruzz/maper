@@ -35,22 +35,21 @@ const app = new Vue({
     el: '#app',
     data: {
         entries: 1,
-        type: 'produccion',
-        products: [],
         product_id: 1,
         quantity: 0,
         selected: '',
         selectedDesign: '',
+        total: '',
     },
     methods: {
         disable(option) {
             return option == 'existente';
         }
     },
-    created() {
-        axios.get('/products').then(response => {
-            this.products = response.data;
-        });
-    }
+    computed: {
+        iva() {
+            return (this.total -  this.total/1.16).toFixed(2);
+        }
+    },
 
 });

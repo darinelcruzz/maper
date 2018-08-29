@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
 use App\Expense;
 use App\Service;
+use App\Invoice;
 
 class BankController extends Controller
 {
     function create()
     {
         $expenses = Expense::where('method','b')->get();
-        $services = Service::where('bill', '!=','n/a')->where('pay', '!=','Efectivo')->get();
+        $invoices = Invoice::where('status', 'pagada')->get();
         $date = Date::now()->format('Y-m-d');
 
-        return view('banks.create', compact('date', 'services', 'expenses'));
+        return view('banks.create', compact('date', 'invoices', 'expenses'));
     }
 
     function store(Request $request)

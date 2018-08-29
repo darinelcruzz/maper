@@ -87,11 +87,11 @@
 
 				@foreach ($invoicesPayed as $row)
 					<tr>
-						<td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+						<td>{{ $row->id }}</td>
 						<td></td>
 						<td></td>
 						<td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
-						<td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
+						<td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
 
 						<td>Factura</td>
 						<td></td>

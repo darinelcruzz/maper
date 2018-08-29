@@ -53,29 +53,19 @@
                     $iva = 0;
                 @endphp
                 <template slot="body">
-                    @foreach($services as $row)
+                    @foreach($invoices as $row)
                         @php
-                            $sub = $row->total;
-                            $iva = ($sub * 1.16)-$sub;
-                            $total = $sub + $iva;
-
-                            $totalAllI += $total;
+                            $totalAllI += $row->amount;
                         @endphp
                         <tr>
-                            <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                            <td>{{ $row->bill }}</td>
-                            <td>{{ $row->clientr->name }}</td>
-                            <td>{{ $row->getShortDate('date_out') }}</td>
-                            <td>$ {{ number_format($sub, 2) }}</td>
-                            <td>$ {{ number_format($iva, 2) }}</td>
-                            <td>
-                                @if ($row->ret >= 0)
-                                    $ {{  number_format($row->ret,2) }}
-                                @else
-                                    @include('banks/ret')
-                                @endif
-                            </td>
-                            <td>$ {{ number_format($total, 2) }}</td>
+                            <td>{{ $row->id }}</td>
+                            <td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
+                            <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
+                            <td>{{ fdate($row->date_pay, 'd/m/Y', 'Y-m-d') }}</td>
+                            <td>{{ fnumber($row->amount - $row->iva) }}</td>
+                            <td>{{ fnumber($row->iva) }}</td>
+                            <td>{{ fnumber($row->retention) }}</td>
+                            <td>{{ fnumber($row->amount) }}</td>
                       </tr>
                     @endforeach
                 </template>

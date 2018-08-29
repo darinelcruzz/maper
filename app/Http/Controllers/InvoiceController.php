@@ -31,7 +31,7 @@ class InvoiceController extends Controller
         $this->validate($request, [
             'folio' => 'required',
             'retention' => 'required',
-            'iva' => 'required',
+            // 'iva' => 'required',
             'amount' => 'required',
             'services' => 'required',
             'date' => 'required',
