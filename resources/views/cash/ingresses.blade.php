@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<data-table-com title="Ingresos del {{ fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example2" color="success" button>
-			{{ drawHeader('ID', '<i class="fa fa-clock-o"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
+			{{ drawHeader('ID', '<i class="fa fa-clock-o"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Ruta', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
 					$sum = 0;
@@ -34,6 +34,7 @@
 							<td>{{ $row->service }}</td>
 						@endif
 						<td>{{ $row->description }}</td>
+						<td>{{ $row->origin }} - {{ $row->destination }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status }}</td>
 						<td>{{ $row->pay }}</td>
@@ -73,6 +74,7 @@
 						<td></td>
 						<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
 						<td>{{ $row->description }}</td>
+						<td>{{ $row->origin }} - {{ $row->destination }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
 						<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>
@@ -83,10 +85,29 @@
 					@endphp
 				@endforeach
 
+				@foreach ($invoicesPayed as $row)
+					<tr>
+						<td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+						<td></td>
+						<td></td>
+						<td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
+						<td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
+
+						<td>Factura</td>
+						<td></td>
+                        <td></td>
+                        <td>{{ $row->status }}</td>
+                        <td>{{ $row->method }}</td>
+                        <td>{{ fnumber($row->amount) }}</td>
+					</tr>
+					@php
+					$sum += $row->amount;
+					@endphp
+				@endforeach
 			</template>
 			<template slot="footer">
 				<tr>
-					<td colspan="8"></td>
+					<td colspan="9"></td>
 					<td><b>Total:</b></td>
 					<td>{{ fnumber($sum) }} </td>
 				</tr>

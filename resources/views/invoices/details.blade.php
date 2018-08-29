@@ -3,7 +3,7 @@
 @section('main-content')
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <data-table-com title="Factura {{ $invoice->folio }} - {{ $invoice->insurer->name }}" example="example1" color="primary">
             {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Monto')}}
             <template slot="body">
@@ -19,7 +19,7 @@
             </template>
         </data-table-com>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <data-table-com title="Datos" example="example2" color="primary">
 
             <template slot="body">

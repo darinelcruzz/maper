@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{ $insurer->business_name }}</h3>
+                        <h3>{{ $insurer->name }}</h3>
                         <table style="width:100%">
                             <thead>
                                 <tr>
@@ -156,9 +156,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Facturado  ()" example="example5" color="info" collapsed button>
+                <data-table-com title="Facturado  ({{ count($pendings) }})" example="example5" color="info" collapsed button>
                     {{ drawHeader('ID', 'Factura', 'Fecha', 'Ret', 'IVA','', 'Monto')}}
                     <template slot="body">
+                        @php
+                            $tPending = 0;
+                        @endphp
                         @foreach($pendings as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
@@ -168,19 +171,22 @@
                                 <td>{{ fnumber($row->iva) }}</td>
                                 <td>
                                     <dropdown color="info" icon="cogs">
-        									<ddi to="{{ route('invoice.edit', ['service' => $row->id, 'status' => 'pagado'])}}"
+        									<ddi to="{{ route('invoice.pay', ['id' => $row->id])}}"
         										icon="dollar" text="Pagar">
         									</ddi>
         							</dropdown>
                                 </td>
                                 <td>{{ fnumber($row->amount) }}</td>
+                                @php
+                                    $tPending += $row->amount;
+                                @endphp
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5"><span class="pull-right">Total</span></th>
-                            <th></th>
+                            <th colspan="6"><span class="pull-right">Total</span></th>
+                            <th>{{ fnumber($tPending) }}</th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -188,7 +194,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Pagadas ()" example="example6" color="success" collapsed button>
+                <data-table-com title="Pagadas ({{ count($paids) }})" example="example6" color="success" collapsed button>
                     {{ drawHeader('ID', 'Factura', 'Fecha', 'Pago', 'Ret', 'IVA', 'Monto')}}
                     <template slot="body">
                         @foreach($paids as $row)

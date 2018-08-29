@@ -21,6 +21,11 @@ class InvoiceController extends Controller
         return view('invoices.create', compact('services', 'insurer'));
     }
 
+    function pay(Invoice $invoice)
+    {
+        return view('invoices.pay', compact('invoice'));
+    }
+
     function store(Request $request)
     {
         $this->validate($request, [
@@ -55,9 +60,15 @@ class InvoiceController extends Controller
         //
     }
 
-    function update(Request $request, Invoice $invoice)
+    function update(Request $request)
     {
-        //
+        $invoice = Invoice::find($request->id);
+        foreach ($invoice->insureServices as $service) {
+            $service->update(['status' => 'pagado']);
+        }
+        $invoice->update($request->all());
+
+        return redirect(route('service.show'));
     }
 
     function destroy(Invoice $invoice)

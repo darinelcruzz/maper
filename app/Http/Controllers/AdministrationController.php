@@ -8,6 +8,7 @@ use App\Service;
 use App\InsurerService;
 use App\Driver;
 use App\Discount;
+use App\Invoice;
 
 class AdministrationController extends Controller
 {
@@ -86,8 +87,8 @@ class AdministrationController extends Controller
         $payed = Service::untilDate($start, 'date_out', $end);
         $credit = Service::untilDate($start, 'date_credit', $end);
         $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
-        $insurerPayed = InsurerService::untilDate($start, 'date_pay', $end);
-        $total = $payed->sum('total') + $credit->sum('total');
+        $invoicesPayed = Invoice::untilDate($start, 'date_pay', $end);
+        $total = $payed->sum('total') + $credit->sum('total') + $invoicesPayed->sum('amount');
 
         $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
         $methodsA = [];
@@ -101,7 +102,7 @@ class AdministrationController extends Controller
             $methodsB[$method] = Service::payType($start, $method, 'date_credit', 'pay_credit', $end)->sum('total');
             $methodsC[$method] = Service::payType($start, $method, 'date_service', 'pay', $end)->sum('total');
             $methodsD[$method] = InsurerService::payType($start, $method, 'date_assignment', 'pay', $end)->sum('total');
-            $methodsE[$method] = InsurerService::payType($start, $method, 'date_pay', 'pay', $end)->sum('total');
+            $methodsE[$method] = Invoice::payType($start, $method, 'date_pay', 'method', $end)->sum('amount');
         }
 
         return [
@@ -115,6 +116,7 @@ class AdministrationController extends Controller
             'total' => $total,
             'services' => $services,
             'insurerServ' => $insurerServ,
+            'invoicesPayed' => $invoicesPayed,
         ];
     }
 }

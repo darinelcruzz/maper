@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<data-table-com title="Servicios del {{  fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example1" color="success" button>
-	        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
+	        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Ruta', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
 					$sum = 0;
@@ -52,6 +52,7 @@
 								<td>{{ $row->service }}</td>
 							@endif
 							<td>{{ $row->description }}</td>
+							<td>{{ $row->origin }} - {{ $row->destination }}</td>
 							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
 								{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}
@@ -83,8 +84,9 @@
 						</td>
 						<td>{{ $row->inventory }}</td>
 						<td>{{ $row->folio }}</td>
-                        <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->business_name }} </a></td>
+                        <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
 						<td>{{ $row->description }}</td>
+						<td>{{ $row->origin }} - {{ $row->destination }}</td>
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
                         <td></td>
@@ -97,7 +99,7 @@
 			</template>
 			<template slot="footer">
 				<tr>
-					<td colspan="8"></td>
+					<td colspan="9"></td>
 					<td><b>Total:</b></td>
 					<td>{{ fnumber($sum) }} </td>
 				</tr>

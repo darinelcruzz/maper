@@ -39,7 +39,7 @@ class InsurerController extends Controller
         $pendings = Invoice::where('insurer_id', $insurer->id)
                             ->where('status', 'pendiente')->get();
         $paids = Invoice::where('insurer_id', $insurer->id)
-                            ->where('status', 'pagado')->get();
+                            ->where('status', 'pagada')->get();
         return view('insurers.details', compact('insurer', 'pendings', 'paids'));
     }
 }

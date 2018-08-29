@@ -103,13 +103,7 @@
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
-                    <td>
-                        @if ($row->bill != null)
-                            {{ $row->bill }}
-                        @else
-                            @include('services/bill')
-                        @endif
-                    </td>
+                    <td>{{ $row->bill }}</td>
                     <td>
                         @if (Auth::user()->level == 1)
                             <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">

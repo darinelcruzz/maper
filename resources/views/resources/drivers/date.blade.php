@@ -7,9 +7,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Imprimir formato</h3>
             </div>
-            <!-- form start -->
-            {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.format']) !!}
-
+            {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.format', 'target' => '_blank']) !!}
             <div class="box-body">
 
                 <div class="row">
@@ -25,14 +23,13 @@
                     </div>
                 </div>
             </div>
-            <!-- /.box-body -->
             <div class="box-footer">
                 {!! Form::submit('Buscar', ['class' => 'btn btn-black btn-block']) !!}
             </div>
-            <!-- /.box-footer -->
             {!! Form::close() !!}
         </div>
     </div>
+
     <div class="col-md-12 col-lg-9">
         <data-table-com title="Servicios con Extras" example="example1" color="danger">
             <template slot="header">
