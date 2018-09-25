@@ -12,11 +12,13 @@ class BankController extends Controller
 {
     function create()
     {
-        $expenses = Expense::where('method','b')->get();
+        $movements = Expense::where('method','b')->get();
+        $expenses = Expense::where('method','b')->where('type', 'cargo')->get();
+        $ingreses = Expense::where('method','b')->where('type', 'abono')->get();
         $invoices = Invoice::where('status', 'pagada')->get();
         $date = Date::now()->format('Y-m-d');
 
-        return view('banks.create', compact('date', 'invoices', 'expenses'));
+        return view('banks.create', compact('date', 'invoices', '$movements', 'ingreses', 'expenses'));
     }
 
     function store(Request $request)
