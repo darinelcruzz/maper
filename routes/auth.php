@@ -137,6 +137,19 @@ Route::group(['prefix' => 'gastos', 'as' => 'expense.'], function () {
     Route::post('formato', usesas($ctrl, 'format'));
 });
 
+// Gasolina
+Route::group(['prefix' => 'gasolina', 'as' => 'gas.'], function () {
+    $ctrl = 'GasController';
+
+    Route::get('/', usesas($ctrl, 'show'));
+    Route::get('crear', usesas($ctrl, 'create'));
+    Route::post('crear', usesas($ctrl, 'store'));
+    Route::get('editar/{gas}', usesas($ctrl, 'edit'))->middleware('one');
+    Route::post('editar', usesas($ctrl, 'change'));
+    Route::get('pagar/{gas}', usesas($ctrl, 'verify'));
+    Route::post('formato', usesas($ctrl, 'format'));
+});
+
 // Bancos
 Route::group(['prefix' => 'bancos', 'as' => 'bank.'], function () {
     $ctrl = 'BankController';

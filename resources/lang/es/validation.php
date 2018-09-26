@@ -224,6 +224,8 @@ return [
         'start'                 => 'de',
         'end'                   => 'hasta',
         'base_salary'           => 'sueldo base',
+        'product'               => 'producto',
+        'observations'          => 'observaciones'
     ],
 
 ];
