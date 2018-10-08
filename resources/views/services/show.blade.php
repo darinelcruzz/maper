@@ -18,7 +18,7 @@
                             <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
                                 icon="times" text="Cancelar">
                             </ddi>
-                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+                            <ddi v-if="{{ Auth::user()->level < 3 ? 1: 0 }}" to="{{ route('service.general.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
                         </dropdown>
@@ -46,7 +46,7 @@
                             <ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
                                 icon="hand-peace-o" text="Liberar">
                             </ddi>
-                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+                            <ddi v-if="{{ Auth::user()->level < 3 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
                         </dropdown>
@@ -75,9 +75,9 @@
                             <ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
                                 icon="print" text="Imprimir">
                             </ddi>
-                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+                            {{-- <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
-                            </ddi>
+                            </ddi> --}}
                         </dropdown>
                     </td>
                     <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
@@ -105,11 +105,9 @@
                     <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                     <td>{{ $row->bill }}</td>
                     <td>
-                        @if (Auth::user()->level == 1)
-                            <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                        @endif
+                        {{-- <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a> --}}
                     </td>
                 </tr>
             @endforeach
@@ -117,7 +115,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito" example="example5" color="info" collapsed button>
+    <data-table col="col-md-12" title="Crédito Clientes" example="example5" color="info" collapsed button>
 
         {{ drawHeader('ID', 'fecha servicio', 'cliente/Aseguradora', 'marca', 'importe', 'pagar', 'opciones') }}
 
@@ -133,11 +131,9 @@
                         @include('services/assign') &nbsp;
                     </td>
                     <td>
-                        @if (Auth::user()->level == 1)
-                            <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                        @endif
+                        <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

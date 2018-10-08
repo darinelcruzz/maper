@@ -46,7 +46,7 @@ return [
                 'route' => 'gas.create'
             ],
             'report' => [
-                'title' => 'Reporte',
+                'title' => 'Corte',
                 'route' => 'admin.search'
             ],
         ]

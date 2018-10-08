@@ -7,30 +7,22 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Editar servicio Público General</h3>
                 </div>
-                <!-- form start -->
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
-
                     <div class="box-body">
-
                         @include('templates.principal')
                         @include('templates.car')
                         @include('templates.ubication')
                         @include('templates.unit')
-                        @if($service->status != 'pendiente')
-                            @include('templates.pay', ['cost' => $service->pension])
-                            <input type="hidden" name="view" value="editPayed">
-                        @else
-                            <input type="hidden" name="view" value="edit">
-                        @endif
+                        <input type="hidden" name="view" value="edit">
 
                     </div>
-                  <!-- /.box-body -->
-                  <div class="box-footer">
-                      <input type="hidden" name="id" value="{{ $service->id }}">
-                      <input type="hidden" name="status" value="{{ $service->status }}">
-                      {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
-                  </div>
-                  <!-- /.box-footer -->
+                    <div class="box-footer">
+                        <input type="hidden" name="id" value="{{ $service->id }}">
+                        <input type="hidden" name="status" value="{{ $service->status }}">
+                        @if ($service->status != 'pagado')
+                            {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
+                        @endif
+                    </div>
                 {!! Form::close() !!}
             </div>
         </div>

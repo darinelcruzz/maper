@@ -43,10 +43,13 @@ class GeneralServiceController extends Controller
 
     function change(GeneralRequest $request)
     {
-        Service::find($request->id)->update($request->all());
-        Service::find($request->id)->update([
-            'status' => $request->pay == 'Credito' ? 'credito' : $request->status
-        ]);
+        $service = Service::find($request->id);
+        if ($service->status != 'pagado' || auth()->user()->id == 1) {
+            $service->update($request->all());
+            $service->update([
+                'status' => $request->pay == 'Credito' ? 'credito' : $request->status
+            ]);
+        }
 
         return redirect(route('admin.cash'));
     }

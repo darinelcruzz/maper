@@ -32,7 +32,9 @@ class CorporationServiceController extends Controller
     public function update(CorporationsRequest $request)
     {
         $service = Service::find($request->id);
-        $service->update($request->all());
+        if ($service->status != 'liberado' || auth()->user()->id == 1) {
+            $service->update($request->all());
+        }
         if ($service->status == 'liberado' && $service->folio == NULL) {
             $lastFree = Service::orderByDesc('folio')->first();
             $service->update(['folio' => $lastFree->folio+1]);
