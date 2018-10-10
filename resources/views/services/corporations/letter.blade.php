@@ -42,7 +42,7 @@
                     Comitán de Domínguez, Chiapas <br>
                     Tel. (963) 2 07 05 Cel. (044) 963 103 64 77 <br>
                     Corralón: 5° Calle Norte Poniente No. 204, Barrio La Cueva
-                </h5><br><br>
+                </h5><br>
             </div>
             <h4 align="right">
                 FOLIO: {{ $service->folio }}
@@ -95,11 +95,11 @@
             </table><br><br>
             <body align="center">
                 El día {{ fdate($service->date_out, 'd \d\e F \d\e\l \a\ñ\o Y') }} y hago constar que
-                el importe total pagado por la liberación del vehículo es la cantidad de:<br><br>
+                el importe total pagado por la liberación del vehículo es la cantidad de:<br>
                 <big>
                     <b>{{ fnumber($service->total) }}</b>
                 </big>
-            </body><br><br><br><br><br><br>
+            </body><br><br><br><br>
 
             <h5 align="center">
                 _____________________________________<br>
