@@ -66,11 +66,10 @@ class Service extends Model
                     ->where($payCol, $type)->get();
     }
 
-    function getDays($date)
+    function getDays($start, $end)
     {
-        $today = Date::now();
-        $entry = new Date(strtotime($this->$date));
-        $interval = $entry->diff($today);
+        $entry = new Date(strtotime($this->$start));
+        $interval = $entry->diff($end);
         $interval = $interval->format('%a');
         return $interval;
     }

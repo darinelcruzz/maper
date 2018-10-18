@@ -93,22 +93,24 @@
 
     <data-table col="col-md-12" title="Pagados" example="example3" color="success" collapsed button>
 
-        {{ drawHeader('ID', 'fecha Pago', 'cliente', 'marca', 'importe', 'factura', 'opciones') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha Pago', 'cliente', 'marca', 'importe', 'factura') }}
 
         <template slot="body">
             @foreach($paid as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td>
+                        <dropdown color="success" icon="cogs">
+                            <ddi to="{{ route('service.general.update', ['id' => $row->id]) }}"
+                                icon="edit" text="Editar Pago">
+                            </ddi>
+                        </dropdown>
+                    </td>
                     <td>{{  $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a')}}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                     <td>{{ $row->bill }}</td>
-                    <td>
-                        {{-- <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a> --}}
-                    </td>
                 </tr>
             @endforeach
 

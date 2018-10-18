@@ -41,6 +41,7 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{service}', usesas($ctrl, 'edit'))->middleware('two');
     Route::post('editar', usesas($ctrl, 'change'));
+    Route::get('modificar/{service}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
     Route::post('pago', usesas($ctrl, "change", 'setPayMethod'));
@@ -54,7 +55,8 @@ Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporatio
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{service}', usesas($ctrl, 'edit'))->middleware('two');
-    Route::post('editar', usesas($ctrl, 'update'));
+    Route::post('editar', usesas($ctrl, 'change'));
+    Route::get('modificar/{service}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
     Route::get('formato/{service}', usesas($ctrl, 'printLetter'));

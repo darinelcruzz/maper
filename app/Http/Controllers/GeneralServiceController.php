@@ -65,6 +65,12 @@ class GeneralServiceController extends Controller
         return view('services.generals.pay', compact('service','cost'));
     }
 
+    function update(Service $service)
+    {
+        $cost = 0;
+        return view('services.generals.pay', compact('service','cost'));
+    }
+
     function cancel(Service $service)
     {
         return view('services.generals.cancel', compact('service'));

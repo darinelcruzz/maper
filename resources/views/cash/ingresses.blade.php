@@ -16,6 +16,11 @@
 									<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 										icon="clock-o" text="Hora de regreso/Extras">
 									</ddi>
+									@if (auth()->user()->level == 1)
+										<ddi to="{{ route('service.general.update', ['id' => $row->id]) }}"
+											icon="edit" text="Editar Pago">
+										</ddi>
+									@endif
 								@else
 									<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
 										icon="print" text="Imprimir">
@@ -23,6 +28,11 @@
 									<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 										icon="clock-o" text="Hora de regreso/Extras">
 									</ddi>
+									@if (auth()->user()->level == 1)
+										<ddi to="{{ route('service.corporation.update', ['id' => $row->id]) }}"
+											icon="edit" text="Editar Pago">
+										</ddi>
+									@endif
 								@endif
 							</dropdown>
 						</td>
@@ -92,7 +102,6 @@
 						<td></td>
 						<td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
 						<td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
-
 						<td>Factura</td>
 						<td></td>
                         <td></td>

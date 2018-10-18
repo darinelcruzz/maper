@@ -5,7 +5,7 @@
     <div id="payment" class="row">
         <div class="col-md-8">
             <solid-box title="{{ $service->service }}" color="default">
-                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.update']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'service.corporation.change']) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -36,6 +36,12 @@
                             </td>
                         </tr>
                         <tr>
+                            @if ($service->status == 'liberado')
+                                <td>
+                                    <b>Fecha y hora salida</b>
+                                    <dd>{{ fdate($service->date_out, 'l, j F Y h:i a') }}</dd>
+                                </td>
+                            @endif
                             <td>
                                 <b>Pensión</b>
                                 <dd>{{ $penalty }}días X ${{ $cost/$penalty }} = ${{ $cost }}</dd>

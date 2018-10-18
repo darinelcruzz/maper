@@ -10,26 +10,26 @@ use App\Price;
 
 class CorporationServiceController extends Controller
 {
-    public function create()
+    function create()
     {
         $prices = Price::all();
         return view('services.corporations.create', compact('prices'));
     }
 
-    public function store(CorporationsRequest $request)
+    function store(CorporationsRequest $request)
     {
         $service = Service::create($request->except(['routes']));
 
         return redirect(route('admin.cash'));
     }
 
-    public function edit(Service $service)
+    function edit(Service $service)
     {
         $prices = Price::all();
         return view('services.corporations.edit', compact('service', 'prices'));
     }
 
-    public function update(CorporationsRequest $request)
+    function change(CorporationsRequest $request)
     {
         $service = Service::find($request->id);
         if ($service->status != 'liberado' || auth()->user()->id == 1) {
@@ -61,8 +61,8 @@ class CorporationServiceController extends Controller
     function pay(Service $service)
     {
         $entry = new Date(strtotime($service->date_service));
-
-        $interval = $service->getDays('date_service');
+        $today = Date::now();
+        $interval = $service->getDays('date_service', $today);
 
         if(Date::now()->format('His') < $entry->format('His')) {
             $penalty = $interval + 2;
@@ -77,6 +77,15 @@ class CorporationServiceController extends Controller
         } else{
             $cost = Price::find(1)->ton3 * $penalty;
         }
+
+        return view('services.corporations.pay', compact('service', 'cost', 'penalty'));
+    }
+
+    function update(Service $service)
+    {
+        $cost = $service->pension;
+        $end = new Date(strtotime($service->date_out));
+        $penalty = $service->getDays('date_service', $end) + 1;
 
         return view('services.corporations.pay', compact('service', 'cost', 'penalty'));
     }
