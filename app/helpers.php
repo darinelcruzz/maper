@@ -36,7 +36,8 @@ function expire()
     $services = App\Service::where('status', 'credito')->get();
 
     foreach ($services as $service) {
-        $interval = $service->getDays('date_service');
+        $today = Date::now();
+        $interval = $service->getDays('date_service', $today);
         if ($interval > $service->client->days ) {
             $service->update(['status' => 'vencida']);
         }
