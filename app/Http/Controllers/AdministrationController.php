@@ -14,9 +14,13 @@ class AdministrationController extends Controller
 {
     function cash(Request $request)
     {
-        $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
-        $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
-
+        if (session('redirected')) {
+            $date = session('redirected');
+        }else {
+            $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
+            $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
+            session()->put('date', $date);
+        }
         $variables = $this->getMethods($date);
 
         return view('cash.balance', compact('date', 'fdate'))->with($variables);

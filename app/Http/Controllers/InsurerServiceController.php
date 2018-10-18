@@ -82,7 +82,7 @@ class InsurerServiceController extends Controller
 
         $service->update($request->all());
 
-        return redirect(route('admin.cash'));
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function pay(Request $request)

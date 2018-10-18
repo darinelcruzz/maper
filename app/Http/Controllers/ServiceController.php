@@ -43,7 +43,7 @@ class ServiceController extends Controller
 
         $service->update($request->all());
 
-        return redirect(route('admin.cash'));
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
 }
