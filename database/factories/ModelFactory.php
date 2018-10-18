@@ -64,6 +64,7 @@ $factory->define(App\Driver::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->firstNameMale,
+        'nickname' => $faker->firstNameMale,
         'start_hour' => $time,
         'end_hour' => date('H:i', strtotime("$time + 10 hours")),
         'type' => 'operador',

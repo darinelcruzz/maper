@@ -18,7 +18,7 @@
                             <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
                                 icon="times" text="Cancelar">
                             </ddi>
-                            <ddi v-if="{{ Auth::user()->level < 3 ? 1: 0 }}" to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
                         </dropdown>
@@ -46,7 +46,7 @@
                             <ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
                                 icon="hand-peace-o" text="Liberar">
                             </ddi>
-                            <ddi v-if="{{ Auth::user()->level < 3 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
                         </dropdown>

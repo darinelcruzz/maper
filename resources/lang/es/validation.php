@@ -225,7 +225,8 @@ return [
         'end'                   => 'hasta',
         'base_salary'           => 'sueldo base',
         'product'               => 'producto',
-        'observations'          => 'observaciones'
+        'observations'          => 'observaciones',
+        'nickname'              => 'apodo',
     ],
 
 ];

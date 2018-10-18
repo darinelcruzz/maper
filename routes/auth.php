@@ -39,7 +39,7 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{service}', usesas($ctrl, 'edit'))->middleware('two');
+    Route::get('editar/{service}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('modificar/{service}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporatio
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{service}', usesas($ctrl, 'edit'))->middleware('two');
+    Route::get('editar/{service}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('modificar/{service}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
@@ -71,7 +71,7 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
     Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{insurerService}', usesas($ctrl, 'edit'))->middleware('two');
+    Route::get('editar/{insurerService}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'update'));
     Route::get('actualizar/{insurerService}/{status}', usesas($ctrl, 'updateStatus'));
     Route::get('horas/{insurerService}', usesas($ctrl, 'editHour', 'editHour'));
@@ -187,7 +187,7 @@ Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], f
 
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{driver}', usesas($ctrl, 'edit'))->middleware('one');
+    Route::get('editar/{driver}', usesas($ctrl, 'edit'))->middleware('two');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('fecha', usesas($ctrl, 'date'));
     Route::post('reporte', usesas($ctrl, 'format'));

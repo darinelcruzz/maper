@@ -42,7 +42,7 @@
         <template slot="body">
             @foreach($drivers as $row)
               <tr>
-                  <td>{{ $row->name }}</td>
+                  <td>{{ $row->name }} <br> {{ $row->nickname }}</td>
                   <td>{{ $row->getHour('start_hour') }} - {{ $row->getHour('end_hour') }}</td>
                   <td>{{ fnumber($row->base_salary) }}</td>
                   <td>{{ $row->type }}</td>

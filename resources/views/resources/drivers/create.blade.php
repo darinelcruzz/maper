@@ -7,10 +7,11 @@
                 {!! Form::open(['method' => 'POST', 'route' => 'resources.driver.store', 'class' => 'form-horizontal']) !!}
                     <div class="box-body">
                         {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('nickname', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::time('start_hour', '08:00',['tpl' => 'templates/oneline']) !!}
                         {!! Field::time('end_hour', '18:00',['tpl' => 'templates/oneline']) !!}
                         {!! Field::number('base_salary', 0, ['tpl' => 'templates/oneline', 'step' => '0.01', 'min' => '0']) !!}
-                        {!! Field::select('type', ['operador' => 'Operador', 'oficina' => 'Oficina'], null, 
+                        {!! Field::select('type', ['operador' => 'Operador', 'oficina' => 'Oficina'], null,
                             ['tpl' => 'templates/oneline', 'empty' => 'Seleccione tipo de empleado'])
                         !!}
                     </div>

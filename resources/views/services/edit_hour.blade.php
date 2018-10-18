@@ -10,7 +10,7 @@
                         <div class="col-md-7">
                             <div id="field_date" class="form-group">
                                 <label for="date_return" class="control-label">
-                                    Fecha y hora:
+                                    Fecha y hora de regreso:
                                 </label>
                                 <div class="controls">
                                     <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{ $service->date_return == NULL ?  date('Y-m-d\TH:i') : date('Y-m-d\TH:i', strtotime($service->date_return))  }}">
@@ -27,6 +27,12 @@
                             </div>
                         @endif
                     </div>
+                    <div class="col-md-7">
+                        <div class="">
+                            <B>Fecha y hora del servicio:</B> <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
+                        </div>
+                    </div>
+                    <br><br>
                     <h4>Horas extra</h4>
                     <div class="row">
                         <div class="col-md-6">

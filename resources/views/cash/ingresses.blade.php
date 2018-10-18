@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<data-table-com title="Ingresos del {{ fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example2" color="success" button>
-			{{ drawHeader('ID', '<i class="fa fa-clock-o"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Ruta', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
+			{{ drawHeader('ID', '<i class="fa fa-clock-o"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Ruta/operador', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
 					$sum = 0;
@@ -44,7 +44,7 @@
 							<td>{{ $row->service }}</td>
 						@endif
 						<td>{{ $row->description }}</td>
-						<td>{{ $row->origin }} - {{ $row->destination }}</td>
+						<td>{{ $row->origin }} - {{ $row->destination }} <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status }}</td>
 						<td>{{ $row->pay }}</td>
@@ -84,7 +84,7 @@
 						<td></td>
 						<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
 						<td>{{ $row->description }}</td>
-						<td>{{ $row->origin }} - {{ $row->destination }}</td>
+						<td>{{ $row->origin }} - {{ $row->destination }} <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
 						<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>

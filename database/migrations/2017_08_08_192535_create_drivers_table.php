@@ -17,6 +17,7 @@ class CreateDriversTable extends Migration
             $table->increments('id');
 
             $table->string('name')->nullable();
+            $table->string('nickname')->nullable();
             $table->time('start_hour')->nullable();
             $table->time('end_hour')->nullable();
 

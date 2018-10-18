@@ -21,6 +21,12 @@
                             {!! Field::number('inventory', $insurerService->inventory, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
                         </div>
                     </div>
+                    <div class="col-md-7">
+                        <div class="">
+                            <B>Fecha y hora del servicio:</B> <dd>{{ fdate($insurerService->date_assignment, 'l, j F Y h:i a') }}</dd>
+                        </div>
+                    </div>
+                    <br><br>
                     <h4>Horas extra</h4>
                     <div class="row">
                         <div class="col-md-6">
