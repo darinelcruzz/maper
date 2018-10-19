@@ -58,7 +58,8 @@
 								<td>{{ $row->service }}</td>
 							@endif
 							<td>{{ $row->description }}</td>
-							<td>{{ $row->origin }} - {{ $row->destination }} <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</td>
+							<td>{{ $row->origin }} - {{ $row->destination }} </td>
+							{{-- <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }} --}}
 							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
 								{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}
@@ -92,7 +93,8 @@
 						<td>{{ $row->folio }}</td>
                         <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
 						<td>{{ $row->description }}</td>
-						<td>{{ $row->origin }} - {{ $row->destination }} <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }} </td>
+						<td>{{ $row->origin }} - {{ $row->destination }}</td>
+						{{-- <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }} --}}
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
                         <td></td>
