@@ -68,7 +68,7 @@ class ClientController extends Controller
         $services = Service::where('status', 'credito')->get();
         foreach ($services as $service) {
             $today = Date::now();
-            $interval = $service->getDays('date_out', $taday);
+            $interval = $service->getDays('date_out', $today);
             if ($interval > $days) {
                 Service::find($service->id)->update(['status' => 'vencida']);
             }
