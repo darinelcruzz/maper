@@ -18,7 +18,7 @@
                             <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
                                 icon="times" text="Cancelar">
                             </ddi>
-                            <ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
                         </dropdown>

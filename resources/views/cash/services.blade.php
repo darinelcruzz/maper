@@ -42,7 +42,7 @@
 											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 												icon="clock-o" text="Hora de regreso/Extras">
 											</ddi>
-											<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+											<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
 												icon="pencil-square-o" text="Editar">
 											</ddi>
 										@endif
