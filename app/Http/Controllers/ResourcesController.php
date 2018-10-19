@@ -10,7 +10,7 @@ class ResourcesController extends Controller
 {
     public function show()
     {
-        $drivers = Driver::all();
+        $drivers = Driver::where('status', '1')->get();
         $units = Unit::all();
         return view('resources.show', compact('drivers', 'units'));
     }

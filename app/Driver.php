@@ -8,7 +8,7 @@ use Jenssegers\Date\Date;
 class Driver extends Model
 {
     protected $fillable = [
-        'name', 'nickname', 'start_hour', 'end_hour', 'type', 'base_salary'
+        'name', 'nickname', 'start_hour', 'end_hour', 'type', 'base_salary', 'status'
     ];
 
     function services()

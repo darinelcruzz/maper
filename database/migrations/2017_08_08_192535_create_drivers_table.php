@@ -6,12 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDriversTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    function up()
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->increments('id');
@@ -20,17 +15,13 @@ class CreateDriversTable extends Migration
             $table->string('nickname')->nullable();
             $table->time('start_hour')->nullable();
             $table->time('end_hour')->nullable();
+            $table->integer('status')->default(1);
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    function down()
     {
         Schema::dropIfExists('drivers');
     }
