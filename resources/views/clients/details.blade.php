@@ -52,7 +52,7 @@
                               <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                               <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{ $row->getDays('date_service') }}</td>
+                              <td>{{ $row->getDays('date_service', $today) }}</td>
                               <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
                           </tr>
                         @endforeach
@@ -91,7 +91,7 @@
                               <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                               <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                               <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                              <td>{{ $row->getDays('date_service') }}</td>
+                              <td>{{ $row->getDays('date_service', $today) }}</td>
                               <td>${{ $row->total }}{{ $row->status == 'pendiente' || $row->status == 'corralon' ? ' (estimado)' : ''}}</td>
                           </tr>
                         @endforeach
