@@ -24,7 +24,7 @@ class ClientController extends Controller
         ]);
 
         $client = Client::create($request->all());
-        
+
         if ($request->city == NULL) {
             return back();
         }
@@ -67,7 +67,8 @@ class ClientController extends Controller
     {
         $services = Service::where('status', 'credito')->get();
         foreach ($services as $service) {
-            $interval = $service->getDays('date_out');
+            $today = Date::now();
+            $interval = $service->getDays('date_out', $taday);
             if ($interval > $days) {
                 Service::find($service->id)->update(['status' => 'vencida']);
             }
