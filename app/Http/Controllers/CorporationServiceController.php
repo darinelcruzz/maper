@@ -74,8 +74,10 @@ class CorporationServiceController extends Controller
             $cost = Price::find(1)->moto * $penalty;
         } elseif ($service->category == 'Coche') {
             $cost = Price::find(1)->car * $penalty;
-        } else{
+        } elseif($service->category == 'Camion'){
             $cost = Price::find(1)->ton3 * $penalty;
+        }else{
+            $cost = Price::find(1)->ton10 * $penalty;
         }
 
         return view('services.corporations.pay', compact('service', 'cost', 'penalty'));
