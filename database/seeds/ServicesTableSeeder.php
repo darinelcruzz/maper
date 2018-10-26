@@ -18,7 +18,7 @@ class ServicesTableSeeder extends Seeder
             'client_id' => 1,
             'date_service' => date('Y-m-d H:i:s'),
             'date_return' => date('Y-m-d H:i:s'),
-            'status' => 'pendiente'
+            'status' => 'credito'
         ]);
 
         for ($i=0; $i < 5; $i++) {

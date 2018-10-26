@@ -197,6 +197,9 @@
                 <data-table-com title="Pagadas ({{ count($paids) }})" example="example6" color="success" collapsed button>
                     {{ drawHeader('ID', 'Factura', 'Fecha', 'Pago', 'Ret', 'IVA', 'Monto')}}
                     <template slot="body">
+                        @php
+                            $tPaids = 0;
+                        @endphp
                         @foreach($paids as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
@@ -206,13 +209,16 @@
                                 <td>{{ fnumber($row->retention) }}</td>
                                 <td>{{ fnumber($row->iva) }}</td>
                                 <td>{{ fnumber($row->amount) }}</td>
+                                @php
+                                    $tPaids += $row->amount;
+                                @endphp
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
                             <th colspan="6"><span class="pull-right">Total</span></th>
-                            <th></th>
+                            <th>{{ fnumber($tPaids) }}</th>
                         </tr>
                     </template>
                 </data-table-com>

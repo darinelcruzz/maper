@@ -171,6 +171,7 @@ Route::group(['prefix' => 'facturas', 'as' => 'invoice.'], function () {
 
     Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear/{insurer}', usesas($ctrl, 'create'));
+    Route::get('hacer/{client}', usesas($ctrl, 'make'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));

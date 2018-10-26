@@ -17,6 +17,9 @@
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 												icon="dollar" text="Pagar">
 											</ddi>
+											{{-- <ddi to="{{ route('invoice.make', ['id' => $row->client_id]) }}"
+												icon="dollar" text="Facturar">
+											</ddi> --}}
 										@endif
 										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 											icon="clock-o" text="Hora de regreso/Extras">

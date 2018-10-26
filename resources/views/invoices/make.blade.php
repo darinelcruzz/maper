@@ -35,7 +35,7 @@
                                 @foreach ($services as $service)
                                     <tr>
                                         <td>{!! Form::checkboxes('services', [$service->id => $service->id]) !!}</td>
-                                        <td>{{ fdate($service->date_assignment, 'j/M/y') }}</td>
+                                        <td>{{ fdate($service->date_service, 'j/M/y') }}</td>
                                         <td>{{ $service->folio }}</td>
                                         <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
                                         <td>{{ fnumber($service->total) }}</td>
@@ -43,8 +43,8 @@
                                 @endforeach
                             </template>
                         </data-table>
-                        <input type="hidden" name="insurer_id" value="{{ $insurer->id }}">
-                        <input type="hidden" name="type" value="insurer">
+                        <input type="hidden" name="client_id" value="{{ $client->id }}">
+                        <input type="hidden" name="type" value="service">
                     </div>
                     <div class="box-footer">
                         {!! Form::submit('Agregar', ['class' => 'btn btn-danger btn-block']) !!}

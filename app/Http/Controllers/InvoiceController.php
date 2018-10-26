@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Invoice;
 use App\InsurerService;
 use App\Insurer;
+use App\Service;
+use App\Client;
 
 class InvoiceController extends Controller
 {
@@ -21,6 +23,12 @@ class InvoiceController extends Controller
         return view('invoices.create', compact('services', 'insurer'));
     }
 
+    function make(Client $client)
+    {
+        $services = Service::where('client_id', $client->id)->where('status', 'vencida')->orWhere('status', 'credito')->get();
+        return view('invoices.make', compact('services', 'client'));
+    }
+
     function pay(Invoice $invoice)
     {
         return view('invoices.pay', compact('invoice'));
@@ -31,22 +39,32 @@ class InvoiceController extends Controller
         $this->validate($request, [
             'folio' => 'required',
             'retention' => 'required',
-            // 'iva' => 'required',
             'amount' => 'required',
             'services' => 'required',
             'date' => 'required',
         ]);
 
-        $invoice = Invoice::create($request->except('services'));
+        $invoice = Invoice::create($request->except('services', 'type'));
 
-        foreach ($request->services as $service_id) {
-            $service = InsurerService::find($service_id);
-            $service->update([
-                'bill' => $invoice->id,
-                'status' => 'facturado'
-            ]);
+        if ($request->type == 'insurer') {
+            foreach ($request->services as $service_id) {
+                $service = InsurerService::find($service_id);
+                $service->update([
+                    'bill' => $invoice->id,
+                    'status' => 'facturado'
+                ]);
+            }
+            return redirect(route('insurer.details', ['insurerService' => $request->insurer_id]));
+        }else {
+            foreach ($request->services as $service_id) {
+                $service = Service::find($service_id);
+                $service->update([
+                    'bill' => $invoice->id,
+                    'status' => 'facturado'
+                ]);
+            }
+            return redirect(route('client.details', ['Service' => $request->client_id]));
         }
-        return redirect(route('insurer.details', ['insurerService' => $request->insurer_id]));
     }
 
     function show(Invoice $invoice)
