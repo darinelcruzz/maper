@@ -64,22 +64,22 @@ class AdministrationController extends Controller
         foreach ($drivers as $driver) {
             $extraHours = [];
             //general
-            $services = Service::where('cut', 1)->where('driver_id', $driver->id)->get();
+            $services = Service::where('cut', 0)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = Service::where('cut', 1)->where('helper', $driver->id)->get();
+            $services = Service::where('cut', 0)->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
             //aseguradoras
-            $services = InsurerService::where('cut', 1)->where('driver_id', $driver->id)->get();
+            $services = InsurerService::where('cut', 0)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = InsurerService::where('cut', 1)->where('helper', $driver->id)->get();
+            $services = InsurerService::where('cut', 0)->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
