@@ -42,7 +42,7 @@
                     Comitán de Domínguez, Chiapas <br>
                     Tel. (963) 2 07 05 Cel. (044) 963 103 64 77 <br>
                     Corralón: 5° Calle Norte Poniente No. 204, Barrio La Cueva
-                </h5><br>
+                </h5>
             </div>
             <h4 align="right">
                 FOLIO: {{ $service->folio }}
@@ -53,7 +53,7 @@
 
             <h5 align="left">
                 <b>A QUIEN CORRESPONDA</b><br>
-                <b>PRESENTE</b><br><br>
+                <b>PRESENTE</b><br>
             </h5>
             <p>Con la presente, la empresa <b><u>Servicio de Grúas "MAPER"</u></b> hace de su conocimiento,
                 que no se hace responsable por daño, robo o descontento (objetos personales, fallas mecánicas,
@@ -67,7 +67,7 @@
                 <b>PROPIETARIO</b>
             </h5>
 
-            Es por ello que: <br><br>
+            Es por ello que: <br>
             <p>Yo <b>{{ $service->releaser }}</b>, en pleno uso de mis facultades, acepto los términos expuestos anteriormente y deslindo de
             cualquier responsabilidad de robo o falla mecánica a: <b><u>SERVICIO DE GRÚAS "MAPER"</u></b>, y recibo de conformidad la unidad:</p><br>
 
