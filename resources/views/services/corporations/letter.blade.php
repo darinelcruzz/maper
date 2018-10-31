@@ -48,12 +48,12 @@
                 FOLIO: {{ $service->folio }}
             </h4>
             <h5 align="right">
-                Comitán de Domínguez, Chiapas a {{ fdate($service->date_out, 'd \d\e F \d\e\l Y') }} <br><br>
+                Comitán de Domínguez, Chiapas a {{ fdate($service->date_out, 'd \d\e F \d\e\l Y') }} <br>
             </h5>
 
             <h5 align="left">
                 <b>A QUIEN CORRESPONDA</b><br>
-                <b>PRESENTE</b><br>
+                <b>PRESENTE</b><br><br>
             </h5>
             <p>Con la presente, la empresa <b><u>Servicio de Grúas "MAPER"</u></b> hace de su conocimiento,
                 que no se hace responsable por daño, robo o descontento (objetos personales, fallas mecánicas,
@@ -61,7 +61,7 @@
                 custodia de vehículos. Así mismo delega cualquier responsabilidad ya una vez liberado el vehículo.</p>
             <p>Esto no afectará en lo absoluto la calidad y eficacia en nuestro trabajo así como tampoco implica un descuido
                 en la realización de nuestras labores y de sus intereses.</p>
-            <p>Agradezco en forma insistente la comprensión y preferencia que ante todo tienen para con nuestros servicios.</p><br>
+            <p>Agradezco en forma insistente la comprensión y preferencia que ante todo tienen para con nuestros servicios.</p>
             <h5 align="center">
                 <b>JOSE ALFREDO FIGUEROA ESPINOSA</b><br>
                 <b>PROPIETARIO</b>
@@ -92,7 +92,7 @@
                     <th> &nbsp; PLACAS:</th>
                     <td> &nbsp; {{ $service->plate }}</td>
                 </tr>
-            </table><br><br>
+            </table><br>
             <body align="center">
                 El día {{ fdate($service->date_out, 'd \d\e F \d\e\l \a\ñ\o Y') }} y hago constar que
                 el importe total pagado por la liberación del vehículo es la cantidad de:<br>
