@@ -20,6 +20,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							{!! Form::submit('Buscar', ['class' => 'btn btn-primary pull-right']) !!}
+							<a href="{{ route('admin.cut') }}" class="btn btn-success pull-left">Hacer corte</a>
 						</div>
 					</div>
 				{!! Form::close() !!}

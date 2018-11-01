@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\Service;
-use App\InsurerService;
-use App\Driver;
-use App\Discount;
-use App\Invoice;
+use App\{Service, InsurerService, Driver, Discount, Invoice};
 
 class AdministrationController extends Controller
 {
@@ -32,6 +28,26 @@ class AdministrationController extends Controller
         return view('cash.reports.search', compact('date'));
     }
 
+    function cut()
+    {
+        $services = Service::all();
+        $insurer_services = InsurerService::all();
+
+        foreach ($services as $service) {
+            $service->update([
+                'cut' => 1
+            ]);
+        }
+
+        foreach ($insurer_services as $service) {
+            $service->update([
+                'cut' => 1
+            ]);
+        }
+
+        return redirect(route('admin.search'));
+    }
+
     function reportBalance(Request $request)
     {
         $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
@@ -48,22 +64,22 @@ class AdministrationController extends Controller
         foreach ($drivers as $driver) {
             $extraHours = [];
             //general
-            $services = Service::fromDateToDate($start, $end, $driver, 'driver_id');
+            $services = Service::where('cut', 0)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = Service::fromDateToDate($start, $end, $driver, 'helper');
+            $services = Service::where('cut', 0)->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
             //aseguradoras
-            $services = InsurerService::fromDateToDate($start, $end, $driver, 'driver_id');
+            $services = InsurerService::where('cut', 0)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = InsurerService::fromDateToDate($start, $end, $driver, 'helper');
+            $services = InsurerService::where('cut', 0)->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
