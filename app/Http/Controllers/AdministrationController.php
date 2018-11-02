@@ -35,13 +35,13 @@ class AdministrationController extends Controller
 
         foreach ($services as $service) {
             $service->update([
-                'cut' => 1
+                'cut_at' => date('Y-m-d')
             ]);
         }
 
         foreach ($insurer_services as $service) {
             $service->update([
-                'cut' => 1
+                'cut_at' => date('Y-m-d')
             ]);
         }
 
@@ -50,8 +50,10 @@ class AdministrationController extends Controller
 
     function reportBalance(Request $request)
     {
-        $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
-        $end = $request->end == 0 ? Date::now()->format('Y-m-d') : $request->end;
+        // $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
+        // $end = $request->end == 0 ? Date::now()->format('Y-m-d') : $request->end;
+        $end = date('Y-m-d');
+        $start = date('Y-m-d', time() - 6 * 24 * 60 * 60);
         $fdate= fdate($start, 'D, d/M/Y', 'Y-m-d') . ' al ' . fdate($end, 'D, d/M/Y', 'Y-m-d');
 
         $variables = $this->getMethods($start, $end);
@@ -60,26 +62,26 @@ class AdministrationController extends Controller
         $discounts = Discount::whereBetween('discounted_at', [$start, $end])->get();
         $totalExtras = [];
 
-        $pay_days = daycount('saturday', strtotime($start), strtotime($end), 0) - 1;
+        // $pay_days = daycount('saturday', strtotime($start), strtotime($end), 0) - 1;
         foreach ($drivers as $driver) {
             $extraHours = [];
             //general
-            $services = Service::where('cut', 0)->where('driver_id', $driver->id)->get();
+            $services = Service::where('cut_at', null)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = Service::where('cut', 0)->where('helper', $driver->id)->get();
+            $services = Service::where('cut_at', null)->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
             //aseguradoras
-            $services = InsurerService::where('cut', 0)->where('driver_id', $driver->id)->get();
+            $services = InsurerService::where('cut_at', null)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = InsurerService::where('cut', 0)->where('helper', $driver->id)->get();
+            $services = InsurerService::where('cut_at', null)->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
@@ -87,7 +89,7 @@ class AdministrationController extends Controller
             $totalExtras[$driver->id] = array_sum($extraHours);
         }
 
-        return view('cash.reports.reportBalance', compact('fdate', 'totalExtras', 'drivers', 'discounts', 'pay_days'))->with($variables);
+        return view('cash.reports.reportBalance', compact('fdate', 'totalExtras', 'drivers', 'discounts'))->with($variables);
     }
 
     function reportServices(Request $request)

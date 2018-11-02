@@ -41,7 +41,8 @@
         @endphp
         @foreach ($drivers as $driver)
             @php
-                $salary = $driver->base_salary * $pay_days;
+                // $salary = $driver->base_salary * $pay_days;
+                $salary = $driver->base_salary;
                 $extras = $totalExtras[$driver->id];
                 $discount = $discounts->where('driver_id', $driver->id)->sum('amount');
                 $expenses += $salary + $extras- $discount;

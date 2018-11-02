@@ -9,14 +9,14 @@ class AddCutToServicesTable extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->integer('cut')->default(0);
+            $table->date('cut_at')->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->dropColumn('cut');
+            $table->dropColumn('cut_at');
         });
     }
 }
