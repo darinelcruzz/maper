@@ -46,7 +46,7 @@
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->origin }} - {{ $row->destination }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-						<td>{{ $row->status }}</td>
+						<td>{!! $row->statusLabel !!}</td>
 						<td>{{ $row->pay }}</td>
 						<td>{{ fnumber($row->total) }}</td>
 					</tr>
@@ -86,7 +86,7 @@
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->origin }} - {{ $row->destination }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
+						<td>{!! $row->status == 'corralon' ? 'pendiente' : $row->statusLabel !!}</td>
 						<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>
 						<td>{{ fnumber($row->total) }}</td>
 					</tr>
@@ -105,7 +105,7 @@
 						<td>Factura</td>
 						<td></td>
                         <td></td>
-                        <td>{{ $row->status }}</td>
+                        <td>{!! $row->statusLabel !!}</td>
                         <td>{{ $row->method }}</td>
                         <td>{{ fnumber($row->amount) }}</td>
 					</tr>

@@ -79,6 +79,13 @@ class Service extends Model
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 
+    function getStatusLabelAttribute()
+    {
+        $colors = ['pagado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger'];
+        $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
+        return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
+    }
+
     function scopeUntilDateWhere($query, $date, $column = 'date_out', $colWhere = 'status', $data = 'credito' ,$condition = '=!')
     {
         return $query->whereBetween($column, [$date . ' 00:00:00', $date . ' 23:59:59'])

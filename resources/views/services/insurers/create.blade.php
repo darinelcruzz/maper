@@ -8,180 +8,204 @@
 
     <div class="row">
         <div class="col-md-12">
-            <simple-box title="Nuevo servicio Aseguradoras" color="box-black">
+            <solid-box title="Nuevo servicio aseguradoras" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.store']) !!}
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('description', isset($service) ? $service->description: null) !!}
-                        </div>
-                        <div class="col-md-4">
-                            <div id="field_date" class="form-group">
-                                <label for="date_assignment" class="control-label">
-                                    Fecha y hora asignación
-                                </label>
-                                <div class="controls">
-                                    <input class="form-control" id="date_assignment" name="date_assignment" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : '' }}">
+
+                    <form-wizard
+                        title=""
+                        subtitle=""
+                        color="#dd4b39"
+                        @on-complete="enableButton"
+                        @on-change="disableButton"
+                        back-button-text="Anterior"
+                        next-button-text="Siguiente"
+                        finish-button-text="Completado">
+
+                        <tab-content title="Cliente" icon="fa fa-user">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
+                                    {!! Field::text('description', isset($service) ? $service->description: null, ['tpl' => 'templates/twolines']) !!}
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::select('insurer_id', $insurers, null,
-                                ['empty' => 'Seleccione aseguradora', 'label' => 'Aseguradora'])
-                            !!}
-                        </div>
-                    </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
+                                    {!! Field::select('insurer_id', $insurers, null,
+                                        ['empty' => 'Seleccione aseguradora', 'label' => 'Aseguradora', 'tpl' => 'templates/twolines'])
+                                    !!}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
+                                    {!! Field::datetimelocal('date_assignment', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : null,
+                                        ['label' => 'Fecha y hora de asignación', 'tpl' => 'templates/twolines'])
+                                    !!}
+                                </div>
+                            </div>
+                        </tab-content>
 
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Vehículo
-                            <i class="fa fa-car" aria-hidden="true"></i>
-                        </h3>
-                    </div>
+                        <tab-content title="Vehículo" icon="fa fa-car">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {!! Field::text('brand', isset($service) ? $service->brand: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::text('type', isset($service) ? $service->type: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión'],
+                                                isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {!! Field::text('plate', isset($service) ? $service->plate: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::number('model', isset($service) ? $service->model: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::text('color', isset($service) ? $service->color: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                    </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('brand', isset($service) ? $service->brand: null)!!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('type', isset($service) ? $service->type: null)!!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión'],
-                                isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría']) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('plate', isset($service) ? $service->plate: null)!!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::number('model', isset($service) ? $service->model: null)!!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('color', isset($service) ? $service->color: null)!!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('load', isset($service) ? $service->load: null)!!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::number('inventory', isset($service) ? $service->inventory: null)!!}
-                        </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {!! Field::text('load', isset($service) ? $service->load: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::number('inventory', isset($service) ? $service->inventory: null, ['tpl' => 'templates/twolines'])!!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab-content>
 
-                    </div>
+                        <tab-content title="Ubicación" icon="fa fa-map-marker">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
 
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Ubicación
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        </h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('origin', isset($service) ? $service->origin: null) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('destination', isset($service) ? $service->destination: null) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('user', isset($service) ? $service->client: null) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado']) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::number('maneuver', 0, ['min' => '0']) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::number('pension', 0, ['min' => '0']) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <br><a href="https://google.com.mx/maps" target="_blank" class="btn btn-success btn-block">Google Maps
-                                <i class="fa fa-map-pin" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-default">
-                                Tabulador
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {!! Field::text('origin', isset($service) ? $service->origin: null, ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! Field::text('destination', isset($service) ? $service->destination: null, ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {!! Field::text('user', isset($service) ? $service->client: null, ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>&nbsp;</label><br>
+                                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-default">
+                                                Tabulador
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {!! Field::number('maneuver', 0, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::number('pension', 0, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>&nbsp;</label><br>
+                                            <a href="https://google.com.mx/maps" target="_blank" class="btn btn-success btn-block">
+                                                Maps &nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </tab-content>
+
+                        <tab-content title="Aseguradora" icon="fa fa-briefcase">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {!! Field::datetimelocal('date_contact', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : null, ['label' => 'Fecha y hora de contacto', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! Field::datetimelocal('date_end', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : null, ['label' => 'Fecha y hora de término', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          {!! Field::text('booth', isset($service) ? $service->booth: null, ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! Field::text('folio', isset($service) ? $service->folio: null, ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {!! Field::text('file', isset($service) ? $service->file: null, ['label' => 'Asistencia', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! Field::text('sinister', isset($service) ? $service->sinister: null, ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab-content>
+
+                        <tab-content title="Verificación" icon="fa fa-truck">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Field::select('driver_id', $drivers, null, ['empty' => 'Seleccione operador', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Field::select('helper', $drivers, null, ['empty' => 'Seleccione operador', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {!! Field::select('unit_id', $units, null, ['empty' => 'Seleccione unidad', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! Field::datetimelocal('date_return', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_return)) : null, ['label' => 'Fecha y hora regreso', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab-content>
+                    </form-wizard>
+
+                    <hr>
+
+                    <div v-if="isFormWizardDone" class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fa fa-save"></i> &nbsp; G U A R D A R
                             </button>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div id="field_date" class="form-group">
-                                <label for="date_contact" class="control-label">
-                                    Fecha y hora contacto
-                                </label>
-                                <div class="controls">
-                                    <input class="form-control" id="date_contact" name="date_contact" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : '' }}">
-                                </div>
-                            </div>
-                       </div>
-                       <div class="col-md-4">
-                           <div id="field_date" class="form-group">
-                               <label for="date_end" class="control-label">
-                                   Fecha y hora término
-                               </label>
-                               <div class="controls">
-                                   <input class="form-control" id="date_end" name="date_end" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : '' }}">
-                               </div>
-                           </div>
-                      </div>
-                      <div class="col-md-4">
-                          {!! Field::text('booth', isset($service) ? $service->booth: null) !!}
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::text('folio', isset($service) ? $service->folio: null) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('file', isset($service) ? $service->file: null, ['label' => 'Asistencia']) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::text('sinister', isset($service) ? $service->sinister: null) !!}
-                        </div>
-                    </div>
 
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Unidad
-                            <i class="fa fa-truck" aria-hidden="true"></i>
-                        </h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::select('driver_id', $drivers, null, ['empty' => 'Seleccione operador']) !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Field::select('unit_id', $units, null, ['empty' => 'Seleccione unidad']) !!}
-                        </div>
-                        <div class="col-md-4">
-                            <div id="field_date" class="form-group">
-                                <label for="date_return" class="control-label">
-                                    Fecha y hora regreso:
-                                </label>
-                                <div class="controls">
-                                    <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{  isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_service)) : '' }}">
-                                </div>
-                            </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {!! Field::select('helper', $drivers, null, ['empty' => 'Seleccione operador']) !!}
-                        </div>
-                    </div>
-
-                    <div class="box-footer">
-                        {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                 {!! Form::close() !!}
-            </simple-box>
+            </solid-box>
+
         </div>
     </div>
+
+    @include('templates.clientmodal')
 
 @endsection

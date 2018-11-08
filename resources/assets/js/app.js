@@ -13,6 +13,11 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//global registration
+import VueFormWizard from 'vue-form-wizard'
+import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+Vue.use(VueFormWizard)
+
 Vue.component('route-table', require('./components/RouteTable.vue'));
 Vue.component('route-row', require('./components/RouteRow.vue'));
 
@@ -30,7 +35,6 @@ Vue.component('ddi', require('./components/lte/DropdownItem.vue'));
 
 Vue.component('icon-box', require('./components/lte/IconBox.vue'));
 
-
 const app = new Vue({
     el: '#app',
     data: {
@@ -40,10 +44,17 @@ const app = new Vue({
         selected: '',
         selectedDesign: '',
         total: '',
+        isFormWizardDone: false
     },
     methods: {
         disable(option) {
             return option == 'existente';
+        },
+        enableButton() {
+            this.isFormWizardDone = true;
+        },
+        disableButton() {
+            this.isFormWizardDone = false;
         }
     },
     computed: {

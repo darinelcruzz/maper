@@ -31,6 +31,7 @@ class GeneralRequest extends FormRequest
             'client_id' => 'sometimes|required',
             'others' => 'sometimes|required',
             'reason' => 'sometimes|required'
+            'key' => 'sometimes|required'
         ];
     }
 }

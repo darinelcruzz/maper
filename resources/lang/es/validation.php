@@ -227,6 +227,7 @@ return [
         'product'               => 'producto',
         'observations'          => 'observaciones',
         'nickname'              => 'apodo',
+        'serial'                => 'serie',
     ],
 
 ];

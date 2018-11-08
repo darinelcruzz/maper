@@ -28,6 +28,13 @@ class InsurerService extends Model
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 
+    function getStatusLabelAttribute()
+    {
+        $colors = ['pagado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger'];
+        $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
+        return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
+    }
+
     function scopeUntilDate($query, $start, $column = 'date_out', $end = NULL)
     {
         if ($end == NULL) {

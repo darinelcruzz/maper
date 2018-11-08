@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div id="field_amount" class="form-group">
-                    <label for="amount" class="control-label">Arrastre</label>
+                    <label for="amount" class="control-label"><b>Arrastre</b></label>
                     <div class="controls">
                         <input min="0" class="form-control" v-model="vamount" id="amount" name="amount" type="number" step="0.01">
                     </div>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-4">
                 <div id="field_maneuver" class="form-group">
-                    <label for="maneuver" class="control-label">Maniobra</label>
+                    <label for="maneuver" class="control-label"><b>Maniobra</b></label>
                     <div class="controls">
                         <input min="0" class="form-control" id="maneuver" name="maneuver" type="number" v-model="vmaneuver">
                     </div>
@@ -31,7 +31,7 @@
             </div>
             <div v-if="ser == 'gen'" class="col-md-4">
                 <div id="field_others" class="form-group">
-                    <label for="others" class="control-label">Otros</label>
+                    <label for="others" class="control-label"><b>Otros</b></label>
                     <div class="controls">
                         <input min="0" class="form-control" id="others" name="others" type="number" v-model="vothers">
                     </div>
@@ -39,7 +39,7 @@
             </div>
             <div v-else class="col-md-4">
                 <div id="field_pension" class="form-group">
-                    <label for="pension" class="control-label">Pension</label>
+                    <label for="pension" class="control-label"><b>Pension</b></label>
                     <div class="controls">
                         <input min="0" class="form-control" id="pension" disabled name="pension" type="number" v-model="vpension">
                     </div>

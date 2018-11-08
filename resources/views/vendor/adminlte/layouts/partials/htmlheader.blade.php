@@ -30,6 +30,7 @@
             echo json_encode($trans);
         @endphp
     </script>
+
     <style>
         body{
             font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;

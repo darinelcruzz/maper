@@ -65,7 +65,7 @@
 							{{-- <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }} --}}
 							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
-								{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}
+								{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}
 								{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
@@ -99,7 +99,7 @@
 						<td>{{ $row->origin }} - {{ $row->destination }}</td>
 						{{-- <br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }} --}}
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-						<td>{{ $row->status == 'corralon' ? 'pendiente' : $row->status }}</td>
+						<td>{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}</td>
                         <td></td>
                         <td>{{ fnumber($row->total) }}</td>
                     </tr>

@@ -7,27 +7,39 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Nuevo servicio General</h3>
-                </div>
+            <solid-box title="Nuevo servicio general" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.store']) !!}
 
-                <div class="box-body">
+                    <form-wizard
+                        title=""
+                        subtitle=""
+                        color="#dd4b39"
+                        @on-complete="enableButton"
+                        @on-change="disableButton"
+                        back-button-text="Anterior"
+                        next-button-text="Siguiente"
+                        finish-button-text="Completado">
 
-                    @include('templates.principal')
-                    @include('templates.car')
-                    @include('templates.ubication')
-                    @include('templates.unit')
+                        <tab-content title="Cliente" icon="fa fa-user">
+                            @include('templates.principal')
+                        </tab-content>
+                        <tab-content title="Vehículo" icon="fa fa-car">
+                            @include('templates.car')
+                        </tab-content>
+                        <tab-content title="Ubicación" icon="fa fa-map-marker">
+                            @include('templates.ubication')
+                        </tab-content>
+                        <tab-content title="Verificación" icon="fa fa-truck">
+                            @include('templates.unit')
+                        </tab-content>
+                    </form-wizard>
 
+                    <hr>
 
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
                     <input type="hidden" name="status" value="pendiente">
                     <input type="hidden" name="service" value="General">
                     <input type="hidden" name="view" value="create">
-                    <div class="row">
+                    <div v-if="isFormWizardDone" class="row">
                         <div class="col-md-6">
                             {!! Form::submit('Pagado', ['class' => 'btn btn-success btn-block', 'name' => 'pagado']) !!}
                         </div>
@@ -35,9 +47,9 @@
                             {!! Form::submit('Crédito', ['class' => 'btn btn-danger btn-block', 'name' => 'credito']) !!}
                         </div>
                     </div>
-                </div>
+
                 {!! Form::close() !!}
-            </div>
+            </solid-box>
         </div>
     </div>
     @include('templates.clientmodal')
