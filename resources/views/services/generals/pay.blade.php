@@ -5,7 +5,7 @@
     <div id="payment" class="row">
         <div class="col-md-8">
             <solid-box title="{{ $service->client->name }}" color="default">
-                {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => ['service.general.change', $service]]) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -43,8 +43,8 @@
                 @include('templates.pay')
 
                 <div class="box-footer">
-                    <input type="hidden" name="status" value="pagado">
-                    <input type="hidden" name="id" value="{{ $service->id }}">
+                    {{-- <input type="hidden" name="status" value="pagado"> --}}
+                    {{--  <input type="hidden" name="id" value="{{ $service->id }}"> --}}
                     <input type="hidden" name="date_out" value="{{ date('Y-m-d\TH:i') }}">
                     <input type="hidden" name="view" value="pay">
                     {!! Form::submit('Pagar', ['class' => 'btn btn-black btn-block']) !!}

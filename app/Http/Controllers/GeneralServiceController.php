@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\Http\Requests\GeneralRequest;
-use App\Http\Requests\ServiceRequest;
-use App\Service;
-use App\Price;
+use App\Http\Requests\{GeneralRequest, ServiceRequest};
+use App\{Service, Price, Payment};
 
 class GeneralServiceController extends Controller
 {
@@ -41,14 +39,18 @@ class GeneralServiceController extends Controller
         return view('services.generals.edit', compact('service', 'prices'));
     }
 
-    function change(GeneralRequest $request)
+    function change(GeneralRequest $request, Service $service)
     {
-        $service = Service::find($request->id);
-        if ($service->status != 'pagado' || auth()->user()->id == 1) {
-            $service->update($request->all());
-            $service->update([
-                'status' => $request->pay == 'Credito' ? 'credito' : $request->status
+        $service->update($request->all());
+        
+        if ($request->payment > 0) {
+            Payment::create([
+                'service_id' => $service->id,
+                'amount' => $request->payment,
+                'method' => $request->pay,
             ]);
+        } else {
+            $service->update(['status' => 'pagado']);
         }
 
         return redirect(route('admin.cash'));

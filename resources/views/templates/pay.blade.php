@@ -12,5 +12,7 @@
             ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
             'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?', 'tpl' => 'templates/twolines'])
         !!}
+
+        {!! Field::number('payment', 0, ['tpl' => 'templates/twolines']) !!}
     </template>
 </payment-box>

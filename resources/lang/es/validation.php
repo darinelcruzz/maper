@@ -228,6 +228,7 @@ return [
         'observations'          => 'observaciones',
         'nickname'              => 'apodo',
         'serial'                => 'serie',
+        'payment'               => 'pago',
     ],
 
 ];

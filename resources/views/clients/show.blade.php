@@ -30,11 +30,9 @@
                       <a href="{{ route('client.edit', ['id' => $client->id]) }}">
                           <i class="fa fa-edit"></i>
                       </a>
-                      @if (count($client->quotations) < 1)
-                          <a href="{{ route('client.delete', ['id' => $client->id]) }}">
-                              <i class="fa fa-trash"></i>
-                          </a>
-                      @endif
+                      <a href="{{ route('client.delete', ['id' => $client->id]) }}">
+                          <i class="fa fa-trash"></i>
+                      </a>
                   </td>
               </tr>
             @endforeach
