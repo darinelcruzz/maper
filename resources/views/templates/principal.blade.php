@@ -7,8 +7,8 @@
                     {!! Field::select('client_id', $clients, isset($service) ? $service->client_id: null, ['empty' => 'Seleccione al cliente', 'class' => 'select2', 'tpl' => 'templates/twolines'])!!}
                 </div>
                 <div class="col-md-3">
-                    <br>
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#client">
+                    <label>&nbsp;</label><br>
+                    <button type="button" class="btn btn-sm btn-danger btn-block" data-toggle="modal" data-target="#client">
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                     </button>
                 </div>
