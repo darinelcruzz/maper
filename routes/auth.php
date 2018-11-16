@@ -75,8 +75,10 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
     Route::get('editar/{insurerService}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'update'));
     Route::get('actualizar/{insurerService}/{status}', usesas($ctrl, 'updateStatus'));
-    Route::get('horas/{insurerService}', usesas($ctrl, 'editHour', 'editHour'));
-    Route::post('horas', usesas($ctrl, 'updateHour', 'updateHour'));
+    Route::get('horas/{insurerService}', usesas($ctrl, 'editHour'));
+    Route::post('horas', usesas($ctrl, 'updateHour'));
+    Route::get('costo/{insurerService}', usesas($ctrl, 'editAmount'));
+    Route::post('costo', usesas($ctrl, 'updateAmount'));
     Route::get('detalles/{insurerService}', usesas($ctrl, 'details'));
     Route::post('pagar', usesas($ctrl, 'pay'));
     Route::post('factura', usesas($ctrl, 'bill'));

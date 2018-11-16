@@ -61,8 +61,12 @@
 								<td>{{ $row->service }}</td>
 							@endif
 							<td>{{ $row->description }}</td>
-							<td>{{ $row->origin }} - {{ $row->destination }}
-							<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span></td>
+							<td>
+								{{ $row->origin }} - {{ $row->destination }}
+								@if ($row->extra_driver > 0)
+									<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+								@endif
+							</td>
 							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
 								{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}
@@ -96,12 +100,22 @@
 						<td>{{ $row->folio }}</td>
                         <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
 						<td>{{ $row->description }}</td>
-						<td>{{ $row->origin }} - {{ $row->destination }}
-						<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span></td>
+						<td>
+							{{ $row->origin }} - {{ $row->destination }}
+							@if ($row->extra_driver > 0)
+								<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@endif
+						</td>
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}</td>
                         <td></td>
-                        <td>{{ fnumber($row->total) }}</td>
+                        <td>
+							@if ($row->total == 0)
+								<a href="{{ route('service.insurer.editAmount', ['id' => $row->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+							@else
+								{{ fnumber($row->total) }}
+							@endif
+						</td>
                     </tr>
 					@php
 						$sum += $row->total;

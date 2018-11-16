@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <span align="center">
                                 <p><em>Operador</em></p>
-                                <h4>{{ $service->driver->name }}</h4>
+                                <h4>{{ $service->driver->nickname }}</h4>
                             </span>
                         </div>
                         @if ($service->extra_driver < 1 || auth()->user()->level == 1)
@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span align="center">
-                                    <h4>{{ $service->helperr->name }}</h4>
+                                    <h4>{{ $service->helperr->nickname }}</h4>
                                 </span>
                             </div>
                             @if ($service->extra_helper < 1 || auth()->user()->level == 1)

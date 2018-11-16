@@ -85,6 +85,20 @@ class InsurerServiceController extends Controller
         return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
+    function editAmount(InsurerService $insurerService)
+    {
+        return view('services.insurers.edit_amount', compact('insurerService'));
+    }
+
+    function updateAmount(Request $request)
+    {
+        $service = InsurerService::find($request->id);
+
+        $service->update($request->all());
+
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
+    }
+
     function pay(Request $request)
     {
         $service = InsurerService::find($request->id);

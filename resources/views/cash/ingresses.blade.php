@@ -44,8 +44,12 @@
 							<td>{{ $row->service }}</td>
 						@endif
 						<td>{{ $row->description }}</td>
-						<td>{{ $row->origin }} - {{ $row->destination }}
-						<br><span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span></td>
+						<td>
+							{{ $row->origin }} - {{ $row->destination }}
+							@if ($row->extra_driver > 0)
+								<br><span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@endif
+						</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{!! $row->statusLabel !!}</td>
 						<td>{{ $row->pay }}</td>

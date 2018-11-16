@@ -50,10 +50,8 @@ class AdministrationController extends Controller
 
     function reportBalance(Request $request)
     {
-        // $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
-        // $end = $request->end == 0 ? Date::now()->format('Y-m-d') : $request->end;
         $end = date('Y-m-d');
-        $start = date('Y-m-d', time() - 6 * 24 * 60 * 60);
+        $start = date('Y-m-d', time() - 5 * 24 * 60 * 60);
         $fdate= fdate($start, 'D, d/M/Y', 'Y-m-d') . ' al ' . fdate($end, 'D, d/M/Y', 'Y-m-d');
 
         $variables = $this->getMethods($start, $end);
