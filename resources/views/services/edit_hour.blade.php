@@ -41,7 +41,7 @@
                                 <h4>{{ $service->driver->name }}</h4>
                             </span>
                         </div>
-                        @if ($service->extra_driver < 1)
+                        @if ($service->extra_driver < 1 || auth()->user()->level == 1)
                             <div class="col-md-6">
                                 {!! Field::number('extra_driver', $service->extra_driver, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
                             </div>
@@ -57,10 +57,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span align="center">
-                                    <h4>{{ $service->helper }}</h4>
+                                    <h4>{{ $service->helperr->name }}</h4>
                                 </span>
                             </div>
-                            @if ($service->extra_helper < 1)
+                            @if ($service->extra_helper < 1 || auth()->user()->level == 1)
                                 <div class="col-md-6">
                                     {!! Field::number('extra_helper', $service->extra_helper, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
                                 </div>

@@ -29,8 +29,7 @@
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-sm-12">
-					<a href="{{ route('admin.cut') }}" class="btn btn-success" style="{{ date('N') == 6 ? '': 'pointer-events: none;
-   cursor: default;' }}" {{ date('N') == 6 ? '': 'disabled' }}>
+					<a href="{{ route('admin.cut') }}" class="btn btn-success">
 						<i class="fa fa-check"></i> &nbsp;Marcar c/pagado
 					</a>
 				</div>

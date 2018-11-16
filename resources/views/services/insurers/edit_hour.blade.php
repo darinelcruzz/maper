@@ -35,9 +35,15 @@
                                 <h4>{{ $insurerService->driver->name }}</h4>
                             </span>
                         </div>
-                        <div class="col-md-4">
-                            {!! Field::number('extra_driver', $insurerService->extra_driver, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
-                        </div>
+                        @if ($insurerService->extra_driver < 1 || auth()->user()->level == 1)
+                            <div class="col-md-6">
+                                {!! Field::number('extra_driver', $insurerService->extra_driver, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
+                            </div>
+                        @else
+                            <div class="col-md-6">
+                                {!! Field::number('extra_driver', $insurerService->extra_driver, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
+                            </div>
+                        @endif
                     </div>
 
                     @if ($insurerService->helper)
@@ -45,12 +51,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span align="center">
-                                    <h4>{{ $insurerService->helper }}</h4>
+                                    <h4>{{ $insurerService->helperr->name }}</h4>
                                 </span>
                             </div>
-                            <div class="col-md-6">
-                                {!! Field::number('extra_helper', 0, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
-                            </div>
+                            @if ($insurerService->extra_helper < 1 || auth()->user()->level == 1)
+                                <div class="col-md-6">
+                                    {!! Field::number('extra_helper', $insurerService->extra_helper, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
+                                </div>
+                            @else
+                                <div class="col-md-6">
+                                    {!! Field::number('extra_helper', $insurerService->extra_helper, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
+                                </div>
+                            @endif
                         </div>
                     @endif
 

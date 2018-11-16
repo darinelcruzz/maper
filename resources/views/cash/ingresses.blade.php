@@ -45,7 +45,7 @@
 						@endif
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->origin }} - {{ $row->destination }}
-						<br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</td>
+						<br><span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span></td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{!! $row->statusLabel !!}</td>
 						<td>{{ $row->pay }}</td>
@@ -86,7 +86,7 @@
 						<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->origin }} - {{ $row->destination }}
-						<br> {{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</td>
+						<br><span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span></td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{!! $row->status == 'corralon' ? 'pendiente' : $row->statusLabel !!}</td>
 						<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>
