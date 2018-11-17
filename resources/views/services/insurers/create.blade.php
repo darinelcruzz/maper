@@ -76,7 +76,7 @@
                                             {!! Field::text('load', isset($service) ? $service->load: null, ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::number('inventory', isset($service) ? $service->inventory: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::number('inventory', isset($service) ? $service->inventory: null, ['tpl' => 'templates/twolines', 'step' => '0.01'])!!}
                                         </div>
                                     </div>
                                 </div>
@@ -113,10 +113,10 @@
 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            {!! Field::number('maneuver', 0, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
+                                            {!! Field::number('maneuver', 0, ['min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01']) !!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::number('pension', 0, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
+                                            {!! Field::number('pension', 0, ['min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01']) !!}
                                         </div>
                                         <div class="col-md-4">
                                             <label>&nbsp;</label><br>
