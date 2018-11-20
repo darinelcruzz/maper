@@ -42,7 +42,7 @@ class GeneralServiceController extends Controller
     function change(GeneralRequest $request, Service $service)
     {
         $service->update($request->all());
-        
+
         if ($request->payment > 0) {
             Payment::create([
                 'service_id' => $service->id,
@@ -67,10 +67,10 @@ class GeneralServiceController extends Controller
         return view('services.generals.pay', compact('service','cost'));
     }
 
-    function update(Service $service)
+    function update(GeneralRequest $request, Service $service)
     {
-        $cost = 0;
-        return view('services.generals.pay', compact('service','cost'));
+        $service->update($request->all());
+        return redirect(route('admin.cash'));
     }
 
     function cancel(Service $service)

@@ -7,7 +7,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Editar servicio Público General</h3>
                 </div>
-                {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => ['service.general.update', $service]]) !!}
                     <div class="box-body">
                         @include('templates.principal')
                         @include('templates.car')

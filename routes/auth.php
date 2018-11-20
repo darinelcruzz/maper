@@ -41,11 +41,10 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{service}', usesas($ctrl, 'edit'));
-    Route::post('editar', usesas($ctrl, 'change'));
-    Route::get('modificar/{service}', usesas($ctrl, 'update'))->middleware('one');
+    Route::post('editar/{service}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
-    Route::post('pago', usesas($ctrl, "change", 'setPayMethod'));
+    Route::post('pago/{service}', usesas($ctrl, 'change'));
     Route::get('cancelar/{service}', usesas($ctrl, 'cancel'));
 });
 
