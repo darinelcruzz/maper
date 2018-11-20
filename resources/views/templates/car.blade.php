@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        {!! Field::number('load', isset($service) ? $service->load : null, ['min' => '0', 'tpl' => 'templates/twolines'])!!}
+        {!! Field::number('load', isset($service) ? $service->load : null, ['min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
     </div>
     <div class="col-md-4">
         {!! Field::text('plate', isset($service) ? $service->plate : null, ['label' => 'Placas / # Económico', 'tpl' => 'templates/twolines'])!!}
@@ -26,7 +26,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        {!! Field::number('inventory', isset($service) ? $service->inventory : null, ['min' => '0', 'tpl' => 'templates/twolines'])!!}
+        {!! Field::number('inventory', isset($service) ? $service->inventory : null, ['min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
     </div>
     @if($ser == 'corp')
         <div class="col-md-4">
