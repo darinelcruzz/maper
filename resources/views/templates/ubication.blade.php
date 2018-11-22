@@ -13,11 +13,9 @@
              <div class="col-md-6">
                 {!! Field::number('amount', isset($service) ? $service->amount: null, ['label' => 'Arrastre estimado', 'min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
            </div>
-           @if($ser == 'corp')
-                <div class="col-md-6">
-                    {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
-               </div>
-            @endif
+            <div class="col-md-6">
+                {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
+           </div>
         </div>
 
         <div class="row">

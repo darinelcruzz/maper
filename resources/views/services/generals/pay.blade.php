@@ -43,11 +43,10 @@
                 @include('templates.pay')
 
                 <div class="box-footer">
-                    {{-- <input type="hidden" name="status" value="pagado"> --}}
-                    {{--  <input type="hidden" name="id" value="{{ $service->id }}"> --}}
-                    <input type="hidden" name="date_out" value="{{ date('Y-m-d\TH:i') }}">
-                    <input type="hidden" name="view" value="pay">
-                    {!! Form::submit('Pagar', ['class' => 'btn btn-black btn-block']) !!}
+                    <input type="hidden" name="date_out" value="{{ $out }}">
+                    @if (auth()->user()->level == 1 || $service->status != 'pagado')
+                        {!! Form::submit('Pagar', ['class' => 'btn btn-black btn-block']) !!}
+                    @endif
                 </div>
             </solid-box>
         </div>

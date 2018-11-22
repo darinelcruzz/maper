@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\GeneralRequest;
 use Jenssegers\Date\Date;
-use App\Http\Requests\{GeneralRequest, ServiceRequest};
 use App\{Service, Price, Payment};
 
 class GeneralServiceController extends Controller
@@ -39,6 +39,25 @@ class GeneralServiceController extends Controller
         return view('services.generals.edit', compact('service', 'prices'));
     }
 
+    function update(GeneralRequest $request, Service $service)
+    {
+        $service->update($request->all());
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
+    }
+
+    function pay(Service $service)
+    {
+        $cost = 0;
+
+        if ($service->status != 'pagado') {
+            $out = date('Y-m-d\TH:i');
+        }else{
+            $out = $service->date_out;
+        }
+
+        return view('services.generals.pay', compact('service','cost', 'out'));
+    }
+
     function change(GeneralRequest $request, Service $service)
     {
         $service->update($request->all());
@@ -53,7 +72,7 @@ class GeneralServiceController extends Controller
             $service->update(['status' => 'pagado']);
         }
 
-        return redirect(route('admin.cash'));
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function details(Service $service)
@@ -61,21 +80,16 @@ class GeneralServiceController extends Controller
         return view('services.generals.details', compact('service'));
     }
 
-    function pay(Service $service)
-    {
-        $cost = 0;
-        return view('services.generals.pay', compact('service','cost'));
-    }
-
-    function update(GeneralRequest $request, Service $service)
-    {
-        $service->update($request->all());
-        return redirect(route('admin.cash'));
-    }
-
-    function cancel(Service $service)
+    function dead(Service $service)
     {
         return view('services.generals.cancel', compact('service'));
+    }
+
+    function cancel(GeneralRequest $request, Service $service)
+    {
+        $service->update($request->all());
+
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function destroy(Service $service)

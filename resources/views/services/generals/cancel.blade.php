@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8">
             <solid-box title="{{ $service->client->name }}" color="default">
-                {!! Form::open(['method' => 'POST', 'route' => 'service.general.change']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => ['service.general.cancel', $service]]) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>
@@ -39,19 +39,25 @@
                     </tbody>
                 </table>
                 <br>
-
-                <div class="col-md-5">
-                    {!! Field::text('reason', isset($service) ? $service->reason: null)!!}
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! Field::text('reason', isset($service) ? $service->reason: null)!!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! Field::number('amount', isset($service) ? $service->amount: null)!!}
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    {!! Field::number('amount', isset($service) ? $service->amount: null)!!}
+                <div class="row">
+                    <div class="col-md-5">
+                        {!! Field::select('pay',
+                            ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
+                            'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?'])
+                            !!}
+                        </div>
                 </div>
-
                 <div class="box-footer">
                     <input type="hidden" name="status" value="cancelado">
-                    <input type="hidden" name="id" value="{{ $service->id }}">
                     <input type="hidden" name="date_out" value="{{ date('Y-m-d\TH:i') }}">
-                    <input type="hidden" name="view" value="cancelado">
                     {!! Form::submit('Cancelar', ['class' => 'btn btn-danger btn-block']) !!}
                 </div>
             </solid-box>

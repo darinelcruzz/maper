@@ -17,19 +17,19 @@
 										icon="clock-o" text="Hora de regreso/Extras">
 									</ddi>
 									@if (auth()->user()->level == 1)
-										<ddi to="{{ route('service.general.update', ['id' => $row->id]) }}"
+										<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 											icon="edit" text="Editar Pago">
 										</ddi>
 									@endif
 								@else
-									<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
-										icon="print" text="Imprimir">
-									</ddi>
+									<li><a target="_blank" href="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}">
+										<i class="fa fa-print"></i>Imprimir
+									</a></li>
 									<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 										icon="clock-o" text="Hora de regreso/Extras">
 									</ddi>
 									@if (auth()->user()->level == 1)
-										<ddi to="{{ route('service.corporation.update', ['id' => $row->id]) }}"
+										<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
 											icon="edit" text="Editar Pago">
 										</ddi>
 									@endif

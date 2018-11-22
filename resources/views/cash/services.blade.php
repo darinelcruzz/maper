@@ -13,9 +13,12 @@
 							<td>
 								<dropdown color="success" icon="cogs">
 									@if ($row->service == 'General')
-										@if ($row->status != 'pagado')
+										@if ($row->status != 'pagado' && $row->status != 'cancelado')
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 												icon="dollar" text="Pagar">
+											</ddi>
+											<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+												icon="times" text="Muerto">
 											</ddi>
 											{{-- <ddi to="{{ route('invoice.make', ['id' => $row->client_id]) }}"
 												icon="dollar" text="Facturar">
@@ -24,12 +27,11 @@
 										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 											icon="clock-o" text="Hora de regreso/Extras">
 										</ddi>
-										<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
-			                                icon="pencil-square-o" text="Editar">
-			                            </ddi>
-										<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
-											icon="times" text="Muerto">
-										</ddi>
+										@if (auth()->user()->level == 1)
+											<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+				                                icon="pencil-square-o" text="Editar">
+				                            </ddi>
+										@endif
 									@else
 										@if ($row->status == 'liberado')
 											<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
@@ -45,9 +47,11 @@
 											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
 												icon="clock-o" text="Hora de regreso/Extras">
 											</ddi>
-											<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
-												icon="pencil-square-o" text="Editar">
-											</ddi>
+											@if (auth()->user()->level == 1)
+												<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+													icon="pencil-square-o" text="Editar">
+												</ddi>
+											@endif
 										@endif
 
 									@endif

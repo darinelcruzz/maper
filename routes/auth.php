@@ -41,11 +41,12 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{service}', usesas($ctrl, 'edit'));
-    Route::post('editar/{service}', usesas($ctrl, 'update'))->middleware('one');
+    Route::post('editar/{service}', usesas($ctrl, 'update'));
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
     Route::post('pago/{service}', usesas($ctrl, 'change'));
-    Route::get('cancelar/{service}', usesas($ctrl, 'cancel'));
+    Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
+    Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
 });
 
 // Corporaciones
@@ -55,10 +56,10 @@ Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporatio
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{service}', usesas($ctrl, 'edit'));
-    Route::post('editar', usesas($ctrl, 'change'));
-    Route::get('modificar/{service}', usesas($ctrl, 'update'))->middleware('one');
+    Route::post('editar/{service}', usesas($ctrl, 'update'));
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
-    Route::get('pago/{service}', usesas($ctrl, 'pay'));
+    Route::get('liberar/{service}', usesas($ctrl, 'pay'));
+    Route::post('liberar/{service}', usesas($ctrl, 'change'));
     Route::get('formato/{service}', usesas($ctrl, 'printLetter'));
     Route::get('ticket/{service}', usesas($ctrl, 'printTicket'));
 

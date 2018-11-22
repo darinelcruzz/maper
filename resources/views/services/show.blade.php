@@ -2,38 +2,7 @@
 
 @section('main-content')
 
-    <data-table col="col-md-12" title="General" example="example1" color="primary" collapsed button>
-
-        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha', 'cliente', 'vehículo', 'operador', 'estimado') }}
-
-        <template slot="body">
-            @foreach($general as $row)
-                <tr>
-                    <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                    <td>
-                        <dropdown color="primary" icon="cogs">
-                            <ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
-                                icon="dollar" text="Pagar">
-                            </ddi>
-                            <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
-                                icon="times" text="Cancelar">
-                            </ddi>
-                            <ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
-                                icon="pencil-square-o" text="Editar">
-                            </ddi>
-                        </dropdown>
-                    </td>
-                    <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                    <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }}</a></td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>{{ $row->driver->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
-                    <td>${{ $row->total }}</td>
-                </tr>
-            @endforeach
-        </template>
-    </data-table>
-
-    <data-table col="col-md-12" title="Corporaciones" example="example2" color="primary" collapsed button>
+    <data-table col="col-md-12" title="Corporaciones" example="example1" color="primary" collapsed button>
 
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha', 'inventario', 'tipo', 'vehículo', 'operador', 'llave') }}
 
@@ -42,14 +11,14 @@
                 <tr>
                     <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
-                        <dropdown color="primary" icon="cogs">
+                        {{-- <dropdown color="primary" icon="cogs">
                             <ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
                                 icon="hand-peace-o" text="Liberar">
                             </ddi>
                             <ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
-                        </dropdown>
+                        </dropdown> --}}
                     </td>
                     <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                     <td>{{ $row->inventory }}</td>
@@ -62,7 +31,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Liberados" example="example4" color="success" collapsed button>
+    <data-table col="col-md-12" title="Liberados" example="example2" color="success" collapsed button>
 
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha Liberación', 'inventario', 'tipo', 'marca', 'liberador', 'importe') }}
 
@@ -71,14 +40,11 @@
                 <tr>
                     <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
-                        <dropdown color="success" icon="cogs">
+                        {{-- <dropdown color="success" icon="cogs">
                             <ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
                                 icon="print" text="Imprimir">
                             </ddi>
-                            {{-- <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
-                                icon="pencil-square-o" text="Editar">
-                            </ddi> --}}
-                        </dropdown>
+                        </dropdown> --}}
                     </td>
                     <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
                     <td>{{ $row->inventory }}</td>
@@ -100,11 +66,11 @@
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
-                        <dropdown color="success" icon="cogs">
+                        {{-- <dropdown color="success" icon="cogs">
                             <ddi to="{{ route('service.general.update', ['id' => $row->id]) }}"
                                 icon="edit" text="Editar Pago">
                             </ddi>
-                        </dropdown>
+                        </dropdown> --}}
                     </td>
                     <td>{{  $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a')}}</td>
                     <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
@@ -117,9 +83,9 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito Clientes" example="example5" color="info" collapsed button>
+    <data-table col="col-md-12" title="Crédito Clientes" example="example4" color="info" collapsed button>
 
-        {{ drawHeader('ID', 'fecha servicio', 'cliente/Aseguradora', 'marca', 'importe', 'pagar', 'opciones') }}
+        {{ drawHeader('ID', 'fecha servicio', 'cliente/Aseguradora', 'marca', 'importe', 'opciones') }}
 
         <template slot="body">
             @foreach($credit as $row)
@@ -130,19 +96,16 @@
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>$ {{ number_format($row->total, 2) }}</td>
                     <td>
-                        @include('services/assign') &nbsp;
-                    </td>
-                    <td>
-                        <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
+                        {{-- <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
+                        </a> --}}
                     </td>
                 </tr>
             @endforeach
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito Aseguradoras" example="example6" color="info" collapsed button>
+    <data-table col="col-md-12" title="Crédito Aseguradoras" example="example5" color="info" collapsed button>
 
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'asiganci{on', 'cliente/Aseguradora', 'marca', 'importe') }}
 
@@ -151,11 +114,11 @@
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
-                        <dropdown color="primary" icon="cogs">
+                        {{-- <dropdown color="primary" icon="cogs">
                             <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
-                        </dropdown>
+                        </dropdown> --}}
                     </td>
                     <td>{{ fdate($row->date_assignment, 'j/M/y, h:i a') }}</td>
                     <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
@@ -166,7 +129,7 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Cancelados" example="example7" color="danger" collapsed button>
+    <data-table col="col-md-12" title="Cancelados" example="example6" color="danger" collapsed button>
 
         {{ drawHeader('ID', 'fecha', 'cliente', 'marca', 'importe', 'opciones') }}
 
