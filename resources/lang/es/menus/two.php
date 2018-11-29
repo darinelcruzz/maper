@@ -25,14 +25,16 @@ return [
         ]
     ],
 
+    'cash' => [
+        'title' => 'Concentrado',
+        'icon' => 'fa fa-sign-out',
+        'route' => 'admin.cash',
+    ],
+
     'admin' => [
         'title' => 'Administración',
         'icon' => 'fa fa-line-chart',
         'submenu' => [
-            'cash' => [
-                'title' => 'Concentrado',
-                'route' => 'admin.cash'
-            ],
             'expenses' => [
                 'title' => 'Caja Chica',
                 'route' => 'expense.create'

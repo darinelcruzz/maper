@@ -46,8 +46,10 @@
 						<td>{{ $row->description }}</td>
 						<td>
 							{{ $row->origin }} - {{ $row->destination }}
-							@if ($row->extra_driver > 0)
-								<br><span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@if ($row->extra_driver == 5)
+								<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@elseif ($row->extra_driver > 10)
+								<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 							@endif
 						</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -90,7 +92,12 @@
 						<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->origin }} - {{ $row->destination }}
-						<br><span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span></td>
+							@if ($row->extra_driver == 5)
+								<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@elseif ($row->extra_driver > 10)
+								<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@endif
+						</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>{!! $row->status == 'corralon' ? 'pendiente' : $row->statusLabel !!}</td>
 						<td>{{ $row->pay_credit ? $row->pay_credit : $row->pay }}</td>

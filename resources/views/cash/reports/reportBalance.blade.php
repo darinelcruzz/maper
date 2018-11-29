@@ -30,9 +30,9 @@
                 <h2 style="border: ridge #ff0000 1px;" align="center">
                     <b>Corte</b><br>
                 </h2>
-                <h5 align="center">
+                {{-- <h5 align="center">
                     <b>{{ $fdate }}</b>
-                </h5>
+                </h5> --}}
             </div>
         </div>
 

@@ -67,7 +67,9 @@
 							<td>{{ $row->description }}</td>
 							<td>
 								{{ $row->origin }} - {{ $row->destination }}
-								@if ($row->extra_driver > 0)
+								@if ($row->extra_driver == 5)
+									<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+								@elseif ($row->extra_driver > 10)
 									<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 								@endif
 							</td>
@@ -106,7 +108,9 @@
 						<td>{{ $row->description }}</td>
 						<td>
 							{{ $row->origin }} - {{ $row->destination }}
-							@if ($row->extra_driver > 0)
+							@if ($row->extra_driver == 5)
+								<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+							@elseif ($row->extra_driver > 10)
 								<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 							@endif
 						</td>

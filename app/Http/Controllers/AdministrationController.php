@@ -30,7 +30,7 @@ class AdministrationController extends Controller
 
     function cut()
     {
-        $services = Service::where('cut_at', NULL)->where('status', 'pagado')->orWhere('status', 'liberado')->get();
+        $services = Service::where('cut_at', NULL)->get();
         $insurer_services = InsurerService::where('cut_at', NULL)->where('status', 'pagado')->get();
 
         foreach ($services as $service) {
