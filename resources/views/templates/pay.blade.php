@@ -12,8 +12,8 @@
             ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
             'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?', 'tpl' => 'templates/twolines'])
         !!}
-        @if ($ser == 'gen')
+        {{-- @if ($ser == 'gen')
             {!! Field::number('payment', 0, ['tpl' => 'templates/twolines']) !!}
-        @endif
+        @endif --}}
     </template>
 </payment-box>

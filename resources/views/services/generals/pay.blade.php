@@ -35,6 +35,13 @@
                                 <dd>${{ $service->total }}</dd>
                             </td>
                         </tr>
+                        @if ($service->status == "pagado")
+                            <td>
+                                {!! Field::datetimelocal('date_out', fdate($service->date_out, 'Y-m-d\TH:i'), ['tpl' => 'templates/twolines']) !!}
+                            </td>
+                        @else
+                            <input type="hidden" name="date_out" value="{{ $out }}">
+                        @endif
 
                     </tbody>
                 </table>
@@ -43,7 +50,6 @@
                 @include('templates.pay')
 
                 <div class="box-footer">
-                    <input type="hidden" name="date_out" value="{{ $out }}">
                     @if (auth()->user()->level == 1 || $service->status != 'pagado')
                         {!! Form::submit('Pagar', ['class' => 'btn btn-black btn-block']) !!}
                     @endif

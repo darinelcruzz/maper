@@ -46,6 +46,11 @@
                                 <b>Pensión</b>
                                 <dd>{{ $penalty }}días X ${{ $cost/$penalty }} = ${{ $cost }}</dd>
                             </td>
+                            {{-- @if ($service->status == "liberado")
+                                <td>
+                                    {!! Field::datetimelocal('date_out', fdate($service->date_out, 'Y-m-d\TH:i'), ['tpl' => 'templates/twolines']) !!}
+                                </td>
+                            @endif --}}
                         </tr>
                     </tbody>
                 </table>

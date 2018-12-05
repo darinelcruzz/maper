@@ -234,6 +234,7 @@ return [
         'date_assignment'       => 'fecha y hora asignacion',
         'date_contact'          => 'fecha y hora contacto',
         'date_end'              => 'fecha y hora termino',
+        'date_out'              => 'fecha y hora pago',
     ],
 
 ];
