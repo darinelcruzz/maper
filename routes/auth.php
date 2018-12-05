@@ -152,7 +152,7 @@ Route::group(['prefix' => 'gasolina', 'as' => 'gas.'], function () {
     Route::get('editar/{gas}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('pagar/{gas}', usesas($ctrl, 'verify'));
-    Route::post('formato', usesas($ctrl, 'format'));
+    Route::get('reporte', usesas($ctrl, 'report'));
 });
 
 // Bancos

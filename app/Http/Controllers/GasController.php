@@ -48,8 +48,10 @@ class GasController extends Controller
         //
     }
 
-    function destroy(Gas $gas)
+    function report()
     {
-        //
+        $pendings = Gas::where('status', 'pendiente')->get()->groupBy('type');
+
+        return view('gases.report', compact('pendings'));
     }
 }

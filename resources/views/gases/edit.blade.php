@@ -4,43 +4,40 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Editar gastos en efectivo</h3>
-                </div>
-
-                {!! Form::open(['method' => 'POST', 'route' => 'expense.change']) !!}
-
+            <simple-box title="Editar ticket" color="danger">
+                {!! Form::open(['method' => 'POST', 'route' => 'gas.store']) !!}
                 <div class="box-body">
-
                     <div class="row">
                         <div class="col-md-6">
-                            {!! Field::text('description', isset($expense) ? $expense->description: null) !!}
+                            {!! Field::date('date') !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::number('amount', isset($expense) ? $expense->amount: null, ['min' => '0', 'step' => '.01']) !!}
+                            {!! Field::number('ticket', ['min' => '0']) !!}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            {!! Field::select('bill',['no' => 'No', 'si' => 'Si'],
-                                isset($expense) ? $expense->bill: null, ['empty' => '¿Facturado?'])!!}
+                            {!! Field::select('product',['Magna' => 'Magna', 'Premium' => 'Premium', 'Disel' => 'Disel'], ['empty' => 'Seleccione el producto'])!!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::text('folio', isset($expense) ? $expense->folio: null) !!}
+                            {!! Field::select('type',['Gruas' => 'Gruas', 'Don Pepe' => 'Don Pepe', 'Piloto' => 'Piloto', 'Lavado' => 'Lavado'], ['empty' => 'Seleccione el tipo'])!!}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! Field::number('total', ['min' => '0', 'step' => '0.01']) !!}
+                        </div>
+                        <div class="col-md-6">
+                            {!! Field::text('observations')!!}
                         </div>
                     </div>
                 </div>
-
                 <div class="box-footer">
-                    <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
-                    <input type="hidden" name="method" value="e">
-                    <input type="hidden" name="id" value="{{ $expense->id }}">
                     {!! Form::submit('Editar', ['class' => 'btn btn-black btn-block']) !!}
                 </div>
 
                 {!! Form::close() !!}
-            </div>
+            </simple-box>
         </div>
     </div>
 @endsection

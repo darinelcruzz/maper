@@ -14,6 +14,7 @@ class CreateGasTable extends Migration
             $table->integer('ticket');
             $table->date('date');
             $table->string('product');
+            $table->string('type')->nullable();
             $table->double('total');
             $table->string('invoice')->nullable();
             $table->string('status')->default('pendiente');
