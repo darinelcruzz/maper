@@ -26,7 +26,7 @@
               {!! Field::select('unit_id', $units, isset($service) ? $service->unit_id : null, ['empty' => 'Seleccione la unidad', 'tpl' => 'templates/twolines']) !!}
           </div>
           <div class="col-md-6">
-              {!! Field::datetimelocal('date_return', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_return)) : null, ['label' => 'Fecha y hora regreso', 'tpl' => 'templates/twolines']) !!}
+              {!! Field::datetimelocal('date_return', isset($service) ? fdate($service->date_return, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
          </div>
       </div>
 

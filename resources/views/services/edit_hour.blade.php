@@ -3,19 +3,12 @@
 @section('main-content')
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <solid-box color="danger" title="Editar horas id = {{ $service->id }}">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.updateHour'])!!}
                     <div class="row">
                         <div class="col-md-7">
-                            <div id="field_date" class="form-group">
-                                <label for="date_return" class="control-label">
-                                    Fecha y hora de regreso:
-                                </label>
-                                <div class="controls">
-                                    <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{ $service->date_return == NULL ?  date('Y-m-d\TH:i') : date('Y-m-d\TH:i', strtotime($service->date_return))  }}">
-                                </div>
-                            </div>
+                            {!! Field::datetimelocal('date_return', isset($service) ? fdate($service->date_return, 'Y-m-d\TH:i') : date('Y-m-d\TH:i'), ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
                         </div>
                         @if ($service->inventory < 1)
                             <div class="col-md-5">

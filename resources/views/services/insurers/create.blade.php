@@ -36,8 +36,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-4">
-                                    {!! Field::datetimelocal('date_assignment', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_assignment)) : null,
-                                        ['label' => 'Fecha y hora de asignación', 'tpl' => 'templates/twolines'])
+                                    {!! Field::datetimelocal('date_assignment', isset($service) ? fdate($service->date_assignment, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines'])
                                     !!}
                                 </div>
                             </div>
@@ -58,7 +57,7 @@
                                                 isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-md-4">
                                             {!! Field::text('plate', isset($service) ? $service->plate: null, ['tpl' => 'templates/twolines'])!!}
@@ -135,10 +134,10 @@
                                 <div class="col-md-6 col-md-offset-3">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!! Field::datetimelocal('date_contact', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_contact)) : null, ['label' => 'Fecha y hora de contacto', 'tpl' => 'templates/twolines']) !!}
+                                            {!! Field::datetimelocal('date_contact', isset($service) ? fdate($service->date_contact, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!! Field::datetimelocal('date_end', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_end)) : null, ['label' => 'Fecha y hora de término', 'tpl' => 'templates/twolines']) !!}
+                                            {!! Field::datetimelocal('date_end', isset($service) ? fdate($service->date_end, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
 
@@ -170,7 +169,7 @@
                                         <div class="col-md-12">
                                             {!! Field::select('driver_id', $drivers, null, ['empty' => 'Seleccione operador', 'tpl' => 'templates/twolines']) !!}
                                         </div>
-                                        
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -182,7 +181,7 @@
                                             {!! Field::select('unit_id', $units, null, ['empty' => 'Seleccione unidad', 'tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!! Field::datetimelocal('date_return', isset($service) ? date('Y-m-d\TH:i', strtotime($service->date_return)) : null, ['label' => 'Fecha y hora regreso', 'tpl' => 'templates/twolines']) !!}
+                                            {!! Field::datetimelocal('date_return', isset($service) ? fdate($service->date_return, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
                                 </div>

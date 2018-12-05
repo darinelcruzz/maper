@@ -229,6 +229,11 @@ return [
         'nickname'              => 'apodo',
         'serial'                => 'serie',
         'payment'               => 'pago',
+        'date_return'           => 'fecha y hora regreso',
+        'date_service'          => 'fecha y hora servicio',
+        'date_assignment'       => 'fecha y hora asignacion',
+        'date_contact'          => 'fecha y hora contacto',
+        'date_end'              => 'fecha y hora termino',
     ],
 
 ];

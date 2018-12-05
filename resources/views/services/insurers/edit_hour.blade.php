@@ -3,30 +3,35 @@
 @section('main-content')
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <solid-box color="danger" title="Editar horas">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.updateHour'])!!}
                     <div class="row">
-                        <div class="col-md-7">
-                            <div id="field_date" class="form-group">
-                                <label for="date_return" class="control-label">
-                                    Fecha y hora:
-                                </label>
-                                <div class="controls">
-                                    <input class="form-control" id="date_return" name="date_return" type="datetime-local" value="{{ $insurerService->date_return == NULL ?  date('Y-m-d\TH:i') : date('Y-m-d\TH:i', strtotime($insurerService->date_return))  }}">
-                                </div>
-                            </div>
+                        <div class="col-md-6">
+                            <B>Fecha y hora del servicio:</B> <dd>{{ fdate($insurerService->date_assignment, 'l, j F Y h:i a') }}</dd>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
+                            <B>Vehiculo:</B> <dd>{{ $insurerService->brand }} - {{ $insurerService->type }} - {{ $insurerService->color }}</dd>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! Field::datetimelocal('date_contact', isset($service) ? fdate($service->date_contact, 'Y-m-d\TH:i') : NULL, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
+                        </div>
+                        <div class="col-md-6">
+                            {!! Field::datetimelocal('date_end', isset($service) ? fdate($service->date_end, 'Y-m-d\TH:i') : NULL, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! Field::datetimelocal('date_return', isset($service) ? fdate($service->date_return, 'Y-m-d\TH:i') : date('Y-m-d\TH:i'), ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
+                        </div>
+                        <div class="col-md-6">
                             {!! Field::number('inventory', $insurerService->inventory, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
                         </div>
                     </div>
-                    <div class="col-md-7">
-                        <div class="">
-                            <B>Fecha y hora del servicio:</B> <dd>{{ fdate($insurerService->date_assignment, 'l, j F Y h:i a') }}</dd>
-                        </div>
-                    </div>
-                    <br><br>
+
                     <h4>Horas extra</h4>
                     <div class="row">
                         <div class="col-md-6">
