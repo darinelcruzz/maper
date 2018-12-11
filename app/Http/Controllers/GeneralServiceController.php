@@ -60,15 +60,17 @@ class GeneralServiceController extends Controller
 
     function change(GeneralRequest $request, Service $service)
     {
-        $service->update($request->all());
-
         if ($request->payment > 0) {
+            $service->update(['status' => 'abonos',
+                                'pay' => 'Abonos']);
             Payment::create([
                 'service_id' => $service->id,
                 'amount' => $request->payment,
                 'method' => $request->pay,
             ]);
-        } else {
+        }
+        else {
+            $service->update($request->all());
             $service->update(['status' => 'pagado']);
         }
 

@@ -13,7 +13,7 @@
 							<td>
 								<dropdown color="success" icon="cogs">
 									@if ($row->service == 'General')
-										@if ($row->status != 'pagado' && $row->status != 'cancelado')
+										@if ($row->status != 'pagado' && $row->status != 'cancelado' && $row->pay != 'Abonos')
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 												icon="dollar" text="Pagar">
 											</ddi>
@@ -80,7 +80,7 @@
 								{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 							</td>
-							<td>{{ $row->pay == 'Credito' ? $row->pay_credit : $row->pay }}</td>
+							<td>{{ $row->pay == 'Abonos' ? 'Link' : $row->pay }}</td>
 							<td>{{ fnumber($row->total) }}</td>
 						</tr>
 						@php

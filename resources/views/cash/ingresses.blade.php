@@ -126,6 +126,24 @@
 					$sum += $row->amount;
 					@endphp
 				@endforeach
+				@foreach ($payments as $row)
+					<tr>
+						<td>{{ $row->id }}</td>
+						<td></td>
+						<td>{{ $row->service->inventory }}</td>
+						<td>ID = <a href="{{ route('service.general.details', ['id' => $row->service->id]) }}"> {{ $row->service->id }} </a></td>
+						<td><a href="{{ route('client.details', ['id' => $row->service->client->id]) }}"> {{ $row->service->client->name }}</a></td>
+						<td>Abono</td>
+                        <td>{{ $row->service->origin }} - {{ $row->service->destination }}</td>
+						<td>{{ $row->service->brand }} - {{ $row->service->type }} - {{ $row->service->color }}</td>
+                        <td></td>
+                        <td>{{ $row->method }}</td>
+                        <td>{{ fnumber($row->amount) }}</td>
+					</tr>
+					@php
+					$sum += $row->amount;
+					@endphp
+				@endforeach
 			</template>
 			<template slot="footer">
 				<tr>

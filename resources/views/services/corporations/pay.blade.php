@@ -56,7 +56,15 @@
                 </table>
                 <br>
 
-                @include('templates.pay')
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! Field::text('releaser', isset($service) ? $service->releaser: null, ['tpl' => 'templates/twolines'])!!}
+                    </div>
+                </div>
+
+                {{-- <payment-box corp :amount="{{ $service->amount or 0 }}" :maneuver="{{ $service->maneuver or 0 }}" :others="{{ $service->others or 0 }}" :pension="{{ $cost or 0 }}" :discount="{{ $service->discount or 0 }}">
+                </payment-box> --}}
+                <payment-box corp :service="{{ $service }}" :pension="{{ $cost or 0 }}"></payment-box>
 
                 <div class="box-footer">
                     <input type="hidden" name="status" value="liberado">

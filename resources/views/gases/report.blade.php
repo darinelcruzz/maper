@@ -43,11 +43,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Fecha</th>
-                                <th>Producto</th>
-                                <th>Observaciones</th>
-                                <th>Monto</th>
+                                <th width="10%">Id</th>
+                                <th width="10%">Fecha</th>
+                                <th width="15%">Producto</th>
+                                <th width="50%">Observaciones</th>
+                                <th width="15%">Monto</th>
                             </tr>
                         </thead>
 

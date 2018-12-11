@@ -4,7 +4,7 @@ return [
 
     'admin' => [
         'title' => 'Concentrado',
-        'icon' => 'fa fa-line-chart',
+        'icon' => 'fa  fa-list-ul',
         'route' => 'admin.cash'
     ],
 

@@ -39,4 +39,11 @@ class Invoice extends Model
         return $query->whereBetween($dateCol, [$start . ' 00:00:00', $end . ' 23:59:59'])
                             ->where($payCol, $type)->get();
     }
+
+    function getStatusLabelAttribute()
+    {
+        $colors = ['pagada' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger'];
+        $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
+        return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
+    }
 }

@@ -19,7 +19,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><h3>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('expired')) }}</h3></td>
+                                    <td><h3>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('expired') + $client->serviceTotal('payment')) }}</h3></td>
                                     <td><h3>{{ $client->pending }}</h3></td>
                                     <td><h3>{{ $client->days . ' dias' }}</h3></td>
                                 </tr>
@@ -62,7 +62,7 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
-                <data-table-com title="Pendientes ({{ count($client->pending_services)}})" example="example2" color="warning" button>
+                <data-table-com title="Pendientes ({{ count($client->pending_services) + count($client->payment_services)}})" example="example2" color="warning" button>
                     {{ drawHeader('ID', 'Fecha', 'Vehículo', 'Dias', 'Monto')}}
                     <template slot="body">
                         @foreach($client->pending_services as $row)
@@ -74,11 +74,20 @@
                               <td>{{ fnumber($row->total) }}</td>
                           </tr>
                         @endforeach
+                        @foreach($client->payment_services as $row)
+                          <tr>
+                              <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                              <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
+                              <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                              <td>{{ $row->getDays('date_service', $today) }}</td>
+                              <td>{{ fnumber($row->debt) }}</td>
+                          </tr>
+                        @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
                             <th colspan="4"><span class="pull-right">Total</span></th>
-                            <th>{{ fnumber($client->serviceTotal('pending')) }}</th>
+                            <th>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment')) }}</th>
                         </tr>
                     </template>
                 </data-table-com>

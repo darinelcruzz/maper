@@ -27,7 +27,7 @@ return [
 
     'cash' => [
         'title' => 'Concentrado',
-        'icon' => 'fa fa-sign-out',
+        'icon' => 'fa  fa-list-ul',
         'route' => 'admin.cash',
     ],
 

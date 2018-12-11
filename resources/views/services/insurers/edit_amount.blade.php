@@ -22,19 +22,21 @@
                             <B>Vehiculo:</B> <dd>{{ $insurerService->brand }} - {{ $insurerService->type }} - {{ $insurerService->color }}</dd>
                         </div>
                     </div>
-                    <h4>Horas extra</h4>
+                    <h4>Editar</h4>
                     <div class="row">
                         <div class="col-md-6">
-                            {!! Field::number('folio', 0, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
+                            {!! Field::number('folio', $insurerService->folio, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'tpl' => 'templates/twolines']) !!}
+                            {!! Field::number('amount', $insurerService->amount, ['step' => '0.01', 'min' => '0', 'tpl' => 'templates/twolines']) !!}
                         </div>
                     </div>
 
                     <input type="hidden" name="id" value="{{ $insurerService->id }}">
                     <hr>
-                    {!! Form::submit('Actualizar', ['class' => 'btn btn-danger pull-right'])!!}
+                    @if ($insurerService->amount == 0)
+                        {!! Form::submit('Actualizar', ['class' => 'btn btn-danger pull-right'])!!}
+                    @endif
                 {!! Form::close()!!}
             </solid-box>
         </div>

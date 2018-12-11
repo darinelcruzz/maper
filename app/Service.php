@@ -43,6 +43,11 @@ class Service extends Model
         return $this->belongsTo(Price::class, 'category');
     }
 
+    function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     function scopeService($query, $comparation, $service, $col)
     {
         return $query->where($col, $comparation, $service)->get();
@@ -79,9 +84,14 @@ class Service extends Model
         return $this->amount + $this->maneuver + $this->pension + $this->others - $this->discount;
     }
 
+    function getDebtAttribute()
+    {
+        return $this->total - ($this->status == 'abonos' ? $this->payments->sum('amount') : 0 );
+    }
+
     function getStatusLabelAttribute()
     {
-        $colors = ['pagado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger'];
+        $colors = ['pagado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger', 'abonos' => 'warning'];
         $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
         return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
     }

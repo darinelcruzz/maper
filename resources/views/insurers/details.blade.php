@@ -49,7 +49,13 @@
         									</ddi>
         							</dropdown>
                                 </td>
-                                <td>${{ $row->total }}</td>
+                                <td>
+                                    @if ($row->total == 0)
+        								<a href="{{ route('service.insurer.editAmount', ['id' => $row->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+        							@else
+        								{{ fnumber($row->total) }}
+        							@endif
+                                </td>
                             </tr>
                         @endforeach
                     </template>

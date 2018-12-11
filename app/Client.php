@@ -41,9 +41,14 @@ class Client extends Model
         return $this->services->where('status', 'credito');
     }
 
+    function getPaymentServicesAttribute()
+    {
+        return $this->services->where('status', 'abonos');
+    }
+
     function getPendingAttribute()
     {
-        return count($this->pending_services) + count($this->expired_services);
+        return count($this->pending_services) + count($this->expired_services) + count($this->payment_services);
     }
 
     function serviceTotal($status, $formatted = false) {
@@ -51,7 +56,7 @@ class Client extends Model
         $total = 0;
 
         foreach ($this->$sattribute as $service) {
-            $total += $service->total;
+            $total += $service->debt;
         }
 
         if ($formatted) {

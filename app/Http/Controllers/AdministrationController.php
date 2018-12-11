@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\{Service, InsurerService, Driver, Discount, Invoice};
+use App\{Service, InsurerService, Driver, Discount, Invoice, Payment};
 
 class AdministrationController extends Controller
 {
@@ -108,7 +108,8 @@ class AdministrationController extends Controller
         $credit = Service::untilDate($start, 'date_credit', $end);
         $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
         $invoicesPayed = Invoice::untilDate($start, 'date_pay', $end);
-        $total = $payed->sum('total') + $credit->sum('total') + $invoicesPayed->sum('amount');
+        $payments = Payment::untilDate($start, 'created_at', $end);
+        $total = $payed->sum('total') + $credit->sum('total') + $invoicesPayed->sum('amount') + $payments->sum('amount');
 
         $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
         $methodsA = [];
@@ -116,6 +117,7 @@ class AdministrationController extends Controller
         $methodsC = [];
         $methodsD = [];
         $methodsE = [];
+        $methodsF = [];
 
         foreach ($methods as $method) {
             $methodsA[$method] = Service::payType($start, $method,'date_out', 'pay', $end)->sum('total');
@@ -123,6 +125,7 @@ class AdministrationController extends Controller
             $methodsC[$method] = Service::payType($start, $method, 'date_service', 'pay', $end)->sum('total');
             $methodsD[$method] = InsurerService::payType($start, $method, 'date_assignment', 'pay', $end)->sum('total');
             $methodsE[$method] = Invoice::payType($start, $method, 'date_pay', 'method', $end)->sum('amount');
+            $methodsF[$method] = Payment::payType($start, $method, 'created_at', 'method', $end)->sum('amount');
         }
 
         return [
@@ -131,12 +134,14 @@ class AdministrationController extends Controller
             'methodsC' => $methodsC,
             'methodsD' => $methodsD,
             'methodsE' => $methodsE,
+            'methodsF' => $methodsF,
             'credit' => $credit,
             'payed' => $payed,
             'total' => $total,
             'services' => $services,
             'insurerServ' => $insurerServ,
             'invoicesPayed' => $invoicesPayed,
+            'payments' => $payments,
         ];
     }
 }

@@ -47,7 +47,7 @@
                 </table>
                 <br>
 
-                @include('templates.pay')
+                <payment-box :service="{{ $service }}" :pension="{{ $cost or 0 }}"></payment-box>
 
                 <div class="box-footer">
                     @if (auth()->user()->level == 1 || $service->status != 'pagado')

@@ -36,11 +36,17 @@
                             </tbody>
                         </table>
                         <hr>
-
-                        {!! Field::select('method',
-                            ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
-                            'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?'])
-                        !!}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Field::select('method',
+                                    ['Efectivo' => 'Efectivo', 'T. Debito' => 'T. Debito', 'T. Credito' => 'T. Credito',
+                                    'Transferencia' => 'Transferencia', 'Cheque' => 'Cheque'], isset($service) ? $service->pay: null, ['empty' => '¿Cómo pagó?'])
+                                    !!}
+                            </div>
+                            <div class="col-md-6">
+                                {!! Field::date('date_pay') !!}
+                            </div>
+                        </div>
 
                     <div class="box-footer">
                         <input type="hidden" name="id" value="{{ $invoice->id }}">
