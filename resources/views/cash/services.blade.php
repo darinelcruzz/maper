@@ -79,8 +79,16 @@
 								{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
+								{{ $row->status == 'abonos' ? 'resta ' . fnumber($row->debt) : '' }}
 							</td>
-							<td>{{ $row->pay == 'Abonos' ? 'link' : $row->pay }}</td>
+							<td>
+								<a v-if="{{ $row->pay == 'Abonos' ? 1 : 0 }}" href="{{ route('service.general.payments', $row) }}">
+									<i class="fa fa-indent"></i>
+								</a>
+								<div v-else>
+									{{ $row->pay }}
+								</div>
+							</td>
 							<td>{{ fnumber($row->total) }}</td>
 						</tr>
 						@php

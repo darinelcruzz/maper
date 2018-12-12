@@ -57,7 +57,7 @@
                     </tfoot>
                 </table>
                 <hr>
-                @if ($service->debt > 0)
+                @if ($service->status == 'abonos')
                     {!! Form::open(['method' => 'POST', 'route' => ['service.general.payment', $service]]) !!}
                     <div class="row">
                         <div class="col-md-4">
