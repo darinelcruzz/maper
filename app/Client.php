@@ -46,6 +46,11 @@ class Client extends Model
         return $this->services->where('status', 'abonos');
     }
 
+    function getSoldoutServicesAttribute()
+    {
+        return $this->services->where('status', 'liquidado');
+    }
+
     function getPendingAttribute()
     {
         return count($this->pending_services) + count($this->expired_services) + count($this->payment_services);

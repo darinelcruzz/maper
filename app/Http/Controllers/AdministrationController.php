@@ -105,15 +105,15 @@ class AdministrationController extends Controller
     {
         $services = Service::untilDate($start, 'date_service', $end);
         $payed = Service::untilDate($start, 'date_out', $end);
-        $credit = Service::untilDate($start, 'date_credit', $end);
+        // $credit = Service::untilDate($start, 'date_credit', $end);
         $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
         $invoicesPayed = Invoice::untilDate($start, 'date_pay', $end);
         $payments = Payment::untilDate($start, 'created_at', $end);
-        $total = $payed->sum('total') + $credit->sum('total') + $invoicesPayed->sum('amount') + $payments->sum('amount');
+        $total = $payed->sum('total') + $invoicesPayed->sum('amount') + $payments->sum('amount');
 
         $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
         $methodsA = [];
-        $methodsB = [];
+        // $methodsB = [];
         $methodsC = [];
         $methodsD = [];
         $methodsE = [];
@@ -121,7 +121,7 @@ class AdministrationController extends Controller
 
         foreach ($methods as $method) {
             $methodsA[$method] = Service::payType($start, $method,'date_out', 'pay', $end)->sum('total');
-            $methodsB[$method] = Service::payType($start, $method, 'date_credit', 'pay_credit', $end)->sum('total');
+            // $methodsB[$method] = Service::payType($start, $method, 'date_credit', 'pay_credit', $end)->sum('total');
             $methodsC[$method] = Service::payType($start, $method, 'date_service', 'pay', $end)->sum('total');
             $methodsD[$method] = InsurerService::payType($start, $method, 'date_assignment', 'pay', $end)->sum('total');
             $methodsE[$method] = Invoice::payType($start, $method, 'date_pay', 'method', $end)->sum('amount');
@@ -130,12 +130,12 @@ class AdministrationController extends Controller
 
         return [
             'methodsA' => $methodsA,
-            'methodsB' => $methodsB,
+            // 'methodsB' => $methodsB,
             'methodsC' => $methodsC,
             'methodsD' => $methodsD,
             'methodsE' => $methodsE,
             'methodsF' => $methodsF,
-            'credit' => $credit,
+            // 'credit' => $credit,
             'payed' => $payed,
             'total' => $total,
             'services' => $services,

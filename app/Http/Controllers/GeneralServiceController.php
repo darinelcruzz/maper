@@ -82,6 +82,26 @@ class GeneralServiceController extends Controller
         return view('services.generals.details', compact('service'));
     }
 
+    function payments(Service $service)
+    {
+        $payments = Payment::where('service_id', $service->id)->get();
+        return view('services.generals.payments', compact('service', 'payments'));
+    }
+
+    function payment(GeneralRequest $request, Service $service)
+    {
+        Payment::create([
+            'service_id' => $service->id,
+            'amount' => $request->payment,
+            'method' => $request->pay,
+        ]);
+        if ($service->debt == 0) {
+            $service->update(['status' => 'liquidado', 'date_credit' => date('Y-m-d\TH:i')]);
+        }
+
+        return redirect(route('client.details', ['id' => $service->client_id]));
+    }
+
     function dead(Service $service)
     {
         return view('services.generals.cancel', compact('service'));

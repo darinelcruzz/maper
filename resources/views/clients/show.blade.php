@@ -12,6 +12,7 @@
                 <th>Teléfono</th>
                 <th>Correo</th>
                 <th>Contacto</th>
+                <th>Saldo</th>
                 <th></th>
             </tr>
         </template>
@@ -26,6 +27,7 @@
                   <td>{{ $client->phone ? $client->phone : '' }}</td>
                   <td>{{ $client->email }}</td>
                   <td>{{ $client->contact }}  {{ $client->cellphone ? 'Cel. ' . $client->cellphone : ''}}</td>
+                  <td>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('expired') + $client->serviceTotal('payment')) }}</td>
                   <td>
                       <a href="{{ route('client.edit', ['id' => $client->id]) }}">
                           <i class="fa fa-edit"></i>

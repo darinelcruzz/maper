@@ -91,7 +91,7 @@ class Service extends Model
 
     function getStatusLabelAttribute()
     {
-        $colors = ['pagado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger', 'abonos' => 'warning'];
+        $colors = ['pagado' => 'success', 'liquidado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger', 'abonos' => 'warning'];
         $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
         return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
     }

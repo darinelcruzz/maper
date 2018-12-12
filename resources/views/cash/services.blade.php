@@ -80,7 +80,7 @@
 								{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 							</td>
-							<td>{{ $row->pay == 'Abonos' ? 'Link' : $row->pay }}</td>
+							<td>{{ $row->pay == 'Abonos' ? 'link' : $row->pay }}</td>
 							<td>{{ fnumber($row->total) }}</td>
 						</tr>
 						@php

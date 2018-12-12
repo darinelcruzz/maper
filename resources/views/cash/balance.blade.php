@@ -32,42 +32,42 @@
 			<div class="col-md-4">
 				<icon-box color="info" icon="money">
 					<p>Efectivo</p>
-					<h3>{{ fnumber($methodsA['Efectivo'] + $methodsB['Efectivo'] + $methodsE['Efectivo'] + $methodsF['Efectivo']) }}</h3>
+					<h3>{{ fnumber($methodsA['Efectivo'] + $methodsE['Efectivo'] + $methodsF['Efectivo']) }}</h3>
 				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
 				<icon-box color="info" icon="credit-card">
 					<p>Tarjeta débito</p>
-					<h3>{{ fnumber($methodsA['T. Debito'] + $methodsB['T. Debito'] + $methodsE['T. Debito'] + $methodsF['T. Debito']) }}</h3>
+					<h3>{{ fnumber($methodsA['T. Debito'] + $methodsE['T. Debito'] + $methodsF['T. Debito']) }}</h3>
 				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
 				<icon-box color="info" icon="credit-card-alt">
 					<p>Tarjeta crédito</p>
-					<h3>{{ fnumber($methodsA['T. Credito'] + $methodsB['T. Credito'] + $methodsE['T. Credito'] + $methodsF['T. Credito']) }}</h3>
+					<h3>{{ fnumber($methodsA['T. Credito'] + $methodsE['T. Credito'] + $methodsF['T. Credito']) }}</h3>
 				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
 				<icon-box color="info" icon="pencil">
 					<p>Cheques</p>
-					<h3>{{ fnumber($methodsA['Cheque'] + $methodsB['Cheque'] + $methodsE['Cheque'] + $methodsF['Cheque']) }}</h3>
+					<h3>{{ fnumber($methodsA['Cheque'] + $methodsE['Cheque'] + $methodsF['Cheque']) }}</h3>
 				</icon-box>
 	    	</div>
 
 			<div class="col-md-4">
 				<icon-box color="info" icon="exchange">
 					<p>Transferencias</p>
-					<h3>{{ fnumber($methodsA['Transferencia'] + $methodsB['Transferencia'] + $methodsE['Transferencia'] + $methodsF['Transferencia']) }}</h3>
+					<h3>{{ fnumber($methodsA['Transferencia'] + $methodsE['Transferencia'] + $methodsF['Transferencia']) }}</h3>
 				</icon-box>
 			</div>
 
 			<div class="col-md-4">
 				<icon-box color="danger" icon="calendar">
 					<p>Crédito</p>
-					<h3>{{ fnumber($methodsA['Credito'] + $methodsB['Credito'] + $methodsC['Credito'] + $methodsD['Credito']) }}</h3>
+					<h3>{{ fnumber($methodsA['Credito'] + $methodsC['Credito'] + $methodsD['Credito']) }}</h3>
 				</icon-box>
 			</div>
 
