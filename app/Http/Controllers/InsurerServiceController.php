@@ -6,6 +6,7 @@ use App\InsurerService;
 use App\Driver;
 use App\Unit;
 use App\Insurer;
+use App\ExtraDriver;
 use Illuminate\Http\Request;
 
 class InsurerServiceController extends Controller
@@ -73,7 +74,10 @@ class InsurerServiceController extends Controller
 
     function editHour(InsurerService $insurerService)
     {
-        return view('services.insurers.edit_hour', compact('insurerService'));
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        $extras = ExtraDriver::where('insurer_service_id', $insurerService->id)->get();
+
+        return view('services.insurers.edit_hour', compact('insurerService', 'drivers', 'extras'));
     }
 
     function updateHour(Request $request)

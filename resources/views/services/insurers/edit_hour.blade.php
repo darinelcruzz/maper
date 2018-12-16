@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-7">
-            <solid-box color="danger" title="Editar horas">
+            <solid-box color="danger" title="Editar horas Aseguradora ID= {{ $insurerService->id }}">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.updateHour'])!!}
                     <div class="row">
                         <div class="col-md-6">
@@ -75,7 +75,40 @@
                     <hr>
                     {!! Form::submit('Guardar', ['class' => 'btn btn-danger pull-right'])!!}
                 {!! Form::close()!!}
+                @if (count($extras) > 0)
+                    <br><hr>
+                    <h4>Operadores/Apoyos extras</h4>
+                    @foreach ($extras as $extra)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span align="center">
+                                    <p><em>{{ $extra->type ? 'Operador' : 'Apoyo' }}</em></p>
+                                    <h4>{{ $extra->driver->nickname }}</h4>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                {!! Field::number('extra_driver', $extra->extra, ['label' => 'Pago:', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </solid-box>
+        </div>
+
+        <div class="col-md-4 col-md-offset-1">
+            <solid-box color="danger" title="Agregar operadores" button>
+                {!! Form::open(['method' => 'POST', 'route' => 'extraDrivers.store'])!!}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {!! Field::select('driver_id', $drivers, null, ['empty' => 'Seleccione al operador', 'tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
+                            {!! Field::select('type', ['1' => 'Operador', '0' => 'Apoyo'], null, ['empty' => '¿Operador o Apoyo?', 'tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
+                            {!! Field::number('extra', ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'money']) !!}
+                        </div>
+                    </div>
+                        <input type="hidden" name="insurer_service_id" value="{{ $insurerService->id }}">
+                    {!! Form::submit('Agregar', ['class' => 'btn btn-danger pull-right'])!!}
+                {!! Form::close()!!}
             </solid-box>
         </div>
     </div>
-@endsection
+    @endsection

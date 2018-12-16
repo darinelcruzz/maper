@@ -1,8 +1,6 @@
 @extends('admin')
 
-@section('htmlheader_title')
-    General
-@endsection
+@section('htmlheader_title', 'Crear servicio general')
 
 @section('main-content')
     <div class="row">

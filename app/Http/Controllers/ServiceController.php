@@ -8,6 +8,7 @@ use App\InsurerService;
 use App\Service;
 use App\Unit;
 use App\Driver;
+use App\ExtraDriver;
 
 class ServiceController extends Controller
 {
@@ -34,7 +35,10 @@ class ServiceController extends Controller
 
     function editHour(Service $service)
     {
-        return view('services.edit_hour', compact('service'));
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        $extras = ExtraDriver::where('service_id', $service->id)->get();
+
+        return view('services.edit_hour', compact('service', 'drivers', 'extras'));
     }
 
     function updateHour(Request $request)

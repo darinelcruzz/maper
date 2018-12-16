@@ -227,3 +227,10 @@ Route::group(['prefix' => 'descuentos', 'as' => 'discount.'], function () {
     Route::get('/', usesas($ctrl, 'index'));
     Route::post('crear', usesas($ctrl, 'store'));
 });
+
+// OperadoreExtras
+Route::group(['prefix' => 'operadoresExtras', 'as' => 'extraDrivers.'], function () {
+    $ctrl = 'ExtraDriverController';
+
+    Route::post('crear', usesas($ctrl, 'store'));
+});
