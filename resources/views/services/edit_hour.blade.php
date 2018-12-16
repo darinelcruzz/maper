@@ -92,7 +92,7 @@
         </div>
 
         <div class="col-md-4 col-md-offset-1">
-            <solid-box color="danger" title="Agregar operadores" button>
+            <solid-box color="danger" title="Agregar operadores extras" button collapsed>
                 {!! Form::open(['method' => 'POST', 'route' => 'extraDrivers.store'])!!}
                     <div class="row">
                         <div class="col-md-12">
