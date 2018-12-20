@@ -25,7 +25,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
     Route::match(['get', 'post'], 'caja', usesas($ctrl, 'cash'));
     Route::get('reportes', usesas($ctrl, 'search'));
     Route::get('reporte/corte', usesas($ctrl, 'cut'));
-    Route::get('reporte/imprimir', usesas($ctrl, 'reportBalance'));
+    Route::post('reporte/corte', usesas($ctrl, 'reportBalance'));
     Route::post('reporte/servicios', usesas($ctrl, 'reportServices'));
 });
 

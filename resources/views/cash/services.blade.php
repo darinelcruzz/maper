@@ -77,7 +77,7 @@
 							<td>
 								{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}
 								{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
-								{{ $row->status == 'liquidado' ? fdate($row->date_credit, ' (d/M/Y)') : '' }}
+								{{ $row->status == 'liquidado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'abonos' ? ' resta ' . fnumber($row->debt) : '' }}
 							</td>

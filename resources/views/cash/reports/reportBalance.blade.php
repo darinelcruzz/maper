@@ -4,9 +4,11 @@
     <title>MAPER</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('/img/MAPER.ico') }}" />
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
-
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('/plugins/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/dataTables.bootstrap.css') }}">
 
     <style>
@@ -30,19 +32,19 @@
                 <h2 style="border: ridge #ff0000 1px;" align="center">
                     <b>Corte</b><br>
                 </h2>
-                {{-- <h5 align="center">
-                    <b>{{ $fdate }}</b>
-                </h5> --}}
+                <h5 align="center">
+                    <b>{{ fdate(date('Y-m-d'), 'D, d \d\e F Y', 'Y-m-d') }}</b>
+                </h5>
             </div>
         </div>
 
         @php
             $expenses = 0;
+
         @endphp
         @foreach ($drivers as $driver)
             @php
-                // $salary = $driver->base_salary * $pay_days;
-                $salary = $driver->base_salary;
+                $salary = $paySalary ? $driver->base_salary : 0;
                 $extras = $totalExtras[$driver->id];
                 $discount = $discounts->where('driver_id', $driver->id)->sum('amount');
                 $expenses += $salary + $extras- $discount;
@@ -54,48 +56,48 @@
 				<div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p>Efectivo</p>
-						<h4>{{ fnumber($methodsA['Efectivo'] + $methodsB['Efectivo'] + $methodsE['Efectivo']) }}</h4>
+						<h4>{{ fnumber($efectivo) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p>Tarjeta débito</p>
-						<h4>{{ fnumber($methodsA['T. Debito'] + $methodsB['T. Debito'] + $methodsE['T. Debito']) }}</h4>
+						<h4>{{ fnumber($debito) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p>Tarjeta crédito</p>
-						<h4>{{ fnumber($methodsA['T. Credito'] + $methodsB['T. Credito'] + $methodsE['T. Credito']) }}</h4>
+						<h4>{{ fnumber($tcredito) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p>Cheques</p>
-						<h4>{{ fnumber($methodsA['Cheque'] + $methodsB['Cheque'] + $methodsE['Cheque']) }}</h4>
+						<h4>{{ fnumber($cheque) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p>Transferencias</p>
-						<h4>{{ fnumber($methodsA['Transferencia'] + $methodsB['Transferencia'] + $methodsE['Transferencia']) }}</h4>
+						<h4>{{ fnumber($transferencia) }}</h4>
 					</div>
 				</div>
 
 				<div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p>Crédito</p>
-						<h4>{{ fnumber($methodsA['Credito'] + $methodsB['Credito'] + $methodsC['Credito'] + $methodsD['Credito']) }}</h4>
+						<h4>{{ fnumber($credito) }}</h4>
 					</div>
 				</div>
                 <div class="col-xs-3">
 					<div class="text-muted well well-sm">
 						<p><b>Ingresos Totales</b></p>
-						<h4>{{ fnumber($total) }}</h4>
+						<h4>{{ fnumber($efectivo + $debito + $tcredito + $cheque + $transferencia) }}</h4>
 					</div>
 				</div>
                 <div class="col-xs-3">
@@ -107,7 +109,7 @@
                 <div class="col-xs-12">
 					<div align="center" color="success" class="text-muted well well-sm">
 						<p><b>Utilidades</b></p>
-						<h4>{{ fnumber($total - $expenses) }}</h4>
+						<h4>{{ fnumber($efectivo + $debito + $tcredito + $cheque + $transferencia - $expenses) }}</h4>
 					</div>
 				</div>
 			</div>
@@ -133,7 +135,7 @@
                         @endphp
                         @foreach ($drivers as $driver)
                             @php
-                                $salary = $driver->base_salary;
+                                $salary = $paySalary ? $driver->base_salary : 0;
                                 $extras = $totalExtras[$driver->id];
                                 $discount = $discounts->where('driver_id', $driver->id)->sum('amount');
                                 $pay = $salary + $extras- $discount;

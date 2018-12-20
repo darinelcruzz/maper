@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\{Service, InsurerService, Driver, Discount, Invoice, Payment};
+use App\{Service, InsurerService, Driver, Discount, Invoice, Payment, ExtraDriver};
 
 class AdministrationController extends Controller
 {
@@ -30,19 +30,44 @@ class AdministrationController extends Controller
 
     function cut()
     {
-        $services = Service::where('cut_at', NULL)->get();
-        $insurer_services = InsurerService::where('cut_at', NULL)->where('status', 'pagado')->get();
+        $services = Service::all();
+        $insurer_services = InsurerService::all();
+        $extras = ExtraDriver::whereNull('cut_at')->get();
+        $discounts = Discount::whereNull('cut_at')->get();
+        $payments = Payment::whereNull('cut_at')->get();
+        $invoices = Invoice::whereNull('cut_at')->get();
+        $date = fdate(date('Y-m-d'), 'd-M-y', 'Y-m-d');
 
         foreach ($services as $service) {
-            $service->update([
-                'cut_at' => date('Y-m-d')
-            ]);
+            if ($service->cut_at == NULL) {
+                $service->update(['cut_at' => date('Y-m-d\TH:i')]);
+            }if ($service->cut2_at == NULL && !empty($service->date_out)) {
+                $service->update(['cut2_at' => date('Y-m-d\TH:i')]);
+            }
         }
 
         foreach ($insurer_services as $service) {
-            $service->update([
-                'cut_at' => date('Y-m-d')
-            ]);
+            if ($service->cut_at == NULL) {
+                $service->update(['cut_at' => date('Y-m-d\TH:i')]);
+            }if ($service->cut2_at == NULL && !empty($service->date_pay)) {
+                $service->update(['cut2_at' => date('Y-m-d\TH:i')]);
+            }
+        }
+
+        foreach ($extras as $extra) {
+            $extra->update(['cut_at' => date('Y-m-d\TH:i')]);
+        }
+
+        foreach ($discounts as $discount) {
+            $discount->update(['cut_at' => date('Y-m-d\TH:i')]);
+        }
+
+        foreach ($payments as $payment) {
+            $payment->update(['cut_at' => date('Y-m-d\TH:i')]);
+        }
+
+        foreach ($invoices as $invoice) {
+            $invoice->update(['cut_at' => date('Y-m-d\TH:i')]);
         }
 
         return redirect(route('admin.search'));
@@ -50,36 +75,42 @@ class AdministrationController extends Controller
 
     function reportBalance(Request $request)
     {
-        $end = date('Y-m-d');
-        $start = date('Y-m-d', time() - 5 * 24 * 60 * 60);
-        $fdate= fdate($start, 'D, d/M/Y', 'Y-m-d') . ' al ' . fdate($end, 'D, d/M/Y', 'Y-m-d');
-
-        $variables = $this->getMethods($start, $end);
+        $variables = $this->getMethodsToReport();
 
         $drivers = Driver::all();
-        $discounts = Discount::whereBetween('discounted_at', [$start, $end])->get();
+        $discounts = Discount::where('cut_at', null)->get();
         $totalExtras = [];
+        $paySalary = $request->salary;
 
-        // $pay_days = daycount('saturday', strtotime($start), strtotime($end), 0) - 1;
         foreach ($drivers as $driver) {
             $extraHours = [];
             //general
-            $services = Service::where('cut_at', null)->where('driver_id', $driver->id)->get();
+            $services = Service::whereNull('cut_at')->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = Service::where('cut_at', null)->where('helper', $driver->id)->get();
+            $services = Service::whereNull('cut_at')->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
+            //abonos
+            $services = ExtraDriver::whereNull('cut_at')->where('type', 1)->where('driver_id', $driver->id)->get();
+            foreach ($services as $service) {
+                array_push($extraHours, $service->extra);
+            }
+
+            $services = ExtraDriver::whereNull('cut_at')->where('type', 0)->where('driver_id', $driver->id)->get();
+            foreach ($services as $service) {
+                array_push($extraHours, $service->extra);
+            }
             //aseguradoras
-            $services = InsurerService::where('cut_at', null)->where('driver_id', $driver->id)->get();
+            $services = InsurerService::whereNull('cut_at')->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
 
-            $services = InsurerService::where('cut_at', null)->where('helper', $driver->id)->get();
+            $services = InsurerService::whereNull('cut_at')->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
@@ -87,7 +118,7 @@ class AdministrationController extends Controller
             $totalExtras[$driver->id] = array_sum($extraHours);
         }
 
-        return view('cash.reports.reportBalance', compact('fdate', 'totalExtras', 'drivers', 'discounts'))->with($variables);
+        return view('cash.reports.reportBalance', compact('totalExtras', 'drivers', 'discounts', 'paySalary'))->with($variables);
     }
 
     function reportServices(Request $request)
@@ -105,37 +136,28 @@ class AdministrationController extends Controller
     {
         $services = Service::untilDate($start, 'date_service', $end);
         $payed = Service::untilDate($start, 'date_out', $end);
-        // $credit = Service::untilDate($start, 'date_credit', $end);
         $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
         $invoicesPayed = Invoice::untilDate($start, 'date_pay', $end);
         $payments = Payment::untilDate($start, 'created_at', $end);
         $total = $payed->sum('total') + $invoicesPayed->sum('amount') + $payments->sum('amount');
 
-        $methods = ['Efectivo', 'T. Debito', 'T. Credito', 'Cheque', 'Transferencia', 'Credito'];
-        $methodsA = [];
-        // $methodsB = [];
-        $methodsC = [];
-        $methodsD = [];
-        $methodsE = [];
-        $methodsF = [];
+        $methods = ['efectivo' => 'Efectivo', 'debito' => 'T. Debito', 'tcredito' => 'T. Credito', 'cheque' => 'Cheque', 'transferencia' => 'Transferencia', 'credito' => 'Credito'];
 
-        foreach ($methods as $method) {
-            $methodsA[$method] = Service::payType($start, $method,'date_out', 'pay', $end)->sum('total');
-            // $methodsB[$method] = Service::payType($start, $method, 'date_credit', 'pay_credit', $end)->sum('total');
-            $methodsC[$method] = Service::payType($start, $method, 'date_service', 'pay', $end)->sum('total');
-            $methodsD[$method] = InsurerService::payType($start, $method, 'date_assignment', 'pay', $end)->sum('total');
-            $methodsE[$method] = Invoice::payType($start, $method, 'date_pay', 'method', $end)->sum('amount');
-            $methodsF[$method] = Payment::payType($start, $method, 'created_at', 'method', $end)->sum('amount');
+        foreach ($methods as $key => $value) {
+            $$key = Service::payType($start, $value,'date_out', 'pay', $end)->sum('total')
+            + Service::whereNull('date_out')->payType($start, $value, 'date_service', 'pay', $end)->sum('total')
+            + InsurerService::payType($start, $value, 'date_assignment', 'pay', $end)->sum('total')
+            + Invoice::payType($start, $value, 'date_pay', 'method', $end)->sum('amount')
+            + Payment::payType($start, $value, 'created_at', 'method', $end)->sum('amount');
         }
 
         return [
-            'methodsA' => $methodsA,
-            // 'methodsB' => $methodsB,
-            'methodsC' => $methodsC,
-            'methodsD' => $methodsD,
-            'methodsE' => $methodsE,
-            'methodsF' => $methodsF,
-            // 'credit' => $credit,
+            'efectivo' => $efectivo,
+            'debito' => $debito,
+            'tcredito' => $tcredito,
+            'cheque' => $cheque,
+            'transferencia' => $transferencia,
+            'credito' => $credito,
             'payed' => $payed,
             'total' => $total,
             'services' => $services,
@@ -143,5 +165,22 @@ class AdministrationController extends Controller
             'invoicesPayed' => $invoicesPayed,
             'payments' => $payments,
         ];
+    }
+
+    function getMethodsToReport()
+    {
+        $methods = ['efectivo' => 'Efectivo', 'debito' => 'T. Debito', 'tcredito' => 'T. Credito', 'cheque' => 'Cheque', 'transferencia' => 'Transferencia', 'credito' => 'Credito'];
+        $results = [];
+
+        foreach ($methods as $key => $value) {
+            $results[$key] = Service::whereNull('cut_at')->whereNull('date_out')->where('pay', $value)->get()->sum('total')
+            + Service::whereNull('cut2_at')->where('date_out', '!=', null)->where('pay', $value)->get()->sum('total')
+            + InsurerService::whereNull('cut_at')->whereNull('date_pay')->where('pay', $value)->get()->sum('total')
+            + InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->where('pay', $value)->get()->sum('total')
+            + Invoice::whereNull('cut_at')->where('method', $value)->get()->sum('amount')
+            + Payment::whereNull('cut_at')->where('method', $value)->get()->sum('amount');
+        }
+
+        return $results;
     }
 }

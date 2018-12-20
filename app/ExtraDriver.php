@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExtraDriver extends Model
 {
     protected $fillable = [
-        'service_id', 'insurer_service_id','driver_id', 'extra', 'type'
+        'service_id', 'insurer_service_id','driver_id', 'extra', 'type', 'cut_at'
     ];
 
     function service()

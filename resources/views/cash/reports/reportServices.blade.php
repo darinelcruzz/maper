@@ -50,42 +50,42 @@
 				<div class="col-xs-4">
 					<div class="text-muted well well-sm">
 						<p>Efectivo</p>
-						<h4>{{ fnumber($methodsA['Efectivo'] + $methodsB['Efectivo'] + $methodsE['Efectivo']) }}</h4>
+						<h4>{{ fnumber($efectivo) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-4">
 					<div class="text-muted well well-sm">
 						<p>Tarjeta débito</p>
-						<h4>{{ fnumber($methodsA['T. Debito'] + $methodsB['T. Debito'] + $methodsE['T. Debito']) }}</h4>
+						<h4>{{ fnumber($debito) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-4">
 					<div class="text-muted well well-sm">
 						<p>Tarjeta crédito</p>
-						<h4>{{ fnumber($methodsA['T. Credito'] + $methodsB['T. Credito'] + $methodsE['T. Credito']) }}</h4>
+						<h4>{{ fnumber($tcredito) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-4">
 					<div class="text-muted well well-sm">
 						<p>Cheques</p>
-						<h4>{{ fnumber($methodsA['Cheque'] + $methodsB['Cheque'] + $methodsE['Cheque']) }}</h4>
+						<h4>{{ fnumber($cheque) }}</h4>
 					</div>
 		    	</div>
 
 				<div class="col-xs-4">
 					<div class="text-muted well well-sm">
 						<p>Transferencias</p>
-						<h4>{{ fnumber($methodsA['Transferencia'] + $methodsB['Transferencia'] + $methodsE['Transferencia']) }}</h4>
+						<h4>{{ fnumber($transferencia) }}</h4>
 					</div>
 				</div>
 
 				<div class="col-xs-4">
 					<div class="text-muted well well-sm">
 						<p>Crédito</p>
-						<h4>{{ fnumber($methodsA['Credito'] + $methodsB['Credito'] + $methodsC['Credito'] + $methodsD['Credito']) }}</h4>
+						<h4>{{ fnumber($credito) }}</h4>
 					</div>
 				</div>
 

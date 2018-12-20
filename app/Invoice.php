@@ -8,7 +8,7 @@ class Invoice extends Model
 {
     protected $fillable = [
         'folio', 'insurer_id', 'client_id', 'retention', 'iva', 'amount',
-        'date', 'date_pay', 'method', 'status'
+        'date', 'date_pay', 'method', 'status', 'cut_at'
     ];
 
     function insureServices()

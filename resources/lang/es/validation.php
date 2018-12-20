@@ -236,6 +236,8 @@ return [
         'date_end'              => 'fecha y hora termino',
         'date_out'              => 'fecha y hora pago',
         'date_pay'              => 'fecha pago',
+        'salary'                => 'salario',
+        'method'                => 'metodo',
     ],
 
 ];

@@ -4,19 +4,19 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCutToInsurerServicesTable extends Migration
+class AddCut2InsurerServicesTable extends Migration
 {
     public function up()
     {
         Schema::table('insurer_services', function (Blueprint $table) {
-            $table->timestamp('cut_at')->nullable();
+            $table->date('cut2_at')->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('insurer_services', function (Blueprint $table) {
-            $table->dropColumn('cut_at');
+            $table->dropColumn('cut2_at');
         });
     }
 }

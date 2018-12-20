@@ -42,12 +42,12 @@
 					@endphp
 				@endforeach
 
-				@foreach ($credit as $row)
+				{{-- @foreach ($invoicesPayed as $row)
 					<tr>
-						<td>{{ $row->id . 'S' }}</td>
+						<td>{{ $row->id . 'FP' }}</td>
 						<td>{{ $row->inventory }}</td>
 						<td></td>
-						<td>{{ $row->client->name }}</td>
+						<td>{{ $row->client->name ? $row->client->name :$row->client->name }}</td>
 						<td>{{ fdate($row->date_service, 'd-m-Y') }}</td>
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -58,7 +58,7 @@
 					@php
 						$sum += $row->total;
 					@endphp
-				@endforeach
+				@endforeach --}}
 
 			</body>
 			<tfooter>

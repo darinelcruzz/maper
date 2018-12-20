@@ -96,7 +96,7 @@ class GeneralServiceController extends Controller
             'method' => $request->pay,
         ]);
         if ($service->debt == 0) {
-            $service->update(['status' => 'liquidado', 'date_credit' => date('Y-m-d\TH:i')]);
+            $service->update(['status' => 'liquidado', 'date_out' => date('Y-m-d\TH:i')]);
         }
 
         return redirect(route('client.details', ['id' => $service->client_id]));

@@ -39,7 +39,7 @@
                     <input type="hidden" name="view" value="create">
                     <div v-if="isFormWizardDone" class="row">
                         <div class="col-md-6">
-                            {!! Form::submit('Pagado', ['class' => 'btn btn-success btn-block', 'name' => 'pagado']) !!}
+                            {!! Form::submit('Pagado/Abonos', ['class' => 'btn btn-success btn-block', 'name' => 'pagado']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Form::submit('Crédito', ['class' => 'btn btn-danger btn-block', 'name' => 'credito']) !!}
