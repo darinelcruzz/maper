@@ -84,7 +84,7 @@
                 <div class="form-group">
                     <label class="control-label"><b>Método</b></label>
                     <div class="controls">
-                        <select class="form-control" name="pay" v-model="vservice.pay">
+                        <select class="form-control" name="pay" required>
                             <option value selected>¿Cómo pagó?</option>
                             <option value="Efectivo">Efectivo</option>
                             <option value="T. Debito">T. Debito</option>

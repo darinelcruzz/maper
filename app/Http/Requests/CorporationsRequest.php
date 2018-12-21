@@ -45,6 +45,7 @@ class CorporationsRequest extends FormRequest
             'lot' => 'sometimes|required',
             'releaser' => 'sometimes|required',
             'discount' => 'sometimes|required',
+            'pay' => 'sometimes|required',
         ];
     }
 }
