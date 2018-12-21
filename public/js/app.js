@@ -47413,7 +47413,58 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])])]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-4"
+  }, [_c('div', {
+    staticClass: "form-group"
   }, [_vm._m(8), _vm._v(" "), _c('div', {
+    staticClass: "controls"
+  }, [_c('select', {
+    staticClass: "form-control",
+    attrs: {
+      "name": "pay",
+      "required": ""
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("¿Cómo pagó?")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "Efectivo"
+    },
+    domProps: {
+      "selected": _vm.vservice.pay == 'Efectivo'
+    }
+  }, [_vm._v("Efectivo")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "T. Debito"
+    },
+    domProps: {
+      "selected": _vm.vservice.pay == 'T. Debito'
+    }
+  }, [_vm._v("T. Debito")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "T. Credito"
+    },
+    domProps: {
+      "selected": _vm.vservice.pay == 'T. Credito'
+    }
+  }, [_vm._v("T. Credito")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "Transferencia"
+    },
+    domProps: {
+      "selected": _vm.vservice.pay == 'Transferencia'
+    }
+  }, [_vm._v("Transferencia")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "Cheque"
+    },
+    domProps: {
+      "selected": _vm.vservice.pay == 'Cheque'
+    }
+  }, [_vm._v("Cheque")])])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
   }), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
@@ -47457,46 +47508,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "control-label"
   }, [_c('b', [_vm._v("Pago")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-md-4"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
+  return _c('label', {
     staticClass: "control-label"
-  }, [_c('b', [_vm._v("Método")])]), _vm._v(" "), _c('div', {
-    staticClass: "controls"
-  }, [_c('select', {
-    staticClass: "form-control",
-    attrs: {
-      "name": "pay",
-      "required": ""
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": "",
-      "selected": ""
-    }
-  }, [_vm._v("¿Cómo pagó?")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "Efectivo"
-    }
-  }, [_vm._v("Efectivo")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "T. Debito"
-    }
-  }, [_vm._v("T. Debito")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "T. Credito"
-    }
-  }, [_vm._v("T. Credito")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "Transferencia"
-    }
-  }, [_vm._v("Transferencia")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "Cheque"
-    }
-  }, [_vm._v("Cheque")])])])])])
+  }, [_c('b', [_vm._v("Método")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

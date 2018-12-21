@@ -85,12 +85,12 @@
                     <label class="control-label"><b>Método</b></label>
                     <div class="controls">
                         <select class="form-control" name="pay" required>
-                            <option value selected>¿Cómo pagó?</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="T. Debito">T. Debito</option>
-                            <option value="T. Credito">T. Credito</option>
-                            <option value="Transferencia">Transferencia</option>
-                            <option value="Cheque">Cheque</option>
+                            <option value>¿Cómo pagó?</option>
+                            <option value="Efectivo" :selected="vservice.pay == 'Efectivo'">Efectivo</option>
+                            <option value="T. Debito" :selected="vservice.pay == 'T. Debito'">T. Debito</option>
+                            <option value="T. Credito" :selected="vservice.pay == 'T. Credito'">T. Credito</option>
+                            <option value="Transferencia" :selected="vservice.pay == 'Transferencia'">Transferencia</option>
+                            <option value="Cheque" :selected="vservice.pay == 'Cheque'">Cheque</option>
                         </select>
                     </div>
                 </div>
