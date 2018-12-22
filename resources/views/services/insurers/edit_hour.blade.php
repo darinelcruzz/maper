@@ -40,7 +40,7 @@
                                 <h4>{{ $insurerService->driver->nickname }}</h4>
                             </span>
                         </div>
-                        @if ($insurerService->extra_driver < 1 || auth()->user()->level == 1)
+                        @if ($insurerService->extra_driver < 10 || auth()->user()->level == 1)
                             <div class="col-md-6">
                                 {!! Field::number('extra_driver', $insurerService->extra_driver, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
                             </div>
@@ -59,7 +59,7 @@
                                     <h4>{{ $insurerService->helperr->nickname }}</h4>
                                 </span>
                             </div>
-                            @if ($insurerService->extra_helper < 1 || auth()->user()->level == 1)
+                            @if ($insurerService->extra_helper < 10 || auth()->user()->level == 1)
                                 <div class="col-md-6">
                                     {!! Field::number('extra_helper', $insurerService->extra_helper, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
                                 </div>
