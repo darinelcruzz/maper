@@ -51,8 +51,51 @@
                         </td>
                     </tr>
                 @endforeach
+                @foreach ($extras as $row)
+                    <tr>
+                        @if ($row->service_id > 0)
+                            <td>{{ $row->id }}</td>
+                            <td>Extra servicio</td>
+                            <td>{{ $row->service->brand }} <br> {{ $row->service->type }} <br> {{ $row->service->color }}</td>
+                            <td><b>Origen:</b>{{ $row->service->origin }} <br><b>Destino:</b> {{ $row->service->destination }}</td>
+                            <td><b>Serv:</b>{{ fdate($row->service->date_service, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->service->date_return, ' l, j/F/Y H:s') }}</td>
+                            <td>
+                                @if ($row->type == 1)
+                                    {{ $row->driver->name }} <br>
+                                    {{ fnumber($row->extra) }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($row->type == 0)
+                                    {{ $row->driver->name }} <br>
+                                    {{ fnumber($row->extra) }}
+                                @endif
+                            </td>
+                        @endif
+                        @if ($row->insurer_service_id > 0)
+                            <td>{{ $row->id }}</td>
+                            <td>Extra Aseguradora</td>
+                            <td>{{ $row->insurerService->brand }} <br> {{ $row->insurerService->type }} <br> {{ $row->insurerService->color }}</td>
+                            <td><b>Origen:</b>{{ $row->insurerService->origin }} <br><b>Destino:</b> {{ $row->insurerService->destination }}</td>
+                            <td><b>Serv:</b>{{ fdate($row->insurerService->date_insurerService, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->insurerService->date_return, ' l, j/F/Y H:s') }}</td>
+                            <td>
+                                @if ($row->type == 1)
+                                    {{ $row->driver->name }} <br>
+                                    {{ fnumber($row->extra) }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($row->type == 0)
+                                    {{ $row->driver->name }} <br>
+                                    {{ fnumber($row->extra) }}
+                                @endif
+                            </td>
+                        @endif
+                    </tr>
+                @endforeach
             </template>
         </data-table-com>
     </div>
-</div>
+    <h3>Total = $ {{ $services->sum('extra_driver') + $services->sum('extra_helper') + $insurerServices->sum('extra_driver') + $insurerServices->sum('extra_helper') + $extras->sum('extra')  }}
+</div></h3>
 @endsection
