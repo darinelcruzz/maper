@@ -17,7 +17,7 @@
 
                     </div>
                     <div class="box-footer">
-                        @if (auth()->user()->level == 1 && $service->status != 'liberado')
+                        @if (auth()->user()->level == 1 || $service->status != 'liberado')
                             {!! Form::submit('Siguiente', ['class' => 'btn btn-black btn-block']) !!}
                         @endif
                     </div>
