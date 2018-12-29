@@ -124,7 +124,7 @@ return [
             ],
             'extras' => [
                 'title' => 'HorasExtras',
-                'route' => 'resources.driver.date'
+                'route' => 'resources.driver.extras'
             ],
             'discounts' => [
                 'title' => 'Descuentos',

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\{Driver, Service, Discount, InsurerService};
+use App\{Driver, Service, Discount, InsurerService, ExtraDriver};
 
 class DriverController extends Controller
 {
@@ -40,13 +40,13 @@ class DriverController extends Controller
         return redirect(route('resources.show'));
     }
 
-    function date()
+    function extras()
     {
-        $date = Date::now()->format('Y-m-d');
+        $services = Service::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
+        $insurerServices = InsurerService::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
+        $extras = ExtraDriver::whereNull('cut_at')->get();
 
-        $services = Service::where('extra_driver', '>', 0)->get();
-
-        return view('resources.drivers.date', compact('date', 'services'));
+        return view('resources.drivers.extras', compact('services', 'extras', 'insurerServices'));
     }
 
     function format(Request $request)

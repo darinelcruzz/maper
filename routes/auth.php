@@ -195,7 +195,7 @@ Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], f
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{driver}', usesas($ctrl, 'edit'))->middleware('two');
     Route::post('editar', usesas($ctrl, 'change'));
-    Route::get('fecha', usesas($ctrl, 'date'));
+    Route::get('extras', usesas($ctrl, 'extras'));
     Route::post('reporte', usesas($ctrl, 'format'));
 });
 
