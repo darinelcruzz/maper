@@ -21,6 +21,11 @@ class Invoice extends Model
         return $this->belongsTo(Insurer::class);
     }
 
+    function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
     function scopeUntilDate($query, $start, $column = 'date_out', $end = NULL)
     {
         if ($end == NULL) {

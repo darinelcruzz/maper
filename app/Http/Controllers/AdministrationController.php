@@ -35,7 +35,7 @@ class AdministrationController extends Controller
         $extras = ExtraDriver::whereNull('cut_at')->get();
         $discounts = Discount::whereNull('cut_at')->get();
         $payments = Payment::whereNull('cut_at')->get();
-        $invoices = Invoice::whereNull('cut_at')->get();
+        $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
         $date = fdate(date('Y-m-d'), 'd-M-y', 'Y-m-d');
 
         foreach ($services as $service) {
@@ -124,12 +124,16 @@ class AdministrationController extends Controller
     function reportServices(Request $request)
     {
         $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
-        $end = $request->end == 0 ? Date::now()->format('Y-m-d') : $request->end;
-        $fdate= fdate($start, 'D, d/M/Y', 'Y-m-d') . ' al ' . fdate($end, 'D, d/M/Y', 'Y-m-d');
+        $fdate= 'Corte al ' . fdate($start, 'D, d/M/Y', 'Y-m-d');
 
-        $variables = $this->getMethods($start, $end);
+        $services = Service::whereNull('cut_at')->whereNull('date_out')->get();
+        $services2 = Service::whereNull('cut2_at')->where('date_out', '!=', null)->get();
+        $insurerServices = InsurerService::whereNull('cut_at')->whereNull('date_pay')->get();
+        $insurerServices2 = InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->get();
+        $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
+        $payments = Payment::whereNull('cut_at')->get();
 
-        return view('cash.reports.reportServices', compact('fdate'))->with($variables);
+        return view('cash.reports.reportServices', compact('fdate', 'services', 'services2', 'insurerServices', 'insurerServices2', 'invoices', 'payments'));
     }
 
     function getMethods($start, $end = NULL)

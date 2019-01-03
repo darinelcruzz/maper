@@ -38,6 +38,7 @@
 
                     <input type="hidden" name="status" value="corralon">
                     <input type="hidden" name="view" value="create">
+                    <input type="hidden" name="pay" value="Credito">
                     <div v-if="isFormWizardDone" class="row">
                         <div class="col-md-4 col-md-offset-4">
                             <button type="submit" class="btn btn-success btn-block">

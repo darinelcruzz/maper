@@ -20,18 +20,6 @@
 				{!! Form::open(['method' => 'POST', 'route' => 'admin.reportServices', 'target' => '_blank']) !!}
 					<div class="row">
 						<div class="col-md-12">
-							{!! Field::date('start', $date, ['tpl' => 'templates/withicon'],
-							['icon' => 'calendar-check-o']) !!}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							{!! Field::date('end', $date, ['tpl' => 'templates/withicon'],
-							['icon' => 'calendar-check-o']) !!}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
 							{!! Form::submit('Buscar', ['class' => 'btn btn-block btn-primary']) !!}
 						</div>
 					</div>
