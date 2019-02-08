@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<data-table-com title="Servicios del {{  fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example1" color="success" button>
-	        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Inv', 'Folio', 'Servicio', 'Descripción', 'Ruta/operador', 'Vehiculo', 'Estatus', 'Método', 'Monto') }}
+	        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Descripción', 'Vehiculo', 'Ruta/operador', 'Servicio', 'Folio', 'Inv', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
 					$sum = 0;
@@ -57,14 +57,8 @@
 									@endif
 								</dropdown>
 							</td>
-							<td>{{ $row->inventory }}</td>
-							<td></td>
-							@if ($row->service == 'General')
-								<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
-							@else
-								<td>{{ $row->service }}</td>
-							@endif
 							<td>{{ $row->description }}</td>
+							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
 								{{ $row->origin }} - {{ $row->destination }}
 								@if ($row->extra_driver == 5)
@@ -73,7 +67,13 @@
 									<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 								@endif
 							</td>
-							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+							@if ($row->service == 'General')
+								<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
+							@else
+								<td>{{ $row->service }}</td>
+							@endif
+							<td></td>
+							<td>{{ $row->inventory }}</td>
 							<td>
 								{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}
 								{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
@@ -110,10 +110,8 @@
 								</ddi> --}}
 							</dropdown>
 						</td>
-						<td>{{ $row->inventory }}</td>
-						<td>{{ $row->folio }}</td>
-                        <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
 						<td>{{ $row->description }}</td>
+						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>
 							{{ $row->origin }} - {{ $row->destination }}
 							@if ($row->extra_driver == 5)
@@ -122,7 +120,9 @@
 								<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 							@endif
 						</td>
-                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+                        <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }} </a></td>
+						<td>{{ $row->folio }}</td>
+						<td>{{ $row->inventory }}</td>
 						<td>{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}</td>
                         <td></td>
                         <td>
