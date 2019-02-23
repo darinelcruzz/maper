@@ -20,6 +20,9 @@
 												<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 													icon="edit" text="Editar Pago">
 												</ddi>
+												<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+					                                icon="pencil-square-o" text="Editar">
+					                            </ddi>
 											@endif
 										@else
 											<li><a target="_blank" href="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}">
@@ -31,6 +34,9 @@
 											@if (auth()->user()->level == 1)
 												<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
 													icon="edit" text="Editar Pago">
+												</ddi>
+												<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+													icon="pencil-square-o" text="Editar">
 												</ddi>
 											@endif
 										@endif
