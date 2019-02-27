@@ -50,17 +50,37 @@ class InsurerServiceController extends Controller
         return view('services.insurers.show', compact('insurerService'));
     }
 
+    function details(InsurerService $insurerService)
+    {
+        return view('services.insurers.details', compact('insurerService'));
+    }
+
     function edit(InsurerService $insurerService)
     {
-
-        return view('services.insurers.edit', compact('drivers', 'insurers', 'insurerService'));
+        $drivers = Driver::where('type', 'operador')->pluck('name', 'id')->toArray();
+        $units = Unit::pluck('description', 'id')->toArray();
+        $insurers = Insurer::pluck('name', 'id')->toArray();
+        return view('services.insurers.edit', compact('drivers', 'units', 'insurers', 'insurerService'));
     }
 
     function update(Request $request)
     {
+        $this->validate($request, [
+            'insurer_id' => 'required',
+            'date_assignment' => 'required',
+            'driver_id' => 'required',
+            'unit_id' => 'required',
+            'brand' => 'required',
+            'origin' => 'required',
+            'destination' => 'required',
+            'user' => 'required',
+            'amount' => 'required',
+            'folio' => 'required'
+        ]);
+        
         InsurerService::find($request->id)->update($request->all());
 
-        return redirect(route('service.show'));
+        return redirect(route('admin.cash'));
     }
 
     function updateStatus(InsurerService $insurerService, $status)

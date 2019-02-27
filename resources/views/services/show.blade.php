@@ -2,9 +2,9 @@
 
 @section('main-content')
 
-    <data-table col="col-md-12" title="Corporaciones" example="example1" color="primary" collapsed button>
+    <data-table col="col-md-12" title="En corralón" example="example1" color="primary" collapsed button>
 
-        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha', 'inventario', 'tipo', 'vehículo', 'operador', 'llave') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha servicio', 'inventario', 'tipo', 'vehículo', 'operador', 'llave') }}
 
         <template slot="body">
             @foreach($corps as $row)
@@ -85,7 +85,7 @@
 
     <data-table col="col-md-12" title="Crédito Clientes" example="example4" color="info" collapsed button>
 
-        {{ drawHeader('ID', 'fecha servicio', 'cliente/Aseguradora', 'marca', 'importe', 'opciones') }}
+        {{ drawHeader('ID', 'fecha servicio', 'cliente', 'marca', 'importe', 'opciones') }}
 
         <template slot="body">
             @foreach($credit as $row)
@@ -105,20 +105,25 @@
         </template>
     </data-table>
 
-    <data-table col="col-md-12" title="Crédito Aseguradoras" example="example5" color="info" collapsed button>
+    <data-table col="col-md-12" title="Aseguradoras" example="example5" color="info" collapsed button>
 
-        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'asiganci{on', 'cliente/Aseguradora', 'marca', 'importe') }}
+        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'asiganción', 'cliente/Aseguradora', 'marca', 'importe') }}
 
         <template slot="body">
             @foreach($creditI as $row)
                 <tr>
                     <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
-                        {{-- <dropdown color="primary" icon="cogs">
-                            <ddi v-if="{{ Auth::user()->level == 1 ? 1: 0 }}" to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
-                                icon="pencil-square-o" text="Editar">
+                        <dropdown color="success" icon="cogs">
+                            <ddi to="{{ route('service.insurer.editHour', ['id' => $row->id]) }}"
+                                icon="clock-o" text="Hora de regreso/Extras">
                             </ddi>
-                        </dropdown> --}}
+                            @if (auth()->user()->level == 1)
+                                <ddi to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
+                                    icon="pencil-square-o" text="Editar">
+                                </ddi>
+                            @endif
+                        </dropdown>
                     </td>
                     <td>{{ fdate($row->date_assignment, 'j/M/y, h:i a') }}</td>
                     <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>

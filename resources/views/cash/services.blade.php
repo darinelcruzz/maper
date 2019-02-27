@@ -9,10 +9,13 @@
 				@foreach ($services as $row)
 					@if (fdate($row->date_service) != fdate($row->date_out))
 						<tr>
-							<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>{{ $row->id }}</td>
 							<td>
 								<dropdown color="success" icon="cogs">
 									@if ($row->service == 'General')
+										<ddi to="{{ route('service.general.details', ['id' => $row->id]) }}"
+											icon="eye" text="Detalles">
+										</ddi>
 										@if ($row->status != 'pagado' && $row->status != 'cancelado' && $row->pay != 'Abonos')
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 												icon="dollar" text="Pagar">
@@ -33,6 +36,9 @@
 				                            </ddi>
 										@endif
 									@else
+										<ddi to="{{ route('service.corporation.details', ['id' => $row->id]) }}"
+											icon="eye" text="Detalles">
+										</ddi>
 										@if ($row->status == 'liberado')
 											<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
 				                                icon="print" text="Imprimir">
@@ -89,7 +95,13 @@
 									{{ $row->pay }}
 								</div>
 							</td>
-							<td>{{ fnumber($row->total) }}</td>
+							<td>
+								@if ($row->total == 0 && $row->service == 'General')
+									<a href="{{ route('service.general.editAmount', ['id' => $row->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+								@else
+									{{ fnumber($row->total) }}
+								@endif
+							</td>
 						</tr>
 						@php
 							$sum += $row->total;
@@ -99,12 +111,20 @@
 
 				@foreach ($insurerServ as $row)
 					<tr>
-                        <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                        <td>{{ $row->id }}</td>
 						<td>
 							<dropdown color="success" icon="cogs">
+								<ddi to="{{ route('service.insurer.details', ['id' => $row->id]) }}"
+									icon="eye" text="Detalles">
+								</ddi>
 								<ddi to="{{ route('service.insurer.editHour', ['id' => $row->id]) }}"
 									icon="clock-o" text="Hora de regreso/Extras">
 								</ddi>
+								@if (auth()->user()->level == 1)
+									<ddi to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
+										icon="pencil-square-o" text="Editar">
+									</ddi>
+								@endif
 								{{-- <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
 									icon="times" text="Muerto">
 								</ddi> --}}

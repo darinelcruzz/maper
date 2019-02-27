@@ -24,7 +24,7 @@
                         <tab-content title="Cliente" icon="fa fa-user">
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-4">
-                                    {!! Field::text('description', isset($service) ? $service->description: null, ['tpl' => 'templates/twolines']) !!}
+                                    {!! Field::text('description', ['tpl' => 'templates/twolines']) !!}
                                 </div>
                             </div>
                             <div class="row">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-4">
-                                    {!! Field::datetimelocal('date_assignment', isset($service) ? fdate($service->date_assignment, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines'])
+                                    {!! Field::datetimelocal('date_assignment', ['tpl' => 'templates/twolines'])
                                     !!}
                                 </div>
                             </div>
@@ -47,35 +47,35 @@
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            {!! Field::text('brand', isset($service) ? $service->brand: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::text('brand', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::text('type', isset($service) ? $service->type: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::text('type', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
                                             {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión'],
-                                                isset($service) ? $service->category: null, ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
+                                             ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            {!! Field::text('plate', isset($service) ? $service->plate: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::text('plate', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::number('model', isset($service) ? $service->model: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::number('model', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::text('color', isset($service) ? $service->color: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::text('color', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            {!! Field::text('load', isset($service) ? $service->load: null, ['tpl' => 'templates/twolines'])!!}
+                                            {!! Field::text('load', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::number('inventory', isset($service) ? $service->inventory: null, ['tpl' => 'templates/twolines', 'step' => '0.01'])!!}
+                                            {!! Field::number('inventory', ['tpl' => 'templates/twolines', 'step' => '0.01'])!!}
                                         </div>
                                     </div>
                                 </div>
@@ -88,16 +88,16 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!! Field::text('origin', isset($service) ? $service->origin: null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::text('origin', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!! Field::text('destination', isset($service) ? $service->destination: null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::text('destination', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            {!! Field::text('user', isset($service) ? $service->client: null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::text('user', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-4">
                                             {!! Field::number('amount', 0, ['step' => '0.01', 'min' => '0', 'label' => 'Importe estimado', 'tpl' => 'templates/twolines']) !!}
@@ -134,28 +134,28 @@
                                 <div class="col-md-6 col-md-offset-3">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!! Field::datetimelocal('date_contact', isset($service) ? fdate($service->date_contact, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::datetimelocal('date_contact', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!! Field::datetimelocal('date_end', isset($service) ? fdate($service->date_end, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                          {!! Field::text('booth', isset($service) ? $service->booth: null, ['tpl' => 'templates/twolines']) !!}
-                                        </div>
-                                        <div class="col-md-6">
-                                            {!! Field::text('folio', isset($service) ? $service->folio: null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::datetimelocal('date_end', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!! Field::text('file', isset($service) ? $service->file: null, ['label' => 'Asistencia', 'tpl' => 'templates/twolines']) !!}
+                                          {!! Field::text('booth', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!! Field::text('sinister', isset($service) ? $service->sinister: null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::text('folio', ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {!! Field::text('file', ['label' => 'Asistencia', 'tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! Field::text('sinister', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                             {!! Field::select('unit_id', $units, null, ['empty' => 'Seleccione unidad', 'tpl' => 'templates/twolines']) !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!! Field::datetimelocal('date_return', isset($service) ? fdate($service->date_return, 'Y-m-d\TH:i') : null, ['tpl' => 'templates/twolines']) !!}
+                                            {!! Field::datetimelocal('date_return', ['tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
                                 </div>

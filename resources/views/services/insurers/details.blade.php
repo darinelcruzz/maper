@@ -1,26 +1,25 @@
 @extends('admin')
 
+@section('htmlheader_title')
+    Detalles Aseg
+@endsection
+
 @section('main-content')
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ 'Id ' . $service->id . ' - ' . $service->client->name }}" color="default">
+            <solid-box title="{{ 'Id ' . $insurerService->id . ' - ' . $insurerService->insurer->name }}" color="default">
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Servicio:</B><dd>{{ $service->service }}</dd>
+                                <B>Descripción:</B><dd>{{ $insurerService->description }}</dd>
                             </td>
                             <td>
-                                <B>Descripción:</B><dd>{{ $service->description }}</dd>
+                                <B>Fecha y hora de Asignación:</B>
+                                <dd>{{ fdate($insurerService->assignment, 'l, j F Y h:i a') }}</dd>
                             </td>
                             <td>
-                                <B>Fecha y hora del servicio:</B>
-                                <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <B>Inventario:</B><dd>{{ $service->inventory }}</dd>
+                                <B>Inventario:</B><dd>{{ $insurerService->inventory }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -31,31 +30,25 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Marca:</B> <dd>{{ $service->brand }}</dd>
+                                <B>Marca:</B> <dd>{{ $insurerService->brand }}</dd>
                             </td>
                             <td>
-                                <B>Tipo:</B><dd>{{ $service->type }}</dd>
+                                <B>Tipo:</B><dd>{{ $insurerService->type }}</dd>
                             </td>
                             <td>
-                                <B>Categoría:</B><dd>{{ $service->category }}</dd>
+                                <B>Categoría:</B><dd>{{ $insurerService->category }}</dd>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <B>Carga:</B><dd>{{ $service->load }}</dd>
+                                <B>Carga:</B><dd>{{ $insurerService->load }}</dd>
                             </td>
                             <td>
-                                <B>Placas:</B><dd>{{ $service->plate }}</dd>
+                                <B>Placas:</B><dd>{{ $insurerService->plate }}</dd>
                             </td>
                             <td>
-                                <B>Color:</B><dd>{{ $service->color }}</dd>
+                                <B>Color:</B><dd>{{ $insurerService->color }}</dd>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <B>Llave:</B><dd>{{ $service->key }}</dd>
-                            </td>
-
                         </tr>
                     </tbody>
                 </table>
@@ -68,13 +61,19 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Cliente:</B><dd>{{ $service->client->name }}</dd>
+                                <B>Origen:</B><dd>{{ $insurerService->origin }}</dd>
                             </td>
                             <td>
-                                <B>Origen:</B><dd>{{ $service->origin }}</dd>
+                                <B>Destino:</B><dd>{{ $insurerService->destination }}</dd>
                             </td>
                             <td>
-                                <B>Destino:</B><dd>{{ $service->destination }}</dd>
+                                <B>Usuario:</B><dd>{{ $insurerService->user }}</dd>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <B>Fecha y hora de Contacto:</B>
+                                <dd>{{ fdate($insurerService->date_contact, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -88,24 +87,27 @@
                 @include('templates.headTable')
                         <tr>
                             <td>
-                                <B>Operador:</B><dd>{{ $service->driver->name }}</dd>
+                                <B>Operador:</B><dd>{{ $insurerService->driver->name }}</dd>
                             </td>
                             <td>
-                                <B>Unidad:</B><dd>{{ $service->unit->description or '' }}</dd>
+                                <B>Unidad:</B><dd>{{ $insurerService->unit->description or '' }}</dd>
                             </td>
                             <td>
-                                <B>Regreso:</B><dd>{{ fdate($service->date_return, 'l, j F Y h:i a') }}</dd>
+                                <B>Regreso:</B><dd>{{ fdate($insurerService->date_return, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <B>Apoyo:</B><dd>{{ $service->helperr->name or 'N/A' }}</dd>
+                                <B>Apoyo:</B><dd>{{ $insurerService->helperr->name or 'N/A' }}</dd>
+                            </td>
+                            <td>
+                                <B>Termino:</B><dd>{{ fdate($insurerService->date_end, 'l, j F Y h:i a') }}</dd>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <h2 align="right">Total: ${{ $service->total }}</h2>
-                <h2 align="right">{{ $service->bill ? 'Fac. ' . $service->bill : '' }}</h2>
+                <h2 align="right">Total: ${{ $insurerService->amount }}</h2>
+                <h2 align="right">{{ $insurerService->bill ? 'Fac. ' . $insurerService->bill : '' }}</h2>
             </solid-box>
         </div>
     </div>

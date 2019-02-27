@@ -102,6 +102,18 @@ class GeneralServiceController extends Controller
         return redirect(route('client.details', ['id' => $service->client_id]));
     }
 
+    function editAmount(Service $service)
+    {
+        return view('services.generals.edit_amount', compact('service'));
+    }
+
+    function updateAmount(Request $request)
+    {
+        Service::find($request->id)->update($request->all());
+
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
+    }
+
     function dead(Service $service)
     {
         return view('services.generals.cancel', compact('service'));

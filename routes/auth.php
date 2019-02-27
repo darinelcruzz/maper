@@ -46,7 +46,9 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
     Route::post('pago/{service}', usesas($ctrl, 'change'));
     Route::get('abonos/{service}', usesas($ctrl, 'payments'));
-    Route::post('abonas/{service}', usesas($ctrl, 'payment'));
+    Route::post('abonos/{service}', usesas($ctrl, 'payment'));
+    Route::get('costo/{service}', usesas($ctrl, 'editAmount'));
+    Route::post('costo', usesas($ctrl, 'updateAmount'));
     Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
     Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
 });

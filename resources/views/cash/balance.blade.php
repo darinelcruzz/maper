@@ -20,6 +20,7 @@
 				<a href="{{ route('service.insurer.create') }}" class="btn btn-danger">Aseguradoras</a>
 				<a href="{{ route('service.general.create') }}" class="btn btn-success">General</a>
 				<a href="{{ route('service.corporation.create') }}" class="btn btn-warning">Corporaciones</a>
+				<a href="{{ route('service.show') }}" class="btn btn-info">Listado</a>
 			</span>
 		</div>
 	</div>
