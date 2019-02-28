@@ -24,8 +24,12 @@ class AdministrationController extends Controller
 
     function search()
     {
+        $services = Service::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
+        $insurerServices = InsurerService::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
+        $extras = ExtraDriver::whereNull('cut_at')->get();
+        $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
         $date = Date::now()->format('Y-m-d');
-        return view('cash.reports.search', compact('date'));
+        return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates'));
     }
 
     function cut()

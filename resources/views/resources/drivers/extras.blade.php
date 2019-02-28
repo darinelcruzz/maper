@@ -1,12 +1,13 @@
-@extends('admin')
+{{-- @extends('admin')
 
 @section('main-content')
 <div class="row">
-    <div class="col-md-12">
-        <data-table-com title="Servicios con Extras" example="example1" color="danger">
+    <div class="col-md-12"> --}}
+        <data-table title="Servicios con Extras" example="example1" color="danger">
             <template slot="header">
                 <tr>
                     <th>#</th>
+                    <th><i class="fa fa-cogs"></i></th>
                     <th>Tipo</th>
                     <th>Vehiculo</th>
                     <th>Ruta</th>
@@ -18,7 +19,23 @@
             <template slot="body">
                 @foreach ($services as $row)
                     <tr>
-                        <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                        <td>{{ $row->id }}</td>
+                        <td>
+                            <dropdown color="success" icon="cogs">
+                                <ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+                                    icon="clock-o" text="Hora de regreso/Extras">
+                                </ddi>
+                                @if ($row->service == 'General')
+                                    <ddi to="{{ route('service.general.details', ['id' => $row->id]) }}"
+                                        icon="eye" text="Detalles">
+                                    </ddi>
+                                @else
+                                    <ddi to="{{ route('service.corporation.details', ['id' => $row->id]) }}"
+                                        icon="eye" text="Detalles">
+                                    </ddi>
+                                @endif
+                            </dropdown>
+                        </td>
                         <td>{{ $row->service }}</td>
                         <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                         <td><b>Origen:</b>{{ $row->origin }} <br><b>Destino:</b> {{ $row->destination }}</td>
@@ -37,6 +54,7 @@
                     <tr>
                         {{-- a href="{{ route('insurerServices.details', ['id' => $row->id]) }}"> --}}
                         <td>{{ $row->id }}</td>
+                        <td></td>
                         <td>Aseguradora</td>
                         <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                         <td><b>Origen:</b>{{ $row->origin }} <br><b>Destino:</b> {{ $row->destination }}</td>
@@ -55,6 +73,7 @@
                     <tr>
                         @if ($row->service_id > 0)
                             <td>{{ $row->id }}</td>
+                            <td></td>
                             <td>Extra servicio</td>
                             <td>{{ $row->service->brand }} <br> {{ $row->service->type }} <br> {{ $row->service->color }}</td>
                             <td><b>Origen:</b>{{ $row->service->origin }} <br><b>Destino:</b> {{ $row->service->destination }}</td>
@@ -74,6 +93,7 @@
                         @endif
                         @if ($row->insurer_service_id > 0)
                             <td>{{ $row->id }}</td>
+                            <td></td>
                             <td>Extra Aseguradora</td>
                             <td>{{ $row->insurerService->brand }} <br> {{ $row->insurerService->type }} <br> {{ $row->insurerService->color }}</td>
                             <td><b>Origen:</b>{{ $row->insurerService->origin }} <br><b>Destino:</b> {{ $row->insurerService->destination }}</td>
@@ -94,8 +114,8 @@
                     </tr>
                 @endforeach
             </template>
-        </data-table-com>
-    </div>
-    <h3>Total = $ {{ $services->sum('extra_driver') + $services->sum('extra_helper') + $insurerServices->sum('extra_driver') + $insurerServices->sum('extra_helper') + $extras->sum('extra')  }}
-</div></h3>
-@endsection
+        </data-table>
+    {{-- </div> --}}
+    <h3 align="center">Total = $ {{ $services->sum('extra_driver') + $services->sum('extra_helper') + $insurerServices->sum('extra_driver') + $insurerServices->sum('extra_helper') + $extras->sum('extra')  }}</h3>
+{{-- </div> --}}
+{{-- @endsection --}}

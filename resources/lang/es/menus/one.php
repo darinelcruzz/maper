@@ -122,10 +122,10 @@ return [
                 'title' => 'Listado',
                 'route' => 'resources.show'
             ],
-            'extras' => [
-                'title' => 'Pagos',
-                'route' => 'resources.driver.extras'
-            ],
+            // 'extras' => [
+            //     'title' => 'Pagos',
+            //     'route' => 'resources.driver.extras'
+            // ],
             'discounts' => [
                 'title' => 'Descuentos',
                 'route' => 'discount.index'
