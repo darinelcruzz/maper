@@ -39,7 +39,7 @@
                                     {!! Field::text('type', isset($insurerService) ? $insurerService->type: null, ['tpl' => 'templates/twolines'])!!}
                                 </div>
                                 <div class="col-md-4">
-                                    {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión'],
+                                    {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión', 'Maquinaria' => 'Maquinaria'],
                                         isset($insurerService) ? $insurerService->category: null, ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
                                 </div>
                             </div>

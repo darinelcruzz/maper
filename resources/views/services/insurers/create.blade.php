@@ -53,7 +53,7 @@
                                             {!! Field::text('type', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión'],
+                                            {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Tractocamión' => 'Tractocamión', 'Maquinaria' => 'Maquinaria'],
                                              ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>

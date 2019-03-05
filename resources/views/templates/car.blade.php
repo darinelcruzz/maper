@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-4">
         {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Camion' => 'Camion',
-            'Autobus' => 'Autobus', 'Remolque' => 'Remolque', 'Tractocamión' => 'Tractocamión'],
+            'Autobus' => 'Autobus', 'Remolque' => 'Remolque', 'Tractocamión' => 'Tractocamión', 'Maquinaria' => 'Maquinaria'],
             isset($service) ? $service->category : null, ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
     </div>
 </div>
