@@ -29,7 +29,9 @@ class AdministrationController extends Controller
         $extras = ExtraDriver::whereNull('cut_at')->get();
         $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
         $date = Date::now()->format('Y-m-d');
-        return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates'));
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        $discounts = Discount::whereNull('cut_at')->get();
+        return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates', 'drivers', 'discounts'));
     }
 
     function cut()

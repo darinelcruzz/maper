@@ -11,8 +11,7 @@
 					@on-complete="enableButton"
 					@on-change="disableButton"
 					back-button-text="Anterior"
-					next-button-text="Siguiente"
-					finish-button-text="Completado">
+					next-button-text="Siguiente">
 
 					<tab-content title="Servicios" icon="fa fa-file-text-o">
 						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportServices', 'target' => '_blank']) !!}
@@ -28,15 +27,15 @@
 					<tab-content title="Extras" icon="fa fa-plus">
 						@include('resources.drivers.extras')
 					</tab-content>
-					<tab-content title="Corte" icon="fa fa-cut">
-						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportBalance', 'target' => '_blank']) !!}
+					<tab-content title="Descuentos" icon="fa fa-minus">
+						@include('resources.drivers.discounts')
+					</tab-content>
+					<tab-content title="Corte" icon="fa fa-cut" :before-change='generateFormat'>
+						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportBalance', 'target' => '_blank', 'ref' => 'generateFormat']) !!}
 							<br><h3 align="center">Formato de pago</h3><br>
 							<div class="row">
 								<div class="col-md-6  col-md-offset-3">
 									{!! Field::select('salary', ['1' => 'Si', '0' => 'No'], null, ['empty' => '¿Agregar salario?', 'tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
-								</div>
-								<div class="col-md-6  col-md-offset-3">
-									{!! Form::submit('Generar', ['class' => 'btn btn-block btn-primary']) !!}
 								</div>
 							</div>
 						{!! Form::close() !!}

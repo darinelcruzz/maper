@@ -25,6 +25,6 @@ class DiscountController extends Controller
 
         Discount::create($request->all());
 
-        return redirect(route('discount.index'));
+        return redirect(route('admin.search'));
     }
 }

@@ -56,6 +56,10 @@ const app = new Vue({
         },
         disableButton() {
             this.isFormWizardDone = false;
+        },
+        generateFormat(){
+            this.$refs.generateFormat.submit()
+            return true
         }
     },
     computed: {

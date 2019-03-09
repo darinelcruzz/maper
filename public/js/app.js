@@ -25639,6 +25639,10 @@ var app = new Vue({
         },
         disableButton: function disableButton() {
             this.isFormWizardDone = false;
+        },
+        generateFormat: function generateFormat() {
+            this.$refs.generateFormat.submit();
+            return true;
         }
     },
     computed: {

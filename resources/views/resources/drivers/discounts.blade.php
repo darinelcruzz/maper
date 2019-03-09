@@ -1,6 +1,6 @@
-@extends('admin')
+{{-- @extends('admin')
 
-@section('main-content')
+@section('main-content') --}}
     <div class="row">
         <div class="col-md-5">
             <simple-box title="Agregar descuento" color="danger">
@@ -9,7 +9,7 @@
                         {!! Field::text('reason', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::date('discounted_at', Date::now(), ['tpl' => 'templates/oneline', 'label' => 'Fecha']) !!}
                         {!! Field::number('amount', 0, ['tpl' => 'templates/oneline', 'step' => '0.01', 'min' => '0']) !!}
-                        {!! Field::select('driver_id', $drivers, null, ['tpl' => 'templates/oneline', 'empty' => 'Seleccione empleado', 'label' => 'Empleado']) 
+                        {!! Field::select('driver_id', $drivers, null, ['tpl' => 'templates/oneline', 'empty' => 'Seleccione empleado', 'label' => 'Empleado'])
                         !!}
                     </div>
 
@@ -48,4 +48,4 @@
             </simple-box>
         </div>
     </div>
-@endsection
+{{-- @endsection --}}
