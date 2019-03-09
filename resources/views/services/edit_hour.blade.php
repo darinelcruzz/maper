@@ -82,9 +82,18 @@
                                     <h4>{{ $extra->driver->nickname }}</h4>
                                 </span>
                             </div>
-                            <div class="col-md-6">
-                                {!! Field::number('extra_driver', $extra->extra, ['label' => 'Pago:', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
-                            </div>
+                            @if (auth()->user()->level == 1 || $extra->extra < 10)
+                                {!! Form::open(['method' => 'POST', 'route' => ['extraDrivers.update', $extra]])!!}
+                                    <div class="col-md-6">
+                                        {!! Field::number('extra', $extra->extra, ['label' => 'Pago:', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
+                                        {!! Form::submit('Editar', ['class' => 'btn btn-danger pull-right'])!!}
+                                    </div>
+                            {!! Form::close()!!}
+                            @else
+                                <div class="col-md-6">
+                                    {!! Field::number('extra', $extra->extra, ['label' => 'Pago:', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
+                                </div>
+                            @endif
                         </div>
                     @endforeach
                 @endif

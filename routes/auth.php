@@ -235,4 +235,5 @@ Route::group(['prefix' => 'operadoresExtras', 'as' => 'extraDrivers.'], function
     $ctrl = 'ExtraDriverController';
 
     Route::post('crear', usesas($ctrl, 'store'));
+    Route::post('editar/{extraDriver}', usesas($ctrl, 'update'));
 });

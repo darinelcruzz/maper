@@ -10,7 +10,6 @@ class ExtraDriverController extends Controller
 
     function store(Request $request)
     {
-        // dd($request->all());
         $validated = $this->validate($request, [
             'driver_id' => 'required',
             'type' => 'required',
@@ -36,7 +35,8 @@ class ExtraDriverController extends Controller
 
     function update(Request $request, ExtraDriver $extraDriver)
     {
-        //
+        $extraDriver->update($request->all());
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function destroy(ExtraDriver $extraDriver)
