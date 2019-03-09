@@ -43,33 +43,66 @@ $(function () {
       radioClass: 'iradio_flat-green'
     });
 
+    var language = {
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Registros del _START_ al _END_ de _TOTAL_ ",
+      "sInfoEmpty":      "No hay registros",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+          "sFirst":    "Primero",
+          "sLast":     "Último",
+          "sNext":     "Siguiente",
+          "sPrevious": "Anterior"
+      },
+      "oAria": {
+          "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    };
+
     //Initialize Select2 Elements
     $(".select2").select2();
 
     // Data Table With Full Features
     $("#example1").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example2").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example3").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example4").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example5").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example6").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example7").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
     $("#example8").DataTable({
-      "order":[[ 0 , "desc"]]
+      "order":[[ 0 , "desc"]],
+      language: language
     });
 });
 </script>
