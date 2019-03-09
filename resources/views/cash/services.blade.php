@@ -16,6 +16,9 @@
 										<ddi to="{{ route('service.general.details', ['id' => $row->id]) }}"
 											icon="eye" text="Detalles">
 										</ddi>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso/Extras">
+										</ddi>
 										@if ($row->status != 'pagado' && $row->status != 'cancelado' && $row->pay != 'Abonos')
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 												icon="dollar" text="Pagar">
@@ -27,9 +30,6 @@
 												icon="dollar" text="Facturar">
 											</ddi> --}}
 										@endif
-										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-											icon="clock-o" text="Hora de regreso/Extras">
-										</ddi>
 										@if (auth()->user()->level == 1)
 											<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
 				                                icon="pencil-square-o" text="Editar">
@@ -39,19 +39,16 @@
 										<ddi to="{{ route('service.corporation.details', ['id' => $row->id]) }}"
 											icon="eye" text="Detalles">
 										</ddi>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso/Extras">
+										</ddi>
 										@if ($row->status == 'liberado')
 											<ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
 				                                icon="print" text="Imprimir">
 				                            </ddi>
-											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-												icon="clock-o" text="Hora de regreso/Extras">
-											</ddi>
 										@else
 											<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
 												icon="hand-peace-o" text="Liberar">
-											</ddi>
-											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-												icon="clock-o" text="Hora de regreso/Extras">
 											</ddi>
 											@if (auth()->user()->level == 1)
 												<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
