@@ -16,7 +16,7 @@
                             </td>
                             <td>
                                 <B>Fecha y hora de Asignación:</B>
-                                <dd>{{ fdate($insurerService->assignment, 'l, j F Y h:i a') }}</dd>
+                                <dd>{{ fdate($insurerService->date_assignment, 'l, j F Y h:i a') }}</dd>
                             </td>
                             <td>
                                 <B>Inventario:</B><dd>{{ $insurerService->inventory }}</dd>

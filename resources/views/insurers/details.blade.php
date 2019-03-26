@@ -38,7 +38,7 @@
                     <template slot="body">
                         @foreach($insurer->credit_services as $row)
                             <tr>
-                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -75,7 +75,7 @@
                     <template slot="body">
                         @foreach($insurer->inserted_services as $row)
                             <tr>
-                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -109,7 +109,7 @@
                     <template slot="body">
                         @foreach($insurer->disputed_services as $row)
                             <tr>
-                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
@@ -142,7 +142,7 @@
                     <template slot="body">
                         @foreach($insurer->approved_services as $row)
                             <tr>
-                                <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                                <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
                                 <td>{{ $row->folio }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>

@@ -77,10 +77,10 @@ class InsurerServiceController extends Controller
             'amount' => 'required',
             'folio' => 'required'
         ]);
-        
+
         InsurerService::find($request->id)->update($request->all());
 
-        return redirect(route('admin.cash'));
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function updateStatus(InsurerService $insurerService, $status)
