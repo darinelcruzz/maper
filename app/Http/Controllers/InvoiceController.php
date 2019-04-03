@@ -39,7 +39,6 @@ class InvoiceController extends Controller
         $this->validate($request, [
             'folio' => 'required',
             'retention' => 'required',
-            'amount' => 'required',
             'iva' => 'required',
             'services' => 'required',
             'date' => 'required',
@@ -87,7 +86,7 @@ class InvoiceController extends Controller
         }
         $invoice->update($request->all());
 
-        return redirect(route('service.show'));
+        return redirect(route('insurer.details', $invoice->insurer_id));
     }
 
     function destroy(Invoice $invoice)

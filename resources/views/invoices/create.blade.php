@@ -8,7 +8,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-4">
-                                {!! Field::text('folio', ['ph' => '0000']) !!}
+                                {!! Field::text('folio', ['ph' => 'X000']) !!}
                             </div>
                             <div class="col-md-4">
                                 {!! Field::date('date') !!}
@@ -16,15 +16,23 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                {!! Field::number('amount', ['step' => '0.01', 'min' => '0', 'v-model' => 'total']) !!}
+                                {!! Field::number('subtotal', ['step' => '0.01', 'min' => '0', 'v-model' => 'subtotal']) !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::number('iva', ['step' => '0.01', 'min' => '0', 'v-model' => 'iva']) !!}
+                                {!! Field::number('iva', ['label' => 'I.V.A.', 'step' => '0.01', 'min' => '0', 'v-model' => 'iva']) !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Field::number('retention', 0, ['step' => '0.01', 'min' => '0']) !!}
+                                {!! Field::number('retention', ['step' => '0.01', 'min' => '0', 'v-model' => 'retention']) !!}
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-8">
+                                <h3>Total <span class="pull-right">$ @{{ total }}</span></h3>
+                                <input type="hidden" name="amount" :value="total">
+                            </div>
+                        </div>
+
                         <data-table example='1'>
                             {{ drawHeader('id', 'Asignación', 'Folio', 'Vehiculo', 'Monto') }}
                             <template slot="body">

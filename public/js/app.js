@@ -25627,7 +25627,8 @@ var app = new Vue({
         quantity: 0,
         selected: '',
         selectedDesign: '',
-        total: 0,
+        subtotal: 0,
+        retention: 0,
         iva: 0,
         isFormWizardDone: false
     },
@@ -25645,8 +25646,12 @@ var app = new Vue({
             this.$refs.generateFormat.submit();
             return true;
         }
+    },
+    computed: {
+        total: function total() {
+            return (this.subtotal - this.retention + Number(this.iva)).toFixed(2);
+        }
     }
-
 });
 
 /***/ }),
