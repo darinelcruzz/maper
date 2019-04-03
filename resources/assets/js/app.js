@@ -44,7 +44,8 @@ const app = new Vue({
         quantity: 0,
         selected: '',
         selectedDesign: '',
-        total: '',
+        total: 0,
+        iva: 0,
         isFormWizardDone: false
     },
     methods: {
@@ -61,11 +62,6 @@ const app = new Vue({
             this.$refs.generateFormat.submit()
             return true
         }
-    },
-    computed: {
-        iva() {
-            return (this.total -  this.total/1.16).toFixed(2);
-        }
-    },
+    }
 
 });

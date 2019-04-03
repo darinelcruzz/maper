@@ -40,6 +40,7 @@ class InvoiceController extends Controller
             'folio' => 'required',
             'retention' => 'required',
             'amount' => 'required',
+            'iva' => 'required',
             'services' => 'required',
             'date' => 'required',
         ]);
