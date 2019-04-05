@@ -36,35 +36,44 @@ class InvoiceController extends Controller
 
     function store(Request $request)
     {
-        $this->validate($request, [
-            'folio' => 'required',
-            'retention' => 'required',
-            'iva' => 'required',
-            'services' => 'required',
-            'date' => 'required',
-        ]);
+        // puse la validación en otra función hasta abajo
+        $this->validateRequest();
 
-        $invoice = Invoice::create($request->except('services', 'type'));
+        // VICTOR!! este if es para evitar duplicados
+        if (Invoice::where('folio', $request->folio)->first() == null) {
+            
+            $invoice = Invoice::create($request->except('services', 'type'));
 
-        if ($request->type == 'insurer') {
-            foreach ($request->services as $service_id) {
-                $service = InsurerService::find($service_id);
+            // si a un FIND le pasas un arreglo con ids -> devuelve esos ids de ese modelo
+            foreach (InsurerService::find($request->services) as $service) {
                 $service->update([
                     'bill' => $invoice->id,
                     'status' => 'facturado'
                 ]);
             }
-            return redirect(route('insurer.details', ['insurerService' => $request->insurer_id]));
-        }else {
-            foreach ($request->services as $service_id) {
-                $service = Service::find($service_id);
-                $service->update([
-                    'bill' => $invoice->id,
-                    'status' => 'facturado'
-                ]);
-            }
-            return redirect(route('client.details', ['Service' => $request->client_id]));
         }
+
+        return redirect(route('insurer.details', $request->insurer_id));
+    }
+
+    // en vez de usar tanto if mejor dos funciones distintas para facturas aseguradoras y facturas cliente no?
+    function persist(Request $request)
+    {
+        $this->validateRequest();
+
+        if (Invoice::where('folio', $request->folio)->first() == null) {
+
+            $invoice = Invoice::create($request->except('services', 'type'));
+            
+            foreach (Service::find($request->services) as $service) {
+                $service->update([
+                    'bill' => $invoice->id,
+                    'status' => 'facturado'
+                ]);
+            }
+        }
+            
+        return redirect(route('client.details', $request->client_id));
     }
 
     function show(Invoice $invoice)
@@ -92,5 +101,17 @@ class InvoiceController extends Controller
     function destroy(Invoice $invoice)
     {
         //
+    }
+
+    function validateRequest()
+    {
+        return request()->validate([
+            'folio' => 'required',
+            'retention' => 'required',
+            'subtotal' => 'required',
+            'iva' => 'required',
+            'services' => 'required',
+            'date' => 'required',
+        ]);
     }
 }
