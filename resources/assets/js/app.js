@@ -44,7 +44,9 @@ const app = new Vue({
         quantity: 0,
         selected: '',
         selectedDesign: '',
-        total: '',
+        subtotal: 0,
+        retention: 0,
+        iva: 0,
         isFormWizardDone: false
     },
     methods: {
@@ -63,9 +65,8 @@ const app = new Vue({
         }
     },
     computed: {
-        iva() {
-            return (this.total -  this.total/1.16).toFixed(2);
+        total() {
+            return (this.subtotal - this.retention + Number(this.iva)).toFixed(2);
         }
-    },
-
+    }
 });
