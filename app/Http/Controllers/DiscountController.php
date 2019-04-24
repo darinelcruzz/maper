@@ -10,8 +10,15 @@ class DiscountController extends Controller
     function index()
     {
         $drivers = Driver::pluck('name', 'id')->toArray();
-        $discounts = Discount::all();
+        $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
         return view('resources.drivers.discounts', compact('drivers', 'discounts'));
+    }
+
+    function payments()
+    {
+        $drivers = Driver::pluck('name', 'id')->toArray();
+        $payments = Discount::whereNull('cut_at')->where('type', 1)->get();
+        return view('resources.drivers.payments', compact('drivers', 'payments'));
     }
 
     function store(Request $request)

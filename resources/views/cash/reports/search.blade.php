@@ -30,6 +30,9 @@
 					<tab-content title="Descuentos" icon="fa fa-minus">
 						@include('resources.drivers.discounts')
 					</tab-content>
+					<tab-content title="Bonificaciones" icon="fa fa-plus">
+						@include('resources.drivers.payments')
+					</tab-content>
 					<tab-content title="Corte" icon="fa fa-cut" :before-change='generateFormat'>
 						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportBalance', 'target' => '_blank', 'ref' => 'generateFormat']) !!}
 							<br><h3 align="center">Formato de pago</h3><br>

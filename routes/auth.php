@@ -223,10 +223,11 @@ Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
 });
 
 // Descuentos
-Route::group(['prefix' => 'descuentos', 'as' => 'discount.'], function () {
+Route::group(['prefix' => 'extras', 'as' => 'discount.'], function () {
     $ctrl = 'DiscountController';
 
-    Route::get('/', usesas($ctrl, 'index'));
+    Route::get('descuentos', usesas($ctrl, 'index'));
+    Route::get('bonificaciones', usesas($ctrl, 'payments'));
     Route::post('crear', usesas($ctrl, 'store'));
 });
 
