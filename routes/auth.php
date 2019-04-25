@@ -228,9 +228,11 @@ Route::group(['prefix' => 'usuarios', 'as' => 'user.'], function () {
 Route::group(['prefix' => 'extras', 'as' => 'discount.'], function () {
     $ctrl = 'DiscountController';
 
-    Route::get('descuentos', usesas($ctrl, 'index'));
-    Route::get('bonificaciones', usesas($ctrl, 'payments'));
+    Route::get('/', usesas($ctrl, 'index'));
+    Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
+    Route::get('editar/{discount}', usesas($ctrl, 'edit'));
+    Route::post('editar', usesas($ctrl, 'update'));
 });
 
 // OperadoreExtras

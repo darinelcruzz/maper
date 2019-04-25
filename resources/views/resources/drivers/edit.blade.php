@@ -16,12 +16,12 @@
                             ['tpl' => 'templates/oneline', 'empty' => 'Seleccione tipo de empleado'])
                         !!}
                     </div>
-                    <!-- /.box-body -->
+
                     <div class="box-footer">
                         <input type="hidden" name="id" value="{{ $driver->id }}">
                         {!! Form::submit('Guardar', ['class' => 'btn btn-danger btn-block']) !!}
                     </div>
-                    <!-- /.box-footer -->
+                    
                 {!! Form::close() !!}
             </simple-box>
         </div>

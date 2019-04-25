@@ -127,8 +127,8 @@ return [
             //     'route' => 'resources.driver.extras'
             // ],
             'discounts' => [
-                'title' => 'Descuentos',
-                'route' => 'discount.index'
+                'title' => 'Descuentos/bonos',
+                'route' => 'discount.create'
             ],
         ]
     ],

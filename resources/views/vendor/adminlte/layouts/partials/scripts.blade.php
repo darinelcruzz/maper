@@ -104,5 +104,10 @@ $(function () {
       "order":[[ 0 , "desc"]],
       language: language
     });
+    $(".no-pagination").DataTable({
+      "order":[[ 0 , "desc"]],
+      language: language,
+      paging: false
+    });
 });
 </script>

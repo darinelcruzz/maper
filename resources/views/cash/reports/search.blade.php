@@ -27,11 +27,16 @@
 					<tab-content title="Extras" icon="fa fa-plus">
 						@include('resources.drivers.extras')
 					</tab-content>
-					<tab-content title="Descuentos" icon="fa fa-minus">
-						@include('resources.drivers.discounts')
-					</tab-content>
-					<tab-content title="Bonificaciones" icon="fa fa-plus">
-						@include('resources.drivers.payments')
+					<tab-content title="Descuentos/Bonos" icon="fa fa-money">
+						@include('resources.drivers.discounts.index')
+						<div class="row">
+							<div class="col-md-6  col-md-offset-3">
+								<a href="{{ route('discount.create') }}" class="btn btn-block btn-danger" target="_blank">
+									Agregar
+								</a>
+							</div>
+						</div>
+						<br><br>
 					</tab-content>
 					<tab-content title="Corte" icon="fa fa-cut" :before-change='generateFormat'>
 						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportBalance', 'target' => '_blank', 'ref' => 'generateFormat']) !!}

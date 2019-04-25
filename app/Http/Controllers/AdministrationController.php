@@ -30,8 +30,9 @@ class AdministrationController extends Controller
         $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
         $date = Date::now()->format('Y-m-d');
         $drivers = Driver::pluck('name', 'id')->toArray();
-        $discounts = Discount::whereNull('cut_at')->get();
-        return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates', 'drivers', 'discounts'));
+        $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
+        $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
+        return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates', 'drivers', 'discounts', 'bonuses'));
     }
 
     function cut()
@@ -39,7 +40,8 @@ class AdministrationController extends Controller
         $services = Service::all();
         $insurer_services = InsurerService::all();
         $extras = ExtraDriver::whereNull('cut_at')->get();
-        $discounts = Discount::whereNull('cut_at')->get();
+        $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
+        $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
         $payments = Payment::whereNull('cut_at')->get();
         $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
         $date = fdate(date('Y-m-d'), 'd-M-y', 'Y-m-d');
@@ -68,6 +70,10 @@ class AdministrationController extends Controller
             $discount->update(['cut_at' => date('Y-m-d\TH:i')]);
         }
 
+        foreach ($bonuses as $bonus) {
+            $bonus->update(['cut_at' => date('Y-m-d\TH:i')]);
+        }
+
         foreach ($payments as $payment) {
             $payment->update(['cut_at' => date('Y-m-d\TH:i')]);
         }
@@ -84,7 +90,8 @@ class AdministrationController extends Controller
         $variables = $this->getMethodsToReport();
 
         $drivers = Driver::all();
-        $discounts = Discount::where('cut_at', null)->get();
+        $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
+        $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
         $totalExtras = [];
         $paySalary = $request->salary;
 
@@ -124,7 +131,7 @@ class AdministrationController extends Controller
             $totalExtras[$driver->id] = array_sum($extraHours);
         }
 
-        return view('cash.reports.reportBalance', compact('totalExtras', 'drivers', 'discounts', 'paySalary'))->with($variables);
+        return view('cash.reports.reportBalance', compact('totalExtras', 'drivers', 'discounts', 'bonuses', 'paySalary'))->with($variables);
     }
 
     function reportServices(Request $request)

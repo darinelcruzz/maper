@@ -17,7 +17,9 @@
                     </div>
 
                     <div class="box-footer">
-                        {!! Form::submit('Agregar', ['class' => 'btn btn-danger btn-block']) !!}
+                        @if ($request->user()->level == 1)
+                            {!! Form::submit('Agregar', ['class' => 'btn btn-danger btn-block']) !!}
+                        @endif
                     </div>
                 {!! Form::close() !!}
             </simple-box>

@@ -47,7 +47,8 @@
                 $salary = $paySalary ? $driver->base_salary : 0;
                 $extras = $totalExtras[$driver->id];
                 $discount = $discounts->where('driver_id', $driver->id)->sum('amount');
-                $expenses += $salary + $extras- $discount;
+                $bonus = $bonuses->where('driver_id', $driver->id)->sum('amount');
+                $expenses += $salary + $extras- $discount + $bonus;
             @endphp
         @endforeach
 
@@ -123,6 +124,7 @@
                             <th>Salario</th>
                             <th>Extras</th>
                             <th>Descuentos</th>
+                            <th>Bonificaciones</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -131,6 +133,7 @@
                             $tSalary = 0;
                             $tExtras = 0;
                             $tDiscount = 0;
+                            $tBonus = 0;
                             $tPay = 0;
                         @endphp
                         @foreach ($drivers as $driver)
@@ -138,19 +141,22 @@
                                 $salary = $paySalary ? $driver->base_salary : 0;
                                 $extras = $totalExtras[$driver->id];
                                 $discount = $discounts->where('driver_id', $driver->id)->sum('amount');
-                                $pay = $salary + $extras- $discount;
+                                $bonus = $bonuses->where('driver_id', $driver->id)->sum('amount');
+                                $pay = $salary + $extras- $discount + $bonus;
                             @endphp
                             <tr>
                                 <td>{{ $driver->name }}</td>
                                 <td>{{ fnumber($salary) }}</td>
                                 <td>{{ fnumber($extras) }}</td>
                                 <td>{{ fnumber($discount) }}</td>
+                                <td>{{ fnumber($bonus) }}</td>
                                 <td>{{ fnumber($pay) }}</td>
                             </tr>
                             @php
                                 $tSalary += $salary;
                                 $tExtras += $extras ;
                                 $tDiscount += $discount;
+                                $tBonus += $bonus;
                                 $tPay += $pay;
                             @endphp
                         @endforeach
@@ -161,6 +167,7 @@
                             <td><b>{{ fnumber($tSalary) }}</b></td>
                             <td><b>{{ fnumber($tExtras) }}</b></td>
                             <td><b>{{ fnumber($tDiscount) }}</b></td>
+                            <td><b>{{ fnumber($tBonus) }}</b></td>
                             <td><b>{{ fnumber($tPay) }}</b></td>
                         </tr>
                     </tfoot>
