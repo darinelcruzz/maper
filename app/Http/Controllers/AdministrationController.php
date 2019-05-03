@@ -8,6 +8,22 @@ use App\{Service, InsurerService, Driver, Discount, Invoice, Payment, ExtraDrive
 
 class AdministrationController extends Controller
 {
+
+    function released()
+    {
+        $today = date('Y-m-d');
+
+        return view('services.corporations.search', compact('today'));
+    }
+
+    function reportReleased(Request $request)
+    {
+        $releaseds = Service::fromDateToDate($request->start, $request->end, 'Liberado', 'status', 'date_out');
+        // $releaseds = Service::where('service', '!=', 'General')->where('date_out', '!=', NULL)->get();
+
+        return view('services.corporations.released', compact('releaseds'));
+    }
+
     function cash(Request $request)
     {
         if (session('redirected')) {

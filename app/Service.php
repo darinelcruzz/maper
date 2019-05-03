@@ -74,9 +74,18 @@ class Service extends Model
     function getDays($start, $end)
     {
         $entry = new Date(strtotime($this->$start));
+        if (is_string($end)) {
+            $end = new Date(strtotime($this->$end));
+        }
         $interval = $entry->diff($end);
         $interval = $interval->format('%a');
-        return $interval;
+
+        if($end->format('His') < $entry->format('His')) {
+            $penalty = $interval + 2;
+        } else {
+            $penalty = $interval + 1;
+        }
+        return $penalty;
     }
 
     function getTotalAttribute()
@@ -102,11 +111,11 @@ class Service extends Model
                         ->where($colWhere,$condition,$data)->get();
     }
 
-    function scopeFromDateToDate($query, $startDate, $endDate, $driver, $type)
+    function scopeFromDateToDate($query, $startDate, $endDate, $data, $colWhere, $column = 'date_service')
     {
-        return $query->whereBetween('date_service', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
-                        ->where($type, $driver->id)
-                        ->where('extra_driver', '>', 0)->get();
+        return $query->whereBetween($column, [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
+                        // ->where('extra_driver', '>', 0)
+                        ->where($colWhere, $data)->get();
     }
 
 }

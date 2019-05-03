@@ -27,6 +27,8 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
     Route::get('reporte/corte', usesas($ctrl, 'cut'));
     Route::post('reporte/corte', usesas($ctrl, 'reportBalance'));
     Route::post('reporte/servicios', usesas($ctrl, 'reportServices'));
+    Route::get('reporte/liberados', usesas($ctrl, 'released'));
+    Route::post('reporte/liberados', usesas($ctrl, 'reportReleased'));
 });
 
 // Servicios
@@ -200,7 +202,7 @@ Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], f
     Route::get('editar/{driver}', usesas($ctrl, 'edit'))->middleware('two');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('extras', usesas($ctrl, 'extras'));
-    Route::post('reporte', usesas($ctrl, 'format'));
+    // Route::post('reporte', usesas($ctrl, 'format'));
 });
 
 // Unidades

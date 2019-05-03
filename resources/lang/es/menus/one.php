@@ -51,6 +51,10 @@ return [
                 'title' => 'Corte',
                 'route' => 'admin.search'
             ],
+            'released' => [
+                'title' => 'Liberados',
+                'route' => 'admin.released'
+            ],
         ]
     ],
 

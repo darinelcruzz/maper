@@ -39,13 +39,7 @@ class CorporationServiceController extends Controller
         if ($service->status != 'liberado') {
             $entry = new Date(strtotime($service->date_service));
             $today = Date::now();
-            $interval = $service->getDays('date_service', $today);
-
-            if(Date::now()->format('His') < $entry->format('His')) {
-                $penalty = $interval + 2;
-            } else {
-                $penalty = $interval + 1;
-            }
+            $penalty = $service->getDays('date_service', $today);
 
             if($service->category == 'Moto'){
                 $cost = Price::find(1)->moto * $penalty;
