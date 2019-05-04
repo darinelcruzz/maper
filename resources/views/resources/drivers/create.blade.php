@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="box-footer">
-                        @if ($request->user()->level == 1)
+                        @if (auth()->user()->level == 1)
                             {!! Form::submit('Agregar', ['class' => 'btn btn-danger btn-block']) !!}
                         @endif
                     </div>

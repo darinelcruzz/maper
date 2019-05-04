@@ -62,6 +62,7 @@
                             <th>Costo <br> diario </th>
                             <th>Total <br> pensión </th>
                             <th>Total</th>
+                            <th>Descuento</th>
                             <th>Total <br> Pagado </th>
 
                         </tr>
@@ -80,6 +81,7 @@
                                 <td>{{ $released->pension/$released->getDays('date_service', 'date_out') }}</td>
                                 <td>{{ fnumber($released->pension) }}</td>
                                 <td>{{ fnumber($released->total + $released->discount) }}</td>
+                                <td>{{ fnumber($released->discount) }} <br> {{ $released->reason }}</td>
                                 <td>{{ fnumber($released->total) }}</td>
                             </tr>
                         @endforeach
