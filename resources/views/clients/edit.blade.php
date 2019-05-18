@@ -2,32 +2,58 @@
 
 @section('main-content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <simple-box title="Editar cliente" color="warning">
-
-                {!! Form::open(['method' => 'POST', 'route' => 'client.change', 'class' => 'form-horizontal']) !!}
-
+        <div class="col-md-7">
+            <solid-box title="Modificar datos del cliente" color="warning">
+                {!! Form::open(['method' => 'POST', 'route' => ['client.update', $client]]) !!}
                     <div class="box-body">
-                        {!! Field::text('name', $client->name, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('city', $client->city, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('phone', $client->phone, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::number('days', $client->days, ['tpl' => 'templates/oneline']) !!}
-                        <hr>
-                        {!! Field::text('address', $client->address, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::number('cp', $client->cp, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('rfc', $client->rfc, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::email('email', $client->email, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('contact', $client->contact, ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('cellphone', $client->cellphone, ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('name', $client->name, ['tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
+                        {!! Field::text('city', $client->city, ['tpl' => 'templates/withicon'], ['icon' => 'map']) !!}
+                            
+                        <div class="row">
+                            <div class="col-md-8">
+                                {!! Field::text('phone', $client->phone, ['tpl' => 'templates/withicon'], ['icon' => 'phone']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::number('days', $client->days, ['tpl' => 'templates/withicon'], ['icon' => 'sun-o']) !!}
+                            </div>
+                        </div>
+                        
+                        {!! Field::text('social', $client->social, ['tpl' => 'templates/withicon'], ['icon' => 'industry']) !!}
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                {!! Field::text('address', $client->address, ['tpl' => 'templates/withicon'], ['icon' => 'home']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::number('cp', $client->cp, ['label' => 'C.P.', 'tpl' => 'templates/withicon'], ['icon' => 'map-signs']) !!}
+                            </div>
+                        </div>                                           
+                                            
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Field::email('email', $client->email, ['tpl' => 'templates/withicon'], ['icon' => 'at']) !!}
+                            </div>
+                            <div class="col-md-6">
+                                {!! Field::text('rfc', $client->rfc, ['tpl' => 'templates/withicon'], ['icon' => 'barcode']) !!}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Field::text('contact', $client->contact, ['tpl' => 'templates/withicon'], ['icon' => 'comment']) !!}
+                            </div>
+                            <div class="col-md-6">
+                                {!! Field::text('cellphone', $client->cellphone, ['tpl' => 'templates/withicon'], ['icon' => 'mobile-phone']) !!}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="box-footer">
-                        <input type="hidden" name="id" value="{{ $client->id }}">
-                        {!! Form::submit('Agregar', ['class' => 'btn btn-warning btn-block']) !!}
+                        {!! Form::submit('Guardar cambios', ['class' => 'btn btn-warning btn-block']) !!}
                     </div>
 
-                    {!! Form::close() !!}
-                </simple-box>
-            </div>
+                {!! Form::close() !!}
+            </solid-box>
         </div>
-    @endsection
+    </div>
+@endsection

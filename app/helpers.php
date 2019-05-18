@@ -31,6 +31,15 @@ function drawHeader(...$titles)
     echo "</tr></template>";
 }
 
+function drawTableHead(...$titles)
+{
+    echo "<thead><tr>";
+    foreach ($titles as $title) {
+        echo "<th>" . ucfirst($title) . "</th>";
+    }
+    echo "</tr></thead>";
+}
+
 function expire()
 {
     $services = App\Service::where('status', 'credito')->get();

@@ -38,16 +38,6 @@ class GasController extends Controller
         return redirect(route('gas.create'));
     }
 
-    function edit(Gas $gas)
-    {
-        //
-    }
-
-    function update(Request $request, Gas $gas)
-    {
-        //
-    }
-
     function report()
     {
         $pendings = Gas::where('status', 'pendiente')->get()->groupBy('type');

@@ -9,6 +9,12 @@ use App\Service;
 
 class ClientController extends Controller
 {
+    function index()
+    {
+        $clients = Client::all();
+        return view('clients.index', compact('clients'));
+    }
+
     function create()
     {
         return view('clients.create');
@@ -31,19 +37,12 @@ class ClientController extends Controller
         return redirect(route('client.show'));
     }
 
-    function show()
+    function edit(Client $client)
     {
-        $clients = Client::all();
-        return view('clients.show', compact('clients'));
-    }
-
-    function edit($id)
-    {
-        $client = Client::find($id);
         return view('clients.edit', compact('client'));
     }
 
-    function change(Request $request)
+    function update(Request $request, Client $client)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -52,9 +51,9 @@ class ClientController extends Controller
             'days' => 'required',
         ]);
 
-        Client::find($request->id)->update($request->all());
+        $client->update($request->all());
 
-        return $this->show();
+        return redirect(route('client.index'));
     }
 
     function details(Client $client)
@@ -76,9 +75,9 @@ class ClientController extends Controller
         }
     }
 
-    function destroy($id)
+    function destroy(Client $client)
     {
-        Client::destroy($id);
+        $client->delete();
 
         return back();
     }

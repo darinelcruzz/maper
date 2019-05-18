@@ -238,6 +238,8 @@ return [
         'date_pay'              => 'fecha pago',
         'salary'                => 'salario',
         'method'                => 'metodo',
+        'cellphone'             => 'celular',
+        'social'                => 'razón social',
     ],
 
 ];

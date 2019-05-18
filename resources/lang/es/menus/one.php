@@ -53,7 +53,7 @@ return [
             ],
             'released' => [
                 'title' => 'Liberados',
-                'route' => 'admin.released'
+                'route' => 'admin.showReleased'
             ],
         ]
     ],
@@ -83,7 +83,7 @@ return [
             ],
             'list' => [
                 'title' => 'Listado',
-                'route' => 'client.show'
+                'route' => 'client.index'
             ],
         ]
     ],

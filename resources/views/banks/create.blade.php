@@ -3,36 +3,8 @@
 @section('main-content')
 
 <div class="row">
-    <div class="col-md-12 col-lg-4">
-        <div class="col-md-6 col-lg-12">
-            <simple-box title="Gastos en Banco" color="danger">
-                {!! Form::open(['method' => 'POST', 'route' => 'bank.store']) !!}
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                {!! Field::text('description') !!}
-                            </div>
-                            <div class="col-md-6">
-                                {!! Field::number('amount', ['min' => '0', 'step' => '.01']) !!}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                {!! Field::text('folio') !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
-                        <input type="hidden" name="type" value="cargo">
-                        <input type="hidden" name="method" value="b">
-                        {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
-                    </div>
-                {!! Form::close() !!}
-            </simple-box>
-        </div>
-    </div>
-    <div class="col-md-12 col-lg-8">
+
+    <div class="col-md-9">
         <data-table col="col-md-12" title="Ingresos" example="example1" color="success" button>
             {{ drawHeader('ID', 'Folio', 'Cliente', 'Fecha', 'Sub', 'Iva', 'Ret', 'Total') }}
             @php
@@ -41,40 +13,40 @@
                 $iva = 0;
             @endphp
             <template slot="body">
-                @foreach($invoices as $row)
+                @foreach($invoices as $invoice)
                     @php
-                        $totalAllI += $row->amount;
+                        $totalAllI += $invoice->amount;
                     @endphp
                     <tr>
-                        <td>{{ $row->id }}</td>
-                        <td><a href="{{ route('invoice.show', ['id' => $row->id]) }}"> {{ $row->folio }} </a></td>
-                        <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
-                        <td>{{ fdate($row->date_pay, 'd/m/Y', 'Y-m-d') }}</td>
-                        <td>{{ fnumber($row->amount - $row->iva) }}</td>
-                        <td>{{ fnumber($row->iva) }}</td>
-                        <td>{{ fnumber($row->retention) }}</td>
-                        <td>{{ fnumber($row->amount) }}</td>
+                        <td>{{ $invoice->id }}</td>
+                        <td><a href="{{ route('invoice.show', ['id' => $invoice->id]) }}"> {{ $invoice->folio }} </a></td>
+                        <td><a href="{{ route('insurer.details', ['id' => $invoice->insurer->id]) }}"> {{ $invoice->insurer->name }}</a></td>
+                        <td>{{ fdate($invoice->date_pay, 'd/m/Y', 'Y-m-d') }}</td>
+                        <td>{{ fnumber($invoice->amount - $invoice->iva) }}</td>
+                        <td>{{ fnumber($invoice->iva) }}</td>
+                        <td>{{ fnumber($invoice->retention) }}</td>
+                        <td>{{ fnumber($invoice->amount) }}</td>
                   </tr>
                 @endforeach
-                @foreach($ingreses as $row)
+                @foreach($ingreses as $ingress)
                     @php
-                        $totalAllI += $row->amount;
+                        $totalAllI += $ingress->amount;
                     @endphp
                     <tr>
-                        <td>{{ $row->id }}</td>
+                        <td>{{ $ingress->id }}</td>
                         <td>N/A</td>
-                        <td>{{ $row->description }}</td>
-                        <td>{{ fdate($row->date, 'd/m/Y') }}</td>
+                        <td>{{ $ingress->description }}</td>
+                        <td>{{ fdate($ingress->date, 'd/m/Y') }}</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>{{ fnumber($row->amount) }}</td>
+                        <td>{{ fnumber($ingress->amount) }}</td>
                   </tr>
                 @endforeach
             </template>
             <template slot="footer">
                 <tr>
-                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                    <td colspan="6"></td>
                     <td><b>Total:</b></td>
                     <td>$ {{ number_format($totalAllI,2) }}</td>
                 </tr>
@@ -82,46 +54,74 @@
         </data-table>
 
         <data-table col="col-md-12" title="Egresos" example="example2" color="danger" button>
-            {{ drawHeader('ID', 'Descripción', 'Tipo', 'Fecha', 'Sub', 'Iva', 'Total', '') }}
+            {{ drawHeader('ID', 'Descripción', 'Tipo', 'Fecha', 'Sub', 'Iva', 'Total') }}
             @php
                 $totalAllE = 0;
                 $sub = 0;
                 $iva = 0;
             @endphp
             <template slot="body">
-                @foreach($expenses as $row)
+                @foreach($expenses as $expense)
                     @php
-                        $totalAllE += $row->amount;
-                        $sub = $row->amount/1.16;
+                        $totalAllE += $expense->amount;
+                        $sub = $expense->amount/1.16;
                         $iva = $sub * 0.16;
                     @endphp
                     <tr>
-                        <td>{{ $row->id }}</td>
-                        <td>{{ $row->description }}</td>
-                        <td>{{ $row->type }}</td>
-                        <td>{{ $row->getShortDate('date') }}</td>
+                        <td>{{ $expense->id }}</td>
+                        <td>
+                            {{ $expense->description }}
+                            <span class="pull-right">
+                                <a href="{{ route('bank.edit', $expense) }}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </span>
+                        </td>
+                        <td>{{ $expense->type }}</td>
+                        <td>{{ $expense->getShortDate('date') }}</td>
                         <td>$ {{ number_format($sub, 2) }}</td>
                         <td>$ {{ number_format($iva, 2) }}</td>
-                        <td>$ {{ number_format($row->amount, 2) }}</td>
-                        <td>
-                            <a href="{{ route('bank.edit', ['id' => $row->id]) }}">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                        </td>
+                        <td>$ {{ number_format($expense->amount, 2) }}</td>
 
                   </tr>
                 @endforeach
             </template>
             <template slot="footer">
                 <tr>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td colspan="5"></td>
                     <td><b>Total:</b></td>
                     <td>$ {{ number_format($totalAllE, 2) }}</td>
                 </tr>
             </template>
         </data-table>
     </div>
-    <div class="col-md-12 col-lg-4">
+
+    <div class="col-md-3">
+        <simple-box title="Gastos en Banco" color="danger">
+            {!! Form::open(['method' => 'POST', 'route' => 'bank.store']) !!}
+                
+                {!! Field::text('description') !!}
+                {!! Field::number('amount', ['min' => '0', 'step' => '.01']) !!}
+
+                
+                <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
+                <input type="hidden" name="type" value="cargo">
+                <input type="hidden" name="method" value="b">
+                
+                <div class="row">
+                    <div class="col-md-7">
+                        {!! Field::text('folio') !!}
+                    </div>
+                    <div class="col-md-5">
+                        <label>&nbsp;</label><br>
+                        {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
+                    </div>
+                </div>
+                
+
+            {!! Form::close() !!}
+        </simple-box>
+
         <div class="small-box bg-green">
             <div class="inner">
                 <p>Saldo en Cuenta</p>

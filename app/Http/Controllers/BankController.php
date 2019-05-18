@@ -31,16 +31,14 @@ class BankController extends Controller
 
     function edit(Expense $expense)
     {
-        $expenses =Expense::where('method','b')->get();
-        return view('banks.edit', compact('expense', 'expenses'));
+        return view('banks.edit', compact('expense'));
     }
 
-    function change(Request $request)
+    function change(Request $request, Expense $expense)
     {
-        $this->validate($request, []);
-        Expense::find($request->id)->update($request->all());
+        $expense->update($request->all());
 
-        return $this->create();
+        return redirect(route('bank.create'));
     }
 
     function update(Request $request)

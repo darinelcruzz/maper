@@ -2,22 +2,50 @@
 
 @section('main-content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <simple-box title="Nuevo cliente" color="danger">
-                {!! Form::open(['method' => 'POST', 'route' => 'client.store', 'class' => 'form-horizontal']) !!}
+        <div class="col-md-7">
+            <solid-box title="Nuevo cliente" color="danger">
+                {!! Form::open(['method' => 'POST', 'route' => 'client.store']) !!}
                     <div class="box-body">
-                        {!! Field::text('name', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('city', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('phone', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::number('days', ['tpl' => 'templates/oneline']) !!}
-                        <hr>
-                        {!! Field::text('social', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('address', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::number('cp', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('rfc', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::email('email', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('contact', ['tpl' => 'templates/oneline']) !!}
-                        {!! Field::text('cellphone', ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('name', ['tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
+                        {!! Field::text('city', ['tpl' => 'templates/withicon'], ['icon' => 'map']) !!}
+                            
+                        <div class="row">
+                            <div class="col-md-8">
+                                {!! Field::text('phone', ['tpl' => 'templates/withicon'], ['icon' => 'phone']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::number('days', ['tpl' => 'templates/withicon'], ['icon' => 'sun-o']) !!}
+                            </div>
+                        </div>
+                        
+                        {!! Field::text('social', ['tpl' => 'templates/withicon'], ['icon' => 'industry']) !!}
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                {!! Field::text('address', ['tpl' => 'templates/withicon'], ['icon' => 'home']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Field::number('cp', ['label' => 'C.P.', 'tpl' => 'templates/withicon'], ['icon' => 'map-signs']) !!}
+                            </div>
+                        </div>                                           
+                                            
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Field::email('email', ['tpl' => 'templates/withicon'], ['icon' => 'at']) !!}
+                            </div>
+                            <div class="col-md-6">
+                                {!! Field::text('rfc', ['tpl' => 'templates/withicon'], ['icon' => 'barcode']) !!}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Field::text('contact', ['tpl' => 'templates/withicon'], ['icon' => 'comment']) !!}
+                            </div>
+                            <div class="col-md-6">
+                                {!! Field::text('cellphone', ['tpl' => 'templates/withicon'], ['icon' => 'mobile-phone']) !!}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="box-footer">
@@ -25,7 +53,7 @@
                     </div>
 
                 {!! Form::close() !!}
-            </simple-box>
+            </solid-box>
         </div>
     </div>
 @endsection

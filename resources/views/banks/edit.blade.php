@@ -9,7 +9,7 @@
                     <h3 class="box-title">Editar gastos en banco</h3>
                 </div>
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'bank.change']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => ['bank.change', $expense]]) !!}
 
                 <div class="box-body">
 

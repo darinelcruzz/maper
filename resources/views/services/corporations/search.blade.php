@@ -8,14 +8,14 @@
     <div class="row">
         <div class="col-md-6">
             <solid-box title="Buscar servicios liberados" color="danger">
-                {!! Form::open(['method' => 'POST', 'route' => 'admin.reportReleased']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'admin.showReleased']) !!}
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Field::date('start', $today, ['tpl' => 'templates/twolines']) !!}
+                                {!! Field::date('start', date('Y-m-d'), ['tpl' => 'templates/twolines']) !!}
                            </div>
                             <div class="col-md-6">
-                                {!! Field::date('end', $today, ['tpl' => 'templates/twolines']) !!}
+                                {!! Field::date('end', date('Y-m-d'), ['tpl' => 'templates/twolines']) !!}
                            </div>
                         </div>
                         <div class="box-footer">

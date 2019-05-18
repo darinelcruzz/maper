@@ -11,23 +11,24 @@ class GeneralServiceController extends Controller
 {
     function create()
     {
-        $prices = Price::all();
-        return view('services.generals.create', compact('prices'));
+        return view('services.generals.create');
     }
 
     function store(GeneralRequest $request)
     {
         $service = Service::create($request->except(['routes']));
-        if(isset($_POST['pagado']))
-        {
-            return redirect(route('service.general.pay', ['id' => $service->id]));
-        }
-        else if(isset($_POST['credito']))
-        {
-            Service::find($service->id)->update([
+
+        if (request()->has('pagado')) {
+
+            return redirect(route('service.general.pay', $service));
+
+        } elseif (request()->has('credito')) {
+
+            $service->update([
                 'status' => 'credito',
                 'pay' => 'Credito',
             ]);
+
             return redirect(route('admin.cash'));
         }
 
@@ -35,8 +36,7 @@ class GeneralServiceController extends Controller
 
     function edit(Service $service)
     {
-        $prices = Price::all();
-        return view('services.generals.edit', compact('service', 'prices'));
+        return view('services.generals.edit', compact('service'));
     }
 
     function update(GeneralRequest $request, Service $service)
@@ -49,11 +49,7 @@ class GeneralServiceController extends Controller
     {
         $cost = 0;
 
-        if ($service->status != 'pagado') {
-            $out = date('Y-m-d\TH:i');
-        }else{
-            $out = $service->date_out;
-        }
+        $out = $service->status != 'pagado' ? date('Y-m-d\TH:i') : $service->date_out;
 
         return view('services.generals.pay', compact('service','cost', 'out'));
     }
@@ -61,17 +57,15 @@ class GeneralServiceController extends Controller
     function change(GeneralRequest $request, Service $service)
     {
         if ($request->payment > 0) {
-            $service->update(['status' => 'abonos',
-                                'pay' => 'Abonos']);
-            Payment::create([
-                'service_id' => $service->id,
-                'amount' => $request->payment,
-                'method' => $request->pay,
-            ]);
-        }
-        else {
-            $service->update($request->all());
-            $service->update(['status' => 'pagado']);
+
+            $service->update(['status' => 'abonos', 'pay' => 'Abonos']);
+
+            $service->payments()->create(['amount' => request('payment'), 'method' => request('pay')]);
+
+        } else {
+
+            $service->update($request->all() + ['status' => 'pagado']);
+
         }
 
         return redirect(route('admin.cash'))->with('redirected', session('date'));
@@ -84,22 +78,18 @@ class GeneralServiceController extends Controller
 
     function payments(Service $service)
     {
-        $payments = Payment::where('service_id', $service->id)->get();
-        return view('services.generals.payments', compact('service', 'payments'));
+        return view('services.generals.payments', compact('service'));
     }
 
     function payment(GeneralRequest $request, Service $service)
     {
-        Payment::create([
-            'service_id' => $service->id,
-            'amount' => $request->payment,
-            'method' => $request->pay,
-        ]);
+        $service->payments()->create(['amount' => request('payment'), 'method' => request('pay')]);
+
         if ($service->debt == 0) {
             $service->update(['status' => 'liquidado', 'date_out' => date('Y-m-d\TH:i')]);
         }
 
-        return redirect(route('client.details', ['id' => $service->client_id]));
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function editAmount(Service $service)
@@ -107,9 +97,9 @@ class GeneralServiceController extends Controller
         return view('services.generals.edit_amount', compact('service'));
     }
 
-    function updateAmount(Request $request)
+    function updateAmount(Request $request, Service $service)
     {
-        Service::find($request->id)->update($request->all());
+        $service->update($request->all());
 
         return redirect(route('admin.cash'))->with('redirected', session('date'));
     }

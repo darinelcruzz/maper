@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6">
             <solid-box color="danger" title="Editar costo ID={{ $service->id }}">
-                {!! Form::open(['method' => 'POST', 'route' => 'service.general.updateAmount'])!!}
+                {!! Form::open(['method' => 'POST', 'route' => ['service.general.updateAmount', $service]])!!}
                     <div class="row">
                         <div class="col-md-6">
                             <B>Cliente:</B> <dd>{{ $service->client->name }}</dd>

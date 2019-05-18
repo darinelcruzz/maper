@@ -9,30 +9,28 @@ use App\{Service, InsurerService, Driver, Discount, Invoice, Payment, ExtraDrive
 class AdministrationController extends Controller
 {
 
-    function released()
+    function searchReleased()
     {
-        $today = date('Y-m-d');
-
-        return view('services.corporations.search', compact('today'));
+        return view('services.corporations.search');
     }
 
-    function reportReleased(Request $request)
+    function showReleased(Request $request)
     {
-        $releaseds = Service::fromDateToDate($request->start, $request->end, 'Liberado', 'status', 'date_out');
-        // $releaseds = Service::where('service', '!=', 'General')->where('date_out', '!=', NULL)->get();
+        $released = Service::fromDateToDate($request->start, $request->end, 'Liberado', 'status', 'date_out');
 
-        return view('services.corporations.released', compact('releaseds'));
+        return view('services.corporations.released', compact('released'));
     }
 
     function cash(Request $request)
     {
         if (session('redirected')) {
             $date = session('redirected');
-        }else {
+        } else {
             $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
             $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
             session()->put('date', $date);
         }
+        
         $variables = $this->getMethods($date);
 
         return view('cash.balance', compact('date', 'fdate'))->with($variables);
@@ -44,7 +42,7 @@ class AdministrationController extends Controller
         $insurerServices = InsurerService::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
         $extras = ExtraDriver::whereNull('cut_at')->get();
         $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
-        $date = Date::now()->format('Y-m-d');
+
         $drivers = Driver::pluck('name', 'id')->toArray();
         $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
         $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
@@ -53,50 +51,21 @@ class AdministrationController extends Controller
 
     function cut()
     {
-        $services = Service::all();
-        $insurer_services = InsurerService::all();
-        $extras = ExtraDriver::whereNull('cut_at')->get();
-        $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
-        $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
-        $payments = Payment::whereNull('cut_at')->get();
-        $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
-        $date = fdate(date('Y-m-d'), 'd-M-y', 'Y-m-d');
+        Service::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
 
-        foreach ($services as $service) {
-            if ($service->cut_at == NULL) {
-                $service->update(['cut_at' => date('Y-m-d\TH:i')]);
-            }if ($service->cut2_at == NULL && !empty($service->date_out)) {
-                $service->update(['cut2_at' => date('Y-m-d\TH:i')]);
-            }
-        }
+        Service::whereNull('cut2_at')->where('date_out', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
+        
+        InsurerService::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
+        
+        InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
 
-        foreach ($insurer_services as $service) {
-            if ($service->cut_at == NULL) {
-                $service->update(['cut_at' => date('Y-m-d\TH:i')]);
-            }if ($service->cut2_at == NULL && !empty($service->date_pay)) {
-                $service->update(['cut2_at' => date('Y-m-d\TH:i')]);
-            }
-        }
+        ExtraDriver::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
 
-        foreach ($extras as $extra) {
-            $extra->update(['cut_at' => date('Y-m-d\TH:i')]);
-        }
+        Discount::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
 
-        foreach ($discounts as $discount) {
-            $discount->update(['cut_at' => date('Y-m-d\TH:i')]);
-        }
+        Payment::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
 
-        foreach ($bonuses as $bonus) {
-            $bonus->update(['cut_at' => date('Y-m-d\TH:i')]);
-        }
-
-        foreach ($payments as $payment) {
-            $payment->update(['cut_at' => date('Y-m-d\TH:i')]);
-        }
-
-        foreach ($invoices as $invoice) {
-            $invoice->update(['cut_at' => date('Y-m-d\TH:i')]);
-        }
+        Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
 
         return redirect(route('admin.search'));
     }

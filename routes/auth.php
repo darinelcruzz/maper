@@ -27,8 +27,8 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
     Route::get('reporte/corte', usesas($ctrl, 'cut'));
     Route::post('reporte/corte', usesas($ctrl, 'reportBalance'));
     Route::post('reporte/servicios', usesas($ctrl, 'reportServices'));
-    Route::get('reporte/liberados', usesas($ctrl, 'released'));
-    Route::post('reporte/liberados', usesas($ctrl, 'reportReleased'));
+    Route::get('reporte/liberados', usesas($ctrl, 'searchReleased'));
+    Route::post('reporte/liberados', usesas($ctrl, 'showReleased'));
 });
 
 // Servicios
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::get('abonos/{service}', usesas($ctrl, 'payments'));
     Route::post('abonos/{service}', usesas($ctrl, 'payment'));
     Route::get('costo/{service}', usesas($ctrl, 'editAmount'));
-    Route::post('costo', usesas($ctrl, 'updateAmount'));
+    Route::post('costo/{service}', usesas($ctrl, 'updateAmount'));
     Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
     Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
 });
@@ -94,13 +94,13 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
 Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {
     $ctrl = 'ClientController';
 
-    Route::get('/', usesas($ctrl, 'show'));
+    Route::get('/', usesas($ctrl, 'index'));
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
-    Route::get('editar/{id}', usesas($ctrl, 'edit'))->middleware('one');
-    Route::post('editar', usesas($ctrl, 'change'));
+    Route::get('editar/{client}', usesas($ctrl, 'edit'))->middleware('one');
+    Route::post('editar/{client}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{client}', usesas($ctrl, 'details'));
-    Route::get('eliminar/{id}', usesas($ctrl, "deleteClient", 'delete'));
+    Route::get('eliminar/{client}', usesas($ctrl, 'destroy'));
 });
 
 // Proveedores
@@ -169,7 +169,7 @@ Route::group(['prefix' => 'bancos', 'as' => 'bank.'], function () {
     Route::get('crear', usesas($ctrl, 'create'));
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
-    Route::post('editar', usesas($ctrl, 'change'));
+    Route::post('editar/{expense}', usesas($ctrl, 'change'));
     Route::post('actualizar', usesas($ctrl, 'update'));
     Route::post('formato', usesas($ctrl, 'format'));
 });

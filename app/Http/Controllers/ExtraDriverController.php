@@ -23,24 +23,9 @@ class ExtraDriverController extends Controller
         return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
-    function show(ExtraDriver $extraDriver)
-    {
-        //
-    }
-
-    function edit(ExtraDriver $extraDriver)
-    {
-        //
-    }
-
     function update(Request $request, ExtraDriver $extraDriver)
     {
         $extraDriver->update($request->all());
         return redirect(route('admin.cash'))->with('redirected', session('date'));
-    }
-
-    function destroy(ExtraDriver $extraDriver)
-    {
-        //
     }
 }

@@ -11,8 +11,7 @@ class CorporationServiceController extends Controller
 {
     function create()
     {
-        $prices = Price::all();
-        return view('services.corporations.create', compact('prices'));
+        return view('services.corporations.create');
     }
 
     function store(CorporationsRequest $request)
@@ -24,8 +23,7 @@ class CorporationServiceController extends Controller
 
     function edit(Service $service)
     {
-        $prices = Price::all();
-        return view('services.corporations.edit', compact('service', 'prices'));
+        return view('services.corporations.edit', compact('service'));
     }
 
     function update(CorporationsRequest $request, Service $service)
@@ -51,7 +49,7 @@ class CorporationServiceController extends Controller
                 $cost = Price::find(1)->ton10 * $penalty;
             }
             $out = date('Y-m-d\TH:i');
-        }else{
+        } else {
             $cost = $service->pension;
             $end = new Date(strtotime($service->date_out));
             $penalty = $service->getDays('date_service', $end) + 1;

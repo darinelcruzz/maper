@@ -41,7 +41,7 @@
                         <th>Monto</th>
                     </thead>
                     <tbody>
-                        @foreach ($payments as $payment)
+                        @foreach ($service->payments as $payment)
                             <tr>
                                 <td>{{ $payment->id }}</td>
                                 <td>{{ fdate($payment->created_at, 'd/m/y') }}</td>
@@ -53,7 +53,7 @@
                     <tfoot>
                         <td></td><td></td>
                         <td><b>Total</b></td>
-                        <td>{{ fnumber($payments->sum('amount')) }}</td>
+                        <td>{{ fnumber($service->payments->sum('amount')) }}</td>
                     </tfoot>
                 </table>
                 <hr>

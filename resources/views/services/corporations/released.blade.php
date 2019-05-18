@@ -68,21 +68,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($releaseds as $released)
+                        @foreach ($released as $service)
                             <tr>
-                                <td>{{ fdate($released->date_service, 'd-M-y') }}</td>
-                                <td>{{ fdate($released->date_out, 'd-M-y') }}</td>
-                                <td>{{ $released->folio }}</td>
-                                <td>{{ $released->inventory }}</td>
-                                <td>{{ $released->brand . ' ' . $released->type }}</td>
-                                <td>{{ fnumber($released->amount) }}</td>
-                                <td>{{ fnumber($released->maneuver) }}</td>
-                                <td>{{ $released->getDays('date_service', 'date_out') }}</td>
-                                <td>{{ $released->pension/$released->getDays('date_service', 'date_out') }}</td>
-                                <td>{{ fnumber($released->pension) }}</td>
-                                <td>{{ fnumber($released->total + $released->discount) }}</td>
-                                <td>{{ fnumber($released->discount) }} <br> {{ $released->reason }}</td>
-                                <td>{{ fnumber($released->total) }}</td>
+                                <td>{{ fdate($service->date_service, 'd-M-y') }}</td>
+                                <td>{{ fdate($service->date_out, 'd-M-y') }}</td>
+                                <td>{{ $service->folio }}</td>
+                                <td>{{ $service->inventory }}</td>
+                                <td>{{ $service->brand . ' ' . $service->type }}</td>
+                                <td>{{ fnumber($service->amount) }}</td>
+                                <td>{{ fnumber($service->maneuver) }}</td>
+                                <td>{{ $service->getDays('date_service', 'date_out') }}</td>
+                                <td>{{ $service->pension/$service->getDays('date_service', 'date_out') }}</td>
+                                <td>{{ fnumber($service->pension) }}</td>
+                                <td>{{ fnumber($service->total + $service->discount) }}</td>
+                                <td>{{ fnumber($service->discount) }} <br> {{ $service->reason }}</td>
+                                <td>{{ fnumber($service->total) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
