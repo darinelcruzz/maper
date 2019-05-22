@@ -4,14 +4,21 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <simple-box title="Pagar factura # {{ $invoice->folio }}" color="danger">
-                {!! Form::open(['method' => 'POST', 'route' => 'invoice.update']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => ['invoice.confirm', $invoice]]) !!}
                     <div class="box-body">
                         @include('templates.headTable')
                                 <tr>
-                                    <td>
-                                        <B>Aseguradora:</B>
-                                        <dd>{{ $invoice->insurer->name }}</dd>
-                                    </td>
+                                    @if ($invoice->client)
+                                        <td>
+                                            <B>Cliente</B>
+                                            <dd>{{ $invoice->client->name }}</dd>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <B>Aseguradora</B>
+                                            <dd>{{ $invoice->insurer->name }}</dd>
+                                        </td>
+                                    @endif
                                     <td></td>
                                     <td>
                                         <B>Fecha Factura:</B>

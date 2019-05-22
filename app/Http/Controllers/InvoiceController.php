@@ -25,26 +25,18 @@ class InvoiceController extends Controller
 
     function make(Client $client)
     {
-        $services = Service::where('client_id', $client->id)->where('status', 'vencida')->orWhere('status', 'credito')->get();
+        $services = Service::where('client_id', $client->id)->Where('status', 'credito')->get();
         return view('invoices.make', compact('services', 'client'));
-    }
-
-    function pay(Invoice $invoice)
-    {
-        return view('invoices.pay', compact('invoice'));
     }
 
     function store(Request $request)
     {
-        // puse la validación en otra función hasta abajo
         $this->validateRequest();
 
-        // VICTOR!! este if es para evitar duplicados
         if (Invoice::where('folio', $request->folio)->first() == null) {
             
             $invoice = Invoice::create($request->except('services', 'type'));
 
-            // si a un FIND le pasas un arreglo con ids -> devuelve esos ids de ese modelo
             foreach (InsurerService::find($request->services) as $service) {
                 $service->update([
                     'bill' => $invoice->id,
@@ -56,7 +48,6 @@ class InvoiceController extends Controller
         return redirect(route('insurer.details', $request->insurer_id));
     }
 
-    // en vez de usar tanto if mejor dos funciones distintas para facturas aseguradoras y facturas cliente no?
     function persist(Request $request)
     {
         $this->validateRequest();
@@ -78,8 +69,15 @@ class InvoiceController extends Controller
 
     function show(Invoice $invoice)
     {
-        $services = InsurerService::where('bill', $invoice->id)->get();
-        return view('invoices.details', compact('invoice', 'services'));
+        if ($invoice->client) {
+            $services = $invoice->services;
+            $model = 'client';
+        } else {
+            $services = $invoice->insurerServices;
+            $model = 'insurer';
+        }
+
+        return view('invoices.details', compact('invoice', 'services', 'model'));
     }
 
     function edit(Invoice $invoice)
@@ -98,9 +96,26 @@ class InvoiceController extends Controller
         return redirect(route('insurer.details', $invoice->insurer_id));
     }
 
-    function destroy(Invoice $invoice)
+    function pay(Invoice $invoice)
     {
-        //
+        return view('invoices.pay', compact('invoice'));
+    }
+
+    function confirm(Request $request, Invoice $invoice)
+    {
+        $relationship = $invoice->client ? 'services': 'insurerServices';
+
+        foreach ($invoice->{$relationship} as $service) {
+            $service->update(['status' => 'pagado']);
+        }
+
+        $invoice->update($request->all());
+
+        if ($invoice->insurer) {
+            return redirect(route('insurer.details', $invoice->insurer_id));
+        }
+
+        return redirect(route('client.details', $invoice->client_id));
     }
 
     function validateRequest()

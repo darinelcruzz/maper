@@ -26,6 +26,11 @@ class Client extends Model
         return $this->hasMany(Service::class, 'client_id');
     }
 
+    function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     function getPaidServicesAttribute()
     {
         return $this->services->where('status', 'pagado');

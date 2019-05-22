@@ -84,7 +84,17 @@
 						<td>Factura</td>
 						<td></td>
 						<td></td>
-						<td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
+						<td>
+							@if ($row->client)
+								<a href="{{ route('client.details', $row->client) }}">
+									{{ $row->client->name }}
+								</a>
+							@else
+								<a href="{{ route('insurer.details', $row->insurer) }}">
+									{{ $row->insurer->name }}
+								</a>
+							@endif
+						</td>
 						<td>{{ $row->folio }}</td>
                         <td></td>
                         <td>{!! $row->statusLabel !!}</td>

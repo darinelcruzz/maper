@@ -59,7 +59,6 @@ class ClientController extends Controller
     function details(Client $client)
     {
         $today = Date::now();
-        $this->expire($client->days);
         return view('clients.details', compact('client', 'today'));
     }
 

@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        <data-table-com title="Factura {{ $invoice->folio }} - {{ $invoice->insurer->name }}" example="example1" color="primary">
+        <data-table-com title="Factura {{ $invoice->folio }} - {{ $invoice->{$model}->name }}" example="example1" color="primary">
             {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Monto')}}
             <template slot="body">
                 @foreach($services as $row)

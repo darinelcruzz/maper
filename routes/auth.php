@@ -182,12 +182,15 @@ Route::group(['prefix' => 'facturas', 'as' => 'invoice.'], function () {
     Route::get('crear/{insurer}', usesas($ctrl, 'create'));
     Route::get('hacer/{client}', usesas($ctrl, 'make'));
     Route::post('crear', usesas($ctrl, 'store'));
-    // otro ruta para agregar facturas de clientes NO aseguradoras
     Route::post('agregar', usesas($ctrl, 'persist'));
+
     Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar', usesas($ctrl, 'update'));
-    Route::get('detalles/{invoice}', usesas($ctrl, 'show'));
+
     Route::get('pagar/{invoice}', usesas($ctrl, 'pay'));
+    Route::post('pagar/{invoice}', usesas($ctrl, 'confirm'));
+
+    Route::get('/{invoice}', usesas($ctrl, 'show'));
 });
 
 // Recursos

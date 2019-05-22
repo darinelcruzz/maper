@@ -21,7 +21,7 @@
 										</ddi>
 										@if ($row->status != 'pagado' && $row->status != 'cancelado' && $row->pay != 'Abonos')
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
-												icon="dollar" text="Pagar">
+												icon="dollar" text="Pagar sin factura">
 											</ddi>
 											<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
 												icon="times" text="Muerto">

@@ -16,6 +16,11 @@ class Invoice extends Model
         return $this->hasMany(InsurerService::class, 'bill');
     }
 
+    function services()
+    {
+        return $this->hasMany(Service::class, 'bill');
+    }
+
     function insurer()
     {
         return $this->belongsTo(Insurer::class);
