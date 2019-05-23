@@ -7,7 +7,7 @@
         <data-table-com title="Factura {{ $invoice->folio }} - {{ $invoice->{$model}->name }}" example="example1" color="primary">
             {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Monto')}}
             <template slot="body">
-                @foreach($invoice->services as $row)
+                @foreach($services as $row)
                     <tr>
                         <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                         <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>

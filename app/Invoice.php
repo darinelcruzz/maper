@@ -11,7 +11,7 @@ class Invoice extends Model
         'date', 'date_pay', 'method', 'status', 'cut_at'
     ];
 
-    function insureServices()
+    function insurerServices()
     {
         return $this->hasMany(InsurerService::class, 'bill');
     }
