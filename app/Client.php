@@ -46,6 +46,11 @@ class Client extends Model
         return $this->services->where('status', 'credito');
     }
 
+    function getLimboServicesAttribute()
+    {
+        return $this->services->where('status', 'pendiente');
+    }
+
     function getPaymentServicesAttribute()
     {
         return $this->services->where('status', 'abonos');

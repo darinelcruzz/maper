@@ -53,6 +53,7 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::post('costo/{service}', usesas($ctrl, 'updateAmount'));
     Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
     Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
+    Route::get('actualizar/{service}/{status}', usesas($ctrl, 'updateStatus'));
 });
 
 // Corporaciones

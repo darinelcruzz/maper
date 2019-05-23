@@ -30,7 +30,35 @@
             </div>
         </div>
 
-        <data-table-com title="Pendientes ({{ count($client->pending_services) + count($client->payment_services) }})" example="example1" color="warning">
+        @if(count($client->limbo_services))
+          <data-table-com title="Sin completar ({{ count($client->limbo_services) }})" example="example1" color="danger">
+              {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Fecha', 'Vehículo', 'Dias', 'Monto')}}
+              <template slot="body">
+                  @foreach($client->limbo_services as $service)
+                    <tr>
+                        <td><a href="{{ route('service.general.details', $service) }}"> {{ $service->id }} </a></td>
+                        <td>
+                            <dropdown color="primary" icon="cogs">
+                                    <ddi to="{{ route('service.general.pay', $service)}}"
+                                        icon="usd" text="Pagar">
+                                    </ddi>
+
+                                    <ddi to="{{ route('service.general.updateStatus', [$service, 'credito'])}}"
+                                      icon="arrow-down" text="Enviar a crédito">
+                                    </ddi>
+                            </dropdown>
+                        </td>
+                        <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                        <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                        <td>{{ $service->getDays('date_service', $today) }}</td>
+                        <td>{{ fnumber($service->total) }}</td>
+                    </tr>
+                  @endforeach
+              </template>
+          </data-table-com>
+        @endif
+
+        <data-table-com title="Pendientes ({{ count($client->pending_services) + count($client->payment_services) }})" example="example2" color="warning">
             {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Fecha', 'Vehículo', 'Dias', 'Monto')}}
             <template slot="body">
                 @foreach($client->pending_services as $row)
@@ -80,7 +108,7 @@
 
     <div class="col-md-6">
         
-        <data-table-com title="Facturadas ({{ count($client->invoices) }})" example="example2" color="info">
+        <data-table-com title="Facturadas ({{ count($client->invoices) }})" example="example3" color="info">
             {{ drawHeader('factura', '<i class="fa fa-cogs"></i>', 'fecha', 'ret', 'I.V.A.', 'monto')}}
             <template slot="body">
                 @foreach($client->invoices as $invoice)
@@ -107,7 +135,7 @@
             </template>
         </data-table-com>
 
-        <data-table-com title="Pagadas ({{ count($client->paid_services) + count($client->soldout_services)}})" example="example3" color="success">
+        <data-table-com title="Pagadas ({{ count($client->paid_services) + count($client->soldout_services)}})" example="example4" color="success">
             {{ drawHeader('ID', 'Fecha Pago', 'Vehículo', 'Método', 'Monto')}}
             <template slot="body">
                 @foreach($client->paid_services as $row)

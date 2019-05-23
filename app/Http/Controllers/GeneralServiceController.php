@@ -76,6 +76,15 @@ class GeneralServiceController extends Controller
         return view('services.generals.details', compact('service'));
     }
 
+    function updateStatus(Service $service, $status)
+    {
+        $service->update([
+            'status' => $status
+        ]);
+
+        return back();
+    }
+
     function payments(Service $service)
     {
         return view('services.generals.payments', compact('service'));
