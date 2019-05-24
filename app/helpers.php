@@ -42,15 +42,7 @@ function drawTableHead(...$titles)
 
 function expire()
 {
-    $services = App\Service::where('status', 'credito')->get();
-
-    foreach ($services as $service) {
-        $today = Date::now();
-        $interval = $service->getDays('date_service', $today);
-        if ($interval > $service->client->days ) {
-            $service->update(['status' => 'vencida']);
-        }
-    }
+    return;
 }
 
 function daycount($day, $start, $end, $counter)
