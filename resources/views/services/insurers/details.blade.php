@@ -107,7 +107,7 @@
                     </tbody>
                 </table>
                 <h2 align="right">Total: ${{ $insurerService->amount }}</h2>
-                <h2 align="right">{{ $insurerService->bill ? 'Fac. ' . $insurerService->bill : '' }}</h2>
+                <h2 align="right">{{ $insurerService->bill ? 'Fac. ' . $insurerService->invoice->folio : '' }}</h2>
             </solid-box>
         </div>
     </div>

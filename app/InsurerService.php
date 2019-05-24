@@ -13,6 +13,11 @@ class InsurerService extends Model
         return $this->belongsTo(Insurer::class);
     }
 
+    function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'bill');
+    }
+
     function driver()
     {
         return $this->belongsTo(Driver::class);
