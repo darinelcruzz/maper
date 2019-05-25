@@ -7,68 +7,66 @@
 					$sum = 0;
 				@endphp
 					@foreach ($payed as $row)
-						@if ($row->pay != 'Abonos')
-							<tr>
-								<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-								<td>
-									<dropdown color="success" icon="cogs">
-										@if ($row->service == 'General')
-											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-												icon="clock-o" text="Hora de regreso/Extras">
+						<tr>
+							<td><a href="{{ route($row->service == 'General' ? 'service.general.details' : 'service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+							<td>
+								<dropdown color="success" icon="cogs">
+									@if ($row->service == 'General')
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso/Extras">
+										</ddi>
+										@if (auth()->user()->level == 1)
+											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
+												icon="edit" text="Editar Pago">
 											</ddi>
-											@if (auth()->user()->level == 1)
-												<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
-													icon="edit" text="Editar Pago">
-												</ddi>
-												<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
-					                                icon="pencil-square-o" text="Editar">
-					                            </ddi>
-											@endif
-										@else
-											<li><a target="_blank" href="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}">
-												<i class="fa fa-print"></i>Carta resposiva
-											</a></li>
-											<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
-												icon="clock-o" text="Hora de regreso/Extras">
-											</ddi>
-											@if (auth()->user()->level == 1)
-												<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
-													icon="edit" text="Editar Pago">
-												</ddi>
-												<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
-													icon="pencil-square-o" text="Editar">
-												</ddi>
-											@endif
+											<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
+				                                icon="pencil-square-o" text="Editar">
+				                            </ddi>
 										@endif
-									</dropdown>
-								</td>
-								<td>{{ $row->description }}</td>
-								<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-								<td>
-									{{ $row->origin }} - {{ $row->destination }}
-									@if ($row->extra_driver == 5)
-										<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
-									@elseif ($row->extra_driver > 10)
-										<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+									@else
+										<li><a target="_blank" href="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}">
+											<i class="fa fa-print"></i>Carta resposiva
+										</a></li>
+										<ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+											icon="clock-o" text="Hora de regreso/Extras">
+										</ddi>
+										@if (auth()->user()->level == 1)
+											<ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+												icon="edit" text="Editar Pago">
+											</ddi>
+											<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+												icon="pencil-square-o" text="Editar">
+											</ddi>
+										@endif
 									@endif
-								</td>
-								@if ($row->service == 'General')
-									<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
-								@else
-									<td>{{ $row->service }}</td>
+								</dropdown>
+							</td>
+							<td>{{ $row->description }}</td>
+							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
+							<td>
+								{{ $row->origin }} - {{ $row->destination }}
+								@if ($row->extra_driver == 5)
+									<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
+								@elseif ($row->extra_driver > 10)
+									<br> <span class="label label-warning">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 								@endif
-								<td></td>
-								<td>{{ $row->inventory }}</td>
-								<td>
-									{!! $row->statusLabel !!}
-								</td>
-								<td>{{ $row->pay }}</td>
-								<td>{{ fnumber($row->total) }}</td>
-							</tr>
-							@php
-								$sum += $row->total;
-							@endphp
-						@endif
+							</td>
+							@if ($row->service == 'General')
+								<td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
+							@else
+								<td>{{ $row->service }}</td>
+							@endif
+							<td></td>
+							<td>{{ $row->inventory }}</td>
+							<td>
+								{!! $row->statusLabel !!}
+							</td>
+							<td>{{ $row->pay }}</td>
+							<td>{{ fnumber($row->total) }}</td>
+						</tr>
+						@php
+							$sum += $row->total;
+						@endphp
 					@endforeach
 
 				@foreach ($invoicesPayed as $row)

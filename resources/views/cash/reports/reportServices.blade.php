@@ -45,7 +45,7 @@
         					<th>ID</th>
         					<th>Inv</th>
         					<th>Servicio</th>
-        					<th>Fecha</th>
+        					<th>Fecha Serv</th>
         					<th>Vehiculo</th>
                             <th>Extras</th>
         					<th>Monto</th>
@@ -117,9 +117,11 @@
         					<th>ID</th>
         					<th>Inv</th>
         					<th>Servicio</th>
-        					<th>Fecha</th>
+        					<th>Fecha Serv</th>
+        					<th>Fecha Pago</th>
         					<th>Vehiculo</th>
                             <th>Extras</th>
+                            <th>Método</th>
         					<th>Monto</th>
         				</tr>
         			</thead>
@@ -138,12 +140,14 @@
         							<td>{{ $row->service }}</td>
         						@endif
         						<td>{{ fdate($row->date_service, 'D, d-M-y') }}</td>
+                                <td>{{ fdate($row->date_out, 'D, d-M-y') }}</td>
         						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
                                     @if ($row->extra_driver > 0)
                                         <i class="fas fa-check"></i>
                                     @endif
                                 </td>
+                                <td>{{ $row->pay }}</td>
         						<td>{{ fnumber($row->total) }}</td>
         					</tr>
         					@php
@@ -156,12 +160,14 @@
         						<td>{{ $row->inventory }}</td>
         						<td>{{ $row->insurer->name }}</td>
         						<td>{{ fdate($row->date_assignment, 'D, d-M-y') }}</td>
+        						<td>{{ fdate($row->date_pay, 'D, d-M-y') }}</td>
         						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
                                     @if ($row->extra_driver > 0)
                                         <i class="fas fa-check"></i>
                                     @endif
                                 </td>
+                                <td>{{ $row->pay }}</td>
         						<td>{{ fnumber($row->total) }}</td>
         					</tr>
         					@php
@@ -179,9 +185,11 @@
                                         {{ $row->client->name }}
                                     @endif
                                 </td>
-        						<td>{{ fdate($row->date, 'd-M-y', 'Y-m-d') }}</td>
         						<td></td>
+                                <td>{{ fdate($row->date, 'D, d-M-y', 'Y-m-d') }}</td>
                                 <td></td>
+                                <td></td>
+                                <td>{{ $row->method }}</td>
         						<td>{{ fnumber($row->amount) }}</td>
         					</tr>
         					@php
@@ -199,9 +207,11 @@
             							{{ $row->service->service }}
             						@endif
                                 </td>
-        						<td>{{ fdate($row->created_at, 'd-M-y') }}</td>
+                                <td></td>
+        						<td>{{ fdate($row->created_at, 'D, d-M-y') }}</td>
         						<td>{{ $row->service->brand }} - {{ $row->service->type }} - {{ $row->service->color }}</td>
                                 <td></td>
+                                <td>{{ $row->method }}</td>
         						<td>{{ fnumber($row->amount) }}</td>
         					</tr>
         					@php
@@ -211,7 +221,7 @@
         			</body>
         			<tfooter>
         				<tr>
-        					<td colspan="5"></td>
+        					<td colspan="6"></td>
         					<td><b>Total:</b></td>
         					<td><b>{{ fnumber($sum) }}</b></td>
         				</tr>

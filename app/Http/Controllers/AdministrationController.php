@@ -30,7 +30,7 @@ class AdministrationController extends Controller
             $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
             session()->put('date', $date);
         }
-        
+
         $variables = $this->getMethods($date);
 
         return view('cash.balance', compact('date', 'fdate'))->with($variables);
@@ -54,9 +54,9 @@ class AdministrationController extends Controller
         Service::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
 
         Service::whereNull('cut2_at')->where('date_out', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
-        
+
         InsurerService::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
-        
+
         InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
 
         ExtraDriver::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
@@ -124,8 +124,8 @@ class AdministrationController extends Controller
         $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
         $fdate= 'Corte al ' . fdate($start, 'D, d/M/Y', 'Y-m-d');
 
-        $services = Service::whereNull('cut_at')->whereNull('date_out')->get();
-        $services2 = Service::whereNull('cut2_at')->where('date_out', '!=', null)->get();
+        $services = Service::whereNull('cut_at')->whereNull('date_out')->where('pay', '!=','abonos')->get();
+        $services2 = Service::whereNull('cut2_at')->where('date_out', '!=', null)->where('pay', '!=', 'abonos')->get();
         $insurerServices = InsurerService::whereNull('cut_at')->whereNull('date_pay')->get();
         $insurerServices2 = InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->get();
         $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
@@ -137,7 +137,7 @@ class AdministrationController extends Controller
     function getMethods($start, $end = NULL)
     {
         $services = Service::untilDate($start, 'date_service', $end);
-        $payed = Service::untilDate($start, 'date_out', $end);
+        $payed = Service::untilDate($start, 'date_out', $end)->where('pay', '!=', 'Abonos');
         $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
         $invoicesPayed = Invoice::untilDate($start, 'date_pay', $end);
         $payments = Payment::untilDate($start, 'created_at', $end);
