@@ -221,7 +221,7 @@
         			</body>
         			<tfooter>
         				<tr>
-        					<td colspan="6"></td>
+        					<td colspan="7"></td>
         					<td><b>Total:</b></td>
         					<td><b>{{ fnumber($sum) }}</b></td>
         				</tr>
