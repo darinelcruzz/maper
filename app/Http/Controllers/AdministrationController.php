@@ -51,21 +51,22 @@ class AdministrationController extends Controller
 
     function cut()
     {
-        Service::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
+        $date = date('Y-m-d');
+        Service::whereNull('cut_at')->update(['cut_at' => $date]);
 
-        Service::whereNull('cut2_at')->where('date_out', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
+        Service::whereNull('cut2_at')->where('date_out', '!=', null)->update(['cut2_at' => $date]);
 
-        InsurerService::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
+        InsurerService::whereNull('cut_at')->update(['cut_at' => $date]);
 
-        InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
+        InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->update(['cut2_at' => $date]);
 
-        ExtraDriver::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
+        ExtraDriver::whereNull('cut_at')->update(['cut_at' => $date]);
 
-        Discount::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
+        Discount::whereNull('cut_at')->update(['cut_at' => $date]);
 
-        Payment::whereNull('cut_at')->update(['cut_at' => date('Y-m-d\TH:i')]);
+        Payment::whereNull('cut_at')->update(['cut_at' => $date]);
 
-        Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->update(['cut_at' => date('Y-m-d\TH:i')]);
+        Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->update(['cut_at' => $date]);
 
         return redirect(route('admin.search'));
     }
