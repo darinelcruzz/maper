@@ -11,7 +11,7 @@ function usesas($ctrl, $fun, $as = null)
 function fdate($original_date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:s')
 {
     if ($original_date == null) {
-        return '1992';
+        return 'No existe';
     }
     $date = Date::createFromFormat($original_format, $original_date);
     return $date->format($format);

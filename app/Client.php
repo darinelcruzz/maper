@@ -33,7 +33,9 @@ class Client extends Model
 
     function getPaidServicesAttribute()
     {
-        return $this->services->where('status', 'pagado');
+        return $this->services
+            ->where('status', 'pagado')
+            ->where('bill', null);
     }
 
     function getExpiredServicesAttribute()
@@ -64,6 +66,16 @@ class Client extends Model
     function getPendingAttribute()
     {
         return count($this->pending_services) + count($this->expired_services) + count($this->payment_services);
+    }
+
+    function getUnpaidInvoicesAttribute()
+    {
+        return $this->invoices->where('status', '!=', 'pagada');
+    }
+
+    function getPaidInvoicesAttribute()
+    {
+        return $this->invoices->where('status', 'pagada');
     }
 
     function serviceTotal($status, $formatted = false) {
