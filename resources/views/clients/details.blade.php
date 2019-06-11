@@ -161,7 +161,7 @@
                 <tr>
                     <th colspan="4"></th>
                     <th>Total</th>
-                    <th>{{ fnumber($client->invoices->sum('amount')) }}</th>
+                    <th>{{ fnumber($client->unpaid_invoices->sum('amount')) }}</th>
                 </tr>
             </template>
         </data-table-com>
