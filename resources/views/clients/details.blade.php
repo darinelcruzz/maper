@@ -51,7 +51,13 @@
                         <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
                         <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
                         <td>{{ $service->getDays('date_service', $today) }}</td>
-                        <td>{{ fnumber($service->total) }}</td>
+                        <td>
+                            @if ($service->total == 0)
+                                <a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+                            @else
+                                {{ fnumber($service->total) }}
+                            @endif
+                        </td>
                     </tr>
                   @endforeach
               </template>
@@ -61,20 +67,26 @@
         <data-table-com title="Pendientes ({{ count($client->pending_services) + count($client->payment_services) }})" example="example2" color="danger">
             {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Fecha', 'Vehículo', 'Dias', 'Monto')}}
             <template slot="body">
-                @foreach($client->pending_services as $row)
+                @foreach($client->pending_services as $service)
                   <tr>
-                      <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                      <td><a href="{{ route('service.general.details', ['id' => $service->id]) }}"> {{ $service->id }} </a></td>
                       <td>
                           <dropdown color="danger" icon="cogs">
-                                  <ddi to="{{ route('service.general.pay', ['service' => $row->id])}}"
+                                  <ddi to="{{ route('service.general.pay', ['service' => $service->id])}}"
                                       icon="usd" text="Pagar">
                                   </ddi>
                           </dropdown>
                       </td>
-                      <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                      <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                      <td>{{ $row->getDays('date_service', $today) }}</td>
-                      <td>{{ fnumber($row->total) }}</td>
+                      <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                      <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                      <td>{{ $service->getDays('date_service', $today) }}</td>
+                      <td>
+                          @if ($service->total == 0)
+                              <a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+                          @else
+                              {{ fnumber($service->total) }}
+                          @endif
+                      </td>
                   </tr>
                 @endforeach
                 @foreach($client->payment_services as $row)
@@ -134,11 +146,11 @@
             </template>
         </data-table-com>
 
-        
+
     </div>
 
     <div class="col-md-6">
-        
+
         <data-table-com title="Facturas pendientes ({{ count($client->unpaid_invoices) }})" example="example3" color="info">
             {{ drawHeader('factura', '<i class="fa fa-cogs"></i>', 'fecha', 'ret', 'I.V.A.', 'monto')}}
             <template slot="body">
