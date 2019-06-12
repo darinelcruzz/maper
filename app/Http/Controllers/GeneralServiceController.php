@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\GeneralRequest;
 use Jenssegers\Date\Date;
-use App\{Service, Price, Payment};
+use App\{Service, Price, Payment, ExtraDriver};
 
 class GeneralServiceController extends Controller
 {
@@ -121,6 +121,10 @@ class GeneralServiceController extends Controller
     function cancel(GeneralRequest $request, Service $service)
     {
         $service->update($request->all());
+        $extras = ExtraDriver::where('service_id', $service->id)->get();
+        foreach ($extras as $extra) {
+            $extra->update(['extra' => 0]);
+        }
 
         return redirect(route('admin.cash'))->with('redirected', session('date'));
     }

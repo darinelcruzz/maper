@@ -4,8 +4,8 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->client->name }} ID = {{ $service->id }}" color="default">
-                {!! Form::open(['method' => 'POST', 'route' => ['service.general.cancel', $service]]) !!}
+            <solid-box title="{{ $service->service }} ID = {{ $service->id }}" color="default">
+                {!! Form::open(['method' => 'POST', 'route' => ['service.corporation.cancel', $service]]) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>

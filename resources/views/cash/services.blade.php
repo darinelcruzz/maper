@@ -23,17 +23,14 @@
 											<ddi to="{{ route('service.general.pay', ['id' => $row->id]) }}"
 												icon="dollar" text="Pagar sin factura">
 											</ddi>
-											<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
-												icon="times" text="Muerto">
-											</ddi>
-											{{-- <ddi to="{{ route('invoice.make', ['id' => $row->client_id]) }}"
-												icon="dollar" text="Facturar">
-											</ddi> --}}
 										@endif
 										@if (auth()->user()->level == 1)
 											<ddi to="{{ route('service.general.edit', ['id' => $row->id]) }}"
 				                                icon="pencil-square-o" text="Editar">
 				                            </ddi>
+											<ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
+												icon="times" text="Cancelar">
+											</ddi>
 										@endif
 									@else
 										<ddi to="{{ route('service.corporation.details', ['id' => $row->id]) }}"
@@ -53,6 +50,9 @@
 											@if (auth()->user()->level == 1)
 												<ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
 													icon="pencil-square-o" text="Editar">
+												</ddi>
+												<ddi to="{{ route('service.corporation.cancel', ['id' => $row->id]) }}"
+													icon="times" text="Cancelar">
 												</ddi>
 											@endif
 										@endif
@@ -121,10 +121,10 @@
 									<ddi to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
 										icon="pencil-square-o" text="Editar">
 									</ddi>
+									<ddi to="{{ route('service.insurer.cancel', ['id' => $row->id]) }}"
+										icon="times" text="Cancelar">
+									</ddi>
 								@endif
-								{{-- <ddi to="{{ route('service.general.cancel', ['id' => $row->id]) }}"
-									icon="times" text="Muerto">
-								</ddi> --}}
 							</dropdown>
 						</td>
 						<td>{{ $row->description }}</td>

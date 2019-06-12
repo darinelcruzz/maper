@@ -38,9 +38,10 @@ class AdministrationController extends Controller
 
     function search()
     {
-        $services = Service::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
-        $insurerServices = InsurerService::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
-        $extras = ExtraDriver::whereNull('cut_at')->get();
+        //Pago de extras
+        $services = Service::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('extra_driver', '>', 0)->get();
+        $insurerServices = InsurerService::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('extra_driver', '>', 0)->get();
+        $extras = ExtraDriver::where('extra', '>', 0)->whereNull('cut_at')->get();
         $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
 
         $drivers = Driver::pluck('name', 'id')->toArray();
@@ -53,12 +54,12 @@ class AdministrationController extends Controller
     {
         $date = date('Y-m-d');
         Service::whereNull('cut_at')->update(['cut_at' => $date]);
-
         Service::whereNull('cut2_at')->where('date_out', '!=', null)->update(['cut2_at' => $date]);
+        Service::where('status', 'cancelado')->update(['cut_at' => $date, 'cut2_at' => $date]);
 
         InsurerService::whereNull('cut_at')->update(['cut_at' => $date]);
-
         InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->update(['cut2_at' => $date]);
+        InsurerService::where('status', 'cancelado')->update(['cut_at' => $date, 'cut2_at' => $date]);
 
         ExtraDriver::whereNull('cut_at')->update(['cut_at' => $date]);
 
@@ -83,33 +84,33 @@ class AdministrationController extends Controller
 
         foreach ($drivers as $driver) {
             $extraHours = [];
-            //general
-            $services = Service::whereNull('cut_at')->where('driver_id', $driver->id)->get();
+            //general por operador
+            $services = Service::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
-
-            $services = Service::whereNull('cut_at')->where('helper', $driver->id)->get();
+            //general por apoyo
+            $services = Service::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
-            //abonos
+            //abonos por operador
             $services = ExtraDriver::whereNull('cut_at')->where('type', 1)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra);
             }
-
+            //abonos por apoyo
             $services = ExtraDriver::whereNull('cut_at')->where('type', 0)->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra);
             }
-            //aseguradoras
-            $services = InsurerService::whereNull('cut_at')->where('driver_id', $driver->id)->get();
+            //aseguradoras por operador
+            $services = InsurerService::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('driver_id', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_driver);
             }
-
-            $services = InsurerService::whereNull('cut_at')->where('helper', $driver->id)->get();
+            //aseguradoras por apoyo
+            $services = InsurerService::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('helper', $driver->id)->get();
             foreach ($services as $service) {
                 array_push($extraHours, $service->extra_helper);
             }
@@ -125,9 +126,9 @@ class AdministrationController extends Controller
         $start = $request->start == 0 ? Date::now()->format('Y-m-d') : $request->start;
         $fdate= 'Corte al ' . fdate($start, 'D, d/M/Y', 'Y-m-d');
 
-        $services = Service::whereNull('cut_at')->whereNull('date_out')->where('pay', '!=','abonos')->get();
+        $services = Service::where('status', '!=', 'cancelado')->whereNull('cut_at')->whereNull('date_out')->where('pay', '!=','abonos')->get();
         $services2 = Service::whereNull('cut2_at')->where('date_out', '!=', null)->where('pay', '!=', 'abonos')->get();
-        $insurerServices = InsurerService::whereNull('cut_at')->whereNull('date_pay')->get();
+        $insurerServices = InsurerService::where('status', '!=', 'cancelado')->whereNull('cut_at')->whereNull('date_pay')->get();
         $insurerServices2 = InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->get();
         $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
         $payments = Payment::whereNull('cut_at')->get();
@@ -137,9 +138,9 @@ class AdministrationController extends Controller
 
     function getMethods($start, $end = NULL)
     {
-        $services = Service::untilDate($start, 'date_service', $end);
+        $services = Service::where('status', '!=', 'cancelado')->untilDate($start, 'date_service', $end);
         $payed = Service::untilDate($start, 'date_out', $end)->where('pay', '!=', 'Abonos');
-        $insurerServ = InsurerService::untilDate($start, 'date_assignment', $end);
+        $insurerServ = InsurerService::where('status', '!=', 'cancelado')->untilDate($start, 'date_assignment', $end);
         $invoicesPayed = Invoice::untilDate($start, 'date_pay', $end);
         $payments = Payment::untilDate($start, 'created_at', $end);
         $total = $payed->sum('total') + $invoicesPayed->sum('amount') + $payments->sum('amount');
@@ -148,8 +149,8 @@ class AdministrationController extends Controller
 
         foreach ($methods as $key => $value) {
             $$key = Service::payType($start, $value,'date_out', 'pay', $end)->sum('total')
-            + Service::whereNull('date_out')->payType($start, $value, 'date_service', 'pay', $end)->sum('total')
-            + InsurerService::payType($start, $value, 'date_assignment', 'pay', $end)->sum('total')
+            + Service::where('status', '!=', 'cancelado')->whereNull('date_out')->payType($start, $value, 'date_service', 'pay', $end)->sum('total')
+            + InsurerService::where('status', '!=', 'cancelado')->payType($start, $value, 'date_assignment', 'pay', $end)->sum('total')
             + Invoice::payType($start, $value, 'date_pay', 'method', $end)->sum('amount')
             + Payment::payType($start, $value, 'created_at', 'method', $end)->sum('amount');
         }
@@ -176,9 +177,9 @@ class AdministrationController extends Controller
         $results = [];
 
         foreach ($methods as $key => $value) {
-            $results[$key] = Service::whereNull('cut_at')->whereNull('date_out')->where('pay', $value)->get()->sum('total')
+            $results[$key] = Service::where('status', '!=', 'cancelado')->whereNull('cut_at')->whereNull('date_out')->where('pay', $value)->get()->sum('total')
             + Service::whereNull('cut2_at')->where('date_out', '!=', null)->where('pay', $value)->get()->sum('total')
-            + InsurerService::whereNull('cut_at')->whereNull('date_pay')->where('pay', $value)->get()->sum('total')
+            + InsurerService::where('status', '!=', 'cancelado')->whereNull('cut_at')->whereNull('date_pay')->where('pay', $value)->get()->sum('total')
             + InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->where('pay', $value)->get()->sum('total')
             + Invoice::whereNull('cut_at')->where('method', $value)->get()->sum('amount')
             + Payment::whereNull('cut_at')->where('method', $value)->get()->sum('amount');

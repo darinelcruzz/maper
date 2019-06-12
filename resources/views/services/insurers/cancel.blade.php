@@ -4,35 +4,35 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->client->name }} ID = {{ $service->id }}" color="default">
-                {!! Form::open(['method' => 'POST', 'route' => ['service.general.cancel', $service]]) !!}
+            <solid-box title="{{ $insurerService->insurer->name }} ID = {{ $insurerService->id }}" color="default">
+                {!! Form::open(['method' => 'POST', 'route' => ['service.insurer.cancel', $insurerService]]) !!}
                 @include('templates.headTable')
                         <tr>
                             <td>
                                 <B>Fecha y hora:</B>
-                                <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
+                                <dd>{{ fdate($insurerService->date_assignment, 'l, j F Y h:i a') }}</dd>
                             </td>
                             <td>
                                 <B>Origen:</B>
-                                <dd>{{ $service->origin }}</dd>
+                                <dd>{{ $insurerService->origin }}</dd>
                             </td>
                             <td>
                                 <B>Destino:</B>
-                                <dd>{{ $service->destination }}</dd>
+                                <dd>{{ $insurerService->destination }}</dd>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <B>Inventario:</B>
-                                <dd>{{ $service->inventory }}</dd>
+                                <dd>{{ $insurerService->inventory }}</dd>
                             </td>
                             <td>
                                 <B>Descripción:</B>
-                                <dd>{{ $service->description }}</dd>
+                                <dd>{{ $insurerService->description }}</dd>
                             </td>
                             <td>
                                 <B>Importe estimado:</B>
-                                <dd>${{ $service->amount }}</dd>
+                                <dd>${{ $insurerService->amount }}</dd>
                             </td>
                         </tr>
 
@@ -41,7 +41,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        {!! Field::text('reason', isset($service) ? $service->reason: null)!!}
+                        {!! Field::text('reason', isset($insurerService) ? $insurerService->reason: null)!!}
                     </div>
                 </div>
                 <div class="box-footer">

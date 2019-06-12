@@ -47,12 +47,12 @@ Route::group(['prefix' => 'servicios/general', 'as' => 'service.general.'], func
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('pago/{service}', usesas($ctrl, 'pay'));
     Route::post('pago/{service}', usesas($ctrl, 'change'));
+    Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
+    Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
     Route::get('abonos/{service}', usesas($ctrl, 'payments'));
     Route::post('abonos/{service}', usesas($ctrl, 'payment'));
     Route::get('costo/{service}', usesas($ctrl, 'editAmount'));
     Route::post('costo/{service}', usesas($ctrl, 'updateAmount'));
-    Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
-    Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
     Route::get('actualizar/{service}/{status}', usesas($ctrl, 'updateStatus'));
 });
 
@@ -67,6 +67,8 @@ Route::group(['prefix' => 'servicios/corporaciones', 'as' => 'service.corporatio
     Route::get('detalles/{service}', usesas($ctrl, 'details'));
     Route::get('liberar/{service}', usesas($ctrl, 'pay'));
     Route::post('liberar/{service}', usesas($ctrl, 'change'));
+    Route::get('cancelar/{service}', usesas($ctrl, 'dead'));
+    Route::post('cancelar/{service}', usesas($ctrl, 'cancel'));
     Route::get('formato/{service}', usesas($ctrl, 'printLetter'));
     Route::get('ticket/{service}', usesas($ctrl, 'printTicket'));
 
@@ -81,13 +83,15 @@ Route::group(['prefix' => 'servicios/aseguradoras', 'as' => 'service.insurer.'],
     Route::post('crear', usesas($ctrl, 'store'));
     Route::get('editar/{insurerService}', usesas($ctrl, 'edit'));
     Route::post('editar', usesas($ctrl, 'update'));
+    Route::get('detalles/{insurerService}', usesas($ctrl, 'details'));
+    Route::post('pagar', usesas($ctrl, 'pay'));
+    Route::get('cancelar/{insurerService}', usesas($ctrl, 'dead'));
+    Route::post('cancelar/{insurerService}', usesas($ctrl, 'cancel'));
     Route::get('actualizar/{insurerService}/{status}', usesas($ctrl, 'updateStatus'));
     Route::get('horas/{insurerService}', usesas($ctrl, 'editHour'));
     Route::post('horas', usesas($ctrl, 'updateHour'));
     Route::get('costo/{insurerService}', usesas($ctrl, 'editAmount'));
     Route::post('costo', usesas($ctrl, 'updateAmount'));
-    Route::get('detalles/{insurerService}', usesas($ctrl, 'details'));
-    Route::post('pagar', usesas($ctrl, 'pay'));
     Route::post('factura', usesas($ctrl, 'bill'));
 });
 

@@ -145,6 +145,22 @@ class InsurerServiceController extends Controller
         return back();
     }
 
+    function dead(InsurerService $insurerService)
+    {
+        return view('services.insurers.cancel', compact('insurerService'));
+    }
+
+    function cancel(Request $request, InsurerService $insurerService)
+    {
+        $insurerService->update($request->all());
+        $extras = ExtraDriver::where('insurer_service_id', $insurerService->id)->get();
+        foreach ($extras as $extra) {
+            $extra->update(['extra' => 0]);
+        }
+
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
+    }
+
     function destroy(InsurerService $insurerService)
     {
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CorporationsRequest;
 use Jenssegers\Date\Date;
-use App\{Service, Price};
+use App\{Service, Price, ExtraDriver};
 
 class CorporationServiceController extends Controller
 {
@@ -85,6 +85,22 @@ class CorporationServiceController extends Controller
     function printTicket(Service $service)
     {
         return view('services.corporations.ticket', compact('service'));
+    }
+
+    function dead(Service $service)
+    {
+        return view('services.corporations.cancel', compact('service'));
+    }
+
+    function cancel(CorporationsRequest $request, Service $service)
+    {
+        $service->update($request->all());
+        $extras = ExtraDriver::where('service_id', $service->id)->get();
+        foreach ($extras as $extra) {
+            $extra->update(['extra' => 0]);
+        }
+
+        return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
     function destroy($id)
