@@ -107,7 +107,13 @@
 						<h4>{{ fnumber($expenses) }}</h4>
 					</div>
 				</div>
-                <div class="col-xs-12">
+                <div class="col-xs-6">
+                    <div align="center" color="success" class="text-muted well well-sm">
+                        <p><b>Utilidades efectivo</b></p>
+                        <h4>{{ fnumber($efectivo - $expenses) }}</h4>
+                    </div>
+                </div>
+                <div class="col-xs-6">
 					<div align="center" color="success" class="text-muted well well-sm">
 						<p><b>Utilidades</b></p>
 						<h4>{{ fnumber($efectivo + $debito + $tcredito + $cheque + $transferencia - $expenses) }}</h4>
