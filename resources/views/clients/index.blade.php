@@ -24,7 +24,10 @@
                   </td>
                   <td>{{ $client->address ? $client->address . ' C.P.' . $client->cp . ' ' . $client->city : 'n/a' }}</td>
                   <td>{{ $client->contact }}  {{ $client->cellphone ? 'Cel. ' . $client->cellphone : ''}}</td>
-                  <td>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('expired') + $client->serviceTotal('payment')) }}</td>
+                  <td>
+                      {{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment')) }} <br>
+                      {{ $client->getServiceExpired($client->days) }}
+                  </td>
               </tr>
             @endforeach
         </template>

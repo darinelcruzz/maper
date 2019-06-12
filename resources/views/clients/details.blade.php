@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><h3>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('expired') + $client->serviceTotal('payment')) }}</h3></td>
+                            <td><h3>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment')) }}</h3></td>
                             <td><h3>{{ $client->pending }}</h3></td>
                             <td><h3>{{ $client->days . ' dias' }}</h3></td>
                         </tr>
@@ -50,7 +50,7 @@
                         </td>
                         <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
                         <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
-                        <td>{{ $service->getDays('date_service', $today) }}</td>
+                        <td>{{ $service->getDays('date_service', $today) > $client->days ? 'si' : 'no' }}</td>
                         <td>
                             @if ($service->total == 0)
                                 <a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
@@ -68,18 +68,21 @@
             {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Fecha', 'Vehículo', 'Dias', 'Monto')}}
             <template slot="body">
                 @foreach($client->pending_services as $service)
+                    @php
+                        $days = $service->getDays('date_service', $today);
+                    @endphp
                   <tr>
                       <td><a href="{{ route('service.general.details', ['id' => $service->id]) }}"> {{ $service->id }} </a></td>
                       <td>
                           <dropdown color="danger" icon="cogs">
                                   <ddi to="{{ route('service.general.pay', ['service' => $service->id])}}"
-                                      icon="usd" text="Pagar">
+                                      icon="usd" text="Pagar sin factura">
                                   </ddi>
                           </dropdown>
                       </td>
                       <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
                       <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
-                      <td>{{ $service->getDays('date_service', $today) }}</td>
+                      <td>{!! $service->getExpired('date_service', $today, $client->days) !!}</td>
                       <td>
                           @if ($service->total == 0)
                               <a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>

@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
+use App\Traits\DatesTrait;
 
 class Service extends Model
 {
+    use DatesTrait;
+    
     protected $fillable = [
         'service','description', 'brand', 'type', 'model',
         'category', 'load', 'plate', 'color', 'inventory',
@@ -71,22 +74,22 @@ class Service extends Model
                     ->where($payCol, $type)->get();
     }
 
-    function getDays($start, $end)
-    {
-        $entry = new Date(strtotime($this->$start));
-        if (is_string($end)) {
-            $end = new Date(strtotime($this->$end));
-        }
-        $interval = $entry->diff($end);
-        $interval = $interval->format('%a');
-
-        if($end->format('His') < $entry->format('His')) {
-            $penalty = $interval + 2;
-        } else {
-            $penalty = $interval + 1;
-        }
-        return $penalty;
-    }
+    // function getDays($start, $end)
+    // {
+    //     $entry = new Date(strtotime($this->$start));
+    //     if (is_string($end)) {
+    //         $end = new Date(strtotime($this->$end));
+    //     }
+    //     $interval = $entry->diff($end);
+    //     $interval = $interval->format('%a');
+    //
+    //     if($end->format('His') < $entry->format('His')) {
+    //         $penalty = $interval + 2;
+    //     } else {
+    //         $penalty = $interval + 1;
+    //     }
+    //     return $penalty;
+    // }
 
     function getTotalAttribute()
     {
@@ -100,7 +103,7 @@ class Service extends Model
 
     function getStatusLabelAttribute()
     {
-        $colors = ['pagado' => 'success', 'liquidado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'vencida' => 'danger', 'abonos' => 'warning'];
+        $colors = ['pagado' => 'success', 'liquidado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'abonos' => 'warning'];
         $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
         return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
     }
@@ -114,8 +117,20 @@ class Service extends Model
     function scopeFromDateToDate($query, $startDate, $endDate, $data, $colWhere, $column = 'date_service')
     {
         return $query->whereBetween($column, [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
-                        // ->where('extra_driver', '>', 0)
                         ->where($colWhere, $data)->get();
+    }
+
+    function getExpired($start, $end, $allow=0)
+    {
+        $days = $this->getDays($start, $end) - $allow;
+        if ($days > 0) {
+            $color = '#FF0000';
+        }elseif ($days > -3) {
+            $color = '#FFFF00';
+        }else {
+            $color = '#00FF00';
+        }
+        return $days . "  <i style='color:$color' class='fa fa-circle'></i>";
     }
 
 }

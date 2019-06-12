@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
+use App\Traits\DatesTrait;
 
 class Client extends Model
 {
+    use DatesTrait;
+
     protected $fillable = [
     	'name', 'rfc', 'address', 'cp', 'city', 'phone', 'email',
         'contact', 'cellphone', 'days', 'social'
@@ -38,19 +41,9 @@ class Client extends Model
             ->where('bill', null);
     }
 
-    function getExpiredServicesAttribute()
-    {
-        return $this->services->where('status', 'vencida');
-    }
-
     function getPendingServicesAttribute()
     {
         return $this->services->where('status', 'credito');
-    }
-
-    function getLimboServicesAttribute()
-    {
-        return $this->services->where('status', 'pendiente');
     }
 
     function getPaymentServicesAttribute()
@@ -65,7 +58,7 @@ class Client extends Model
 
     function getPendingAttribute()
     {
-        return count($this->pending_services) + count($this->expired_services) + count($this->payment_services);
+        return count($this->pending_services) + count($this->payment_services);
     }
 
     function getUnpaidInvoicesAttribute()
@@ -91,6 +84,22 @@ class Client extends Model
         }
 
         return $total;
+    }
+
+    function getServiceExpired($allow) {
+        $sattribute = "pending_services";
+        $total = 0;
+        $today = Date::now();
+
+        foreach ($this->$sattribute as $service) {
+            $days = $this->getDays($service->date_service, $today) - $allow;
+            $days > 0 ? $total += 1 : 0 ;
+        }
+        if ($total > 0) {
+            return 'Vencidas: ' . $total;
+        }else{
+            return '';
+        }
     }
 
 }
