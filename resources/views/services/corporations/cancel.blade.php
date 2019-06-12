@@ -46,8 +46,10 @@
                 </div>
                 <div class="box-footer">
                     <input type="hidden" name="status" value="cancelado">
-                    {!! Form::submit('Cancelar', ['class' => 'btn btn-danger btn-block']) !!}
-                    <p>(Todos los extras relacionados se volverán 0)</p>
+                    @if (auth()->user()->level == 1)
+                        {!! Form::submit('Cancelar', ['class' => 'btn btn-danger btn-block']) !!}
+                        <p>(Todos los extras relacionados se volverán 0)</p>
+                    @endif
                 </div>
             </solid-box>
         </div>
