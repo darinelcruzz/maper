@@ -19,8 +19,9 @@
                     @endphp
                     <tr>
                         <td>{{ $invoice->id }}</td>
-                        <td><a href="{{ route('invoice.show', ['id' => $invoice->id]) }}"> {{ $invoice->folio }} </a></td>
-                        <td><a href="{{ route('insurer.details', ['id' => $invoice->insurer->id]) }}"> {{ $invoice->insurer->name }}</a></td>
+                        <td><a href="{{ route('invoice.show', $invoice->id) }}"> {{ $invoice->folio }} </a></td>
+
+                        <td>{{ $invoice->insurer_id == null ?  $invoice->client->name : $invoice->insurer->name }}</a></td>
                         <td>{{ fdate($invoice->date_pay, 'd/m/Y', 'Y-m-d') }}</td>
                         <td>{{ fnumber($invoice->amount - $invoice->iva) }}</td>
                         <td>{{ fnumber($invoice->iva) }}</td>
@@ -99,15 +100,15 @@
     <div class="col-md-3">
         <simple-box title="Gastos en Banco" color="danger">
             {!! Form::open(['method' => 'POST', 'route' => 'bank.store']) !!}
-                
+
                 {!! Field::text('description') !!}
                 {!! Field::number('amount', ['min' => '0', 'step' => '.01']) !!}
 
-                
+
                 <input type="hidden" name="date" value="{{ date('Y-m-d\TH:i') }}">
                 <input type="hidden" name="type" value="cargo">
                 <input type="hidden" name="method" value="b">
-                
+
                 <div class="row">
                     <div class="col-md-7">
                         {!! Field::text('folio') !!}
@@ -117,7 +118,7 @@
                         {!! Form::submit('Crear', ['class' => 'btn btn-black btn-block']) !!}
                     </div>
                 </div>
-                
+
 
             {!! Form::close() !!}
         </simple-box>
