@@ -106,7 +106,7 @@ Route::group(['prefix' => 'clientes', 'as' => 'client.'], function () {
     Route::post('editar/{client}', usesas($ctrl, 'update'))->middleware('one');
     Route::get('detalles/{client}', usesas($ctrl, 'details'));
     Route::get('eliminar/{client}', usesas($ctrl, 'destroy'));
-    Route::get('reporte/{client}/{status}', usesas($ctrl, 'report'));
+    Route::get('reporte/{client}/{type}/{status}', usesas($ctrl, 'report'));
 });
 
 // Proveedores

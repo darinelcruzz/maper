@@ -61,7 +61,7 @@ class Client extends Model
         return count($this->pending_services) + count($this->payment_services);
     }
 
-    function getUnpaidInvoicesAttribute()
+    function getPendingInvoicesAttribute()
     {
         return $this->invoices->where('status', '!=', 'pagada');
     }

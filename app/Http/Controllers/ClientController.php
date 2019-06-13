@@ -61,17 +61,16 @@ class ClientController extends Controller
         $today = Date::now();
         return view('clients.details', compact('client', 'today'));
     }
-    function report(Client $client, $status)
+    function report(Client $client, $type, $status)
     {
         $today = Date::now();
-        if ($status == 'pendientes') {
-            $type = 'pending_services';
-            $status = 'Pendientes';
-        }elseif ($status == 'sinfac') {
-            $type = 'pending_services';
-            $tatus = 'Sin factura';
-        }
-        return view('clients.report', compact('client', 'today', 'type', 'status'));
+
+        $types = ['servicios' => 'services', 'facturas' => 'invoices'];
+        $kinds = ['pagados' => 'paid', 'pagadas' => 'paid', 'pendientes' => 'pending'];
+
+        $function = $kinds[$status] . "_" . $types[$type];
+
+        return view('clients.report', compact('client', 'today', 'function', 'function2', 'type', 'status'));
     }
 
     function destroy(Client $client)

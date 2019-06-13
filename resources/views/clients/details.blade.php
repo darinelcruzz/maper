@@ -105,13 +105,18 @@
                       <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                       <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                       <td>{{ $row->getDays('date_service', $today) }}</td>
-                      <td>{{ fnumber($row->debt) }}</td>
+                      <td>{{ fnumber($row->debt) }}(pagos)</td>
                   </tr>
                 @endforeach
             </template>
             <template slot="footer">
                 <tr>
-                    <th colspan="4"><a class="btn btn-xs btn-danger btn-block" href="{{ route('invoice.make', $client) }}">Facturar</a></th>
+                    <th colspan="2">
+                        <a class="btn btn-xs btn-primary btn-block" href="{{ route('client.report', [$client, 'servicios', 'pendientes']) }}">Reporte</a>
+                    </th>
+                    <th colspan="2">
+                        <a class="btn btn-xs btn-danger btn-block" href="{{ route('invoice.make', $client) }}">Facturar</a>
+                    </th>
                     <th><span class="pull-right">Total</span></th>
                     <th>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment')) }}</th>
                 </tr>
@@ -142,7 +147,10 @@
             </template>
             <template slot="footer">
                 <tr>
-                    <th colspan="3"></th>
+                    <th colspan="2">
+                        <a class="btn btn-xs btn-primary btn-block" href="{{ route('client.report', [$client, 'servicios', 'pagados']) }}">Reporte</a>
+                    </th>
+                    <th></th>
                     <th>Total</th>
                     <th>{{ fnumber($client->serviceTotal('paid') + $client->serviceTotal('soldout')) }}</th>
                 </tr>
@@ -157,7 +165,7 @@
         <data-table-com title="Facturas pendientes ({{ count($client->unpaid_invoices) }})" example="example3" color="info">
             {{ drawHeader('factura', '<i class="fa fa-cogs"></i>', 'fecha', 'ret', 'I.V.A.', 'monto')}}
             <template slot="body">
-                @foreach($client->unpaid_invoices as $invoice)
+                @foreach($client->pending_invoices as $invoice)
                   <tr>
                       <td><a href="{{ route('invoice.show', $invoice) }}"> {{ $invoice->folio }} </a></td>
                       <td>
@@ -174,15 +182,18 @@
             </template>
             <template slot="footer">
                 <tr>
-                    <th colspan="4"></th>
+                    <th colspan="2">
+                        <a class="btn btn-xs btn-primary btn-block" href="{{ route('client.report', [$client, 'facturas', 'pendientes']) }}">Reporte</a>
+                    </th>
+                    <th colspan="2"></th>
                     <th>Total</th>
-                    <th>{{ fnumber($client->unpaid_invoices->sum('amount')) }}</th>
+                    <th>{{ fnumber($client->pending_invoices->sum('amount')) }}</th>
                 </tr>
             </template>
         </data-table-com>
 
         <data-table-com title="Facturas pagadas ({{ count($client->paid_invoices) }})" example="example5" color="success">
-            {{ drawHeader('folio', 'fecha', 'ret', 'I.V.A.', 'monto')}}
+            {{ drawHeader('folio', 'fecha', 'ret', 'I.V.A.', 'pago', 'monto')}}
             <template slot="body">
                 @foreach($client->paid_invoices as $invoice)
                   <tr>
@@ -190,15 +201,19 @@
                       <td>{{ fdate($invoice->date_pay, 'j/M/y', 'Y-m-d') }}</td>
                       <td>{{ fnumber($invoice->retention) }}</td>
                       <td>{{ fnumber($invoice->iva) }}</td>
+                      <td>{{ fdate($invoice->date_pay, 'j/M/y', 'Y-m-d') }}</td>
                       <td>{{ fnumber($invoice->amount) }}</td>
                   </tr>
                 @endforeach
             </template>
             <template slot="footer">
                 <tr>
-                    <th colspan="3"></th>
+                    <th colspan="2">
+                        <a class="btn btn-xs btn-primary btn-block" href="{{ route('client.report', [$client, 'facturas', 'pagadas']) }}">Reporte</a>
+                    </th>
+                    <th colspan="2">
                     <th>Total</th>
-                    <th>{{ fnumber($client->invoices->sum('amount')) }}</th>
+                    <th>{{ fnumber($client->paid_invoices->sum('amount')) }}</th>
                 </tr>
             </template>
         </data-table-com>
