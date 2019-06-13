@@ -61,17 +61,17 @@ class ClientController extends Controller
         $today = Date::now();
         return view('clients.details', compact('client', 'today'));
     }
-
-    function expire($days)
+    function report(Client $client, $status)
     {
-        $services = Service::where('status', 'credito')->get();
-        foreach ($services as $service) {
-            $today = Date::now();
-            $interval = $service->getDays('date_out', $today);
-            if ($interval > $days) {
-                Service::find($service->id)->update(['status' => 'vencida']);
-            }
+        $today = Date::now();
+        if ($status == 'pendientes') {
+            $type = 'pending_services';
+            $status = 'Pendientes';
+        }elseif ($status == 'sinfac') {
+            $type = 'pending_services';
+            $tatus = 'Sin factura';
         }
+        return view('clients.report', compact('client', 'today', 'type', 'status'));
     }
 
     function destroy(Client $client)

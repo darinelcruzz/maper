@@ -112,7 +112,7 @@
         <template slot="body">
             @foreach($creditI as $row)
                 <tr>
-                    <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                     <td>
                         <dropdown color="success" icon="cogs">
                             <ddi to="{{ route('service.insurer.editHour', ['id' => $row->id]) }}"

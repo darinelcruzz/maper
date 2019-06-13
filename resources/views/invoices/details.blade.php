@@ -9,8 +9,17 @@
             <template slot="body">
                 @foreach($services as $row)
                     <tr>
-                        <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
-                        <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
+                        @if ($model == 'client')
+                            <td>
+                                <a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }}</a>
+                            </td>
+                            <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                        @else
+                            <td>
+                                <a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }}</a>
+                            </td>
+                            <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
+                        @endif
                         <td>{{ $row->folio }}</td>
                         <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                         <td>{{ fnumber($row->total) }}</td>

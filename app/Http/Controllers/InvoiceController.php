@@ -34,7 +34,7 @@ class InvoiceController extends Controller
         $this->validateRequest();
 
         if (Invoice::where('folio', $request->folio)->first() == null) {
-            
+
             $invoice = Invoice::create($request->except('services', 'type'));
 
             foreach (InsurerService::find($request->services) as $service) {
@@ -55,7 +55,7 @@ class InvoiceController extends Controller
         if (Invoice::where('folio', $request->folio)->first() == null) {
 
             $invoice = Invoice::create($request->except('services', 'type'));
-            
+
             foreach (Service::find($request->services) as $service) {
                 $service->update([
                     'bill' => $invoice->id,
@@ -63,7 +63,7 @@ class InvoiceController extends Controller
                 ]);
             }
         }
-            
+
         return redirect(route('client.details', $request->client_id));
     }
 
