@@ -27719,7 +27719,7 @@ exports.push([module.i, ".vue-form-wizard .wizard-btn{display:inline-block;margi
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\r\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\r\n    opacity: 0;\n}", ""]);
+exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\n    opacity: 0;\n}", ""]);
 
 /***/ }),
 /* 65 */
@@ -27733,21 +27733,21 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\r\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\r\n    opacity: 0;\n}", ""]);
+exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\n    opacity: 0;\n}", ""]);
 
 /***/ }),
 /* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\r\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\r\n    opacity: 0;\n}", ""]);
+exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\n    opacity: 0;\n}", ""]);
 
 /***/ }),
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\r\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\r\n    opacity: 0;\n}", ""]);
+exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n    transition: opacity 1s ease;\n}\n.fade-enter, .fade-leave-to {\n    opacity: 0;\n}", ""]);
 
 /***/ }),
 /* 69 */
@@ -46154,7 +46154,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\RouteRow.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/RouteRow.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RouteRow.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46188,7 +46188,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\RouteTable.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/RouteTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RouteTable.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46222,7 +46222,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\ServicesPayment.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/ServicesPayment.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ServicesPayment.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46260,7 +46260,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\auth\\EmailResetPasswordForm.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/auth/EmailResetPasswordForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] EmailResetPasswordForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46298,7 +46298,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\auth\\LoginForm.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/auth/LoginForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] LoginForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46336,7 +46336,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\auth\\RegisterForm.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/auth/RegisterForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RegisterForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46374,7 +46374,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\auth\\ResetPasswordForm.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/auth/ResetPasswordForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ResetPasswordForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46408,7 +46408,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\DataTable.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/DataTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] DataTable.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46442,7 +46442,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\DropdownButton.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/DropdownButton.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] DropdownButton.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46476,7 +46476,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\DropdownItem.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/DropdownItem.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] DropdownItem.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46514,7 +46514,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\IconBox.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/IconBox.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] IconBox.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46548,7 +46548,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\SimpleBox.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/SimpleBox.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SimpleBox.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46582,7 +46582,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\SingleElementRow.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/SingleElementRow.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SingleElementRow.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46616,7 +46616,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\SmallDataTable.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/SmallDataTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SmallDataTable.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46650,7 +46650,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\maper\\resources\\assets\\js\\components\\lte\\SolidBox.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/maper/resources/assets/js/components/lte/SolidBox.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SolidBox.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47150,33 +47150,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.vservice.amount),
-      expression: "vservice.amount",
-      modifiers: {
-        "number": true
-      }
-    }],
     staticClass: "form-control",
     attrs: {
-      "min": "0",
       "name": "amount",
       "type": "number",
-      "step": "0.01"
+      "disabled": ""
     },
     domProps: {
-      "value": (_vm.vservice.amount)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.$set(_vm.vservice, "amount", _vm._n($event.target.value))
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
+      "value": _vm.vservice.amount
     }
   })])])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
@@ -47185,33 +47166,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.vservice.maneuver),
-      expression: "vservice.maneuver",
-      modifiers: {
-        "number": true
-      }
-    }],
     staticClass: "form-control",
     attrs: {
-      "min": "0",
       "name": "maneuver",
       "type": "number",
-      "step": "0.01"
+      "disabled": ""
     },
     domProps: {
-      "value": (_vm.vservice.maneuver)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.$set(_vm.vservice, "maneuver", _vm._n($event.target.value))
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
+      "value": _vm.vservice.maneuver
     }
   })])])]), _vm._v(" "), (_vm.corp) ? _c('div', {
     staticClass: "col-md-4"
@@ -47220,71 +47182,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.vpension),
-      expression: "vpension",
-      modifiers: {
-        "number": true
-      }
-    }],
     staticClass: "form-control",
     attrs: {
-      "min": "0",
       "name": "pension",
       "type": "number",
-      "step": "0.01",
       "disabled": ""
     },
     domProps: {
-      "value": (_vm.vpension)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.vpension = _vm._n($event.target.value)
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
+      "value": _vm.vpension
     }
-  })])])]) : _c('div', {
-    staticClass: "col-md-4"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
-    staticClass: "controls"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.vservice.others),
-      expression: "vservice.others",
-      modifiers: {
-        "number": true
-      }
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "min": "0",
-      "name": "others",
-      "type": "number",
-      "step": "0.01"
-    },
-    domProps: {
-      "value": (_vm.vservice.others)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.$set(_vm.vservice, "others", _vm._n($event.target.value))
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
-    }
-  })])])])]), _vm._v(" "), (_vm.corp) ? _c('h4', {
+  })])])]) : _vm._e()]), _vm._v(" "), (_vm.corp) ? _c('h4', {
     staticClass: "pull-right"
   }, [_c('b', [_vm._v("Subtotal:")]), _vm._v(" $ " + _vm._s(_vm.subtotal.toFixed(2)))]) : _vm._e(), _vm._v(" "), (_vm.corp) ? _c('div', {
     staticClass: "row"
@@ -47292,7 +47199,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('input', {
     directives: [{
@@ -47321,7 +47228,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_vm._m(5), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('input', {
     directives: [{
@@ -47350,7 +47257,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_vm._m(6), _vm._v(" "), _c('div', {
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('select', {
     directives: [{
@@ -47391,7 +47298,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_vm._m(7), _vm._v(" "), _c('div', {
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('input', {
     directives: [{
@@ -47422,7 +47329,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_vm._m(8), _vm._v(" "), _c('div', {
+  }, [_vm._m(7), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('select', {
     staticClass: "form-control",
@@ -47492,10 +47399,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('label', {
     staticClass: "control-label"
   }, [_c('b', [_vm._v("Pension")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('label', {
-    staticClass: "control-label"
-  }, [_c('b', [_vm._v("Otros")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', {
     staticClass: "control-label"

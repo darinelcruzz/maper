@@ -46,11 +46,6 @@
                                 <b>Pensión</b>
                                 <dd>{{ $penalty }}días X ${{ $cost/$penalty }} = ${{ $cost }}</dd>
                             </td>
-                            {{-- @if ($service->status == "liberado")
-                                <td>
-                                    {!! Field::datetimelocal('date_out', fdate($service->date_out, 'Y-m-d\TH:i'), ['tpl' => 'templates/twolines']) !!}
-                                </td>
-                            @endif --}}
                         </tr>
                     </tbody>
                 </table>
@@ -61,9 +56,6 @@
                         {!! Field::text('releaser', isset($service) ? $service->releaser: null, ['tpl' => 'templates/twolines'])!!}
                     </div>
                 </div>
-
-                {{-- <payment-box corp :amount="{{ $service->amount or 0 }}" :maneuver="{{ $service->maneuver or 0 }}" :others="{{ $service->others or 0 }}" :pension="{{ $cost or 0 }}" :discount="{{ $service->discount or 0 }}">
-                </payment-box> --}}
                 <payment-box corp :service="{{ $service }}" :pension="{{ $cost or 0 }}"></payment-box>
 
                 <div class="box-footer">

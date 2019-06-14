@@ -5,7 +5,7 @@
                 <div class="form-group">
                     <label class="control-label"><b>Arrastre</b></label>
                     <div class="controls">
-                        <input min="0" class="form-control" v-model.number="vservice.amount" name="amount" type="number" step="0.01">
+                        <input class="form-control" :value="vservice.amount" name="amount" type="number" disabled>
                     </div>
                 </div>
             </div>
@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label class="control-label"><b>Maniobra</b></label>
                     <div class="controls">
-                        <input min="0" class="form-control" v-model.number="vservice.maneuver" name="maneuver" type="number" step="0.01">
+                        <input class="form-control" :value="vservice.maneuver" name="maneuver" type="number" disabled>
                     </div>
                 </div>
             </div>
@@ -21,18 +21,18 @@
                 <div class="form-group">
                     <label class="control-label"><b>Pension</b></label>
                     <div class="controls">
-                        <input min="0" class="form-control" v-model.number="vpension" name="pension" type="number" step="0.01" disabled>
+                        <input class="form-control" :value="vpension" name="pension" type="number" disabled>
                     </div>
                 </div>
             </div>
-            <div v-else class="col-md-4">
+            <!-- <div v-else class="col-md-4">
                 <div class="form-group">
                     <label class="control-label"><b>Otros</b></label>
                     <div class="controls">
-                        <input min="0" class="form-control" v-model.number="vservice.others" name="others" type="number" step="0.01">
+                        <input min="0" class="form-control" :value="vservice.others" name="others" type="number" disabled>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <h4 v-if="corp" class="pull-right"><b>Subtotal:</b> $ {{ subtotal.toFixed(2) }}</h4 v-if="corp">

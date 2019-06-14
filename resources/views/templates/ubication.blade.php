@@ -16,6 +16,9 @@
             <div class="col-md-6">
                 {!! Field::number('maneuver', isset($service) ? $service->maneuver: null, ['label' => 'Maniobra estimado', 'min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
            </div>
+            {{-- <div class="col-md-4">
+                {!! Field::number('others', isset($service) ? $service->others: null, ['label' => 'otros', 'min' => '0', 'tpl' => 'templates/twolines', 'step' => '0.01'])!!}
+           </div> --}}
         </div>
 
         <div class="row">
