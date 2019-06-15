@@ -58,7 +58,7 @@
                         <td>Aseguradora</td>
                         <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                         <td><b>Origen:</b>{{ $row->origin }} <br><b>Destino:</b> {{ $row->destination }}</td>
-                        <td><b>Serv:</b>{{ fdate($row->date_service, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->date_return, ' l, j/F/Y H:s') }}</td>
+                        <td><b>Serv:</b>{{ fdate($row->date_assignment, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->date_return, ' l, j/F/Y H:s') }}</td>
                         <td>
                             {{ $row->driver->name }} <br>
                             {{ fnumber($row->extra_driver) }}
@@ -97,7 +97,7 @@
                             <td>Extra Aseguradora</td>
                             <td>{{ $row->insurerService->brand }} <br> {{ $row->insurerService->type }} <br> {{ $row->insurerService->color }}</td>
                             <td><b>Origen:</b>{{ $row->insurerService->origin }} <br><b>Destino:</b> {{ $row->insurerService->destination }}</td>
-                            <td><b>Serv:</b>{{ fdate($row->insurerService->date_insurerService, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->insurerService->date_return, ' l, j/F/Y H:s') }}</td>
+                            <td><b>Serv:</b>{{ fdate($row->insurerService->date_assignment, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->insurerService->date_return, ' l, j/F/Y H:s') }}</td>
                             <td>
                                 @if ($row->type == 1)
                                     {{ $row->driver->name }} <br>
