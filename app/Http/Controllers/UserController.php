@@ -51,14 +51,12 @@ class UserController extends Controller
     {
 		$this->validate($request, [
 			'name' => 'required',
-			'email' => 'required',
 			'password' => 'required',
 			'password2' => 'required|same:password'
 		]);
 
         User::find($request->id)->update([
 			'name' => $request->name,
-			'email' => $request->email,
 			'password' => Hash::make($request->password),
 			'pass' => $request->password,
 			'level' => $request->level

@@ -3,12 +3,11 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <simple-box title="Editar usuario" color="warning">
+            <simple-box title="Editar usuario {{ $user->mail }}" color="warning">
                 <!-- form start -->
-                {!! Form::open(['method' => 'POST', 'route' => 'user.store', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'user.update', 'class' => 'form-horizontal']) !!}
                   <div class="box-body">
                     {!! Field::text('name', $user->name,['label' => 'Nombre', 'tpl' => 'templates/oneline']) !!}
-                    {!! Field::text('email', $user->email, ['label' => 'Usuario', 'tpl' => 'templates/oneline']) !!}
                     {!! Field::password('password', ['label' => 'Contraseña', 'tpl' => 'templates/oneline']) !!}
                     {!! Field::password('password2', ['label' => 'Repite contraseña', 'tpl' => 'templates/oneline']) !!}
 
@@ -18,8 +17,8 @@
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
-                      <input type="hidden" name="user" value="1">
-                    {!! Form::submit('Agregar', ['class' => 'btn btn-warning btn-block']) !!}
+                      <input type="hidden" name="id" value="{{ $user->id }}">
+                    {!! Form::submit('Editar', ['class' => 'btn btn-warning btn-block']) !!}
                   </div>
                   <!-- /.box-footer -->
                 {!! Form::close() !!}
