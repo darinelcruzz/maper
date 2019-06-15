@@ -37,9 +37,7 @@ class UserController extends Controller
 
 	function index()
     {
-        $users = User::get([
-            'id', 'name', 'email', 'pass', 'level'
-        ]);
+        $users = User::where('user', '1')->get();
 
         return view('users.show', compact('users'));
     }
