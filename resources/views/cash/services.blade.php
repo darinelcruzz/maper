@@ -81,7 +81,8 @@
 								{!! $row->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $row->statusLabel !!}
 								{{ $row->status == 'liberado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
 								{{ $row->status == 'liquidado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
-								{{ $row->status == 'pagado' ? fdate($row->date_out, ' (d/M/Y)') : '' }}
+								{{ $row->status == 'pagado' && $row->bill == null ? fdate($row->date_out, ' (d/M/Y)') : '' }}
+								{!! $row->status == 'pagado' && $row->bill != null ? fdate($row->invoice->date_pay, '(d/M/Y)', 'Y-m-d') . '<br>' . 'Fac ' . $row->invoice->folio : '' !!}
 								{{ $row->status == 'abonos' ? ' resta ' . fnumber($row->debt) : '' }}
 							</td>
 							<td>

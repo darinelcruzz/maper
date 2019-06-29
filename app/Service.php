@@ -9,7 +9,7 @@ use App\Traits\DatesTrait;
 class Service extends Model
 {
     use DatesTrait;
-    
+
     protected $fillable = [
         'service','description', 'brand', 'type', 'model',
         'category', 'load', 'plate', 'color', 'inventory',
@@ -39,6 +39,11 @@ class Service extends Model
     function helperr()
     {
         return $this->belongsTo(Driver::class, 'helper');
+    }
+
+    function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'bill');
     }
 
     function pricer()
