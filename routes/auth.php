@@ -211,7 +211,7 @@ Route::group(['prefix' => 'recursos/operadores', 'as' => 'resources.driver.'], f
     Route::get('editar/{driver}', usesas($ctrl, 'edit'))->middleware('two');
     Route::post('editar', usesas($ctrl, 'change'));
     Route::get('extras', usesas($ctrl, 'extras'));
-    // Route::post('reporte', usesas($ctrl, 'format'));
+    Route::get('reporte', usesas($ctrl, 'format'));
 });
 
 // Unidades

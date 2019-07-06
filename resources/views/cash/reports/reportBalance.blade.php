@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>MAPER</title>
+    <title>MAPER|Corte</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('/img/MAPER.ico') }}" />
@@ -35,6 +35,11 @@
                 <h5 align="center">
                     <b>{{ fdate(date('Y-m-d'), 'D, d \d\e F Y', 'Y-m-d') }}</b>
                 </h5>
+            </div>
+            <div class="col-xs-3">
+                <center>
+                    <img width="80px" src="{{ asset('/img/MAPER.png') }}">
+                </center>
             </div>
         </div>
 

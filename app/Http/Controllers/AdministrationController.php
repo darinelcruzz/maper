@@ -42,6 +42,7 @@ class AdministrationController extends Controller
         $services = Service::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('extra_driver', '>', 0)->get();
         $insurerServices = InsurerService::where('status', '!=', 'cancelado')->whereNull('cut_at')->where('extra_driver', '>', 0)->get();
         $extras = ExtraDriver::where('extra', '>', 0)->whereNull('cut_at')->get();
+
         $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
 
         $drivers = Driver::pluck('name', 'id')->toArray();

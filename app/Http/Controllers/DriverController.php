@@ -40,52 +40,14 @@ class DriverController extends Controller
         return redirect(route('resources.show'));
     }
 
-    function extras()
+    function format()
     {
         $services = Service::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
         $insurerServices = InsurerService::whereNull('cut_at')->where('extra_driver', '>', 0)->get();
         $extras = ExtraDriver::whereNull('cut_at')->get();
 
-        return view('resources.drivers.extras', compact('services', 'extras', 'insurerServices'));
+        return view('resources.drivers.extrasReport', compact('services', 'extras', 'insurerServices'));
     }
-
-    // function format(Request $request)
-    // {
-    //     $start = $request->start;
-    //     $end = $request->end;
-    //
-    //     $drivers = Driver::all();
-    //     $discounts = Discount::whereBetween('discounted_at', [$start, $end])->get();
-    //     $totalExtras = [];
-    //
-    //     $pay_days = daycount('saturday', strtotime($start), strtotime($end), 0);
-    //
-    //     // foreach ($drivers as $driver) {
-    //     //     $servicesID = [];
-    //     //
-    //     //     $services = Service::fromDateToDate($start, $end, $driver->id, 'driver_id');
-    //     //     foreach ($services as $service) {
-    //     //         array_push($servicesID, $service);
-    //     //     }
-    //     //     $services = Service::fromDateToDate($start, $end, $driver->id, 'helper');
-    //     //     foreach ($services as $service) {
-    //     //         array_push($servicesID, $service);
-    //     //     }
-    //     //
-    //     //     $services = InsurerService::fromDateToDate($start, $end, $driver->id, 'driver_id');
-    //     //     foreach ($services as $service) {
-    //     //         array_push($servicesID, $service);
-    //     //     }
-    //     //     $services = InsurerService::fromDateToDate($start, $end, $driver->id, 'helper');
-    //     //     foreach ($services as $service) {
-    //     //         array_push($servicesID, $service);
-    //     //     }
-    //     //
-    //     //     $totalExtras[$driver->id] = $servicesID;
-    //     // }
-    //
-    //     return view('resources.drivers.format', compact('totalExtras', 'drivers', 'start', 'end', 'discounts', 'pay_days'));
-    // }
 
     function destroy($id)
     {

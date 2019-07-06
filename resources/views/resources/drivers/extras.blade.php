@@ -71,51 +71,45 @@
                 @endforeach
                 @foreach ($extras as $row)
                     <tr>
+                        <td>{{ $row->id }}</td>
                         @if ($row->service_id > 0)
-                            <td>{{ $row->id }}</td>
                             <td></td>
                             <td>Extra servicio</td>
                             <td>{{ $row->service->brand }} <br> {{ $row->service->type }} <br> {{ $row->service->color }}</td>
                             <td><b>Origen:</b>{{ $row->service->origin }} <br><b>Destino:</b> {{ $row->service->destination }}</td>
                             <td><b>Serv:</b>{{ fdate($row->service->date_service, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->service->date_return, ' l, j/F/Y H:s') }}</td>
-                            <td>
-                                @if ($row->type == 1)
-                                    {{ $row->driver->name }} <br>
-                                    {{ fnumber($row->extra) }}
-                                @endif
-                            </td>
-                            <td>
-                                @if ($row->type == 0)
-                                    {{ $row->driver->name }} <br>
-                                    {{ fnumber($row->extra) }}
-                                @endif
-                            </td>
                         @endif
                         @if ($row->insurer_service_id > 0)
-                            <td>{{ $row->id }}</td>
                             <td></td>
                             <td>Extra Aseguradora</td>
                             <td>{{ $row->insurerService->brand }} <br> {{ $row->insurerService->type }} <br> {{ $row->insurerService->color }}</td>
                             <td><b>Origen:</b>{{ $row->insurerService->origin }} <br><b>Destino:</b> {{ $row->insurerService->destination }}</td>
                             <td><b>Serv:</b>{{ fdate($row->insurerService->date_assignment, ' l, j/F/Y H:s') }} <br><b>Reg:</b> {{ fdate($row->insurerService->date_return, ' l, j/F/Y H:s') }}</td>
-                            <td>
-                                @if ($row->type == 1)
-                                    {{ $row->driver->name }} <br>
-                                    {{ fnumber($row->extra) }}
-                                @endif
-                            </td>
-                            <td>
-                                @if ($row->type == 0)
-                                    {{ $row->driver->name }} <br>
-                                    {{ fnumber($row->extra) }}
-                                @endif
-                            </td>
                         @endif
+                        <td>
+                            @if ($row->type == 1)
+                                {{ $row->driver->name }} <br>
+                                {{ fnumber($row->extra) }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($row->type == 0)
+                                {{ $row->driver->name }} <br>
+                                {{ fnumber($row->extra) }}
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </template>
         </data-table>
     {{-- </div> --}}
-    <h3 align="center">Total = $ {{ $services->sum('extra_driver') + $services->sum('extra_helper') + $insurerServices->sum('extra_driver') + $insurerServices->sum('extra_helper') + $extras->sum('extra')  }}</h3>
+    <h3 align="center">Total = {{ fnumber($services->sum('extra_driver') + $services->sum('extra_helper') + $insurerServices->sum('extra_driver') + $insurerServices->sum('extra_helper') + $extras->sum('extra')) }}</h3>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <a href="{{ route('resources.driver.format') }}" class="btn btn-block btn-primary" target="_blank">
+                Imprimir
+            </a>
+        </div>
+    </div>
 {{-- </div> --}}
 {{-- @endsection --}}
