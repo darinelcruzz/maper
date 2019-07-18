@@ -63,7 +63,7 @@
                                 <td>{{ $row->service }}</td>
                                 <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                                 <td><b>O:</b>{{ $row->origin }} <br><b>D:</b> {{ $row->destination }}</td>
-                                <td><b>S:</b>{{ fdate($row->date_service, ' j/M/y H:s') }} <br><b>R:</b> {{ fdate($row->date_return, ' j/M/y H:s') }}</td>
+                                <td><b>S:</b>{{ fdate($row->date_service, ' j/M/y H:i') }} <br><b>R:</b> {{ fdate($row->date_return, ' j/M/y H:i') }}</td>
                                 <td>
                                     <b>O:</b> {{ $row->driver->nickname }}: {{ fnumber($row->extra_driver) }} <br>
                                     <b>A:</b> {{ $row->helperr->nickname or '' }} {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
@@ -76,7 +76,7 @@
                                 <td>Aseguradora</td>
                                 <td>{{ $row->brand }} <br> {{ $row->type }} <br> {{ $row->color }}</td>
                                 <td><b>O:</b>{{ $row->origin }} <br><b>D:</b> {{ $row->destination }}</td>
-                                <td><b>S:</b>{{ fdate($row->date_assignment, ' j/M/y H:s') }} <br><b>R:</b> {{ fdate($row->date_return, ' j/M/y H:s') }}</td>
+                                <td><b>S:</b>{{ fdate($row->date_assignment, ' j/M/y H:i') }} <br><b>R:</b> {{ fdate($row->date_return, ' j/M/y H:i') }}</td>
                                 <td>
                                     <b>O:</b> {{ $row->driver->nickname }}: {{ fnumber($row->extra_driver) }} <br>
                                     <b>A:</b> {{ $row->helperr->nickname or '' }} {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
@@ -90,13 +90,13 @@
                                     <td>Extra servicio</td>
                                     <td>{{ $row->service->brand }} <br> {{ $row->service->type }} <br> {{ $row->service->color }}</td>
                                     <td><b>O:</b>{{ $row->service->origin }} <br><b>D:</b> {{ $row->service->destination }}</td>
-                                    <td><b>S:</b>{{ fdate($row->service->date_service, ' j/M/y H:s') }} <br><b>R:</b> {{ fdate($row->service->date_return, ' j/M/y H:s') }}</td>
+                                    <td><b>S:</b>{{ fdate($row->service->date_service, ' j/M/y H:i') }} <br><b>R:</b> {{ fdate($row->service->date_return, ' j/M/y H:i') }}</td>
                                 @endif
                                 @if ($row->insurer_service_id > 0)
                                     <td>Extra Aseguradora</td>
                                     <td>{{ $row->insurerService->brand }} <br> {{ $row->insurerService->type }} <br> {{ $row->insurerService->color }}</td>
                                     <td><b>O:</b>{{ $row->insurerService->origin }} <br><b>D:</b> {{ $row->insurerService->destination }}</td>
-                                    <td><b>S:</b>{{ fdate($row->insurerService->date_assignment, ' j/M/y H:s') }} <br><b>R:</b> {{ fdate($row->insurerService->date_return, ' j/M/y H:s') }}</td>
+                                    <td><b>S:</b>{{ fdate($row->insurerService->date_assignment, ' j/M/y H:i') }} <br><b>R:</b> {{ fdate($row->insurerService->date_return, ' j/M/y H:i') }}</td>
                                 @endif
                                     <td>
                                         @if ($row->type == 1)
