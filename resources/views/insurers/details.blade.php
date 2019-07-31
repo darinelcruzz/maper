@@ -21,6 +21,11 @@
                                     <td><h3>{{ fnumber($insurer->total_sum) }}</h3></td>
                                     <td><h3>{{ $insurer->pending }}</h3></td>
                                 </tr>
+                                <br>    
+                                <tr>
+                                    <td>RECEPCIÓN: {{ $insurer->reception }}</td>
+                                    <td>{{ $insurer->observations }}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <br>

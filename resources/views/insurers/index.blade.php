@@ -10,11 +10,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre</th>
-                                <th>R.F.C.</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
+                                <th style="width: 25%">Nombre</th>
+                                <th style="width: 30%">Dirección</th>
                                 <th>Saldo</th>
+                                <th style="width: 12%"># Recepción</th>
+                                <th>Observaciones</th>
                             </tr>
                         </thead>
 
@@ -22,11 +22,17 @@
                             @foreach ($insurers as $insurer)
                                 <tr>
                                     <td>{{ $insurer->id}}</td>
-                                    <td><a href="{{ route('insurer.details', ['id' => $insurer->id]) }}"> {{ $insurer->name }} </a></td>
-                                    <td>{{ $insurer->rfc }}</td>
-                                    <td>{{ $insurer->address }}</td>
-                                    <td>{{ $insurer->phone }}</td>
-                                    <td>{{ fnumber($insurer->total_sum) }}</td>
+                                    <td>
+                                        <a href="{{ route('insurer.details', ['id' => $insurer->id]) }}"> {{ $insurer->name }} </a>
+                                        {!! $insurer->rfc != '0' ? '<br> R.F.C. <span style="color: red">' . $insurer->rfc . '</span>': '' !!}
+                                    </td>
+                                    <td>
+                                        {{ $insurer->address }}
+                                        {!! $insurer->phone != '0' ? '<br> <i class="fa fa-phone"></i> <span style="color: blue">' . $insurer->phone . '</span>': '' !!}
+                                    </td>
+                                    <td style="text-align: right;">{{ fnumber($insurer->total_sum) }}</td>
+                                    <td>{{ $insurer->reception }}</td>
+                                    <td>{{ $insurer->observations }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

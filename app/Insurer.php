@@ -7,7 +7,7 @@ use Jenssegers\Date\Date;
 
 class Insurer extends Model
 {
-    protected $fillable = ['name', 'business_name', 'rfc', 'address', 'phone'];
+    protected $fillable = ['name', 'business_name', 'rfc', 'address', 'phone', 'observations', 'reception'];
 
     function services()
     {

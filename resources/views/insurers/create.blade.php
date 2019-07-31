@@ -11,6 +11,8 @@
                         {!! Field::text('rfc', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('address', ['tpl' => 'templates/oneline']) !!}
                         {!! Field::text('phone', ['tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('reception', ['label' => 'Número de recepción', 'tpl' => 'templates/oneline']) !!}
+                        {!! Field::text('observations', ['tpl' => 'templates/oneline']) !!}
                     </div>
 
                     <div class="box-footer">
