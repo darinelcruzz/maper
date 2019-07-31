@@ -23,7 +23,12 @@
                                 <tr>
                                     <td>{{ $insurer->id}}</td>
                                     <td>
-                                        <a href="{{ route('insurer.details', ['id' => $insurer->id]) }}"> {{ $insurer->name }} </a>
+                                        <a href="{{ route('insurer.details', $insurer) }}"> {{ $insurer->name }} </a> &nbsp;
+                                        @if(auth()->user()->level == 1)
+                                        <a href="{{ route('insurer.edit', $insurer) }}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        @endif
                                         {!! $insurer->rfc != '0' ? '<br> R.F.C. <span style="color: red">' . $insurer->rfc . '</span>': '' !!}
                                     </td>
                                     <td>
