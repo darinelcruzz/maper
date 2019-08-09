@@ -73,7 +73,7 @@
                         </dropdown> --}}
                     </td>
                     <td>{{  $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a')}}</td>
-                    <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }} </a></td>
+                    <td><a href="{{ route('client.details', $row->client) }}"> {{ $row->client->name }} </a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                     <td>{{ $row->bill }}</td>
