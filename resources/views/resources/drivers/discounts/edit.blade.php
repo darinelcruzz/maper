@@ -15,8 +15,8 @@
 
                     <div class="box-footer">
                         <input type="hidden" name="id" value="{{ $discount->id }}">
-                        @if ($request->user()->level == 1)
-                            {!! Form::submit('Modificar', ['class' => 'btn btn-danger btn-block']) !!}                            
+                        @if (auth()->user()->level == 1)
+                            {!! Form::submit('Modificar', ['class' => 'btn btn-danger btn-block']) !!}
                         @endif
                     </div>
                 {!! Form::close() !!}
