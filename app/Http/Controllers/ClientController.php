@@ -11,7 +11,7 @@ class ClientController extends Controller
 {
     function index()
     {
-        $clients = Client::all();
+        $clients = Client::where('status', 1)->get();
         return view('clients.index', compact('clients'));
     }
 
@@ -75,7 +75,9 @@ class ClientController extends Controller
 
     function destroy(Client $client)
     {
-        $client->delete();
+        $client->update([
+            'status' => 0
+        ]);
 
         return back();
     }
