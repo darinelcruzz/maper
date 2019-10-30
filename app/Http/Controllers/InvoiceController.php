@@ -121,7 +121,7 @@ class InvoiceController extends Controller
     function validateRequest()
     {
         return request()->validate([
-            'folio' => 'required',
+            'folio' => 'required|unique:invoices',
             'retention' => 'required',
             'subtotal' => 'required',
             'iva' => 'required',
