@@ -47,7 +47,8 @@ const app = new Vue({
         subtotal: 0,
         retention: 0,
         iva: 0,
-        isFormWizardDone: false
+        isFormWizardDone: false,
+        checked: []
     },
     methods: {
         disable(option) {
@@ -67,6 +68,12 @@ const app = new Vue({
     computed: {
         total() {
             return (this.subtotal - this.retention + Number(this.iva)).toFixed(2);
+        },
+        services_sum() {
+            return this.checked.reduce((a, b) => a + b.amount, 0).toFixed(2)
+        },
+        selected_services() {
+            return this.checked.map((a) => a.id)
         }
     }
 });

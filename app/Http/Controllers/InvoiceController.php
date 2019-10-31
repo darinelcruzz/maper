@@ -37,7 +37,9 @@ class InvoiceController extends Controller
 
             $invoice = Invoice::create($request->except('services', 'type'));
 
-            foreach (InsurerService::find($request->services) as $service) {
+            $services = InsurerService::find(explode(',', $request->services));
+
+            foreach ($services as $service) {
                 $service->update([
                     'bill' => $invoice->id,
                     'status' => 'facturado'
@@ -56,7 +58,7 @@ class InvoiceController extends Controller
 
             $invoice = Invoice::create($request->except('services', 'type'));
 
-            foreach (Service::find($request->services) as $service) {
+            foreach (Service::find(explode(',', $request->services)) as $service) {
                 $service->update([
                     'bill' => $invoice->id,
                     'status' => 'facturado'
