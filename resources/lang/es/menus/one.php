@@ -55,6 +55,10 @@ return [
                 'title' => 'Liberados',
                 'route' => 'admin.showReleased'
             ],
+            'invoices' => [
+                'title' => 'Facturas',
+                'route' => 'invoice.index'
+            ],
         ]
     ],
 
