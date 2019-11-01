@@ -74,7 +74,7 @@
                                     <td>{{ $row->id }}</td>
                                     <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
                                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                                    <td>{{ $service->origin . ' - ' . $service->destination }}</td>
+                                    <td>{{ $row->origin . ' - ' . $row->destination }}</td>
                                     <td>{{ $row->getDays('date_service', $today) }}</td>
                                     <td>{{ fnumber($row->debt) }}(Pagos)</td>
                                 </tr>
