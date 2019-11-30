@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 use App\Insurer;
 use App\Invoice;
 
@@ -61,5 +62,17 @@ class InsurerController extends Controller
         $paids = Invoice::where('insurer_id', $insurer->id)
                             ->where('status', 'pagada')->get();
         return view('insurers.details', compact('insurer', 'pendings', 'paids'));
+    }
+
+    function report(Insurer $insurer, $type, $status)
+    {
+        $today = Date::now();
+
+        $types = ['servicios' => 'services', 'facturas' => 'invoices'];
+        $kinds = ['credito' => 'credit', 'ingresados' => 'inserted', 'disputa' => 'disputed', 'aprobados' => 'approved', 'pagados' => 'paid', 'pagadas' => 'paid', 'pendientes' => 'pending'];
+
+        $function = $kinds[$status] . "_" . $types[$type];
+
+        return view('insurers.report', compact('insurer', 'today', 'function', 'type', 'status', 'kinds'));
     }
 }

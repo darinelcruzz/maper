@@ -3,7 +3,7 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <simple-box title="Editar aseguradora" color="warning">
+            <simple-box title="Editar aseguradora" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => ['insurer.update', $insurer], 'class' => 'form-horizontal']) !!}
                     <div class="box-body">
                         {!! Field::text('name', $insurer->name, ['tpl' => 'templates/oneline']) !!}

@@ -21,11 +21,6 @@
                                     <td><h3>{{ fnumber($insurer->total_sum) }}</h3></td>
                                     <td><h3>{{ $insurer->pending }}</h3></td>
                                 </tr>
-                                <br>    
-                                <tr>
-                                    <td>RECEPCIÓN: {{ $insurer->reception }}</td>
-                                    <td>{{ $insurer->observations }}</td>
-                                </tr>
                             </tbody>
                         </table>
                         <br>
@@ -39,13 +34,13 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Credito ({{ $insurer->serviceNumber('credit') }})" example="example1" color="primary" collapsed button>
-                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio/Inv', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->credit_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
-                                <td>{{ $row->folio }}</td>
+                                <td>{{ $row->folio }}<br>{{ $row->inventory != 0 ? 'Inv: ' . $row->inventory :'' }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
                                     <dropdown color="primary" icon="cogs">
@@ -66,7 +61,10 @@
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5"><span class="pull-right">Total</span></th>
+                            <th colspan="3">
+                                <a class="btn btn-xs btn-primary btn-block" href="{{ route('insurer.report', [$insurer, 'servicios', 'credito']) }}">Reporte</a>
+                            </th>
+                            <th colspan="2"><span class="pull-right">Total</span></th>
                             <th>{{ $insurer->serviceTotal('credit', true) }}</th>
                         </tr>
                     </template>
@@ -76,13 +74,13 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Ingresados  ({{ $insurer->serviceNumber('inserted') }})" example="example2" color="primary" collapsed button>
-                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio/Inv', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->inserted_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
-                                <td>{{ $row->folio }}</td>
+                                <td>{{ $row->folio }}<br>{{ $row->inventory != 0 ? 'Inv: ' . $row->inventory :'' }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
                                     <dropdown color="primary" icon="cogs">
@@ -100,7 +98,10 @@
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5"><span class="pull-right">Total</span></th>
+                            <th colspan="3">
+                                <a class="btn btn-xs btn-primary btn-block" href="{{ route('insurer.report', [$insurer, 'servicios', 'ingresados']) }}">Reporte</a>
+                            </th>
+                            <th colspan="2"><span class="pull-right">Total</span></th>
                             <th>{{ $insurer->serviceTotal('inserted', true)}}</th>
                         </tr>
                     </template>
@@ -110,13 +111,13 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Disputa  ({{ $insurer->serviceNumber('disputed') }})" example="example3" color="danger" collapsed button>
-                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', '', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio/Inv', 'Vehículo', '', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->disputed_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
-                                <td>{{ $row->folio }}</td>
+                                <td>{{ $row->folio }}<br>{{ $row->inventory != 0 ? 'Inv: ' . $row->inventory :'' }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>
                                     <dropdown color="danger" icon="cogs">
@@ -131,7 +132,10 @@
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="5"><span class="pull-right">Total</span></th>
+                            <th colspan="3">
+                                <a class="btn btn-xs btn-primary btn-block" href="{{ route('insurer.report', [$insurer, 'servicios', 'disputa']) }}">Reporte</a>
+                            </th>
+                            <th colspan="2"><span class="pull-right">Total</span></th>
                             <th>{{ $insurer->serviceTotal('disputed', true)}}</th>
                         </tr>
                     </template>
@@ -143,13 +147,13 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Aprobado  ({{ $insurer->serviceNumber('approved') }})" example="example4" color="warning" collapsed button>
-                    {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Monto')}}
+                    {{ drawHeader('ID', 'Asignacion', 'Folio/Inv', 'Vehículo', 'Monto')}}
                     <template slot="body">
                         @foreach($insurer->approved_services as $row)
                             <tr>
                                 <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
                                 <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
-                                <td>{{ $row->folio }}</td>
+                                <td>{{ $row->folio }}<br>{{ $row->inventory != 0 ? 'Inv: ' . $row->inventory :'' }}</td>
                                 <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                                 <td>${{ $row->total }}</td>
                             </tr>
@@ -157,12 +161,15 @@
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="3">
+                            <th colspan="2">
+                                <a class="btn btn-xs btn-primary btn-block" href="{{ route('insurer.report', [$insurer, 'servicios', 'aprobados']) }}">Reporte</a>
+                            </th>
+                            <th>
                                 @if (auth()->user()->level == 1)
-                                    <a class="btn btn-xs btn-primary btn-block" href="{{ route('invoice.create', ['insurer_id' => $insurer->id]) }}">Facturar</a>
+                                    <a class="btn btn-xs btn-success btn-block" href="{{ route('invoice.create', ['insurer_id' => $insurer->id]) }}">Facturar</a>
                                 @endif
                             </th>
-                            <th colspan="1"><span class="pull-right"><span class="pull-right">Total</span></span></th>
+                            <th><span class="pull-right"><span class="pull-right">Total</span></span></th>
                             <th>{{ $insurer->serviceTotal('approved', true)}}</th>
                         </tr>
                     </template>
@@ -172,7 +179,7 @@
         <div class="row">
             <div class="col-md-12">
                 <data-table-com title="Facturado  ({{ count($pendings) }})" example="example5" color="info" collapsed button>
-                    
+
 
                     @if (auth()->user()->level == 1)
                         {{ drawHeader('ID', '<i class="fa fa-usd"></i>', 'Factura', 'Fecha', 'Ret', 'IVA', 'Monto')}}
@@ -181,9 +188,6 @@
                     @endif
 
                     <template slot="body">
-                        @php
-                            $tPending = 0;
-                        @endphp
                         @foreach($pendings as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
@@ -199,16 +203,16 @@
                                 <td>{{ fnumber($row->retention) }}</td>
                                 <td>{{ fnumber($row->iva) }}</td>
                                 <td>{{ fnumber($row->amount) }}</td>
-                                @php
-                                    $tPending += $row->amount;
-                                @endphp
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="{{ auth()->user()->level == 1 ? 6: 5}}"><span class="pull-right">Total</span></th>
-                            <th>{{ fnumber($tPending) }}</th>
+                            <th colspan="3">
+                                <a class="btn btn-xs btn-primary btn-block" href="{{ route('insurer.report', [$insurer, 'facturas', 'pendientes']) }}">Reporte</a>
+                            </th>
+                            <th colspan="3"><span class="pull-right">Total</span></th>
+                            <th>{{ fnumber($insurer->pending_invoices->sum('amount')) }}</th>
                         </tr>
                     </template>
                 </data-table-com>
@@ -219,9 +223,6 @@
                 <data-table-com title="Pagadas ({{ count($paids) }})" example="example6" color="success" collapsed button>
                     {{ drawHeader('ID', 'Factura', 'Fecha', 'Pago', 'Ret', 'IVA', 'Monto')}}
                     <template slot="body">
-                        @php
-                            $tPaids = 0;
-                        @endphp
                         @foreach($paids as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
@@ -230,17 +231,17 @@
                                 <td>{{ fdate($row->date_pay, 'j/M/y', 'Y-m-d') }}</td>
                                 <td>{{ fnumber($row->retention) }}</td>
                                 <td>{{ fnumber($row->iva) }}</td>
-                                <td>{{ fnumber($row->amount) }}</td>
-                                @php
-                                    $tPaids += $row->amount;
-                                @endphp
+                                <td>{{ fnumber($row->amount) }}</td>                                
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
-                            <th colspan="6"><span class="pull-right">Total</span></th>
-                            <th>{{ fnumber($tPaids) }}</th>
+                            <th colspan="3">
+                                <a class="btn btn-xs btn-primary btn-block" href="{{ route('insurer.report', [$insurer, 'facturas', 'pagadas']) }}">Reporte</a>
+                            </th>
+                            <th colspan="3"><span class="pull-right">Total</span></th>
+                            <th>{{ fnumber($insurer->paid_invoices->sum('amount')) }}</th>
                         </tr>
                     </template>
                 </data-table-com>

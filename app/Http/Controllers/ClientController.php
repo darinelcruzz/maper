@@ -61,6 +61,7 @@ class ClientController extends Controller
         $today = Date::now();
         return view('clients.details', compact('client', 'today'));
     }
+
     function report(Client $client, $type, $status)
     {
         $today = Date::now();
@@ -70,7 +71,7 @@ class ClientController extends Controller
 
         $function = $kinds[$status] . "_" . $types[$type];
 
-        return view('clients.report', compact('client', 'today', 'function', 'function2', 'type', 'status'));
+        return view('clients.report', compact('client', 'today', 'function', 'type', 'status'));
     }
 
     function destroy(Client $client)

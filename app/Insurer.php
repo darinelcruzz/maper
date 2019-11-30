@@ -14,6 +14,11 @@ class Insurer extends Model
         return $this->hasMany(InsurerService::class, 'insurer_id');
     }
 
+    function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     function getCreditServicesAttribute()
     {
         return $this->services->where('status', 'credito');
@@ -49,11 +54,21 @@ class Insurer extends Model
         return count($this->credit_services) + count($this->inserted_services) + count($this->disputed_services) + count($this->approved_services) + count($this->invoiced_services);
     }
 
+    function getPendingInvoicesAttribute()
+    {
+        return $this->invoices->where('status', 'pendiente');
+    }
+
+    function getPaidInvoicesAttribute()
+    {
+        return $this->invoices->where('status', 'pagada');
+    }
+
     function serviceTotal($status, $formatted = false) {
-        $sattribute = $status . "_services";
+        $sAttribute = $status . "_services";
         $total = 0;
 
-        foreach ($this->$sattribute as $service) {
+        foreach ($this->$sAttribute as $service) {
             $total += $service->total;
         }
 
@@ -70,9 +85,9 @@ class Insurer extends Model
     }
 
     function serviceNumber($status) {
-        $sattribute = $status . "_services";
+        $sAttribute = $status . "_services";
         $total = 0;
-        foreach ($this->$sattribute as $service) {
+        foreach ($this->$sAttribute as $service) {
             $total++;
         }
         return $total;

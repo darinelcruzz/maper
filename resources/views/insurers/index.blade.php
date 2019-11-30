@@ -13,7 +13,6 @@
                                 <th style="width: 25%">Nombre</th>
                                 <th style="width: 30%">Dirección</th>
                                 <th>Saldo</th>
-                                <th style="width: 12%"># Recepción</th>
                                 <th>Observaciones</th>
                             </tr>
                         </thead>
@@ -36,7 +35,6 @@
                                         {!! $insurer->phone != '0' ? '<br> <i class="fa fa-phone"></i> <span style="color: blue">' . $insurer->phone . '</span>': '' !!}
                                     </td>
                                     <td style="text-align: right;">{{ fnumber($insurer->total_sum) }}</td>
-                                    <td>{{ $insurer->reception }}</td>
                                     <td>{{ $insurer->observations }}</td>
                                 </tr>
                             @endforeach

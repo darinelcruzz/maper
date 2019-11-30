@@ -16,6 +16,7 @@ Route::group(['prefix' => 'aseguradoras', 'as' => 'insurer.'], function () {
     Route::get('editar/{insurer}', usesas($ctrl, 'edit'))->middleware('one');
     Route::post('editar/{insurer}', usesas($ctrl, 'update'));
     Route::get('detalles/{insurer}', usesas($ctrl, 'details'));
+    Route::get('reporte/{insurer}/{type}/{status}', usesas($ctrl, 'report'));
 });
 
 //Admin
