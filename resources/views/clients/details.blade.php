@@ -31,14 +31,14 @@
         </div>
 
         @if(count($client->limbo_services))
-          <data-table-com title="Sin completar ({{ count($client->limbo_services) }})" example="example1" color="danger">
+          <data-table-com title="Sin completar ({{ count($client->limbo_services) }})" example="example1" color="default">
               {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Fecha', 'Vehículo', 'Dias', 'Monto')}}
               <template slot="body">
                   @foreach($client->limbo_services as $service)
                     <tr>
                         <td><a href="{{ route('service.general.details', $service) }}"> {{ $service->id }} </a></td>
                         <td>
-                            <dropdown color="primary" icon="cogs">
+                            <dropdown color="default" icon="cogs">
                                     <ddi to="{{ route('service.general.pay', $service)}}"
                                         icon="usd" text="Pagar">
                                     </ddi>
@@ -162,7 +162,7 @@
 
     <div class="col-md-6">
 
-        <data-table-com title="Facturas pendientes ({{ count($client->unpaid_invoices) }})" example="example3" color="info">
+        <data-table-com title="Facturas pendientes ({{ count($client->pending_invoices) }})" example="example3" color="info">
             {{ drawHeader('factura', '<i class="fa fa-cogs"></i>', 'fecha', 'ret', 'I.V.A.', 'monto')}}
             <template slot="body">
                 @foreach($client->pending_invoices as $invoice)
