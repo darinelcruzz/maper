@@ -51,6 +51,10 @@ return [
                 'title' => 'Corte',
                 'route' => 'admin.search'
             ],
+            'past' => [
+                'title' => 'Cortes anteriores',
+                'route' => 'admin.pastServices'
+            ],
             'released' => [
                 'title' => 'Liberados',
                 'route' => 'admin.showReleased'

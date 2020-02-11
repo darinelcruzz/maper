@@ -60,25 +60,8 @@
 						</div>
 						<br><br>
 					</tab-content>
-					<tab-content title="Anteriores" icon="fa fa-backward">
-						{{-- <div class="row">
-							<div class="col-md-12">
-								{!! Field::select('salary', $dates, null, ['empty' => '¿De que fecha?', 'tpl' => 'templates/withicon'], ['icon' => 'user']) !!}
-							</div>
-						</div> --}}
-					</tab-content>
 				</form-wizard>
 			</solid-box>
 		</div>
-
-		{{-- <div class="col-md-4">
-			<solid-box title="Servicios" color="primary" >
-
-			</solid-box>
-		</div>
-
-		<div class="col-md-4">
-
-		</div> --}}
 	</div>
 @endsection

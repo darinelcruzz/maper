@@ -48,6 +48,7 @@ class AdministrationController extends Controller
         $drivers = Driver::pluck('name', 'id')->toArray();
         $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
         $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
+
         return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates', 'drivers', 'discounts', 'bonuses'));
     }
 
@@ -133,6 +134,44 @@ class AdministrationController extends Controller
         $insurerServices2 = InsurerService::whereNull('cut2_at')->where('date_pay', '!=', null)->get();
         $invoices = Invoice::whereNull('cut_at')->where('date_pay', '!=', null)->get();
         $payments = Payment::whereNull('cut_at')->get();
+
+        return view('cash.reports.reportServices', compact('fdate', 'services', 'services2', 'insurerServices', 'insurerServices2', 'invoices', 'payments'));
+    }
+
+    function pastServices()
+    {
+        $cut_dates = Service::whereNotNull('cut_at')->orderBy('cut_at', 'desc')->pluck('id', 'cut_at')->take(10);
+
+        return view('cash.reports.past', compact('cut_dates'));
+    }
+
+    function reportPastServices(Request $request)
+    {
+        $fdate= 'Corte del ' . fdate($request->start, 'D, d/M/Y', 'Y-m-d');
+        $services = Service::where([
+                ['cut2_at', '!=', $request->start],
+                ['cut_at', '=', $request->start],
+                ['status', '!=', 'cancelado'],
+                ['pay', '!=','abonos']
+            ])->orWhere([
+                ['cut2_at', '=', null],
+                ['cut_at', '=', $request->start],
+                ['status', '!=', 'cancelado'],
+                ['pay', '!=','abonos']
+            ])->get();
+        $services2 = Service::where('cut2_at', $request->start)->where('pay', '!=', 'abonos')->get();
+        $insurerServices = InsurerService::where([
+                ['cut2_at', '!=', $request->start],
+                ['cut_at', '=', $request->start],
+                ['status', '!=', 'cancelado']
+            ])->orWhere([
+                ['cut2_at', '=', null],
+                ['cut_at', '=', $request->start],
+                ['status', '!=', 'cancelado']
+            ])->get();
+        $insurerServices2 = InsurerService::where('cut2_at', $request->start)->get();
+        $invoices = Invoice::where('cut_at', $request->start)->get();
+        $payments = Payment::where('cut_at', $request->start)->get();
 
         return view('cash.reports.reportServices', compact('fdate', 'services', 'services2', 'insurerServices', 'insurerServices2', 'invoices', 'payments'));
     }

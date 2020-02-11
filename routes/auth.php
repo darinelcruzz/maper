@@ -28,6 +28,8 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
     Route::get('reporte/corte', usesas($ctrl, 'cut'));
     Route::post('reporte/corte', usesas($ctrl, 'reportBalance'));
     Route::post('reporte/servicios', usesas($ctrl, 'reportServices'));
+    Route::get('reporte/servicios/pasados', usesas($ctrl, 'pastServices'));
+    Route::post('reporte/servicios/pasados', usesas($ctrl, 'reportPastServices'));
     Route::get('reporte/liberados', usesas($ctrl, 'searchReleased'));
     Route::post('reporte/liberados', usesas($ctrl, 'showReleased'));
 });
