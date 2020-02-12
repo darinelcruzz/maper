@@ -28,10 +28,18 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.'], function () {
     Route::get('reporte/corte', usesas($ctrl, 'cut'));
     Route::post('reporte/corte', usesas($ctrl, 'reportBalance'));
     Route::post('reporte/servicios', usesas($ctrl, 'reportServices'));
-    Route::get('reporte/servicios/pasados', usesas($ctrl, 'pastServices'));
-    Route::post('reporte/servicios/pasados', usesas($ctrl, 'reportPastServices'));
     Route::get('reporte/liberados', usesas($ctrl, 'searchReleased'));
     Route::post('reporte/liberados', usesas($ctrl, 'showReleased'));
+});
+
+//Reportes
+Route::group(['prefix' => 'reporte', 'as' => 'report.'], function () {
+    $ctrl = 'ReportController';
+
+    Route::get('servicios/pasados', usesas($ctrl, 'pastServices'));
+    Route::post('servicios/pasados', usesas($ctrl, 'reportPastServices'));
+    Route::post('cortes/pasados', usesas($ctrl, 'reportPastBalance'));
+
 });
 
 // Servicios

@@ -53,7 +53,7 @@ return [
             ],
             'past' => [
                 'title' => 'Cortes anteriores',
-                'route' => 'admin.pastServices'
+                'route' => 'report.pastServices'
             ],
             'released' => [
                 'title' => 'Liberados',

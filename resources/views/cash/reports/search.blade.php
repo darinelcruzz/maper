@@ -14,7 +14,7 @@
 					next-button-text="Siguiente">
 
 					<tab-content title="Servicios" icon="fa fa-file-text-o">
-						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportServices', 'target' => '_blank']) !!}
+						{!! Form::open(['method' => 'POST', 'route' => 'admin.reportServices', 'target' => '_blank']) !!}						
 							<br><h3 align="center">Formato de servicios e ingresos</h3><br>
 							<div class="row">
 								<div class="col-md-6  col-md-offset-3">

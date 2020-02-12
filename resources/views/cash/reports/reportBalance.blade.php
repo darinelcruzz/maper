@@ -33,7 +33,7 @@
                     <b>Corte</b><br>
                 </h2>
                 <h5 align="center">
-                    <b>{{ fdate(date('Y-m-d'), 'D, d \d\e F Y', 'Y-m-d') }}</b>
+                    <b>{{ $fdate }}</b>
                 </h5>
             </div>
             <div class="col-xs-3">
