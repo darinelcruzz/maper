@@ -70,7 +70,7 @@ const app = new Vue({
             return (this.subtotal - this.retention + Number(this.iva)).toFixed(2);
         },
         services_sum() {
-            return this.checked.reduce((a, b) => a + b.amount, 0).toFixed(2)
+            return this.checked.reduce((a, b) => a + (b.amount + b.maneuver + b.pension + b.others - b.discount), 0).toFixed(2)
         },
         selected_services() {
             return this.checked.map((a) => a.id)
