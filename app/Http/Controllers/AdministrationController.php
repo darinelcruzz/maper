@@ -25,6 +25,7 @@ class AdministrationController extends Controller
     {
         if (session('redirected')) {
             $date = session('redirected');
+            $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
         } else {
             $date = $request->date == 0 ? Date::now()->format('Y-m-d') : $request->date;
             $fdate= fdate($date, 'D, d/M/Y', 'Y-m-d');
@@ -49,7 +50,7 @@ class AdministrationController extends Controller
         $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
         $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
 
-        return view('cash.reports.search', compact('date', 'services', 'extras', 'insurerServices', 'dates', 'drivers', 'discounts', 'bonuses'));
+        return view('cash.reports.search', compact('services', 'extras', 'insurerServices', 'dates', 'drivers', 'discounts', 'bonuses'));
     }
 
     function cut()
