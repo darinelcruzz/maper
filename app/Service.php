@@ -18,7 +18,7 @@ class Service extends Model
         'date_service', 'date_out', 'date_return', 'amount',
         'ret', 'status', 'maneuver', 'pension', 'bill','others',
         'discount', 'reason', 'pay', 'view', 'releaser', 'folio',
-        'lot', 'key', 'cut_at', 'cut2_at'
+        'lot', 'key', 'cut_at', 'cut2_at', 'km'
     ];
 
     function driver()

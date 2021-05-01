@@ -77,6 +77,11 @@
                                 <B>Destino:</B><dd>{{ $service->destination }}</dd>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <B>Km:</B><dd>{{ $service->km }}</dd>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 

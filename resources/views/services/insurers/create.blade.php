@@ -75,7 +75,7 @@
                                             {!! Field::text('load', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                         <div class="col-md-4">
-                                            {!! Field::number('inventory', ['tpl' => 'templates/twolines', 'step' => '0.01'])!!}
+                                            {!! Field::number('inventory', ['tpl' => 'templates/twolines'])!!}
                                         </div>
                                     </div>
                                 </div>
@@ -87,11 +87,14 @@
                                 <div class="col-md-8 col-md-offset-2">
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             {!! Field::text('origin', ['tpl' => 'templates/twolines']) !!}
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             {!! Field::text('destination', ['tpl' => 'templates/twolines']) !!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {!! Field::number('km', 0, ['min' => '0', 'tpl' => 'templates/twolines']) !!}
                                         </div>
                                     </div>
 

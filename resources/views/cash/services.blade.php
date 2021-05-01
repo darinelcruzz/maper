@@ -63,7 +63,7 @@
 							<td>{{ $row->description }}</td>
 							<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 							<td>
-								{{ $row->origin }} - {{ $row->destination }}
+								{{ $row->origin }} - {{ $row->destination }} - {{ $row->km}} km
 								@if ($row->extra_driver == 5)
 									<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 								@elseif ($row->extra_driver > 10)
@@ -131,7 +131,7 @@
 						<td>{{ $row->description }}</td>
 						<td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
 						<td>
-							{{ $row->origin }} - {{ $row->destination }}
+							{{ $row->origin }} - {{ $row->destination }}  - {{ $row->km}} km
 							@if ($row->extra_driver == 5)
 								<br> <span class="label label-danger">{{ $row->driver->nickname }}{{ $row->helper ? ' - ' . $row->helperr->nickname : '' }}</span>
 							@elseif ($row->extra_driver > 10)

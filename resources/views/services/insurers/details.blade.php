@@ -72,6 +72,9 @@
                         </tr>
                         <tr>
                             <td>
+                                <B>Km:</B><dd>{{ $service->km }}</dd>
+                            </td>
+                            <td>
                                 <B>Fecha y hora de Contacto:</B>
                                 <dd>{{ fdate($insurerService->date_contact, 'l, j F Y h:i a') }}</dd>
                             </td>
