@@ -14,7 +14,7 @@
                         </div>
                         @if ($service->inventory < 1)
                             <div class="col-md-5">
-                                {!! Field::number('inventory', ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator'])!!}
+                                {!! Field::number('inventory', isset($service) ? $service->inventory : 0, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator'])!!}
                             </div>
                         @else
                             <div class="col-md-5">
@@ -22,11 +22,17 @@
                             </div>
                         @endif
                     </div>
-                    <div class="col-md-7">
-                        <div class="">
-                            <B>Fecha y hora del servicio:</B> <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="">
+                                <B>Fecha y hora del servicio:</B> <dd>{{ fdate($service->date_service, 'l, j F Y h:i a') }}</dd>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            {!! Field::number('km', isset($service) ? $service->km : 0, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'road'])!!}
                         </div>
                     </div>
+
                     <br><br>
                     <h4>Horas extra</h4>
                     <div class="row">
