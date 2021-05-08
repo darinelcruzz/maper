@@ -77,9 +77,11 @@
 								<ddi to="{{ route('invoice.show', $row->id) }}"
 									icon="eye" text="Detalles">
 								</ddi>
-								<ddi to="{{ route('invoice.edit', $row->id) }}"
-									icon="edit" text="Editar">
-								</ddi>
+								@if (auth()->user()->level == 1)
+									<ddi to="{{ route('invoice.edit', $row->id) }}"
+										icon="edit" text="Editar">
+									</ddi>
+								@endif
 							</dropdown>
 						</td>
 						<td>Factura</td>
