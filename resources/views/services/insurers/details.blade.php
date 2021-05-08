@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <B>Km:</B><dd>{{ $service->km }}</dd>
+                                <B>Km:</B><dd>{{ $insurerService->km }}</dd>
                             </td>
                             <td>
                                 <B>Fecha y hora de Contacto:</B>

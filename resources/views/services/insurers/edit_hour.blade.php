@@ -31,6 +31,11 @@
                             {!! Field::number('inventory', $insurerService->inventory, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! Field::number('km', $insurerService->km, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'road'])!!}
+                        </div>
+                    </div>
 
                     <h4>Horas extra</h4>
                     <div class="row">

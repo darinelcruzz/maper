@@ -34,7 +34,7 @@ class ClientController extends Controller
         if ($request->city == NULL) {
             return back();
         }
-        return redirect(route('client.show'));
+        return redirect(route('client.index'));
     }
 
     function edit(Client $client)

@@ -84,18 +84,43 @@ class InvoiceController extends Controller
 
     function edit(Invoice $invoice)
     {
-        //
+        if ($invoice->client) {
+            $services = $invoice->services;
+            $model = 'client';
+        } else {
+            $services = $invoice->insurerServices;
+            $model = 'insurer';
+        }
+
+        return view('invoices.edit', compact('invoice', 'services', 'model'));
     }
 
-    function update(Request $request)
+    function update(Request $request, Invoice $invoice)
     {
-        $invoice = Invoice::find($request->id);
-        foreach ($invoice->insureServices as $service) {
-            $service->update(['status' => 'pagado']);
-        }
+        //Si no a dado error es porque este código no servía (es lo mas seguro)
+        // $invoice = Invoice::find($request->id);
+        // foreach ($invoice->insureServices as $service) {
+        //     $service->update(['status' => 'pagado']);
+        // }
+        // $invoice->update($request->all());
+        //
+        // return redirect(route('insurer.details', $invoice->insurer_id));
+
+        $this->validate($request, [
+            'folio' => 'required',
+            'date' => 'required',
+            'method' => 'sometimes|required',
+            'date_pay' => 'sometimes|required',
+        ]);
+
         $invoice->update($request->all());
 
-        return redirect(route('insurer.details', $invoice->insurer_id));
+        if ($invoice->insurer) {
+            return redirect(route('insurer.details', $invoice->insurer_id));
+        }
+
+        return redirect(route('client.details', $invoice->client_id));
+
     }
 
     function pay(Invoice $invoice)

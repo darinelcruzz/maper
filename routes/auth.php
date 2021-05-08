@@ -200,10 +200,8 @@ Route::group(['prefix' => 'facturas', 'as' => 'invoice.'], function () {
     Route::get('hacer/{client}', usesas($ctrl, 'make'));
     Route::post('crear', usesas($ctrl, 'store'))->middleware('one');
     Route::post('agregar', usesas($ctrl, 'persist'));
-
-    Route::get('editar/{expense}', usesas($ctrl, 'edit'))->middleware('one');
-    Route::post('editar', usesas($ctrl, 'update'));
-
+    Route::get('editar/{invoice}', usesas($ctrl, 'edit'))->middleware('one');
+    Route::post('editar/{invoice}', usesas($ctrl, 'update'));
     Route::get('pagar/{invoice}', usesas($ctrl, 'pay'));
     Route::post('pagar/{invoice}', usesas($ctrl, 'confirm'));
 
