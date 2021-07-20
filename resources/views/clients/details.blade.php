@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><h3>{{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment')) }}</h3></td>
+                            <td><h3>{{ number_format($client->serviceTotal('pending') + $client->serviceTotal('payment') + $client->invoices->where('status', 'pendiente')->sum('amount'), 2) }}</h3></td>
                             <td><h3>{{ $client->pending }}</h3></td>
                             <td><h3>{{ $client->days . ' dias' }}</h3></td>
                         </tr>
