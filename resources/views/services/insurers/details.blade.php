@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <solid-box title="{{ 'ID #' . $insurerService->id }}" color="danger">
+            <solid-box title="ID #{{ $insurerService->id }}" color="danger">
                 <table class="table">
                     <thead>
                         <tr>
