@@ -1,6 +1,152 @@
 <div class="row">
 	<div class="col-md-12">
-		<data-table-com title="Ingresos del {{ fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example2" color="success" button>
+		<solid-box title="Ingresos del {{ fdate($date, 'd/M/Y', 'Y-m-d') }}" color="success">
+			<div class="table-responsive">
+				<table id="example2" class="table table-bordered table-striped table-hover table-condensed">
+					<thead>
+						<tr>
+							<th style="width: 3%"><small>ID</small></th>
+							<th style="width: 3%"><i class="fa fa-cogs"></i></th>
+							<th style="width: 8%"><small>DESCRIPCIÓN</small></th>
+							<th style="width: 15%"><small>VEHÍCULO</small></th>
+							<th style="width: 15%"><small>ORIGEN</small></th>
+							<th style="width: 13%"><small>DESTINO</small></th>
+							<th style="width: 3%; text-align: center"><small>KM</small></th>
+							<th style="width: 5%; text-align: center"><small>OPERADOR</small></th>
+							<th style="width: 12%"><small>SERVICIO</small></th>
+							<th style="width: 5%; text-align: center"><small>FOLIO</small></th>
+							<th style="width: 5%; text-align: center"><small>INV</small></th>
+							<th style="width: 5%; text-align: center"><small>ESTADO</small></th>
+							<th style="width: 5%; text-align: center"><small>MÉTODO</small></th>
+							<th style="width: 10%; text-align: right;"><small>IMPORTE</small></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						@php
+							$sum = 0;
+						@endphp
+
+						@foreach ($payed as $service)
+							<tr>
+								<td>
+									<a href="{{ route($service->service == 'General' ? 'service.general.details' : 'service.corporation.details', $service) }}">
+										{{ $service->id }}
+									</a>
+								</td>
+								<td>
+									<dropdown color="success" icon="cogs">
+										@if ($service->service == 'General')
+											<ddi to="{{ route('service.editHour', $service) }}"
+												icon="clock-o" text="Hora de regreso/Extras">
+											</ddi>
+											@if (auth()->user()->level == 1)
+												<ddi to="{{ route('service.general.pay', $service) }}"
+													icon="edit" text="Editar Pago">
+												</ddi>
+												<ddi to="{{ route('service.general.edit', $service) }}"
+					                                icon="pencil-square-o" text="Editar">
+					                            </ddi>
+											@endif
+										@else
+											<li><a target="_blank" href="{{ route('service.corporation.printLetter', $service) }}">
+												<i class="fa fa-print"></i>Carta resposiva
+											</a></li>
+											<ddi to="{{ route('service.editHour', $service) }}"
+												icon="clock-o" text="Hora de regreso/Extras">
+											</ddi>
+											@if (auth()->user()->level == 1)
+												<ddi to="{{ route('service.corporation.pay', $service) }}"
+													icon="edit" text="Editar Pago">
+												</ddi>
+												<ddi to="{{ route('service.corporation.edit', $service) }}"
+													icon="pencil-square-o" text="Editar">
+												</ddi>
+											@endif
+										@endif
+									</dropdown>
+								</td>
+								<td>{{ $service->description }}</td>
+								<td>{{ $service->brand }} {{ $service->type }}<br>{{ $service->color }}</td>
+								<td>{{ $service->origin }}</td>
+								<td>{{ $service->destination }}</td>
+								<td style="text-align: center; font-family:monospace;">{{ $service->km }}</td>
+								<td style="text-align: center;">
+									<span class="label label-{{ $service->extra_driver == 5 ? 'danger': 'warning'}}">{{ $service->driver->nickname }}</span>
+									@if($service->helper)
+										<br>
+										<span class="label label-default">{{ $service->helperr->nickname ?? '' }}</span>
+									@endif
+								</td>
+								@if ($service->service == 'General')
+									<td><a href="{{ route('client.details', $service->client) }}"> {{ $service->client->name }} </a></td>
+								@else
+									<td>{{ $service->service }}</td>
+								@endif
+								<td></td>
+								<td style="text-align: center;">{{ $service->inventory }}</td>
+								<td style="text-align: center;">
+									{!! $service->statusLabel !!}
+								</td>
+								<td style="text-align: center;">{{ $service->pay }}</td>
+								<td style="text-align: right;">{{ number_format($service->total, 2) }}</td>
+							</tr>
+							@php
+								$sum += $service->total;
+							@endphp
+						@endforeach
+
+						@foreach ($payments as $payment)
+							<tr>
+								<td>{{ $payment->id }}</td>
+								<td>
+									<dropdown color="success" icon="cogs">
+										<ddi to="{{ route('service.general.details', $payment->service_id) }}"
+											icon="eye" text="Detalles">
+										</ddi>
+										<ddi to="{{ route('service.general.payments', $payment->service_id) }}"
+											icon="indent" text="Historial Abonos">
+										</ddi>
+									</dropdown>
+								</td>
+								<td><small>ABONO</small></td>
+								<td>{{ $payment->service->brand }} {{ $payment->service->type }}<br>{{ $payment->service->color }}</td>
+								<td>{{ $payment->service->origin }}</td>
+								<td>{{ $payment->service->destination }}</td>
+								<td style="text-align: center;">{{ $payment->service->km }}</td>
+								<td></td>
+								<td>
+									<a href="{{ route('client.details', ['id' => $payment->service->client->id]) }}">
+										{{ $payment->service->client->name }}
+									</a>
+								</td>
+								<td></td>
+								<td style="text-align: center;">{{ $payment->service->inventory }}</td>
+								<td style="text-align: center;">{!! $payment->service->statusLabel !!}</td>
+		                        <td style="text-align: center;">{{ $payment->method }}</td>
+		                        <td style="text-align: right;">{{ number_format($payment->amount, 2) }}</td>
+							</tr>
+							@php
+							$sum += $payment->amount;
+							@endphp
+						@endforeach
+
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<td colspan="12"></td>
+							<th><small>TOTAL</small></th>
+							<td style="text-align: right;">{{ number_format($sum, 2) }} </td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</solid-box>
+	</div>
+</div>
+
+		{{-- <data-table-com title="Ingresos del {{ fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example2" color="success" button>
 			{{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Descripción', 'Vehiculo', 'Ruta/operador', 'Servicio', 'Folio', 'Inv', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">
 				@php
@@ -132,7 +278,7 @@
 							{!! $row->service->statusLabel !!} <br>
 							{{-- <a href="{{ route('service.general.payments', $row->service_id) }}">
 								<i class="fa fa-indent"></i>
-							</a> --}}
+							</a>
 						</td>
                         <td>{{ $row->method }}</td>
                         <td>{{ fnumber($row->amount) }}</td>
@@ -149,6 +295,8 @@
 					<td>{{ fnumber($sum) }} </td>
 				</tr>
 			</template>
-		</data-table-com>
-	</div>
-</div>
+		</data-table-com> --}}
+
+
+	{{-- </div>
+</div> --}}
