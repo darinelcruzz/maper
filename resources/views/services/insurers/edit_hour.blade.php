@@ -53,24 +53,26 @@
                                 <tr>
                                     <th><small>PRINCIPAL</small></th>
                                     <td>{{ $insurerService->driver->nickname }}</td>
-                                    <td>CONDUCTOR</td>
+                                    <td>OPERADOR</td>
                                     <td>
-                                        <input type="number" name="extra_driver" class="form-control" value="{{ $insurerService->extra_driver }}" {{ ($insurerService->extra_driver < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
+                                        <input type="number" name="extra_driver" class="form-control" value="{{ $insurerService->extra_driver ?? 0 }}" {{ ($insurerService->extra_driver < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
                                     </td>
                                 </tr>
+                                @if($insurerService->helper)
                                 <tr>
                                     <th></th>
                                     <td>{{ $insurerService->helperr->nickname ?? 'X'}}</td>
                                     <td>APOYO</td>
                                     <td>
-                                        <input type="number" name="extra_helper" class="form-control" value="{{ $insurerService->extra_helper }}" {{ ($insurerService->extra_helper < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
+                                        <input type="number" name="extra_helper" class="form-control" value="{{ $insurerService->extra_helper ?? 0 }}" {{ ($insurerService->extra_helper < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
                                     </td>
                                 </tr>
+                                @endif
                                 @forelse($extras as $extra)
                                     <tr>
                                         <th><small>{{ $loop->index == 0 ? 'EXTRAS': '' }}</small></th>
                                         <td>{{ $extra->driver->nickname }}</td>
-                                        <td>{{ $extra->type ? 'CONDUCTOR' : 'APOYO' }}</td>
+                                        <td>{{ $extra->type ? 'OPERADOR' : 'APOYO' }}</td>
                                         <td>
                                             <input type="hidden" name="extras[{{ $loop->index }}][id]" value="{{ $extra->id }}">
                                             <input type="number" name="extras[{{ $loop->index }}][amount]" class="form-control" value="{{ $extra->extra }}" {{ ($extra->extra < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
