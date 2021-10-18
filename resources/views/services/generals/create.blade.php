@@ -4,7 +4,7 @@
 
 @section('main-content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <solid-box title="Nuevo servicio general" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.store']) !!}
 
@@ -32,7 +32,7 @@
                         </tab-content>
                     </form-wizard>
 
-                    <hr>
+                    {{-- <hr> --}}
 
                     <input type="hidden" name="status" value="pendiente">
                     <input type="hidden" name="service" value="General">

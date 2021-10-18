@@ -102,9 +102,17 @@ class InsurerServiceController extends Controller
 
     function updateHour(Request $request)
     {
+        // dd($request->all());
         $service = InsurerService::find($request->id);
 
-        $service->update($request->all());
+        $service->update($request->except('extras'));
+
+        if (request('extras')) {
+            foreach ($request->extras as $extra) {
+                $extra_driver = ExtraDriver::find($extra['id']);
+                $extra_driver->update(['extra' => $extra['amount']]);
+            }
+        }
 
         return redirect(route('admin.cash'))->with('redirected', session('date'));
     }

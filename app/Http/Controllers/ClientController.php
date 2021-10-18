@@ -56,10 +56,10 @@ class ClientController extends Controller
         return redirect(route('client.index'));
     }
 
-    function details(Client $client)
+    function show(Client $client)
     {
         $today = Date::now();
-        return view('clients.details', compact('client', 'today'));
+        return view('clients.show', compact('client', 'today'));
     }
 
     function report(Client $client, $type, $status)
@@ -76,10 +76,7 @@ class ClientController extends Controller
 
     function destroy(Client $client)
     {
-        $client->update([
-            'status' => 0
-        ]);
-
+        $client->update(['status' => 0]);
         return back();
     }
 }

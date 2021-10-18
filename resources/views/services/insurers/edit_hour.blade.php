@@ -3,7 +3,7 @@
 @section('main-content')
 
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-6">
             <solid-box color="danger" title="Editar horas Aseguradora ID= {{ $insurerService->id }}">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.insurer.updateHour'])!!}
                     <div class="row">
@@ -37,70 +37,60 @@
                         </div>
                     </div>
 
-                    <h4>Horas extra</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <span align="center">
-                                <p><em>Operador</em></p>
-                                <h4>{{ $insurerService->driver->nickname }}</h4>
-                            </span>
-                        </div>
-                        @if ($insurerService->extra_driver < 10 || auth()->user()->level == 1)
-                            <div class="col-md-6">
-                                {!! Field::number('extra_driver', $insurerService->extra_driver, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
-                            </div>
-                        @else
-                            <div class="col-md-6">
-                                {!! Field::number('extra_driver', $insurerService->extra_driver, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
-                            </div>
-                        @endif
-                    </div>
 
-                    @if ($insurerService->helper)
-                        <b>Apoyo</b>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <span align="center">
-                                    <h4>{{ $insurerService->helperr->nickname }}</h4>
-                                </span>
-                            </div>
-                            @if ($insurerService->extra_helper < 10 || auth()->user()->level == 1)
-                                <div class="col-md-6">
-                                    {!! Field::number('extra_helper', $insurerService->extra_helper, ['label' => 'Pago', 'tpl' => 'templates/withicon'], ['icon' => 'dollar'])!!}
-                                </div>
-                            @else
-                                <div class="col-md-6">
-                                    {!! Field::number('extra_helper', $insurerService->extra_helper, ['label' => 'Pago (si aplica):', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
-                                </div>
-                            @endif
-                        </div>
-                    @endif
+                    <h4>Horas extra</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th><small></small></th>
+                                    <th><small>NOMBRE</small></th>
+                                    <th><small>ACTIVIDAD</small></th>
+                                    <th style="width: 20%; text-align: center;"><small>PAGO</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th><small>PRINCIPAL</small></th>
+                                    <td>{{ $insurerService->driver->nickname }}</td>
+                                    <td>CONDUCTOR</td>
+                                    <td>
+                                        <input type="number" name="extra_driver" class="form-control" value="{{ $insurerService->extra_driver }}" {{ ($insurerService->extra_driver < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>{{ $insurerService->helperr->nickname ?? 'X'}}</td>
+                                    <td>APOYO</td>
+                                    <td>
+                                        <input type="number" name="extra_helper" class="form-control" value="{{ $insurerService->extra_helper }}" {{ ($insurerService->extra_helper < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
+                                    </td>
+                                </tr>
+                                @forelse($extras as $extra)
+                                    <tr>
+                                        <th><small>{{ $loop->index == 0 ? 'EXTRAS': '' }}</small></th>
+                                        <td>{{ $extra->driver->nickname }}</td>
+                                        <td>{{ $extra->type ? 'CONDUCTOR' : 'APOYO' }}</td>
+                                        <td>
+                                            <input type="hidden" name="extras[{{ $loop->index }}][id]" value="{{ $extra->id }}">
+                                            <input type="number" name="extras[{{ $loop->index }}][amount]" class="form-control" value="{{ $extra->extra }}" {{ ($extra->extra < 10 || auth()->user()->level == 1) ? '': 'disabled' }}>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <td colspan="4"><em><small>SIN EXTRAS</small></em></td>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
 
                     <input type="hidden" name="id" value="{{ $insurerService->id }}">
                     <hr>
-                    {!! Form::submit('Guardar', ['class' => 'btn btn-danger pull-right'])!!}
+                    {!! Form::submit('GUARDAR', ['class' => 'btn btn-danger pull-right'])!!}
                 {!! Form::close()!!}
-                @if (count($extras) > 0)
-                    <br><hr>
-                    <h4>Operadores/Apoyos extras</h4>
-                    @foreach ($extras as $extra)
-                        <div class="row">
-                            <div class="col-md-6">
-                                <span align="center">
-                                    <p><em>{{ $extra->type ? 'Operador' : 'Apoyo' }}</em></p>
-                                    <h4>{{ $extra->driver->nickname }}</h4>
-                                </span>
-                            </div>
-                            <div class="col-md-6">
-                                {!! Field::number('extra_driver', $extra->extra, ['label' => 'Pago:', 'tpl' => 'templates/withicon', 'disabled'], ['icon' => 'dollar'])!!}
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
             </solid-box>
         </div>
 
-        <div class="col-md-4 col-md-offset-1">
+        <div class="col-md-6">
             <solid-box color="danger" title="Agregar operadores extras" button collapsed>
                 {!! Form::open(['method' => 'POST', 'route' => 'extraDrivers.store'])!!}
                     <div class="row">

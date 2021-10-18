@@ -8,7 +8,6 @@ use App\{Service, InsurerService, Driver, Discount, Invoice, Payment, ExtraDrive
 
 class AdministrationController extends Controller
 {
-
     function searchReleased()
     {
         return view('services.corporations.search');
