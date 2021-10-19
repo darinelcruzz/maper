@@ -56,10 +56,10 @@ class ClientController extends Controller
         return redirect(route('client.index'));
     }
 
-    function show(Client $client)
+    function details(Client $client)
     {
         $today = Date::now();
-        return view('clients.show', compact('client', 'today'));
+        return view('clients.details', compact('client', 'today'));
     }
 
     function report(Client $client, $type, $status)
