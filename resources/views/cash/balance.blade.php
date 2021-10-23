@@ -32,16 +32,6 @@
 	@include('cash.ingresses')
 
 	<div class="row">
-		{{-- @foreach(['Efectivo' => 'efectivo', 'Tarjeta débito' => 'debito', 'Tarjeta crédito' => 'tcredito', 'Cheques' => 'cheque', 'Transferencias' => 'transferencia', 'Crédito' => 'credito'] as $label => $value)
-
-		<div class="col-md-4">
-			<icon-box color="info" icon="money">
-				<p>{{ $label }}</p>
-				<h3>{{ fnumber($$value) }}</h3>
-			</icon-box>
-    	</div>
-
-		@endforeach --}}
 
 		<div class="col-md-4">
 			<icon-box color="info" icon="money">

@@ -89,10 +89,12 @@
 								<td>{{ $service->destination }}</td>
 								<td style="text-align: center; font-family: monospace;">{{ $service->km }}</td>
 								<td style="text-align: center">
-									@if ($service->extra_driver == 5)
-										<span class="label label-danger">{{ $service->driver->nickname }}{{ $service->helper ? ' - ' . $service->helperr->nickname : '' }}</span>
-									@elseif ($service->extra_driver > 10)
-										<span class="label label-warning">{{ $service->driver->nickname }}{{ $service->helper ? ' - ' . $service->helperr->nickname : '' }}</span>
+									@if($service->extra_driver)
+										<span class="label label-{{ $service->extra_driver == 5 ? 'danger': 'warning'}}">{{ $service->driver->nickname }}</span>
+									@endif
+									@if($service->helper)
+										<br>
+										<span class="label label-default">{{ $service->helperr->nickname ?? '' }}</span>
 									@endif
 								</td>
 								@if ($service->service == 'General')
