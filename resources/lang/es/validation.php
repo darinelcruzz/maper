@@ -240,6 +240,7 @@ return [
         'method'                => 'metodo',
         'cellphone'             => 'celular',
         'social'                => 'razón social',
+        'invoice'               => 'factura',
     ],
 
 ];

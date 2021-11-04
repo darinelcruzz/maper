@@ -75,7 +75,7 @@
 									@if($service->extra_driver)
 										<span class="label label-{{ $service->extra_driver == 5 ? 'danger': 'warning'}}">{{ $service->driver->nickname }}</span>
 									@endif
-									@if($service->helper)
+									@if($service->extra_helper)
 										<br>
 										<span class="label label-default">{{ $service->helperr->nickname ?? '' }}</span>
 									@endif
@@ -130,6 +130,46 @@
 							</tr>
 							@php
 							$sum += $payment->amount;
+							@endphp
+						@endforeach
+						//revisar aqui lo de las facturas pagadas
+						@foreach ($invoicesPayed as $row)
+							<tr>
+								<td>{{ $row->id }}</td>
+								<td>
+									<dropdown color="success" icon="cogs">
+										<ddi to="{{ route('invoice.show', $row->id) }}"
+											icon="eye" text="Detalles">
+										</ddi>
+										@if (auth()->user()->level == 1)
+											<ddi to="{{ route('invoice.edit', $row->id) }}"
+												icon="edit" text="Editar">
+											</ddi>
+										@endif
+									</dropdown>
+								</td>
+								<td>Factura</td>
+								<td></td>
+								<td></td>
+								<td>
+									@if ($row->client)
+										<a href="{{ route('client.details', $row->client) }}">
+											{{ $row->client->name }}
+										</a>
+									@else
+										<a href="{{ route('insurer.details', $row->insurer) }}">
+											{{ $row->insurer->name }}
+										</a>
+									@endif
+								</td>
+								<td>{{ $row->folio }}</td>
+		                        <td></td>
+		                        <td>{!! $row->statusLabel !!}</td>
+		                        <td>{{ $row->method }}</td>
+		                        <td>{{ fnumber($row->amount) }}</td>
+							</tr>
+							@php
+							$sum += $row->amount;
 							@endphp
 						@endforeach
 

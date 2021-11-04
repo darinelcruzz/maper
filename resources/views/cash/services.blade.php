@@ -92,7 +92,7 @@
 									@if($service->extra_driver)
 										<span class="label label-{{ $service->extra_driver == 5 ? 'danger': 'warning'}}">{{ $service->driver->nickname }}</span>
 									@endif
-									@if($service->helper)
+									@if($service->extra_helper)
 										<br>
 										<span class="label label-default">{{ $service->helperr->nickname ?? '' }}</span>
 									@endif
@@ -194,9 +194,8 @@
 						</tr>
 					</tfoot>
 				</table>
-			</div>	
 		</solid-box>
-		
+
 		{{-- <data-table-com title="Servicios del {{  fdate($date, 'd/M/Y', 'Y-m-d') }}" example="example3" color="success" button>
 	        {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'Descripción', 'Vehiculo', 'Ruta/operador', 'Servicio', 'Folio', 'Inv', 'Estatus', 'Método', 'Monto') }}
 			<template slot="body">

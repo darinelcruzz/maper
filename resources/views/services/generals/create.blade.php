@@ -4,7 +4,7 @@
 
 @section('main-content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <solid-box title="Nuevo servicio general" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => 'service.general.store']) !!}
 
