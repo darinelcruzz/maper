@@ -32,7 +32,6 @@
 	@include('cash.ingresses')
 
 	<div class="row">
-
 		<div class="col-md-4">
 			<icon-box color="info" icon="money">
 				<p>Efectivo</p>
