@@ -6,6 +6,14 @@ Route::get('/', function () {
 
 })->name('home');
 
+Route::get('/actualizar-liberados', function () {
+    $services = App\Service::where('status', 'liberado')->get();
+    foreach ($services as $service) {
+        $service->update(['released_at' => $service->date_out]);
+    }
+    return 'YA ACTUALIZADOS';
+});
+
 // Aseguradoras
 Route::group(['prefix' => 'aseguradoras', 'as' => 'insurer.'], function () {
     $ctrl = 'InsurerController';

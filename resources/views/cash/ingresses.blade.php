@@ -98,6 +98,49 @@
 							@endphp
 						@endforeach
 
+						@foreach($invoicesPayed as $payment)
+							<tr>
+								<td>{{ $payment->id }}</td>
+								<td>
+									<dropdown color="success" icon="cogs">
+										<ddi to="{{ route('invoice.show', $payment->id) }}"
+											icon="eye" text="Detalles">
+										</ddi>
+										@if (auth()->user()->level == 1)
+											<ddi to="{{ route('invoice.edit', $payment->id) }}"
+												icon="edit" text="Editar">
+											</ddi>
+										@endif
+									</dropdown>
+								</td>
+								<td><small>FACTURA</small></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									@if ($payment->client)
+										<a href="{{ route('client.details', $payment->client) }}">
+											{{ $payment->client->name }}
+										</a>
+									@else
+										<a href="{{ route('insurer.details', $payment->insurer) }}">
+											{{ $payment->insurer->name }}
+										</a>
+									@endif
+								</td>
+								<td style="text-align: center;">{{ $payment->folio }}</td>
+		                        <td></td>
+		                        <td style="text-align: center;">{!! $payment->statusLabel !!}</td>
+		                        <td style="text-align: center;">{{ $payment->method }}</td>
+		                        <td style="text-align: right;">{{ fnumber($payment->amount) }}</td>
+							</tr>
+							@php
+							$sum += $payment->amount;
+							@endphp
+						@endforeach
+
 						@foreach ($payments as $payment)
 							<tr>
 								<td>{{ $payment->id }}</td>

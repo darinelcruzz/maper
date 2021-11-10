@@ -105,7 +105,7 @@
 									<td style="text-align: center">{{ $service->inventory }}</td>
 									<td style="text-align: center">
 										{!! $service->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $service->statusLabel !!}
-										{{ $service->status == 'liberado' ? fdate($service->date_out, ' (d/M/Y)') : '' }}
+										{{ $service->released_at != null ? fdate($service->released_at, ' (d/M/Y)', 'Y-m-d') : '' }}
 										{{ $service->status == 'liquidado' ? fdate($service->date_out, ' (d/M/Y)') : '' }}
 										{{ $service->status == 'pagado' && $service->bill == null ? fdate($service->date_out, ' (d/M/Y)') : '' }}
 										{!! $service->status == 'pagado' && $service->bill != null ? fdate($service->invoice->date_pay, '(d/M/Y)', 'Y-m-d') . '<br>' . 'Fac ' . $service->invoice->folio : '' !!}

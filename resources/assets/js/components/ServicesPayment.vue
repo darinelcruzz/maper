@@ -82,6 +82,18 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
+                    <label class="control-label"><b>Factura</b></label>
+                    <div class="controls">
+                        <select class="form-control" name="invoice" required v-model="invoice">
+                            <option value="" selected>¿Se va a facturar?</option>
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" v-if="invoice != 'Sí'">
                     <label class="control-label"><b>Método</b></label>
                     <div class="controls">
                         <select class="form-control" name="pay" required>
@@ -93,9 +105,12 @@
                             <option value="Cheque" :selected="vservice.pay == 'Cheque'">Cheque</option>
                         </select>
                     </div>
+                    <input type="hidden" name="date_out" :value="date">
+                </div>
+                <div v-else>
+                    <slot></slot>
                 </div>
             </div>
-            <div class="col-md-4"></div>
             <div class="col-md-4">
                 <h3 class="pull-right"><b>Total:</b> <span style="color: green;">$ {{ total.toFixed(2) }}</span></h3>
             </div>
@@ -110,6 +125,7 @@ export default {
         return {
             vpension: 0,
             deposit:'',
+            invoice: '',
             vservice: {},
         }
     },
@@ -119,7 +135,8 @@ export default {
             default: null
         },
         pension: Number,
-        service: Object
+        service: Object,
+        date: String
     },
     computed: {
         subtotal() {

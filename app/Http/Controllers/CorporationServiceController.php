@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CorporationsRequest;
 use Jenssegers\Date\Date;
-use App\{Service, Price, ExtraDriver};
+use App\{Service, Price, ExtraDriver, Client};
 
 class CorporationServiceController extends Controller
 {
@@ -56,11 +56,14 @@ class CorporationServiceController extends Controller
             $out = $service->date_out;
         }
 
-        return view('services.corporations.pay', compact('service', 'cost', 'penalty', 'out'));
+        $clients = Client::where('status', 1)->pluck('name', 'id')->toArray();
+
+        return view('services.corporations.pay', compact('service', 'cost', 'penalty', 'out', 'clients'));
     }
 
     function change(CorporationsRequest $request, Service $service)
     {
+        // dd($request->all());
         $service->update($request->all());
 
         if ($service->folio == NULL) {

@@ -48,7 +48,7 @@ class Client extends Model
 
     function getLimboServicesAttribute()
     {
-        return $this->services->where('status', 'pendiente');
+        return $this->services->whereIn('status', ['pendiente', 'liberado']);
     }
 
     function getPaymentServicesAttribute()

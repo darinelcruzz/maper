@@ -48,7 +48,7 @@
                 FOLIO: {{ $service->folio }}
             </h4>
             <h5 align="right">
-                Comitán de Domínguez, Chiapas a {{ fdate($service->date_out, 'd \d\e F \d\e\l Y') }} <br>
+                Comitán de Domínguez, Chiapas a {{ fdate($service->released_at, 'd \d\e F \d\e\l Y', 'Y-m-d') }} <br>
             </h5>
 
             <h5 align="left">

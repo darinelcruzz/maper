@@ -18,7 +18,7 @@ class Service extends Model
         'date_service', 'date_out', 'date_return', 'amount',
         'ret', 'status', 'maneuver', 'pension', 'bill','others',
         'discount', 'reason', 'pay', 'view', 'releaser', 'folio',
-        'lot', 'key', 'cut_at', 'cut2_at', 'km'
+        'lot', 'key', 'cut_at', 'cut2_at', 'km', 'released_at'
     ];
 
     function driver()
@@ -108,9 +108,10 @@ class Service extends Model
 
     function getStatusLabelAttribute()
     {
+        $status = $this->released_at != null ? 'liberado': $this->status;
         $colors = ['pagado' => 'success', 'liquidado' => 'success', 'credito' => 'primary', 'pendiente' => 'warning', 'abonos' => 'warning'];
-        $color = array_key_exists($this->status, $colors) ? $colors[$this->status] : 'default';
-        return "<label class='label label-$color'>" . strtoupper($this->status) . "</label>";
+        $color = array_key_exists($status, $colors) ? $colors[$status] : 'default';
+        return "<label class='label label-$color'>" . strtoupper($status) . "</label>";
     }
 
     function scopeUntilDateWhere($query, $date, $column = 'date_out', $colWhere = 'status', $data = 'credito' ,$condition = '=!')

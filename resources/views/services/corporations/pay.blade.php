@@ -4,7 +4,7 @@
 
     <div id="payment" class="row">
         <div class="col-md-8">
-            <solid-box title="{{ $service->service }}" color="default">
+            <solid-box title="{{ $service->service }}" color="danger">
                 {!! Form::open(['method' => 'POST', 'route' => ['service.corporation.change', $service]]) !!}
                 @include('templates.headTable')
                         <tr>
@@ -56,14 +56,19 @@
                         {!! Field::text('releaser', isset($service) ? $service->releaser: null, ['tpl' => 'templates/twolines'])!!}
                     </div>
                 </div>
-                <payment-box corp :service="{{ $service }}" :pension="{{ $cost or 0 }}"></payment-box>
+                <payment-box corp :service="{{ $service }}" :pension="{{ $cost or 0 }}" date="{{ $out }}">
+                    {!! Field::select('client_id', $clients, null, ['empty' => 'Seleccione al cliente', 'class' => 'select2', 'tpl' => 'templates/twolines'])!!}
+                </payment-box>
+
+                <br>
 
                 <div class="box-footer">
                     <input type="hidden" name="status" value="liberado">
-                    <input type="hidden" name="date_out" value="{{ $out }}">
+                    <input type="hidden" name="released_at" value="{{ $out }}">
                     <input type="hidden" name="pension" value="{{ $cost }}">
                     @if (auth()->user()->level == 1 || $service->status != 'liberado')
-                        {!! Form::submit('Liberar', ['class' => 'btn btn-black btn-block']) !!}
+                        <button type="submit" class='btn btn-danger btn-md pull-right'>L I B E R A R &nbsp;&nbsp;<i class='fa fa-sign-out'></i></button>
+                        {{-- {!! Form::submit(, ['class' => 'btn btn-danger btn-md']) !!} --}}
                     @endif()
                 </div>
             </solid-box>
