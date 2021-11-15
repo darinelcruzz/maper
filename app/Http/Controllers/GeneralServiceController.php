@@ -56,6 +56,7 @@ class GeneralServiceController extends Controller
 
     function change(GeneralRequest $request, Service $service)
     {
+        // dd($request->all());
         if ($request->payment > 0) {
 
             $service->update(['status' => 'abonos', 'pay' => 'Abonos']);

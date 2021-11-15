@@ -40,7 +40,7 @@
                                     {!! Field::datetimelocal('date_out', fdate($service->date_out, 'Y-m-d\TH:i'), ['tpl' => 'templates/twolines']) !!}
                                 </td>
                             @else
-                                <input type="hidden" name="date_out" value="{{ $out }}">
+                                <input type="hidden" name="date_out" value="{{ date('Y-m-d') }}">
                             @endif
 
                         </tbody>
@@ -48,6 +48,8 @@
                     <br>
 
                     <payment-box :service="{{ $service }}" :pension="0"></payment-box>
+
+                    <input type="hidden" name="date_out" value="{{ date('Y-m-d') }}">
 
                     <div class="box-footer">
                         @if (auth()->user()->level == 1 || $service->status != 'pagado')
