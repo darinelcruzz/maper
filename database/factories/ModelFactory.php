@@ -1,4 +1,7 @@
 <?php
+
+namespace Database\Factories;
+
 use Illuminate\Support\Facades\Hash;
 
 /*
