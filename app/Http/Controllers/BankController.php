@@ -18,7 +18,7 @@ class BankController extends Controller
         $invoices = Invoice::where('status', 'pagada')->get();
         $date = Date::now()->format('Y-m-d');
 
-        return view('banks.create', compact('date', 'invoices', '$movements', 'ingreses', 'expenses'));
+        return view('banks.create', compact('date', 'invoices', 'movements', 'ingreses', 'expenses'));
     }
 
     function store(Request $request)

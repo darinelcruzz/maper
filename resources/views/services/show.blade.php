@@ -9,7 +9,7 @@
         <template slot="body">
             @foreach($corps as $row)
                 <tr>
-                    <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.corporation.details', $row)}}"> {{ $row->id }}  </a></td>
                     <td>
                         {{-- <dropdown color="primary" icon="cogs">
                             <ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
@@ -38,7 +38,7 @@
         <template slot="body">
             @foreach($release as $row)
                 <tr>
-                    <td><a href="{{ route('service.corporation.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.corporation.details', $row) }}"> {{ $row->id }} </a></td>
                     <td>
                         {{-- <dropdown color="success" icon="cogs">
                             <ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
@@ -64,7 +64,7 @@
         <template slot="body">
             @foreach($paid as $row)
                 <tr>
-                    <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.general.details',  $row->id) }}"> {{ $row->id }} </a></td>
                     <td>
                         {{-- <dropdown color="success" icon="cogs">
                             <ddi to="{{ route('service.general.update', ['id' => $row->id]) }}"
@@ -73,7 +73,7 @@
                         </dropdown> --}}
                     </td>
                     <td>{{  $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a')}}</td>
-                    <td><a href="{{ route('client.details', $row->client) }}"> {{ $row->client->name }} </a></td>
+                    <td><a href="{{ route('client.details', $row) }}"> {{ $row->client->name }} </a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
                     <td>{{ $row->bill }}</td>
@@ -90,9 +90,9 @@
         <template slot="body">
             @foreach($credit as $row)
                 <tr>
-                    <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.general.details', $row) }}"> {{ $row->id }} </a></td>
                     <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                    <td><a href="{{ route('client.details', ['id' => $row->client->id]) }}"> {{ $row->client->name }}</a></td>
+                    <td><a href="{{ route('client.details', $row->client) }}"> {{ $row->client->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>$ {{ number_format($row->total, 2) }}</td>
                     <td>
@@ -112,21 +112,21 @@
         <template slot="body">
             @foreach($creditI as $row)
                 <tr>
-                    <td><a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.insurer.details', $row) }}"> {{ $row->id }} </a></td>
                     <td>
                         <dropdown color="success" icon="cogs">
-                            <ddi to="{{ route('service.insurer.editHour', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.insurer.editHour', $row->id) }}"
                                 icon="clock-o" text="Hora de regreso/Extras">
                             </ddi>
                             @if (auth()->user()->level == 1)
-                                <ddi to="{{ route('service.insurer.edit', ['id' => $row->id]) }}"
+                                <ddi to="{{ route('service.insurer.edit', $row) }}"
                                     icon="pencil-square-o" text="Editar">
                                 </ddi>
                             @endif
                         </dropdown>
                     </td>
                     <td>{{ fdate($row->date_assignment, 'j/M/y, h:i a') }}</td>
-                    <td><a href="{{ route('insurer.details', ['id' => $row->insurer->id]) }}"> {{ $row->insurer->name }}</a></td>
+                    <td><a href="{{ route('insurer.details', $row->insurer) }}"> {{ $row->insurer->name }}</a></td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                     <td>$ {{ number_format($row->total, 2) }}</td>
                 </tr>
@@ -141,7 +141,7 @@
         <template slot="body">
             @foreach($cancel as $row)
                 <tr>
-                    <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.general.details', $row) }}"> {{ $row->id }} </a></td>
                     <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
                     <td>{{ $row->client->name }}</td>
                     <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>

@@ -22,15 +22,15 @@
                         <td>{{ $row->id }}</td>
                         <td>
                             <dropdown color="success" icon="cogs">
-                                <ddi to="{{ route('service.editHour', ['id' => $row->id]) }}"
+                                <ddi to="{{ route('service.editHour', $row)}}"
                                     icon="clock-o" text="Hora de regreso/Extras">
                                 </ddi>
                                 @if ($row->service == 'General')
-                                    <ddi to="{{ route('service.general.details', ['id' => $row->id]) }}"
+                                    <ddi to="{{ route('service.general.details', $row) }}"
                                         icon="eye" text="Detalles">
                                     </ddi>
                                 @else
-                                    <ddi to="{{ route('service.corporation.details', ['id' => $row->id]) }}"
+                                    <ddi to="{{ route('service.corporation.details', $row) }}"
                                         icon="eye" text="Detalles">
                                     </ddi>
                                 @endif
@@ -45,7 +45,7 @@
                             {{ fnumber($row->extra_driver) }}
                         </td>
                         <td>
-                            {{ $row->helperr->name or '' }} <br>
+                            {{ $row->helperr->name ?? '' }} <br>
                             {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                             {{ fnumber($row->extra_driver) }}
                         </td>
                         <td>
-                            {{ $row->helperr->name or '' }} <br>
+                            {{ $row->helperr->name ?? '' }} <br>
                             {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
                         </td>
                     </tr>

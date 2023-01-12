@@ -125,7 +125,7 @@
                         <td>{{ $row->type == 'cargo' ? '' : '$' . number_format($row->amount,2) }}</td>
                         <td>{{ '$' . number_format($temp,2) }}</td>
                         <td>
-                            <a href="{{ route('expense.edit', ['id' => $row->id]) }}">
+                            <a href="{{ route('expense.edit', $row) }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                         </td>

@@ -21,7 +21,7 @@
                     <td>{{ $row->email }}</td>
                     <td>{{ $row->level }}</td>
                     <td>
-                        <a href="{{ route('user.edit', ['id' => $row->id])}}">
+                        <a href="{{ route('user.edit', $row)}}">
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>

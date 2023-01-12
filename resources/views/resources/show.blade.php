@@ -47,7 +47,7 @@
                   <td>{{ fnumber($row->base_salary) }}</td>
                   <td>{{ $row->type }}</td>
                   <td>
-                      <a href="{{ route('resources.driver.edit', ['id' => $row->id]) }}">
+                      <a href="{{ route('resources.driver.edit', $row) }}">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>
                   </td>

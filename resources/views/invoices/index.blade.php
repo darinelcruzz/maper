@@ -24,7 +24,7 @@
                       {{ $invoice->folio }}
                     </a>
                   </td>
-                  <td>{{ $invoice->insurer->name or $invoice->client->name }}</td>
+                  <td>{{ $invoice->insurer->name ?? $invoice->client->name }}</td>
                   <td>{{ fnumber($invoice->retention) }}</td>
                   <td>{{ fnumber($invoice->iva) }}</td>
                   <td>{{ fnumber($invoice->amount) }}</td>

@@ -97,7 +97,7 @@
 										@endif
 									</td>
 									@if ($service->service == 'General')
-										<td><a href="{{ route('client.details', ['id' => $service->client->id]) }}"> {{ $service->client->name }} </a></td>
+										<td><a href="{{ route('client.details', $service->client) }}"> {{ $service->client->name }} </a></td>
 									@else
 										<td>{{ $service->service }}</td>
 									@endif

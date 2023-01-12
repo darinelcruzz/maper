@@ -25,7 +25,7 @@
                                   <td>
                                       {{ $price->name }}
                                       &nbsp;&nbsp;&nbsp;
-                                      <a href="{{ route('price.edit', ['id' => $price->id]) }}" title="EDITAR">
+                                      <a href="{{ route('price.edit', $price) }}" title="EDITAR">
                                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                       </a>
                                   </td>
