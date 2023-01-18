@@ -2,31 +2,45 @@
 
 namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
+// use Faker\Generator as Faker;
 
-$factory->define(App\InsurerService::class, function (Faker $faker) {
+
+// $factory->define(App\InsurerService::class, function (Faker $faker) {
+   
+
+class InsurerServiceFactory extends Factory
+{
+    
+    public function definition()
+    {
+
     return [
-        'insurer_id' => $faker->numberBetween(1, 5),
-        'description' => $faker->randomElement(array('Choque', 'Arrastre', 'Descompuerto')),
-        'brand' => $faker->company,
-        'type' => $faker->company,
-        'model' => $faker->year,
-        'category' => $faker->numberBetween(1, 3),
-        'load' => $faker->numberBetween(100, 300),
-        'plate' => $faker->regexify('[A-Z]{2}\-[A-Z][0-9]\-[0-9]{2}'),
-        'color' => $faker->safeColorName,
-        'user' => $faker->name,
-        'origin' => $faker->city,
-        'destination' => $faker->city,
-        'driver_id' => $faker->numberBetween(1, 5),
+        'insurer_id' => $this->faker->numberBetween(1, 5),
+        'description' => $this->faker->randomElement(array('Choque', 'Arrastre', 'Descompuerto')),
+        'brand' => $this->faker->company,
+        'type' => $this->faker->company,
+        'model' => $this->faker->year,
+        'category' => $this->faker->numberBetween(1, 3),
+        'load' => $this->faker->numberBetween(100, 300),
+        'plate' => $this->faker->regexify('[A-Z]{2}\-[A-Z][0-9]\-[0-9]{2}'),
+        'color' => $this->faker->safeColorName,
+        'user' => $this->faker->name,
+        'origin' => $this->faker->city,
+        'destination' => $this->faker->city,
+        'driver_id' => $this->faker->numberBetween(1, 5),
         'unit_id' => 1,
-        'booth' => $faker->name,
+        'booth' => $this->faker->name,
         'date_return' => date('Y-m-d H:i:s'),
         'date_assignment' =>  date('Y-m-d H:i:s'),
-        'amount' => $faker->numberBetween(100, 600),
+        'amount' => $this->faker->numberBetween(100, 600),
         'maneuver' => 0,
         'pension' => 0,
-        'file' => $faker->numberBetween(1, 500),
-        'folio' => $faker->numberBetween(1, 500),
+        'file' => $this->faker->numberBetween(1, 500),
+        'folio' => $this->faker->numberBetween(1, 500),
     ];
-});
+
+    }   
+
+}
+

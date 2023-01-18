@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use App\User;
+
 
 class InsurerServicesModuleTest extends TestCase
 {
@@ -13,7 +15,7 @@ class InsurerServicesModuleTest extends TestCase
     /** @test */
     function adds_a_new_insurer_service()
     {
-        $user = factory(\App\User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('service.insurer.create'))

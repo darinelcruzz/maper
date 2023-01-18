@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Insurer extends Model
 {
+    use HasFactory;
     protected $fillable = ['name', 'business_name', 'rfc', 'address', 'phone', 'observations', 'reception'];
 
     function services()

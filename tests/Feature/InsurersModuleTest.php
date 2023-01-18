@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
+use App\Insurer;
 
 class InsurersModuleTest extends TestCase
 {
@@ -13,9 +15,9 @@ class InsurersModuleTest extends TestCase
     /** @test */
     function shows_a_list_with_all_insurers()
     {
-        $user = factory(\App\User::class)->create();
+        $user = User::factory()->create();
 
-        $insurer = factory(\App\Insurer::class)->create();
+        $insurer = Insurer::factory()->create();
 
         $this->actingAs($user)
             ->get(route('insurer.index'))
@@ -27,7 +29,7 @@ class InsurersModuleTest extends TestCase
     /** @test */
     function creates_a_new_insurer()
     {
-        $user = factory(\App\User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('insurer.create'))
