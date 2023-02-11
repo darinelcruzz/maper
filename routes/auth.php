@@ -1,10 +1,6 @@
 <?php
 
-Route::get('/', function () {
-    expire();
-    return view('welcome');
-
-})->name('home');
+Route::get('/', usesas('WelcomeController', 'index'));
 
 Route::get('/actualizar-liberados', function () {
     $services = App\Service::where('status', 'liberado')->get();
