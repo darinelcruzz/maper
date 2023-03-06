@@ -41,7 +41,8 @@ class GeneralServiceController extends Controller
 
     function update(GeneralRequest $request, Service $service)
     {
-        $service->update($request->all());
+        // dd($request->all());
+        $service->update($request->except('routes'));
         return redirect(route('admin.cash'))->with('redirected', session('date'));
     }
 
