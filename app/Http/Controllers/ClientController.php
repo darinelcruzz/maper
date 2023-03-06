@@ -11,7 +11,11 @@ class ClientController extends Controller
 {
     function index()
     {
-        $clients = Client::where('status', 1)->with('invoices')->get();
+        $clients = Client::query()
+            ->where('status', 1)
+            ->with('invoices', 'services', 'services.payments:id,amount')
+            ->get();
+
         return view('clients.index', compact('clients'));
     }
 

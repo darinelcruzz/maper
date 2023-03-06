@@ -53,7 +53,7 @@
                         <td>{{ $service->getDays('date_service', $today) > $client->days ? 'si' : 'no' }}</td>
                         <td>
                             @if ($service->total == 0)
-                                <a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+                                <a href="{{ route('service.general.editAmount', $service) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
                             @else
                                 {{ fnumber($service->total) }}
                             @endif
@@ -72,10 +72,10 @@
                         $days = $service->getDays('date_service', $today);
                     @endphp
                   <tr>
-                      <td><a href="{{ route('service.general.details', ['id' => $service->id]) }}"> {{ $service->id }} </a></td>
+                      <td><a href="{{ route('service.general.details', $service) }}"> {{ $service->id }} </a></td>
                       <td>
                           <dropdown color="danger" icon="cogs">
-                                  <ddi to="{{ route('service.general.pay', ['service' => $service->id])}}"
+                                  <ddi to="{{ route('service.general.pay', $service)}}"
                                       icon="usd" text="Pagar sin factura">
                                   </ddi>
                           </dropdown>
@@ -85,27 +85,27 @@
                       <td>{!! $service->getExpired('date_service', $today, $client->days) !!}</td>
                       <td>
                           @if ($service->total == 0)
-                              <a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+                              <a href="{{ route('service.general.editAmount', $service) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
                           @else
                               {{ fnumber($service->total) }}
                           @endif
                       </td>
                   </tr>
                 @endforeach
-                @foreach($client->payment_services as $row)
+                @foreach($client->payment_services as $service)
                   <tr>
-                      <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                      <td><a href="{{ route('service.general.details', $service) }}"> {{ $service->id }} </a></td>
                       <td>
                           <dropdown color="danger" icon="cogs">
-                                  <ddi to="{{ route('service.general.payments', ['service' => $row->id])}}"
+                                  <ddi to="{{ route('service.general.payments', $service)}}"
                                       icon="plus" text="Abonar">
                                   </ddi>
                           </dropdown>
                       </td>
-                      <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                      <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                      <td>{{ $row->getDays('date_service', $today) }}</td>
-                      <td>{{ fnumber($row->debt) }}(pagos)</td>
+                      <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                      <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                      <td>{{ $service->getDays('date_service', $today) }}</td>
+                      <td>{{ fnumber($service->debt) }}(pagos)</td>
                   </tr>
                 @endforeach
             </template>
@@ -128,7 +128,7 @@
             <template slot="body">
                 @foreach($client->paid_services as $row)
                   <tr>
-                      <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                      <td><a href="{{ route('service.general.details', $row) }}"> {{ $row->id }} </a></td>
                       <td>{{ $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a') }}</td>
                       <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                       <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
@@ -137,7 +137,7 @@
                 @endforeach
                 @foreach($client->soldout_services as $row)
                   <tr>
-                      <td><a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }} </a></td>
+                      <td><a href="{{ route('service.general.details', $row) }}"> {{ $row->id }} </a></td>
                       <td>{{ fdate($row->date_credit, 'j/M/y, h:i a') }}</td>
                       <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
                       <td>{{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
