@@ -121,7 +121,7 @@
 									</td>
 									<td style="text-align: right;">
 										@if ($service->total == 0 && $service->service == 'General')
-											<a href="{{ route('service.general.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+											<a href="{{ route('service.general.editAmount', $service) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
 										@else
 											{{ number_format($service->total, 2) }}
 										@endif
@@ -166,14 +166,14 @@
 										<span class="label label-warning">{{ $service->driver->nickname }}{{ $service->helper ? ' - ' . $service->helperr->nickname : '' }}</span>
 									@endif
 								</td>
-		                        <td><a href="{{ route('insurer.details', ['id' => $service->insurer->id]) }}"> {{ $service->insurer->name }} </a></td>
+		                        <td><a href="{{ route('insurer.details', $service->insurer) }}"> {{ $service->insurer->name }} </a></td>
 								<td style="text-align: center;">{{ $service->folio }}</td>
 								<td style="text-align: center;">{{ $service->inventory }}</td>
 								<td style="text-align: center;">{!! $service->status == 'corralon' ? '<label class="label label-warning">PENDIENTE</label>' : $service->statusLabel !!}</td>
 		                        <td></td>
 		                        <td style="text-align: right;">
 									@if ($service->total == 0)
-										<a href="{{ route('service.insurer.editAmount', ['id' => $service->id]) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
+										<a href="{{ route('service.insurer.editAmount', $service) }}"> <i style="color:#DCBF32" class="fa fa-warning"></i> </a>
 									@else
 										{{ number_format($service->total, 2) }}
 									@endif
