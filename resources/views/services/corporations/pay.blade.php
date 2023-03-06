@@ -44,7 +44,7 @@
                             @endif
                             <td>
                                 <b>Pensión</b>
-                                <dd>{{ $penalty }}días X ${{ $cost/$penalty }} = ${{ $cost }}</dd>
+                                <dd>{{ $penalty }} días X ${{ $cost/$penalty }} = ${{ $cost }}</dd>
                             </td>
                         </tr>
                     </tbody>
@@ -56,7 +56,7 @@
                         {!! Field::text('releaser', isset($service) ? $service->releaser: null, ['tpl' => 'templates/twolines'])!!}
                     </div>
                 </div>
-                <payment-box corp :service="{{ $service }}" :pension="{{ $cost or 0 }}" date="{{ $out }}">
+                <payment-box corp :service="{{ $service }}" :pension="{{ $cost ?? 0 }}" date="{{ $out }}">
                     {!! Field::select('client_id', $clients, null, ['empty' => 'Seleccione al cliente', 'class' => 'select2', 'tpl' => 'templates/twolines'])!!}
                 </payment-box>
 
