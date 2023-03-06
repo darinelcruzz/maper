@@ -161,7 +161,7 @@
 								<td style="text-align: center;">{{ $payment->service->km }}</td>
 								<td></td>
 								<td>
-									<a href="{{ route('client.details', ['id' => $payment->service->client->id]) }}">
+									<a href="{{ route('client.details', $payment->service->client->id) }}">
 										{{ $payment->service->client->name }}
 									</a>
 								</td>
