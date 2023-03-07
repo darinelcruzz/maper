@@ -10,7 +10,10 @@ class Client extends Model
 {
     use DatesTrait;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name', 'rfc', 'address', 'cp', 'city', 'phone', 'email',
+        'contact', 'cellphone', 'days', 'social', 'status'
+    ];
 
     function getShortNameAttribute()
     {
