@@ -2,8 +2,8 @@
 
 @section('main-content')
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <simple-box title="Editar factura" color="danger">
+    <div class="col-md-8">
+        <solid-box title="Editar factura" color="danger">
             <div class="box-body">
                 {!! Form::open(['method' => 'POST', 'route' => ['invoice.update', $invoice]]) !!}
                     <div class="row">
@@ -17,15 +17,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             {!! Field::number('subtotal', ['step' => '0.01', 'min' => '0', 'v-model' => 'subtotal']) !!}
-                            {{ $invoice->amount - $invoice->iva + $invoice->retention }}
+                            ({{ number_format($invoice->amount - $invoice->iva + $invoice->retention, 2) }})
                         </div>
                         <div class="col-md-4">
                             {!! Field::number('iva', ['label' => 'I.V.A.', 'step' => '0.01', 'min' => '0', 'v-model' => 'iva']) !!}
-                            {{ $invoice->iva }}
+                            ({{ number_format($invoice->iva, 2) }})
                         </div>
                         <div class="col-md-4">
                             {!! Field::number('retention', ['step' => '0.01', 'min' => '0', 'v-model' => 'retention']) !!}
-                            {{ $invoice->retention }}
+                            ({{ number_format($invoice->retention, 2) }})
                         </div>
                     </div>
                     <div class="row">
@@ -51,36 +51,45 @@
 
                 {!! Form::close() !!}
                 <data-table example='1'>
-                    {{ drawHeader('ID', 'Fecha', 'Vehiculo', 'Monto') }}
+
+                    <template slot="header">
+                        <tr>
+                            <th><small>ID</small></th>
+                            <th><small>FECHA</small></th>
+                            <th><small>VEHÍCULO</small></th>
+                            <th style="text-align: right;"><small>MONTO</small></th>
+                        </tr>
+                    </template>
+
                     <template slot="body">
-                        @foreach($services as $row)
+                        @foreach($services as $service)
                             <tr>
                                 @if ($model == 'client')
                                     <td>
-                                        <a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }}</a>
+                                        <a href="{{ route('service.general.details', $service) }}"> {{ $service->id }}</a>
                                     </td>
-                                    <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                                    <td>{{ fdate($service->date_service, 'j/M/y') }}</td>
                                 @else
                                     <td>
-                                        <a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }}</a>
+                                        <a href="{{ route('service.insurer.details', $service) }}"> {{ $service->id }}</a>
                                     </td>
-                                    <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
+                                    <td>{{ fdate($service->date_assignment, 'j/M/y') }}</td>
                                 @endif
-                                <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                                <td>{{ fnumber($row->total) }}</td>
+                                <td>{{ $service->brand }} | {{ $service->type }} | {{ $service->color }}</td>
+                                <td style="text-align: right">{{ number_format($service->total, 2) }}</td>
                             </tr>
                         @endforeach
                     </template>
                     <template slot="footer">
                         <tr>
                             <th colspan="2"></th>
-                            <th style="text-align: right">Total seleccionados</th>
-                            <td>{{ fnumber($services->sum('total')) }}</td>
+                            <th style="text-align: right"><em><small>TOTAL SELECCIONADOS</small></em></th>
+                            <td style="text-align: right">{{ number_format($services->sum('total'), 2) }}</td>
                         </tr>
                     </template>
                 </data-table>
             </div>
-        </simple-box>
+        </solid-box>
     </div>
 </div>
     @endsection
