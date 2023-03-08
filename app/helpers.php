@@ -10,14 +10,14 @@ function usesas($ctrl, $fun, $as = null)
 
 function fdate($original_date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:s')
 {
-    Date::setLocale('es');
-    // return date($format, strtotime($original_date)) ?? '';
-    if ($original_date == null) {
-        return 'No existe';
-    }
-    // $date = Date::createFromFormat($original_format, $original_date);
-    $date = Date::parse($original_date);
-    return $date->format($format);
+    return date($format, strtotime($original_date)) ?? '';
+    // Date::setLocale('es');
+    // if ($original_date == null) {
+    //     return 'No existe';
+    // }
+    // // $date = Date::createFromFormat($original_format, $original_date);
+    // $date = Date::parse($original_date);
+    // return $date->format($format);
 }
 
 function fnumber($original_number)
