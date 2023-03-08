@@ -18,7 +18,6 @@ class Driver extends Model
 
     function getHour($hour)
     {
-        $fhour = new Date(strtotime($this->$hour));
-        return $fhour->format('h:i a');
+        return date('h:i a', strtotime($this->$hour));
     }
 }

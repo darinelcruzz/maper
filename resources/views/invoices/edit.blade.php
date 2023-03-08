@@ -68,12 +68,12 @@
                                     <td>
                                         <a href="{{ route('service.general.details', $service) }}"> {{ $service->id }}</a>
                                     </td>
-                                    <td>{{ fdate($service->date_service, 'j/M/y') }}</td>
+                                    <td>{{ fdate($service->date_service, 'j/F/y') }}</td>
                                 @else
                                     <td>
                                         <a href="{{ route('service.insurer.details', $service) }}"> {{ $service->id }}</a>
                                     </td>
-                                    <td>{{ fdate($service->date_assignment, 'j/M/y') }}</td>
+                                    <td>{{ fdate($service->date_assignment, 'j/F/y') }}</td>
                                 @endif
                                 <td>{{ $service->brand }} | {{ $service->type }} | {{ $service->color }}</td>
                                 <td style="text-align: right">{{ number_format($service->total, 2) }}</td>
