@@ -15,22 +15,30 @@ class ServiceController extends Controller
 
     function show()
     {
-        $general = Service::where('status', 'pendiente')->get();
-        $corps = Service::where('service', '!=', 'General')
-                        ->where('status', 'corralon')->get();
-        $release = Service::where('service', '!=', 'General')
-                        ->where('status', 'liberado')->get();
-        $paid = Service::where('service', 'General')
-                        ->where('status', 'pagado')
-                        ->orWhere('status', 'liquidado')->get();
-        $credit = Service::where('service', 'General')
-                        ->where('status', 'credito')
-                        ->orWhere('status', 'vencida')->get();
-        $creditI = InsurerService::where('status', '!=', 'Pagado')->get();
-        $cancel = Service::where('service', 'General')
-                        ->where('status', 'cancelado')->get();
+        $general = Service::where('service', 'General')
+            ->whereNotIn('status', ['pagado', 'liquidado'])
+            ->with('driver:id,name', 'client:id,name')
+            ->get()
+            ->groupBy('status');
 
-        return view('services.show', compact('general', 'corps', 'release', 'paid', 'credit', 'cancel', 'creditI'));
+        $paid = Service::where('service', 'General')
+            ->whereIn('status', ['pagado', 'liquidado'])
+            ->with('driver:id,name', 'client:id,name')
+            ->latest()
+            ->get()
+            ->take(100);
+
+        $corporations = Service::where('service', '!=', 'General')
+            ->whereIn('status', ['corralon', 'liberado'])
+            ->with('driver:id,name', 'helperr:id,name')
+            ->get()
+            ->groupBy('status');
+
+        $insurer_services = InsurerService::where('status', '!=', 'Pagado')
+            ->with('insurer:id,name', 'driver:id,name')
+            ->get();
+
+        return view('services.show', compact('corporations', 'general', 'paid', 'insurer_services'));
     }
 
     function editHour(Service $service)

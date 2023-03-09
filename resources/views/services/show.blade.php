@@ -7,25 +7,25 @@
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha servicio', 'inventario', 'tipo', 'vehículo', 'operador', 'llave') }}
 
         <template slot="body">
-            @foreach($corps as $row)
+            @foreach($corporations['corralon'] as $service)
                 <tr>
-                    <td><a href="{{ route('service.corporation.details', $row)}}"> {{ $row->id }}  </a></td>
+                    <td><a href="{{ route('service.corporation.details', $service)}}"> {{ $service->id }}  </a></td>
                     <td>
                         {{-- <dropdown color="primary" icon="cogs">
-                            <ddi to="{{ route('service.corporation.pay', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.corporation.pay', ['id' => $service->id]) }}"
                                 icon="hand-peace-o" text="Liberar">
                             </ddi>
-                            <ddi to="{{ route('service.corporation.edit', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.corporation.edit', ['id' => $service->id]) }}"
                                 icon="pencil-square-o" text="Editar">
                             </ddi>
                         </dropdown> --}}
                     </td>
-                    <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                    <td>{{ $row->inventory }}</td>
-                    <td>{{ $row->service }}</td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>{{ $row->driver->name }} {{ isset($row->helper) ? ' - ' . $row->helperr->name : '' }}</td>
-                    <td>{{ $row->key }}</td>
+                    <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                    <td>{{ $service->inventory }}</td>
+                    <td>{{ $service->service }}</td>
+                    <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                    <td>{{ $service->driver->name }} {{ isset($service->helper) ? ' - ' . $service->helperr->name : '' }}</td>
+                    <td>{{ $service->key }}</td>
                 </tr>
             @endforeach
         </template>
@@ -36,22 +36,22 @@
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha Liberación', 'inventario', 'tipo', 'marca', 'liberador', 'importe') }}
 
         <template slot="body">
-            @foreach($release as $row)
+            @foreach($corporations['liberado'] as $service)
                 <tr>
-                    <td><a href="{{ route('service.corporation.details', $row) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.corporation.details', $service) }}"> {{ $service->id }} </a></td>
                     <td>
                         {{-- <dropdown color="success" icon="cogs">
-                            <ddi to="{{ route('service.corporation.printLetter', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.corporation.printLetter', ['id' => $service->id]) }}"
                                 icon="print" text="Imprimir">
                             </ddi>
                         </dropdown> --}}
                     </td>
-                    <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
-                    <td>{{ $row->inventory }}</td>
-                    <td>{{ $row->service }}</td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>{{ $row->releaser }}</td>
-                    <td>${{ $row->total }} - {{ $row->pay }}</td>
+                    <td>{{ fdate($service->date_out, 'j/M/y, h:i a') }}</td>
+                    <td>{{ $service->inventory }}</td>
+                    <td>{{ $service->service }}</td>
+                    <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                    <td>{{ $service->releaser }}</td>
+                    <td>${{ $service->total }} - {{ $service->pay }}</td>
                 </tr>
             @endforeach
         </template>
@@ -62,21 +62,21 @@
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'fecha Pago', 'cliente', 'marca', 'importe', 'factura') }}
 
         <template slot="body">
-            @foreach($paid as $row)
+            @foreach($paid as $service)
                 <tr>
-                    <td><a href="{{ route('service.general.details',  $row->id) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.general.details',  $service->id) }}"> {{ $service->id }} </a></td>
                     <td>
                         {{-- <dropdown color="success" icon="cogs">
-                            <ddi to="{{ route('service.general.update', ['id' => $row->id]) }}"
+                            <ddi to="{{ route('service.general.update', ['id' => $service->id]) }}"
                                 icon="edit" text="Editar Pago">
                             </ddi>
                         </dropdown> --}}
                     </td>
-                    <td>{{  $row->pay_credit ? fdate($row->date_credit, 'j/M/y, h:i a') : fdate($row->date_out, 'j/M/y, h:i a')}}</td>
-                    <td><a href="{{ route('client.details', $row) }}"> {{ $row->client->name }} </a></td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>${{ $row->total }} - {{  $row->pay_credit ? $row->pay_credit . " (". $row->pay . ")" : $row->pay }}</td>
-                    <td>{{ $row->bill }}</td>
+                    <td>{{  $service->pay_credit ? fdate($service->date_credit, 'j/M/y, h:i a') : fdate($service->date_out, 'j/M/y, h:i a')}}</td>
+                    <td><a href="{{ route('client.details', $service) }}"> {{ $service->client->name }} </a></td>
+                    <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                    <td>${{ $service->total }} - {{  $service->pay_credit ? $service->pay_credit . " (". $service->pay . ")" : $service->pay }}</td>
+                    <td>{{ $service->bill }}</td>
                 </tr>
             @endforeach
 
@@ -88,13 +88,13 @@
         {{ drawHeader('ID', 'fecha servicio', 'cliente', 'marca', 'importe', 'opciones') }}
 
         <template slot="body">
-            @foreach($credit as $row)
+            @foreach($general['credito'] as $service)
                 <tr>
-                    <td><a href="{{ route('service.general.details', $row) }}"> {{ $row->id }} </a></td>
-                    <td>{{ fdate($row->date_service, 'j/M/y, h:i a') }}</td>
-                    <td><a href="{{ route('client.details', $row->client) }}"> {{ $row->client->name }}</a></td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>$ {{ number_format($row->total, 2) }}</td>
+                    <td><a href="{{ route('service.general.details', $service) }}"> {{ $service->id }} </a></td>
+                    <td>{{ fdate($service->date_service, 'j/M/y, h:i a') }}</td>
+                    <td><a href="{{ route('client.details', $service->client) }}"> {{ $service->client->name }}</a></td>
+                    <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                    <td>$ {{ number_format($service->total, 2) }}</td>
                     <td>
                         {{-- <a href="{{ route('service.general.edit', ['id' => $row->id]) }}" class="btn btn-info">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -110,25 +110,25 @@
         {{ drawHeader('ID', '<i class="fa fa-cogs"></i>', 'asiganción', 'cliente/Aseguradora', 'marca', 'importe') }}
 
         <template slot="body">
-            @foreach($creditI as $row)
+            @foreach($insurer_services as $service)
                 <tr>
-                    <td><a href="{{ route('service.insurer.details', $row) }}"> {{ $row->id }} </a></td>
+                    <td><a href="{{ route('service.insurer.details', $service) }}"> {{ $service->id }} </a></td>
                     <td>
-                        <dropdown color="success" icon="cogs">
-                            <ddi to="{{ route('service.insurer.editHour', $row->id) }}"
+                        <dropdown color="info" icon="cogs">
+                            <ddi to="{{ route('service.insurer.editHour', $service->id) }}"
                                 icon="clock-o" text="Hora de regreso/Extras">
                             </ddi>
                             @if (auth()->user()->level == 1)
-                                <ddi to="{{ route('service.insurer.edit', $row) }}"
+                                <ddi to="{{ route('service.insurer.edit', $service) }}"
                                     icon="pencil-square-o" text="Editar">
                                 </ddi>
                             @endif
                         </dropdown>
                     </td>
-                    <td>{{ fdate($row->date_assignment, 'j/M/y, h:i a') }}</td>
-                    <td><a href="{{ route('insurer.details', $row->insurer) }}"> {{ $row->insurer->name }}</a></td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>$ {{ number_format($row->total, 2) }}</td>
+                    <td>{{ fdate($service->date_assignment, 'j/M/y, h:i a') }}</td>
+                    <td><a href="{{ route('insurer.details', $service->insurer) }}"> {{ $service->insurer->name }}</a></td>
+                    <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                    <td>$ {{ number_format($service->total, 2) }}</td>
                 </tr>
             @endforeach
         </template>
@@ -139,14 +139,14 @@
         {{ drawHeader('ID', 'fecha', 'cliente', 'marca', 'importe', 'opciones') }}
 
         <template slot="body">
-            @foreach($cancel as $row)
+            @foreach($general['cancelado'] as $service)
                 <tr>
-                    <td><a href="{{ route('service.general.details', $row) }}"> {{ $row->id }} </a></td>
-                    <td>{{ fdate($row->date_out, 'j/M/y, h:i a') }}</td>
-                    <td>{{ $row->client->name }}</td>
-                    <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                    <td>$ {{ number_format($row->total, 2) }}</td>
-                    <td>{{ $row->reason }}</td>
+                    <td><a href="{{ route('service.general.details', $service) }}"> {{ $service->id }} </a></td>
+                    <td>{{ fdate($service->date_out, 'j/M/y, h:i a') }}</td>
+                    <td>{{ $service->client->name }}</td>
+                    <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                    <td>$ {{ number_format($service->total, 2) }}</td>
+                    <td>{{ $service->reason }}</td>
                 </tr>
             @endforeach
         </template>

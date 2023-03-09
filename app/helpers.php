@@ -8,16 +8,11 @@ function usesas($ctrl, $fun, $as = null)
     return ['uses' => "$ctrl@$fun", 'as' => $fun];
 }
 
-function fdate($original_date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:s')
+function fdate($date, $format = '%e de %B, %Y')
 {
-    return date($format, strtotime($original_date)) ?? '';
-    // Date::setLocale('es');
-    // if ($original_date == null) {
-    //     return 'No existe';
-    // }
-    // // $date = Date::createFromFormat($original_format, $original_date);
-    // $date = Date::parse($original_date);
-    // return $date->format($format);
+    if ($date == null) return 'No existe';
+    $format = '%e de %B, %Y';
+    return Date::parse($date)->formatLocalized($format);
 }
 
 function fnumber($original_number)

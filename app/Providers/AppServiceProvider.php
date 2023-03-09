@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         $this->registerViewComposers();
+
+        \Carbon\Carbon::setUTF8(true);
+        \Carbon\Carbon::setLocale(config('app.locale'));
+        setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
     }
 
     /**
