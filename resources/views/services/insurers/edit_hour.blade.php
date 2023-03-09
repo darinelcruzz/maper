@@ -17,15 +17,15 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                            {!! Field::datetimelocal('date_contact', isset($insurerService) ? fdate($insurerService->date_contact) : NULL, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
+                            {!! Field::datetimelocal('date_contact', $insurerService->date_contact, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::datetimelocal('date_end', isset($insurerService) ? fdate($insurerService->date_end) : NULL, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
+                            {!! Field::datetimelocal('date_end', $insurerService->date_end, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            {!! Field::datetimelocal('date_return', isset($insurerService) ? fdate($insurerService->date_return) : NULL, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
+                            {!! Field::datetimelocal('date_return', $insurerService->date_return, ['tpl' => 'templates/withicon', 'min' => '0'], ['icon' => 'calculator']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Field::number('inventory', $insurerService->inventory, ['tpl' => 'templates/withicon', 'step' => '0.01', 'min' => '0'], ['icon' => 'calculator'])!!}
