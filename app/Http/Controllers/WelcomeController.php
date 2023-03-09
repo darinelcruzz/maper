@@ -11,17 +11,13 @@ class WelcomeController extends Controller
     function index()
     {
         $service = Service::where('cut_at', '!=', 'null')
-            ->orderBy('cut_at', 'desc')
-            ->take(1)
+            ->latest()
             ->get()
-            ->pluck('cut_at');
+            ->first();
 
         $cut = $service[0];
 
-        $last_cut = fdate($cut, 'U', 'Y-m-d');
-
-        $now = Date::now()->format('U');
-        $days = ($now - $last_cut)/86400;
+        $days = (time() - strtotime($service->cut_at))/86400;
 
         return view('welcome', compact('days', 'cut'));
     }
