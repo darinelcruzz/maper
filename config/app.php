@@ -170,7 +170,6 @@ return [
         Styde\Html\HtmlServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,7 +230,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         'Date' => Jenssegers\Date\Date::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

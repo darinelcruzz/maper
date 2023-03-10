@@ -12,7 +12,6 @@
         "laravel/tinker": "^2.5",
         "acacha/admin-lte-template-laravel": "8.0",
         "laravel/dusk": "^6.0",
-        "barryvdh/laravel-dompdf": "^0.8.7",
         "doctrine/dbal": "^3.2.0",
         "jenssegers/date": "^4.0.0",
         "styde/html": "~1.8"
