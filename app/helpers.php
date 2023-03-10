@@ -11,7 +11,7 @@ function usesas($ctrl, $fun, $as = null)
 function fdate($date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:s')
 {
     if ($date == null) return 'No existe';
-    return Carbon\Carbon::parse($date)->translatedFormat($format);
+    return Carbon\Carbon::createFromFormat($original_format, $date)->locale('es_ES')->translatedFormat($format);
 }
 
 function fnumber($original_number)
