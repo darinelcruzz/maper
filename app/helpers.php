@@ -8,11 +8,10 @@ function usesas($ctrl, $fun, $as = null)
     return ['uses' => "$ctrl@$fun", 'as' => $fun];
 }
 
-function fdate($date, $format = '%e de %B, %Y')
+function fdate($date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:s')
 {
     if ($date == null) return 'No existe';
-    $format = '%e de %B, %Y';
-    return Date::parse($date)->formatLocalized($format);
+    return Carbon\Carbon::parse($date)->translatedFormat($format);
 }
 
 function fnumber($original_number)

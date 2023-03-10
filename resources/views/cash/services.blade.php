@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<solid-box title="Servicios del {{ fdate($date, '%e %B %Y') }}" color="success">
+		<solid-box title="Servicios del {{ fdate($date, 'D d \d\e F, Y') }}" color="success">
 			<div class="table-responsive">
 				<table id="example1" class="table table-bordered table-striped table-hover table-condensed">
 					<thead>
