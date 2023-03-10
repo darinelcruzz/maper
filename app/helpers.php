@@ -8,9 +8,10 @@ function usesas($ctrl, $fun, $as = null)
     return ['uses' => "$ctrl@$fun", 'as' => $fun];
 }
 
-function fdate($date, $format = 'Y-m-d', $original_format = 'Y-m-d H:i:s')
+function fdate($date, $format = 'd/m/Y', $original_format = 'Y-m-d H:i:s')
 {
     if ($date == null) return 'No existe';
+    return date($format, strtotime($date));
     return Carbon\Carbon::createFromFormat($original_format, $date)->locale('es_ES')->translatedFormat($format);
 }
 
