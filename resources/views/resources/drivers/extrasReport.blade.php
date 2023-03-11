@@ -66,7 +66,7 @@
                                 <td><b>S:</b>{{ fdate($row->date_service, ' j/M/y H:i') }} <br><b>R:</b> {{ fdate($row->date_return, ' j/M/y H:i') }}</td>
                                 <td>
                                     <b>O:</b> {{ $row->driver->nickname }}: {{ fnumber($row->extra_driver) }} <br>
-                                    <b>A:</b> {{ $row->helperr->nickname or '' }} {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
+                                    <b>A:</b> {{ $row->helperr->nickname ?? '' }} {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
                                 </td>
                             </tr>
                         @endforeach
@@ -79,7 +79,7 @@
                                 <td><b>S:</b>{{ fdate($row->date_assignment, ' j/M/y H:i') }} <br><b>R:</b> {{ fdate($row->date_return, ' j/M/y H:i') }}</td>
                                 <td>
                                     <b>O:</b> {{ $row->driver->nickname }}: {{ fnumber($row->extra_driver) }} <br>
-                                    <b>A:</b> {{ $row->helperr->nickname or '' }} {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
+                                    <b>A:</b> {{ $row->helperr->nickname ?? '' }} {{ $row->extra_helper ?  fnumber($row->extra_helper, 2): '' }}
                                 </td>
                             </tr>
                         @endforeach
