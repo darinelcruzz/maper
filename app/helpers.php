@@ -13,13 +13,13 @@ function usesas($ctrl, $fun, $as = null)
 function fdate($date, $format = 'd/m/Y', $original_format = 'Y-m-d')
 {
     if ($date == null) return 'No existe';
-    // return date($format, strtotime($date));
-    $date = Carbon::createFromFormat($original_format, $date);
-    $locale = app()->getLocale();
-    Carbon::setlocale($locale);
-    // $format = $locale === 'es' ? $format : 'd/m/Y';
-    $translatedDateString = $date->translatedFormat($format);
-    return $translatedDateString;
+    return date($format, strtotime($date));
+    // $date = Carbon::createFromFormat($original_format, $date);
+    // $locale = app()->getLocale();
+    // Carbon::setlocale($locale);
+    // // $format = $locale === 'es' ? $format : 'd/m/Y';
+    // $translatedDateString = $date->translatedFormat($format);
+    // return $translatedDateString;
 }
 
 function fnumber($original_number)
