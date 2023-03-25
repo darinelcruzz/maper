@@ -25,7 +25,7 @@
                   <td>{{ $client->address ? $client->address . ' C.P.' . $client->cp . ' ' . $client->city : 'n/a' }}</td>
                   <td>{{ $client->contact }}  {{ $client->cellphone ? 'Cel. ' . $client->cellphone : ''}}</td>
                   <td>
-                      {{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment') + $client->invoices->where('status', 'pendiente')->sum('amount')) }} <br>
+                      {{ fnumber($client->serviceTotal('pending') + $client->serviceTotal('payment') + $client->invoices->where('status', 'pendiente')->sum('amount'), 2) }} <br>
                       {{ $client->getServiceExpired($client->days) }}
                   </td>
               </tr>

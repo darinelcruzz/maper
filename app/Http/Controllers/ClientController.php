@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Date\Date;
-use App\Client;
-use App\Service;
+use App\{Client, Service, Invoice, Payment};
 
 class ClientController extends Controller
 {
@@ -13,8 +12,11 @@ class ClientController extends Controller
     {
         $clients = Client::query()
             ->where('status', 1)
-            ->with('invoices', 'services', 'services.payments:id,amount')
+            ->where('id', 49)
+            ->with('invoices', 'services', 'services.payments')
             ->get();
+
+        // dd($clients);
 
         return view('clients.index', compact('clients'));
     }

@@ -103,7 +103,7 @@ class Service extends Model
 
     function getDebtAttribute()
     {
-        return $this->total - ($this->status == 'abonos' ? $this->payments->sum('amount') : 0 );
+        return $this->total - $this->payments->sum('amount');
     }
 
     function getStatusLabelAttribute()
