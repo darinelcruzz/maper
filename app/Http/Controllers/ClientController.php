@@ -12,7 +12,6 @@ class ClientController extends Controller
     {
         $clients = Client::query()
             ->where('status', 1)
-            ->where('id', 49)
             ->with('invoices', 'services', 'services.payments')
             ->get();
 
