@@ -16,7 +16,7 @@ class WelcomeController extends Controller
 
         // dd($service);
 
-        $cut = $service->cut_at;
+        $cut = $service->cut_at ?? date('Y-m-d');
         $days = (time() - strtotime($cut))/86400;
 
         return view('welcome', compact('cut', 'days'));
