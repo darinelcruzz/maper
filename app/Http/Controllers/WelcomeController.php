@@ -14,8 +14,6 @@ class WelcomeController extends Controller
             ->latest()
             ->first();
 
-        // dd($service);
-
         $cut = $service->cut_at;
         $days = (time() - strtotime($cut))/86400;
 
