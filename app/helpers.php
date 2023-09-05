@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 function usesas($ctrl, $fun, $as = null)
 {

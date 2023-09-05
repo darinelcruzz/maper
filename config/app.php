@@ -169,7 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Styde\Html\HtmlServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
-        Jenssegers\Date\DateServiceProvider::class,
+        //Jenssegers\Date\DateServiceProvider::class,
 
         /*
          * Application Service Providers...
