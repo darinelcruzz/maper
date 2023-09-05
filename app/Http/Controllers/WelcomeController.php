@@ -15,7 +15,7 @@ class WelcomeController extends Controller
             ->get()
             ->first();
 
-        $cut = $service[0];
+        $cut = $service;
 
         $days = (time() - strtotime($service->cut_at))/86400;
 

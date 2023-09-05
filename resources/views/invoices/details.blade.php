@@ -7,22 +7,22 @@
         <data-table-com title="Factura {{ $invoice->folio }} - {{ $invoice->{$model}->name }}" example="example1" color="primary">
             {{ drawHeader('ID', 'Asignacion', 'Folio', 'Vehículo', 'Monto')}}
             <template slot="body">
-                @foreach($services as $row)
+                @foreach($services as $service)
                     <tr>
                         @if ($model == 'client')
                             <td>
-                                <a href="{{ route('service.general.details', ['id' => $row->id]) }}"> {{ $row->id }}</a>
+                                <a href="{{ route('service.general.details', $service) }}"> {{ $service->id }}</a>
                             </td>
-                            <td>{{ fdate($row->date_service, 'j/M/y') }}</td>
+                            <td>{{ fdate($service->date_service, 'j/M/y') }}</td>
                         @else
                             <td>
-                                <a href="{{ route('service.insurer.details', ['id' => $row->id]) }}"> {{ $row->id }}</a>
+                                <a href="{{ route('service.insurer.details', $service) }}"> {{ $service->id }}</a>
                             </td>
-                            <td>{{ fdate($row->date_assignment, 'j/M/y') }}</td>
+                            <td>{{ fdate($service->date_assignment, 'j/M/y') }}</td>
                         @endif
-                        <td>{{ $row->folio }}</td>
-                        <td>{{ $row->brand }} - {{ $row->type }} - {{ $row->color }}</td>
-                        <td>{{ fnumber($row->total) }}</td>
+                        <td>{{ $service->folio }}</td>
+                        <td>{{ $service->brand }} - {{ $service->type }} - {{ $service->color }}</td>
+                        <td>{{ fnumber($service->total) }}</td>
                     </tr>
                 @endforeach
             </template>
