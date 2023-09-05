@@ -11,14 +11,12 @@ class WelcomeController extends Controller
     function index()
     {
         $service = Service::where('cut_at', '!=', 'null')
-            ->latest()
             ->get()
-            ->first();
+            ->last();
 
-        $cut = $service;
-        // dd(strtotime($service->cut_at));
-        // $days = (time() - strtotime($service->cut_at))/86400;
+        $cut = $service->cut_at;
+        $days = (time() - strtotime($cut))/86400;
 
-        return view('welcome', compact('cut'));
+        return view('welcome', compact('cut', 'days'));
     }
 }
