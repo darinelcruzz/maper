@@ -66,7 +66,13 @@
 										@endif
 									</dropdown>
 								</td>
-								<td>{{ $service->description }}</td>
+								<td>
+									@if (fdate($service->date_service) == fdate($service->date_out))
+										{{ $service->description }}
+									@else
+										PAGO <br>Serv: {{ fdate($service->date_service) }}
+									@endif
+								</td>
 								<td>{{ $service->brand }} {{ $service->type }}<br>{{ $service->color }}</td>
 								<td>{{ $service->origin }}</td>
 								<td>{{ $service->destination }}</td>

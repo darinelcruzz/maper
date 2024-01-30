@@ -43,8 +43,12 @@ class CorporationServiceController extends Controller
                 $cost = Price::find(1)->moto * $penalty;
             } elseif ($service->category == 'Coche') {
                 $cost = Price::find(1)->car * $penalty;
-            } elseif($service->category == 'Camion'){
+            } elseif($service->category == 'Camioneta'){
                 $cost = Price::find(1)->ton3 * $penalty;
+            } elseif($service->category == 'Tractor'){
+                $cost = Price::find(1)->ton3 * $penalty;
+            } elseif($service->category == 'Camion'){
+                $cost = Price::find(1)->ton5 * $penalty;
             }else{
                 $cost = Price::find(1)->ton10 * $penalty;
             }

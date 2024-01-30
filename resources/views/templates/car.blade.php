@@ -6,9 +6,9 @@
         {!! Field::text('type', isset($service) ? $service->type : null, ['tpl' => 'templates/twolines'])!!}
     </div>
     <div class="col-md-4">
-        {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Camion' => 'Camion',
+        {!! Field::select('category', ['Moto' => 'Moto', 'Coche' => 'Coche', 'Camioneta' => 'Camioneta' , 'Camion' => 'Camion',
             'Autobus' => 'Autobus', 'Remolque' => 'Remolque', 'Tractocamión' => 'Tractocamión', 'Maquinaria' => 'Maquinaria',
-          'Combi' => 'Combi', 'Ganado' => 'Ganado', 'Combustible' => 'Combustible'],
+          'Combi' => 'Combi', 'Ganado' => 'Ganado', 'Combustible' => 'Combustible', 'Tractor' => 'Tractor'],
             isset($service) ? $service->category : null, ['empty' => 'Seleccione la categoría', 'tpl' => 'templates/twolines']) !!}
     </div>
 </div>
