@@ -16,7 +16,7 @@
         @else
             {!! Field::select('service',
                 ['Tránsito del Estado' => 'Tránsito del Estado', 'Vialidad Municipal' => 'Vialidad Municipal', 'Policia Municipal' => 'Policia Municipal',
-                'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal', 'PGR' => 'PGR', 'Delegación de transportes del Estado' => 'Delegación de transportes del Estado', 'Guardia Nacional' => 'Guardia Nacional'],
+                'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal', 'PGR' => 'PGR', 'Delegación de transportes del Estado' => 'Delegación de transportes del Estado', 'Guardia Nacional' => 'Guardia Nacional', 'FGR' => 'FGR'],
                 isset($service) ? $service->service: null, ['empty' => '¿A que corresponde?', 'tpl' => 'templates/twolines'])
             !!}
         @endif
