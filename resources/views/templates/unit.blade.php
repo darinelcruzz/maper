@@ -13,7 +13,7 @@
     </div>
     @if($ser == 'corp')
      <div class="col-md-6">
-         {!! Field::select('lot', ['cueva' => 'Cueva'], isset($service) ? $service->lot : null, ['empty' => 'Seleccione el corralón', 'tpl' => 'templates/twolines'])
+         {!! Field::select('lot', ['cueva' => 'Cueva', 'corralón vaca' => 'Corralón Vaca'], isset($service) ? $service->lot : null, ['empty' => 'Seleccione el corralón', 'tpl' => 'templates/twolines'])
          !!}
      </div>
      @endif
