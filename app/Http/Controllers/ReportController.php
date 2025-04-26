@@ -49,7 +49,7 @@ class ReportController extends Controller
         $fdate= fdate($request->start, 'D, d \d\e F Y', 'Y-m-d');
         $variables = $this->getMethodsToReport($request->start);
 
-        $drivers = Driver::all();
+        $drivers = Driver::where('status', 1)->get();
         $discounts = Discount::where('cut_at', $request->start)->where('type', 0)->get();
         $bonuses = Discount::where('cut_at', $request->start)->where('type', 1)->get();
         $totalExtras = [];
