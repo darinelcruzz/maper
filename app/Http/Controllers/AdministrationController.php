@@ -45,7 +45,7 @@ class AdministrationController extends Controller
 
         $dates = Service::where('cut_at', '!=', NULL)->orderBy('cut_at', 'desc')->get()->groupBy('cut_at')->take(5)->keys()->toArray();
 
-        $drivers = Driver::pluck('name', 'id')->toArray();
+        $drivers = Driver::where('status', 1)->pluck('name', 'id')->toArray();
         $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
         $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
 
@@ -79,7 +79,7 @@ class AdministrationController extends Controller
         $fdate= fdate($request->start, 'D, d \d\e F Y', 'Y-m-d');
         $variables = $this->getMethodsToReport();
 
-        $drivers = Driver::all();
+        $drivers = Driver::where('status', 1)->get();
         $discounts = Discount::whereNull('cut_at')->where('type', 0)->get();
         $bonuses = Discount::whereNull('cut_at')->where('type', 1)->get();
         $totalExtras = [];
