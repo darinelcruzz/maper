@@ -10,7 +10,16 @@ class Service extends Model
 {
     use DatesTrait;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'service','description', 'brand', 'type', 'model',
+        'category', 'load', 'plate', 'color', 'inventory',
+        'client_id', 'origin', 'destination', 'driver_id',
+        'extra_driver', 'helper', 'extra_helper', 'unit_id',
+        'date_service', 'date_out', 'date_return', 'amount',
+        'ret', 'status', 'maneuver', 'pension', 'bill','others',
+        'discount', 'reason', 'pay', 'view', 'releaser', 'folio',
+        'lot', 'key', 'cut_at', 'cut2_at', 'km', 'released_at', 'serial'
+    ];
 
     function driver()
     {
