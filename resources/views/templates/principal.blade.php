@@ -15,8 +15,19 @@
             </div>
         @else
             {!! Field::select('service',
-                ['Tránsito del Estado' => 'Tránsito del Estado', 'Vialidad Municipal' => 'Vialidad Municipal', 'Policia Municipal' => 'Policia Municipal',
-                'Fiscalía' => 'Fiscalía', 'Federal' => 'Federal', 'PGR' => 'PGR', 'Delegación de transportes del Estado' => 'Delegación de transportes del Estado', 'Guardia Nacional' => 'Guardia Nacional', 'FGR' => 'FGR'],
+                [
+                    'Tránsito del Estado' => 'Tránsito del Estado',
+                    'Vialidad Municipal' => 'Vialidad Municipal',
+                    'Policia Municipal' => 'Policia Municipal',
+                    'Fiscalía' => 'Fiscalía',
+                    'Federal' => 'Federal',
+                    'PGR' => 'PGR',
+                    'Delegación de transportes del Estado' => 'Delegación de transportes del Estado',
+                    'Guardia Nacional' => 'Guardia Nacional',
+                    'FGR' => 'FGR',
+                    'Fiscalía General de Comalapa' => 'Fiscalía General de Comalapa',
+                    'Fiscalía General de Comitán' => 'Fiscalía General de Comitán'
+                ],
                 isset($service) ? $service->service: null, ['empty' => '¿A que corresponde?', 'tpl' => 'templates/twolines'])
             !!}
         @endif
